@@ -1,0 +1,88 @@
+<!DOCTYPE>
+<html>
+<head>
+    <title>开房查询</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge，chrome=1">
+    <meta name="description" content="不超过150个字符"/>
+    <meta name="keywords" content="">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="robots" content="index,follow"/>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta name="HandheldFriendly" content="true">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <!--[if lt IE 9]>      
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+    <style type="text/css">
+        *{margin:0;padding:0;}
+        /*ul{
+            width: 100%;
+        }
+        ul li{
+            text-align: center;
+        }*/
+        /*ul li span{
+            width: 32%;
+        }*/
+         ul{width: 100%;margin-top: 1.2rem;}
+        ul li{background:#291B4C;color: white;list-style: none;width: 100%;margin-top: 0.8%;height: 2.2rem;line-height: 2.2rem;font-size: 0.8rem;opacity: 0.9;}
+
+        ul li span:first-child{float: left;margin-left: 2rem;max-width: 5rem;overflow: hidden; text-overflow:ellipsis;white-space:nowrap;}
+        ul li span:last-child{float: right;margin-right: 1rem;}
+        ul li:first-child img{
+            width:4rem;
+            margin-top:0.5rem;
+        }
+    </style>
+</head>
+<body style="background: #0E0226;overflow: hidden;">
+    <div style="width: 100%;padding:0.5rem 0rem 0.7rem;background: #291B4C;line-height: 0.8rem;">
+        <img src="{$memberinfo.photo}" style="width: 4rem;float: left;margin-left: 0.5rem;"><span style="margin-left:0.5rem;line-height: 1.5rem;color: white;font-size: 1.1rem;border-radius: 3px;">{$memberinfo.nickname}</span><br/>
+        <span style="margin-left:0.5rem;line-height: 1.5rem;color: white;font-size: 0.9rem;">ID:{$memberinfo.id}</span><br/>
+        <img src="__STATIC__/game/img/roomCard.png" style="width: 1.2rem;margin-left: 0.5rem;vertical-align: middle;"><span class="cardsNum" style="display: inline-block;padding-right: 1rem;padding-left:0.3rem;height: 1.3rem;border-top-right-radius: 0.5rem;border-bottom-right-radius:0.5rem;background: #000;font-size: 0.8rem;color:white;line-height: 1.3rem;">{$memberinfo.cards}</span>
+        
+    </div>
+
+   <ul>
+            <li>
+                <span>游戏类型</span>
+                <span style="position: absolute;left: 50%;margin-left: 5%;">结束时间</span>
+                <span style="position: absolute;left: 50%;margin-left: -18%;">房间号</span>
+                <span style="margin-right: 1.5rem;">分数</span>
+                
+            </li>
+           {volist name="result" id="vo"} 
+           <li class="gametype" name="{$vo['type']}">
+                <span style="color:orange;">{eq name="vo['type'] " value='6'}六人牛牛{/eq}{eq name="vo['type']" value='9'}九人牛牛{/eq}{eq name="vo['type']" value='12'}十二人牛牛{/eq}</span>
+                <span style="position: absolute;left: 50%;margin-left: 3%;">{$vo['taipaitime']}</span>
+                <span style="position: absolute;left: 50%;margin-left: -19.3%;">{$vo['room_num']}</span>
+                <span >{$vo['fen']}</span>
+                 
+            </li>
+            {/volist}
+       
+   </ul>
+ 
+  
+   
+</body>
+<script src="__STATIC__/game/js/jquery-1.12.1.js" type="text/javascript"></script>
+<script type="text/javascript">
+    function type(type){
+        $('.gametype').hide();
+        $('li[name='+type+']').show();
+        $('.gamekind img').css('opacity','0.5');
+        $(".r"+type).css('opacity','1');
+    }
+
+   
+   
+   
+</script>
+</html>

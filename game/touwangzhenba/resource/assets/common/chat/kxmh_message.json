@@ -1,0 +1,8 @@
+{"file":"kxmh_message.png","frames":{
+"kxmh_biaoqingmsg":{"x":806,"y":51,"w":58,"h":171,"offX":0,"offY":0,"sourceW":58,"sourceH":171},
+"kxmh_biaoqingmsg2":{"x":746,"y":51,"w":58,"h":171,"offX":0,"offY":0,"sourceW":58,"sourceH":171},
+"kxmh_leftmsgqipao":{"x":409,"y":1,"w":275,"h":49,"offX":0,"offY":0,"sourceW":275,"sourceH":49},
+"kxmh_rightmsgqipao":{"x":686,"y":1,"w":275,"h":48,"offX":0,"offY":0,"sourceW":275,"sourceH":48},
+"kxmh_textmsg":{"x":686,"y":51,"w":58,"h":173,"offX":0,"offY":0,"sourceW":58,"sourceH":173},
+"kxmh_textmsg2":{"x":963,"y":1,"w":58,"h":173,"offX":0,"offY":0,"sourceW":58,"sourceH":173},
+"kxmh_messageBg":{"x":1,"y":1,"w":406,"h":391,"offX":0,"offY":0,"sourceW":406,"sourceH":391}}}

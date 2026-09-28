@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="jincai" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" width="640" height="1038">
+	<e:Image source="mengban_png" x="0" y="0" width="100%" height="100%"/>
+	<e:Group scaleX="0.9" scaleY="0.9" horizontalCenter="0.5" verticalCenter="-6">
+		<e:Image x="0" y="0" source="tipsbg_png"/>
+		<e:Group y="11.77" scaleX="0.8" scaleY="0.8" horizontalCenter="0" height="121" width="628">
+			<e:Image source="flytitle" x="0" verticalCenter="0"/>
+			<e:Image id="titleImg" horizontalCenter="0.5" source="fly8" verticalCenter="-18.5"/>
+		</e:Group>
+		<e:Group id="mainGroup" y="170.4" horizontalCenter="0.5">
+			<e:Image id="qiangHead" source="playerphoto" x="0" y="0" scaleX="0.9" scaleY="0.9" width="140" height="140"/>
+			<e:Image id="beiqiangHead" source="playerphoto" x="434.24" y="0" scaleX="0.9" scaleY="0.9" width="140" height="140"/>
+			<e:Group y="135.22" horizontalCenter="0">
+				<e:Image source="vs" horizontalCenter="0" verticalCenter="0"/>
+				<e:Group width="150" height="51" x="0" verticalCenter="-1" scaleX="1.1" scaleY="1.1">
+					<e:Button id="bugouBtn" label="不够" horizontalCenter="0" verticalCenter="0">
+						<e:skinName>
+						<e:Skin states="up,down,disabled">
+							<e:Image width="100%" height="100%" source="btngreensmall" source.down="btngreensmallclick"  scaleX.down="1.1" scaleY.down="1.1"/>
+							<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+						</e:Skin>
+						</e:skinName>
+					</e:Button>
+				</e:Group>
+				<e:Group width="150" height="51" x="392.18" verticalCenter="-1" scaleX="1.1" scaleY="1.1">
+					<e:Button id="gouBtn" label="够" horizontalCenter="0" verticalCenter="0">
+						<e:skinName>
+						<e:Skin states="up,down,disabled">
+							<e:Image width="100%" height="100%" source="btngreensmall" source.down="btngreensmallclick"  scaleX.down="1.1" scaleY.down="1.1"/>
+							<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+						</e:Skin>
+						</e:skinName>
+					</e:Button>
+				</e:Group>
+			</e:Group>
+			<e:Label id="qiangkai" text="抢开" x="39.1" y="-35.25"/>
+			<e:Label id="shainum" text="36个" x="450.66" y="-34.31" textAlign="right" width="64" height="30"/>
+			<e:Label id="dizhu" text="20金币/注" y="82.84" textColor="0xffff00" horizontalCenter="0.5" fontFamily="Microsoft YaHei" size="25"/>
+			<e:Group y="30.16" horizontalCenter="1" x="164" scaleX="1" scaleY="1">
+				<e:Image id="shai0" source="pinshai1_png" x="72.69" scaleX="0.5" scaleY="0.5" verticalCenter="0"/>
+				<e:Label id="shainum0" text="36个" x="0" textAlign="right" width="66" height="30" verticalCenter="0" fontFamily="Microsoft YaHei"/>
+				<e:Label text="够不够？" x="112.79" textAlign="right" height="30" verticalCenter="0" fontFamily="Microsoft YaHei"/>
+			</e:Group>
+			<e:Image id="shai" source="pinshai1_png" x="513.6799999999998" y="-38.420000000000016" scaleX="0.5" scaleY="0.5"/>
+		</e:Group>
+		<e:Group width="20" height="20" x="634.36" y="56.68">
+			<e:Button id="closeBtn" label="" scaleX="1" scaleY="1" horizontalCenter="0" verticalCenter="0">
+				<e:skinName>
+					<e:Skin states="up,down,disabled">
+					<e:Image width="100%" height="100%" source="BTN_Close"/>
+					<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+					</e:Skin>
+				</e:skinName>
+			</e:Button>
+		</e:Group>
+		<e:Label id="daoji" text="10秒后结束竞猜" y="392.36" size="25" horizontalCenter="0"/>
+	</e:Group>
+</e:Skin>

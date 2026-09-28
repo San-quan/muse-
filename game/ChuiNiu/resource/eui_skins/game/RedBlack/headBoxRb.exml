@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="headBox" width="400" height="300" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+	<e:Group id="userInfoGroup" x="0" y="80">
+		<e:Group id="detail" x="125.3" y="41">
+			<e:Image x="2.2" y="1" source="headdikuang"/>
+			<e:Image id="whoseTurn" source="bzHeadkuang" x="0" y="0" visible="false"/>
+			<e:Group x="16.8" y="21.15">
+			<e:Image id="headImg" width="73" height="73" horizontalCenter="0" verticalCenter="-27.5" source="33_png"/>
+			<e:Label id="nickname" text="tom922" y="80.78" size="21" textAlign="center" horizontalCenter="0.5" width="71" height="21"/>
+			<e:Label id="point" text="999999" y="106.25" size="21" textAlign="center" horizontalCenter="0.5" textColor="0xf4df58" width="71" height="21"/>
+				<e:Image id="YY" source="newPublic_json.zhengzaishuohua" x="1.03" y="0" width="73" height="73" visible="false"/>
+			<e:Image id="offline" source="offline" x="0" y="0" width="73" height="73" visible="false"/>
+				<e:Image id="gou" source="fly" x="17" y="-17"/>
+			</e:Group>
+			<e:Group id="call" x="94.05000000000001" y="-50" scaleX="1" scaleY="1" width="90">
+			<e:Image id="chatpop" source="chatpop_png" x="0" y="0" scaleX="1" scaleY="1" scale9Grid="25,17,74,13" width="90"/>
+			<e:Image id="callDian" source="mine4" scaleX="0.45" scaleY="0.45" horizontalCenter="0" verticalCenter="0"/>
+			</e:Group>
+			<e:Group id="call0" x="-109.32" y="-50" visible="false">
+				<e:Image id="chatpop0" source="chatpop_png" x="122" y="0" scaleX="-1" scaleY="1"/>
+				<e:Image source="mine4" x="75.99" y="9.67" scaleX="0.4" scaleY="0.4"/>
+				<e:Label text="3个" x="14.42" y="12.73" textColor="0x000000" size="25" textAlign="center" width="53" height="25"/>
+			</e:Group>
+			<e:Group width="20" height="20" x="43" y="52.5">
+				<e:Image id="out" source="out" scaleX="0.7" scaleY="0.7" horizontalCenter="0" verticalCenter="0"/>
+			</e:Group>
+			<e:Label id="addpoint" text="+10" x="22.7" y="44" fontFamily="Microsoft YaHei" bold="true" scaleX="1" scaleY="1" textColor="0xdfe200"/>
+			<e:Image id="readyStatus" source="biaozhunIndex_json.readyStatus" x="12.3" y="41.15"/>
+		</e:Group>
+		<e:Image source="shaizhong" x="0" y="53" scaleX="0.7" scaleY="0.7" visible="false"/>
+		<e:Group id="muchWin" x="123" y="11">
+			<e:Image source="typebg" x="0" y="0" scaleX="0.7" scaleY="0.7"/>
+			<e:Label id="winnum" text="10连胜" horizontalCenter="0" verticalCenter="0" fontFamily="Microsoft YaHei" size="20"/>
+		</e:Group>
+		<e:Group id="shaiGroup" x="245.32" y="50.32" width="122" height="162">
+			<e:Group id="shaiDrangon" x="0" y="-7">
+				<e:Image id="shaizhong" source="shaizhong" x="0" y="0" scaleX="0.7" scaleY="0.7"/>
+			</e:Group>
+			<e:Group id="animate" x="0" y="0" scaleX="1" scaleY="1">
+			<e:Image id="baozi" source="leopard" x="-11.810000000000002" y="-30.66" scaleX="0.7" scaleY="0.7" visible="false"/>
+			</e:Group>
+			<e:Image id="shai0" source="mine1" x="5.51" y="55.67" scaleX="0.7" scaleY="0.7"/>
+			<e:Image id="shai1" source="mine1" x="53" y="57.33" scaleX="0.7" scaleY="0.7"/>
+			<e:Image id="shai2" source="mine1" x="63.19" y="83.3" scaleX="0.7" scaleY="0.7"/>
+			<e:Image id="shai4" source="mine1" x="-3.96" y="84.34" scaleX="0.7" scaleY="0.7"/>
+			<e:Image id="shai3" source="mine1" x="31.02" y="100.87" scaleX="0.7" scaleY="0.7"/>
+			<e:Image id="kai" x="-71.54" y="-96.62" scaleX="1" scaleY="1" source="kai1" visible="false"/>
+			<e:Image id="title" source="" y="18" scaleX="0.6" scaleY="0.6" horizontalCenter="0" visible="false"/>
+			<e:Image source="boom_0002" x="57.93" y="128" scaleX="0.7" scaleY="0.7" anchorOffsetX="61.5" anchorOffsetY="60" visible="false"/>
+		</e:Group>
+		<e:Image id="biaoqing" source="10_png" x="134.1" y="57" visible="false"/>
+		<e:Image id="yaoqing" source="yaoqing" y="53" x="132.1" visible="false"/>
+		<e:Image id="sit" source="sit" x="132.1" y="53"/>
+		<e:Label text="+10" x="144" y="5" textColor="0x117a1b" visible="false"/>
+		<e:Group id="gameendTip" x="145.75" y="51.4" scaleX="0.6" scaleY="0.6" anchorOffsetY="109" visible="false">
+			<e:Image id="endImg" x="7.34" y="7.33" anchorOffsetX="0" anchorOffsetY="0" scaleX="1" scaleY="1" source="huoli_png"/>
+			<e:BitmapLabel id="endContent" x="157.41" text="389" verticalCenter="-1.5" font="winbei_fnt"/>
+			<e:Image id="bei" source="bei_png" x="332.79" verticalCenter="0.5"/>
+		</e:Group>
+		<e:Image id="onlyThese" source="Rb1ge" x="209.3" y="175.48" width="30" height="30"/>
+	</e:Group>
+	<e:Group id="messagebg" x="60" y="37" visible="false">
+		<e:Image source="qipao_png" x="0" y="0" width="230"/>
+		<e:Label id="message" text="我当年横扫澳门五条加尔后台同仁堂让他人" size="20" width="220" horizontalCenter="0" verticalCenter="-11" textAlign="center"/>
+	</e:Group>
+</e:Skin>

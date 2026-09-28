@@ -1,0 +1,82 @@
+{include file="public/top"}
+
+  <section id="content">
+  <style>
+    .mycircle{
+        line-height:29px ;font-size: 18px;
+    }
+    .panel .table td, .panel .table th {
+    padding: 5px 0;
+    border-top: 1px solid #eaedef;
+    text-align: center;
+}
+</style>
+    <section class="main padder">
+      
+      <div class="row">
+
+          <div class="col-lg-6">
+          <section class="panel">
+            <header class="panel-heading">
+              系统设置 / 通知
+            </header>
+            <form class="form-horizontal" method="get" data-validate="parsley">      
+              
+              
+              
+              
+             
+              
+              <div class="form-group">
+                <label class="col-lg-3 control-label">通知</label>
+                <div class="col-lg-8">
+                  <textarea placeholder="请输入通知内容" rows="5" id="messageContent" class="form-control parsley-validated" data-trigger="keyup">{$ret.msg}</textarea>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-lg-9 col-offset-3" style="text-align:center;">                      
+                  
+                  <button type="button" onclick="changeMsg()" class="btn btn-primary">确认修改</button>
+                </div>
+              </div>
+            </form>
+          </section>
+          
+        </div>
+      </div>
+    </section>
+  </section>
+  <!-- .modal -->
+  <div id="modal" class="modal fade">
+    <form class="m-b-none">
+      <div class="modal-dialog pos-abt" style="margin-top:50px;">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i></button>
+            <h4 class="modal-title" id="myModalLabel">提示信息</h4>
+          </div>
+          <div class="modal-body">          
+            修改成功
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-small btn-default" data-dismiss="modal" aria-hidden="true">确定</button>
+            <!-- <button type="button" class="btn btn-small btn-primary" data-loading-text="Publishing...">Publish</button> -->
+          </div>
+        </div><!-- /.modal-content -->
+      </div>
+    </form>
+  </div>
+<script src="__STATIC__/laydate/laydate.js"></script> <!-- 改成你的路径 -->
+<script>
+
+
+var changeMsg=function(){
+  // $('#modal').modal('show');
+  var msg=$('#messageContent').val();
+  $.post("{:url('index/editMessage')}",{msg:msg},function(res){
+    $('#modal').modal('show');
+  })
+}
+
+</script>
+{include file="public/bottom"}

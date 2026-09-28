@@ -1,0 +1,7 @@
+{"file":"ddz_public.png","frames":{
+"lord_game_setting_unchecked":{"x":472,"y":519,"w":173,"h":67,"offX":0,"offY":0,"sourceW":173,"sourceH":67},
+"lord_game_setting_checked":{"x":649,"y":519,"w":177,"h":65,"offX":0,"offY":0,"sourceW":177,"sourceH":65},
+"ddz_wins_bg_little":{"x":2,"y":2,"w":856,"h":513,"offX":0,"offY":0,"sourceW":856,"sourceH":513},
+"wanfa_title":{"x":862,"y":71,"w":107,"h":50,"offX":0,"offY":0,"sourceW":107,"sourceH":50},
+"xinwen_title":{"x":862,"y":2,"w":140,"h":65,"offX":0,"offY":0,"sourceW":140,"sourceH":65},
+"setBg":{"x":2,"y":519,"w":466,"h":345,"offX":0,"offY":0,"sourceW":466,"sourceH":345}}}

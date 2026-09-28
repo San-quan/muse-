@@ -1,0 +1,71 @@
+<audio onended="mp3pause('addscore');" id="addscore" src="__STATIC__/baijiale/music/add_score.m4a"></audio>
+<audio onended="mp3pause('click');" id="click" src="__STATIC__/baijiale/music/click.m4a"></audio>
+<audio onended="mp3pause('enddraw');" id="enddraw" src="__STATIC__/baijiale/music/end_draw.m4a"></audio>
+<audio onended="mp3pause('endlost');" id="endlost" src="__STATIC__/baijiale/music/end_lost.m4a"></audio>
+<audio onended="mp3pause('endwin');" id="endwin" src="__STATIC__/baijiale/music/end_win.m4a"></audio>
+<audio onended="mp3pause('gamestart');" id="gamestart" src="__STATIC__/baijiale/music/game_start.m4a"></audio>
+<audio onended="mp3pause('openalert');" id="openalert" src="__STATIC__/baijiale/music/open_alert.m4a"></audio>
+<!-- <audio onended="mp3pause('sendcard');" id="sendcard" src="__STATIC__/baijiale/music/send_card.m4a"></audio> -->
+<audio onended="mp3playandpause('sendcard');" id="sendcard" src="__STATIC__/baijiale/music/Free-Converter.com-send_card-45771455.mp3"></audio>
+
+
+
+
+<audio id="background" autoplay="autoplay" loop="loop" src="__STATIC__/baijiale/music/game_blackground.m4a" autoplay preload></audio>
+
+<script>
+    function mp3play(id){
+        
+        document.getElementById(id).play();
+    }
+    function mp3pause(id){
+        document.getElementById(id).pause();
+    }
+
+    function mp3playandpause(id){
+        mp3play(id);
+        mp3pause(id);
+    }
+
+</script>
+<script>
+    function audioAutoPlay(id){
+        var audio = document.getElementById(id),
+                play = function(){
+                    audio.play();
+                };
+        document.addEventListener("WeixinJSBridgeReady", function () {
+            play();
+            mp3pause(id);
+        }, false);
+        document.addEventListener('YixinJSBridgeReady', function() {
+            play();
+            mp3pause(id);
+        }, false);
+    }
+
+    audioAutoPlay('addscore');
+    audioAutoPlay('click');
+    audioAutoPlay('enddraw');
+    audioAutoPlay('endlost');
+    audioAutoPlay('endwin');
+    audioAutoPlay('gamestart');
+    audioAutoPlay('openalert');
+    audioAutoPlay('sendcard');
+    
+    audioAutoPlay('background');
+
+    audioAutoPlay('mp3daojishi');
+   
+
+window.onload=function(){
+    setTimeout(function(){
+    mp3play('background');
+},1000)
+}
+
+
+
+
+</script>
+

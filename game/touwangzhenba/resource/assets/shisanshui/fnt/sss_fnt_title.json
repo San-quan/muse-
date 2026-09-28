@@ -1,0 +1,9 @@
+{"file":"sss_fnt_title.png","frames":{
+"sss_bottom_lose":{"x":121,"y":54,"w":118,"h":50,"offX":0,"offY":0,"sourceW":118,"sourceH":50},
+"sss_bottom_win":{"x":1,"y":54,"w":118,"h":50,"offX":0,"offY":0,"sourceW":118,"sourceH":50},
+"sss_head_lose":{"x":119,"y":1,"w":116,"h":51,"offX":0,"offY":0,"sourceW":116,"sourceH":51},
+"sss_head_win":{"x":1,"y":1,"w":116,"h":51,"offX":0,"offY":0,"sourceW":116,"sourceH":51},
+"sss_mid_lose":{"x":116,"y":106,"w":113,"h":51,"offX":0,"offY":0,"sourceW":113,"sourceH":51},
+"sss_mid_win":{"x":1,"y":106,"w":113,"h":51,"offX":0,"offY":0,"sourceW":113,"sourceH":51},
+"sss_total_lose":{"x":119,"y":159,"w":116,"h":49,"offX":0,"offY":0,"sourceW":116,"sourceH":49},
+"sss_total_win":{"x":1,"y":159,"w":116,"h":49,"offX":0,"offY":0,"sourceW":116,"sourceH":49}}}

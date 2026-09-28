@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="loadingUI" width="1038" height="640" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+	<w:Config id="16135cc7f36"/>
+	<e:Image id="bg" x="0" y="0" width="100%" height="100%" source="ddzLoading_png"/>
+	<e:Image id="title" source="waitWenzi_png" y="387.09" horizontalCenter="10.5"/>
+	<e:ProgressBar id="pro" y="417.09" skinName="skins.ProgressBarSkin" anchorOffsetX="0" anchorOffsetY="0" horizontalCenter="0" enabled="true"/>
+</e:Skin>

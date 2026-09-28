@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="setting" width="640" height="1038" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+	<e:Image id="m_mengban" width="100%" height="100%" x="320" y="519.5" source="mengban_png" anchorOffsetX="320" anchorOffsetY="519"/>
+	<e:Group horizontalCenter="0" verticalCenter="0">
+		<e:Image y="0" source="bg_png" x="0"/>
+		<e:Button id="close" label="" x="432" y="10.67" visible="false">
+			<e:skinName>
+			<e:Skin states="up,down,disabled">
+				<e:Image width="100%" height="100%" source="lord_exit_btn_close_d_png" scaleX.down="1.1" scaleY.down="1.1"/>
+				<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+			</e:Skin>
+			</e:skinName>
+		</e:Button>
+		<e:Image id="bgMusic" x="160" y="156.5" source="lord_game_setting_checked_png"/>
+		<e:Image id="bgAudio" x="160" y="244.5" source="lord_game_setting_checked_png"/>
+	</e:Group>
+</e:Skin>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="skins.HallFuncItemfind" minWidth="30" minHeight="18" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" width="414" height="72">
+	<e:Image id="m_bg" x="0" y="0" source="findAndFight_json.zafhh"/>
+	<e:Label id="m_jushu" text="正在第1局游戏中" x="139.67" y="46" size="14" fontFamily="Microsoft YaHei" textColor="0xfcde6c"/>
+	<e:Group width="20" height="20" x="346" verticalCenter="0" scaleX="1.2" scaleY="1.2">
+		<e:Button id="m_enterbtn" label="" horizontalCenter="0" verticalCenter="0">
+			<e:skinName>
+				<e:Skin states="up,down,disabled">
+				<e:Image width="100%" height="100%" source="faxianJinru" scaleX.down="1.1" scaleY.down="1.1"/>
+				<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+				</e:Skin>
+			</e:skinName>
+		</e:Button>
+	</e:Group>
+	<e:BitmapLabel id="m_roomid" x="189.15" y="17.91" font="fightAndFind_fnt" text="666666"/>
+	<e:Label text="房间号：" x="139.67" y="17.34" fontFamily="Microsoft YaHei" size="14" textColor="0xfcde6c"/>
+</e:Skin>

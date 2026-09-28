@@ -1,0 +1,14 @@
+{"file":"shopimages.png","frames":{
+"chongrecord":{"x":486,"y":483,"w":223,"h":44,"offX":0,"offY":0,"sourceW":223,"sourceH":44},
+"chongrecordAn":{"x":195,"y":485,"w":223,"h":42,"offX":0,"offY":0,"sourceW":223,"sourceH":42},
+"chongzhi":{"x":761,"y":467,"w":223,"h":44,"offX":0,"offY":0,"sourceW":223,"sourceH":44},
+"chongzhian":{"x":711,"y":513,"w":223,"h":42,"offX":0,"offY":0,"sourceW":223,"sourceH":42},
+"diamond2":{"x":891,"y":335,"w":130,"h":117,"offX":0,"offY":0,"sourceW":130,"sourceH":117},
+"diamond3":{"x":195,"y":335,"w":154,"h":132,"offX":0,"offY":0,"sourceW":154,"sourceH":132},
+"diamondbag":{"x":351,"y":335,"w":133,"h":148,"offX":0,"offY":0,"sourceW":133,"sourceH":148},
+"diamondBBox":{"x":619,"y":335,"w":140,"h":136,"offX":0,"offY":0,"sourceW":140,"sourceH":136},
+"diamondBox":{"x":761,"y":335,"w":128,"h":130,"offX":0,"offY":0,"sourceW":128,"sourceH":130},
+"diamondSbg":{"x":486,"y":335,"w":131,"h":146,"offX":0,"offY":0,"sourceW":131,"sourceH":146},
+"goodsBg":{"x":1,"y":335,"w":192,"h":281,"offX":0,"offY":0,"sourceW":192,"sourceH":283},
+"shopSend":{"x":907,"y":1,"w":34,"h":88,"offX":0,"offY":0,"sourceW":34,"sourceH":88},
+"chongrescordBg":{"x":1,"y":1,"w":904,"h":332,"offX":0,"offY":0,"sourceW":904,"sourceH":332}}}

@@ -1,0 +1,207 @@
+{include file="public/top"}
+
+  <section id="content">
+  <style>
+    .mycircle{
+        line-height:29px ;font-size: 18px;
+    }
+    .panel .table td, .panel .table th {
+    padding: 0;
+    border-top: 1px solid #eaedef;
+    text-align: center;
+    line-height: 32px;
+    font-size: 11px;
+
+}
+.pagination > li > a, .pagination > li > span {
+
+    padding: 4px 11px;
+
+}
+</style>
+    <section class="main padder">
+  
+      <div class="row">
+        <div class="col-lg-12">
+          <section class="panel">
+            <header class="panel-heading">
+              代理管理 / 我的代理列表
+            </header>
+            <div class="row text-small">
+            <form action="{:url('Daili/myAgentList')}" method="get">
+              <div class="col-lg-12 m-b-mini">
+                <input type="text" style="width:135px;" class="input-small inline form-control" placeholder="请输入代理ID" name="aid" value="{$myid}">
+                <button class="btn btn-small btn-white" type="submit">搜索</button>
+              </div>
+            </form>
+             <!--  <div class="col-lg-4">
+                <div class="input-group">
+                  <input type="text" class="input-small form-control" placeholder="Search">
+                  <span class="input-group-btn">
+                    <button class="btn btn-small btn-white" type="button">Go!</button>
+                  </span>
+                </div>
+              </div> -->
+            </div>
+            <div class="pull-out m-t-small">
+              <table class="table table-striped b-t text-small">
+                <thead>
+                  <tr>
+                    <!-- <th width="20"><input type="checkbox"></th> -->
+                    <th>ID</th>
+                    <th>名字</th>
+                    <th>电话</th>
+                    <th>状态</th>
+                    <th>操作</th>
+                    <!-- <th width="30"></th> -->
+                  </tr>
+                </thead>
+                <tbody>
+                {volist name='ret' id='list'}
+                  <tr> 
+                    <td>{$list.id}</td>
+                    <td >{:mb_substr($list.name,0,5)}</td>
+                 
+                    <td>{$list.phone}</td>
+                    {if condition="$list.status eq 1"}
+                      <td style="color:green;">正常</td>
+                    {elseif condition="$list.status eq 0"}
+                      <td style="color:black;">禁用</td>
+                    {elseif condition="$list.status eq 2"}
+                      <td style="color:orange;">待审核</td>
+                    {elseif condition="$list.status eq 3"}
+                      <td style="color:red;">已拒绝</td>
+                    {/if}
+
+                    
+                    
+                    <td>
+                    {if condition="$list.status eq 1"}
+                        <span class="file-input-wrapper btn btn btn-small btn-info" style="font-size: 8px;background-color:#233445;" onclick="turnToBlack(0,{$list.id},this)">禁用</span>
+                    
+                    {elseif condition="$list.status eq 0"}
+                        <span class="file-input-wrapper btn btn btn-small btn-info" style="font-size: 8px;background-color:#233445;" onclick="turnToBlack(1,{$list.id},this)">启用</span>
+                    {elseif condition="$list.status eq 2"}
+                        <span class="file-input-wrapper btn btn btn-small btn-info" id="actionBtn1" style="font-size: 8px;background-color:#3fcf7f;" onclick="agreeOrnot(1,{$list.id},this)">同意</span>
+                        <span class="file-input-wrapper btn btn btn-small btn-info" id="actionBtn2" style="font-size: 8px;background-color:#ff8585;" onclick="agreeOrnot(3,{$list.id},this)">拒绝</span>
+                    {/if}
+                    <span onclick="agentDetail({$list.id})" class="file-input-wrapper btn btn btn-small btn-info" style="font-size: 8px;" >编辑</span>
+                    </td>
+                    <!--   <td>
+                      <a href="#" class="active" data-toggle="class"><i class="icon-ok icon-large text-success text-active"></i><i class="icon-remove icon-large text-danger text"></i></a>
+                    </td> -->
+                  </tr>
+                {/volist}
+                </tbody>
+              </table>
+            </div>
+            <footer class="panel-footer">
+              <div class="row">
+               <!--  <div class="col-lg-4 hidden-sm">
+                  <select class="input-small inline form-control" style="width:130px">
+                    <option value="0">Bulk action</option>
+                    <option value="1">Delete selected</option>
+                    <option value="2">Bulk edit</option>
+                    <option value="3">Export</option>
+                  </select>
+                  <button class="btn btn-small btn-white">Apply</button>                  
+                </div> -->
+               <!--  <div class="col-lg-4 text-center">
+                  <small class="text-muted inline m-t-small m-b-small">showing 20-30 of 50 items</small>
+                </div> -->
+
+                <div class="col-lg-4 text-right text-center-sm">                
+                  <!-- <ul class="pagination pagination-small m-t-none m-b-none">
+                    <li><a href="#"><i class="icon-chevron-left"></i></a></li>
+                    <li><a href="#">1</a></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">4</a></li>
+                    <li><a href="#">5</a></li>
+                    <li><a href="#"><i class="icon-chevron-right"></i></a></li>
+                  </ul> -->
+                  {$ret->render()}
+                </div>
+              </div>
+            </footer>
+          </section>
+        </div>
+      </div>
+    </section>
+  </section>
+  <!-- .modal -->
+  {include file="daili/agentinfo"}
+<script src="__STATIC__/laydate/laydate.js"></script> <!-- 改成你的路径 -->
+<script>
+
+//执行一个laydate实例
+laydate.render({
+  elem: '#startDate', //指定元素
+  type: 'datetime'
+});
+laydate.render({
+  elem: '#endDate', //指定元素
+  type: 'datetime'
+});
+var agentDetail=function(aid){
+  $("#editBtn").show();
+  $.post("{:url('Daili/getAgentDetail')}",{aid:aid},function(res){
+    var rel=eval('('+res+')');
+      $('#modelContent').html(rel.html);
+      $('#modal').modal('show');
+    
+  },'JSON')
+}
+var turnToBlack=function(isblack,uid,obj){
+ var _this=$(obj);
+  $("#editBtn").hide();
+  if(isblack==0?confirm('是否拉黑该玩家？'):confirm('是否恢复该玩家？')){
+
+    $.post("turnToBlack",{isblack:isblack,uid:uid},function(ret){
+      // _this=$(_this);
+      if(ret==1){
+        _this.attr("onclick","turnToBlack(1,"+uid+",this)");
+        _this.parent().prev().html('禁用');
+        _this.parent().prev().attr('style',"color:black;");
+        _this.html('启用');
+        $('#modelContent').html('拉黑成功');
+        $('#modal').modal('show');
+      }else{
+        _this.attr("onclick","turnToBlack(0,"+uid+",this)");
+        _this.parent().prev().html('正常');
+        _this.html('拉黑');
+        _this.parent().prev().attr('style',"color:green;");
+        $('#modelContent').html('恢复成功');
+        $('#modal').modal('show');
+      }
+    },"json")
+  }
+}
+var agreeOrnot=function(isblack,uid,obj){
+ var _this=$(obj);
+  $("#editBtn").hide();
+  if(isblack==1?confirm('是否同意该用户成为代理？'):confirm('是否拒绝该用户成为代理？')){
+
+    $.post("turnToBlack",{isblack:isblack,uid:uid},function(ret){
+      // _this=$(_this);
+      if(ret!=3){
+        $("#actionBtn2").attr("onclick","turnToBlack(0,"+uid+",this)");
+        _this.parent().prev().html('正常');
+        _this.parent().prev().attr('style',"color:green;");
+        $("#actionBtn1").hide();
+        $("#actionBtn2").html('拉黑');
+        $("#actionBtn2").attr("style","font-size: 8px;background-color:#233445;")
+        $('#modelContent').html('已同意');
+        $('#modal').modal('show');
+      }else{
+        
+        _this.parent().parent().remove();
+       
+        $('#modelContent').html('已拒绝');
+        $('#modal').modal('show');
+      }
+    },"json")
+  }
+}
+</script>
+{include file="public/bottom"}

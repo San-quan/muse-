@@ -1,0 +1,16 @@
+{"file":"bzInGame.png","frames":{
+"fly4":{"x":631,"y":213,"w":368,"h":176,"offX":0,"offY":0,"sourceW":368,"sourceH":176},
+"fly2":{"x":1,"y":336,"w":358,"h":124,"offX":0,"offY":0,"sourceW":358,"sourceH":124},
+"fly1":{"x":538,"y":391,"w":175,"h":74,"offX":0,"offY":0,"sourceW":175,"sourceH":74},
+"dot":{"x":963,"y":1,"w":14,"h":17,"offX":0,"offY":0,"sourceW":14,"sourceH":17},
+"bettxt":{"x":361,"y":336,"w":175,"h":74,"offX":0,"offY":0,"sourceW":175,"sourceH":74},
+"betting":{"x":361,"y":412,"w":125,"h":50,"offX":0,"offY":0,"sourceW":125,"sourceH":50},
+"playerphoto":{"x":821,"y":1,"w":140,"h":140,"offX":0,"offY":0,"sourceW":140,"sourceH":140},
+"flytitle":{"x":1,"y":213,"w":628,"h":121,"offX":0,"offY":0,"sourceW":628,"sourceH":121},
+"fly8":{"x":1,"y":1,"w":447,"h":210,"offX":0,"offY":0,"sourceW":447,"sourceH":210},
+"fly6":{"x":450,"y":1,"w":369,"h":210,"offX":0,"offY":0,"sourceW":369,"sourceH":210},
+"vs":{"x":863,"y":391,"w":105,"h":69,"offX":0,"offY":0,"sourceW":105,"sourceH":69},
+"BTN_Close":{"x":1,"y":462,"w":73,"h":75,"offX":0,"offY":0,"sourceW":73,"sourceH":75},
+"BTN_CloseClick":{"x":715,"y":443,"w":73,"h":75,"offX":0,"offY":0,"sourceW":73,"sourceH":75},
+"btngreensmall":{"x":715,"y":391,"w":146,"h":50,"offX":2,"offY":1,"sourceW":150,"sourceH":51},
+"btngreensmallclick":{"x":821,"y":143,"w":150,"h":51,"offX":0,"offY":0,"sourceW":150,"sourceH":51}}}

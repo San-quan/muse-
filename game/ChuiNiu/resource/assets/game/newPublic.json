@@ -1,0 +1,8 @@
+{"file":"newPublic.png","frames":{
+"watchingNew":{"x":145,"y":168,"w":73,"h":23,"offX":0,"offY":0,"sourceW":73,"sourceH":23},
+"playingNew":{"x":129,"y":143,"w":74,"h":23,"offX":0,"offY":0,"sourceW":74,"sourceH":23},
+"dibuYY":{"x":139,"y":97,"w":105,"h":44,"offX":0,"offY":0,"sourceW":105,"sourceH":44},
+"dibuPlayerList":{"x":1,"y":125,"w":126,"h":47,"offX":0,"offY":0,"sourceW":126,"sourceH":47},
+"dibuMsg":{"x":1,"y":174,"w":142,"h":39,"offX":0,"offY":0,"sourceW":142,"sourceH":39},
+"isLuying":{"x":1,"y":1,"w":136,"h":122,"offX":0,"offY":0,"sourceW":136,"sourceH":122},
+"zhengzaishuohua":{"x":139,"y":1,"w":93,"h":94,"offX":0,"offY":0,"sourceW":93,"sourceH":94}}}

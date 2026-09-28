@@ -1,0 +1,8 @@
+{"file":"hallImage2.png","frames":{
+"hall_top":{"x":1,"y":875,"w":640,"h":102,"offX":0,"offY":0,"sourceW":640,"sourceH":102},
+"hall_bottom":{"x":1,"y":766,"w":640,"h":107,"offX":0,"offY":0,"sourceW":640,"sourceH":107},
+"hall_create_fourPoker":{"x":1,"y":613,"w":627,"h":151,"offX":0,"offY":0,"sourceW":627,"sourceH":151},
+"hall_create_doudizhu":{"x":1,"y":460,"w":627,"h":151,"offX":0,"offY":0,"sourceW":627,"sourceH":151},
+"hall_creat_shisanshui":{"x":1,"y":307,"w":627,"h":151,"offX":0,"offY":0,"sourceW":627,"sourceH":151},
+"hall_create_hzmj":{"x":1,"y":154,"w":627,"h":151,"offX":0,"offY":0,"sourceW":627,"sourceH":151},
+"hall_creat_paodekuai":{"x":1,"y":1,"w":627,"h":151,"offX":0,"offY":0,"sourceW":627,"sourceH":151}}}

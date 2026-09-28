@@ -1,0 +1,267 @@
+{include file="public/top"}
+  <!-- / nav -->
+
+  <section id="content">
+  <style>
+    .mycircle{
+        line-height:29px ;font-size: 18px;
+    }
+    .panel .table td, .panel .table th {
+      padding: 0;
+      border-top: 1px solid #eaedef;
+      text-align: center;
+      line-height: 32px;
+      font-size: 11px;
+    }
+  </style>
+  
+    <section class="main padder">
+  
+      <div class="row">
+        <div class="col-lg-12">
+          <section class="panel">
+            <header class="panel-heading">
+              后台列表
+            </header>
+            <div class="row text-small">
+            <!-- <form action="{:url('Sp/add')}" method="get"> -->
+              <div class="col-lg-12 m-b-mini">
+                <input id="UID" type="text" style="width:135px;" class="input-small inline form-control" placeholder="请输入玩家ID" name="uid" value="">
+                <button class="btn btn-small btn-white" type="button" onclick="add()">添加</button>
+              </div>
+            <!-- </form> -->
+             <!--  <div class="col-lg-4">
+                <div class="input-group">
+                  <input type="text" class="input-small form-control" placeholder="Search">
+                  <span class="input-group-btn">
+                    <button class="btn btn-small btn-white" type="button">Go!</button>
+                  </span>
+                </div>
+              </div> -->
+            </div>
+            <div class="pull-out m-t-small">
+              <table class="table table-striped b-t text-small">
+                <thead>
+                  <tr>
+                    <!-- <th width="20"><input type="checkbox"></th> -->
+                    <th>ID</th>
+                    <!-- <th>游戏种类</th> -->
+                    <th >昵称</th>
+                    <th>操作</th>
+               
+                    <!-- <th width="30"></th> -->
+                  </tr>
+                </thead>
+                <tbody>
+                {if condition="$data.state eq false"}
+                  <tr >
+                     <td style='color:red;' colspan="3">暂无数据！</td>
+                    </tr>
+                {/if}
+                {if condition="$data.state eq true"}
+                  {volist name='data.data' id='list'}
+                    <tr>
+                      <td>{$list.id}</td>
+                      <td>{$list.nickname}</td>
+                      <td>
+                        <span class="file-input-wrapper btn btn btn-small btn-success" style="font-size: 11px;" onclick="editSP({$list.id})">编辑</span>
+                        <span class="file-input-wrapper btn btn btn-small btn-danger" style="font-size: 11px;" onclick="if(confirm('确认删除')){deleteSP({$list.id})}">删除</span>
+                      </td>
+                    </tr>
+                  {/volist}
+                {/if}
+                  
+                </tbody>
+              </table>
+            </div>
+            <!-- <footer class="panel-footer"> -->
+              <!-- <div class="row"> -->
+               <!--  <div class="col-lg-4 hidden-sm">
+                  <select class="input-small inline form-control" style="width:130px">
+                    <option value="0">Bulk action</option>
+                    <option value="1">Delete selected</option>
+                    <option value="2">Bulk edit</option>
+                    <option value="3">Export</option>
+                  </select>
+                  <button class="btn btn-small btn-white">Apply</button>                  
+                </div> -->
+               <!--  <div class="col-lg-4 text-center">
+                  <small class="text-muted inline m-t-small m-b-small">showing 20-30 of 50 items</small>
+                </div> -->
+
+                <!-- <div class="col-lg-4 text-right text-center-sm">                 -->
+                  <!-- <ul class="pagination pagination-small m-t-none m-b-none">
+                    <li><a href="#"><i class="icon-chevron-left"></i></a></li>
+                    <li><a href="#">1</a></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">4</a></li>
+                    <li><a href="#">5</a></li>
+                    <li><a href="#"><i class="icon-chevron-right"></i></a></li>
+                  </ul> -->
+               
+                <!-- </div> -->
+              <!-- </div> -->
+            <!-- </footer> -->
+          </section>
+        </div>
+      </div>
+    </section>
+  </section>
+  <!-- .modal -->
+  <div id="modal" class="modal fade">
+    <form class="m-b-none">
+      <div class="modal-dialog pos-abt" style="margin-top:-235px; top:50%">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i></button>
+            <h4 class="modal-title" id="myModalLabel">提示</h4>
+          </div>
+          <div class="modal-body" style="padding:0;">          
+            <section class="panel" style="margin-bottom:0;padding:8px;">
+            <!-- <header class="panel-heading">
+              <ul class="nav nav-pills pull-right">
+                <li>
+                  <a href="#" class="panel-toggle text-muted"><i class="icon-caret-down icon-large text-active"></i><i class="icon-caret-up icon-large text"></i></a>
+                </li>
+              </ul>
+              <span class="label label-large bg-default">15</span> Inbox
+            </header> -->
+            <section id="modelContent"  class="panel-content scrollbar scroll-y scroll-x">
+              
+            </section>
+          </section>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-small btn-default" data-dismiss="modal" aria-hidden="true">确定</button>
+            <!-- <button type="button" class="btn btn-small btn-primary" data-loading-text="Publishing...">Publish</button> -->
+          </div>
+        </div><!-- /.modal-content -->
+      </div>
+    </form>
+  </div>
+</body>
+<script src="__STATIC__/laydate/laydate.js"></script> <!-- 改成你的路径 -->
+<script>
+
+
+//执行一个laydate实例
+laydate.render({
+  elem: '#startDate', //指定元素
+  type: 'datetime'
+});
+laydate.render({
+  elem: '#endDate', //指定元素
+  type: 'datetime'
+});
+var roomDetail=function(pwd){
+  $.post("getRoomDetail",{pwd:pwd},function(res){
+    if(res.state==0){
+      $('#modal').modal('show');
+      $('#modelContent').html("<p style='color:red;'>暂无数据！</p>");
+    }else if(res.state==1){
+      $('#modelContent').html(res.html);
+      $('#modal').modal('show');
+    }
+  },'JSON')
+}
+var add=function(){
+  var uid=$("#UID").val(); 
+  $.post("{:url('Sp/add')}",{uid:uid},function(res){
+    if(res.state==0){
+      $('#modal').modal('show');
+      $('#modelContent').html("<p style='color:red;'>ID不能为空！</p>");
+    }else if(res.state==1){
+      $('#modelContent').html("<p style='color:red;'>请输入正确的ID！</p>");
+      $('#modal').modal('show');
+    }else if(res.state==2){
+      window.location.reload();
+    }else if(res.state==3){
+      $('#modelContent').html("<p style='color:red;'>该ID已被添加</p>");
+      $('#modal').modal('show');
+    }
+  },'JSON')
+}
+var deleteSP=function(uid){
+  // var uid=$("#UID").val(); 
+  $.post("{:url('Sp/deleteSP')}",{uid:uid},function(res){
+    if(res.state==0){
+      $('#modal').modal('show');
+      $('#modelContent').html("<p style='color:red;'>ID不能为空！</p>");
+    }else if(res.state==1){
+      $('#modelContent').html("<p style='color:red;'>请输入正确的ID！</p>");
+      $('#modal').modal('show');
+    }else if(res.state==2){
+      window.location.reload();
+    }else if(res.state==3){
+      $('#modelContent').html("<p style='color:red;'>该ID已被添加</p>");
+      $('#modal').modal('show');
+    }
+  },'JSON')
+}
+var editSP=function(uid){
+  $.ajax({
+    type:"post",
+    dataType:"json",
+    url:"{:url('Sp/editData')}",
+    data:{
+      uid:uid,
+    },
+    success:function(data){
+      var modal_title="编辑控制";
+      var modal_body='<table class="table table-striped b-t text-small">'+
+                  '<tr>'+
+                    '<td align="center"><b>玩家ID</b><td>'+
+                    '<td align="center"><b>昵称</b><td>'+
+                    '<td align="center"><b>概率（%）</b><td>'+
+                  '</tr>'+
+                  '<tr>'+
+                    '<td align="center">'+data.uid+'<td>'+
+                    '<td align="center">'+data.nickname+'<td>'+
+                    '<td align="center"><input type="number" value="'+data.rank+'" id="rank" class="input-small inline form-control" /><td>'+
+                  '</tr>'+
+                  '</table>';
+      var modal_footer='<button type="button" class="btn btn-small btn-default" onclick="doEditSP('+data.uid+')">保存</button>'+
+                      '<button type="button" class="btn btn-small btn-default" data-dismiss="modal" aria-hidden="true">取消</button>';
+      $("#modal .modal-title").html(modal_title);
+      $("#modelContent").html(modal_body);
+      $("#modal .modal-footer").html(modal_footer);
+      $("#modal").modal("show");
+    }
+  })
+}
+var doEditSP=function(uid){
+  var rank=$("#rank").val();
+  rank=parseInt(rank);
+  if(isNaN(rank)||rank<0||rank>100){
+    var modal_title="提示";
+    var modal_body="概率请输入0到100之间的正整数";
+    var modal_footer='<button type="button" class="btn btn-small btn-default" data-dismiss="modal" aria-hidden="true">确定</button>';
+    $("#modal .modal-title").html(modal_title);
+    $("#modelContent").html(modal_body);
+    $("#modal .modal-footer").html(modal_footer);
+  }else{
+    $.ajax({
+      type:"post",
+      dataType:"json",
+      url:"{:url('Sp/doEditSP')}",
+      data:{
+        uid:uid,
+        rank:rank
+      },
+      success:function(data){
+        var modal_title="提示";
+        var modal_body=data.desc;
+        var modal_footer='<button type="button" class="btn btn-small btn-default" data-dismiss="modal" aria-hidden="true" onclick="dumpToSelf()">确定</button>';
+        $("#modal .modal-title").html(modal_title);
+        $("#modelContent").html(modal_body);
+        $("#modal .modal-footer").html(modal_footer);
+      }
+    })
+  }
+}
+var dumpToSelf=function(){
+  window.location.reload();
+}
+</script>
+{include file="public/bottom"}

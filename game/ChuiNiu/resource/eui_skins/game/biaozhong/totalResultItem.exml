@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="totalResultItem" width="529" height="72" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+	<e:Group x="0" y="0">
+		<e:Image source="ITemitem" x="0" y="0" height="72"/>
+		<e:Image id="paiMing" x="17.5" verticalCenter="0" source="img_rank3"/>
+		<e:Label id="nickname" text="魂族网络科技" x="79" textColor="0x78450F" fontFamily="Microsoft YaHei" verticalCenter="0" size="25" width="150" height="25" textAlign="center"/>
+		<e:Label id="ID" text="666666" x="247" textColor="0x78450F" fontFamily="Microsoft YaHei" verticalCenter="0.5" size="25" width="88" height="25" textAlign="center"/>
+		<e:Label id="pmText" text="5" x="30" textColor="0x78450f" size="30" fontFamily="Microsoft YaHei" verticalCenter="1"/>
+		<e:Group x="346" verticalCenter="0" width="180" height="30">
+			<e:BitmapLabel id="point" text="-222666" font="loss_total_fnt" scaleX="1" scaleY="1" horizontalCenter="0" verticalCenter="0"/>
+		</e:Group>
+	</e:Group>
+</e:Skin>

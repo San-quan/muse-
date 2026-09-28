@@ -1,0 +1,13 @@
+<img src="__STATIC__/game/img/list.png"><div class="content">
+    <p class="times">房间号：<span style="margin-right:0.6rem;">{$room.room_num}</span><span>{:date('Y-m-d H:i',$room['taipaitime'])}</span></p>
+    <ul>
+
+<style type="text/css">.nn12{background:#1C1606;color: white;list-style: none;width: 96%;margin-left: 2%;margin-top: 0.7%;height: 1.2rem;line-height: 1.2rem;font-size: 0.8rem;opacity: 0.9;}</style>
+
+{volist name="list" id="vo"}
+        <li class="nn12 {gt name="vo['money']" value="0"}add{/gt}" style="{eq name="key" value="0"} height: 2rem;line-height: 2rem;{/eq}"><div class="{eq name="key" value="0"} win{/eq}"><span>{$vo.nickname}</span><span>{gt name="vo['money']" value="0"}+{else /}-{/gt}{:abs($vo['money'])}</span></div></li>
+
+{/volist}
+
+    </ul>
+</div>

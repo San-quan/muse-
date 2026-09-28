@@ -1,0 +1,247 @@
+{include file="public/top"}
+
+  <section id="content">
+  <style>
+    .mycircle{
+        line-height:29px ;font-size: 18px;
+    }
+    .panel .table td, .panel .table th {
+    padding: 0;
+    border-top: 1px solid #eaedef;
+    text-align: center;
+    line-height: 32px;
+    font-size: 11px;
+
+}
+.pagination > li > a, .pagination > li > span {
+
+    padding: 4px 11px;
+
+}
+</style>
+    <section class="main padder">
+  
+      <div class="row">
+        <div class="col-lg-12">
+          <section class="panel">
+            <header class="panel-heading">
+              商品管理 / 赠品管理
+            </header>
+            <div class="row text-small">
+              <div class="col-lg-12 m-b-mini">
+                <button class="btn btn-small btn-white" type="button" onclick="addSong()">添加赠品</button>
+              </div>
+            </div>
+            <div class="pull-out m-t-small">
+              <table class="table table-striped b-t text-small">
+                <tr>
+                  <th>连续签到天数</th>
+                  <th>赠送商品名称</th>
+                  <th>操作</th>
+                </tr>
+                {if condition="count($songList) neq 0"}
+                {foreach name="songList" id="list" key="k"}
+                <tr>
+                  <td>{$list.continuityDay}</td>
+                  <td>{$list.name}</td>
+                  <td>
+                    <button class="btn btn-small btn-white" onclick="saveSong({$list.continuityDay},{$list.goodsid})">设置</button>
+                    {if condition="$k eq count($songList)-1"}
+                    <button class="btn btn-small btn-white" onclick="delSong()">删除</button>
+                    {/if}
+                  </td>
+                </tr>
+                {/foreach}
+                {else}
+                <tr><td colspan="3">暂无数据...</td></tr>
+                {/if}
+              </table>
+            </div>
+          </section>
+        </div>
+      </div>
+    </section>
+  </section>
+  <!-- .modal -->
+  <div id="modal" class="modal fade">
+    <form class="m-b-none">
+      <div class="modal-dialog pos-abt" style="margin-top:50px;">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i></button>
+            <h4 class="modal-title" id="modalTitle">提示</h4>
+          </div>
+          <div class="modal-body" id="modalContent">          
+            
+          </div>
+          <div class="modal-footer" id="modalFooter">
+            <button type="button" class="btn btn-small btn-default" data-dismiss="modal" aria-hidden="true">关闭</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div>
+    </form>
+  </div>
+  <div id="tipModal" class="modal fade">
+      <div class="modal-dialog pos-abt" style="margin-top:50px;">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i></button>
+            <h4 class="modal-title" id="tipModalTitle">提示</h4>
+          </div>
+          <div class="modal-body" id="tipModalContent">          
+            
+          </div>
+          <div class="modal-footer" id="tipModalFooter">
+            <button type="button" class="btn btn-small btn-default" data-dismiss="modal" aria-hidden="true">关闭</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div>
+  </div>
+<script src="__STATIC__/laydate/laydate.js"></script> <!-- 改成你的路径 -->
+<script>
+
+var addSong=function(){
+  var currentDay=0;
+  $.ajax({
+    type:"post",
+    dataType:"json",
+    url:"{:url('getSongDay')}",
+    async:false,
+    success:function(data){
+      currentDay=data+1;
+      var modalTitle="添加赠品";
+      var modalContent='<table style="width:60%;margin:0 auto;">'+
+            '<tr>'+
+              '<td>天数</td>'+
+              '<td><input type="text" id="continuityDay" value="'+currentDay+'" disabled class="input-small form-control" style="width:150px"></td>'+
+            '</tr>'+
+            '<tr>'+
+              '<td>赠品</td>'+
+              '<td>'+
+                '<select id="goodsid" style="width:150px" class="input-small form-control">'+
+                  '{volist name="goodsList" id="list"}'+
+                    '<option value="{$list.id}">{$list.name}</option>'+
+                  '{/volist}'+
+                '</select>'+
+              '</td>'+
+            '</tr>'+
+          '</table>';
+      var modalFooter='<button type="button" class="btn btn-small btn-default" onclick="addSongClick()">添加</button>'+
+          '<button type="button" class="btn btn-small btn-default" data-dismiss="modal" aria-hidden="true">关闭</button>';
+      $("#modalTitle").html(modalTitle);
+      $("#modalContent").html(modalContent);
+      $("#modalFooter").html(modalFooter);
+      $("#modal").modal("show");
+    }
+  });
+}
+
+var addSongClick=function(){
+  var continuityDay=$("#continuityDay").val();
+  var goodsid=$("#goodsid").val();
+  $.ajax({
+    type:"post",
+    dataType:"json",
+    url:"ajaxAddSong",
+    async:false,
+    data:{
+      continuityDay:continuityDay,
+      goodsid:goodsid
+    },
+    success:function(data){
+      $("#tipModalTitle").html("提示");
+      $("#tipModalContent").html(data.desc);
+      if(data.state){
+        var modalFooter='<button type="button" class="btn btn-small btn-default" onclick="reload()">确定</button>';
+      }else{
+        var modalFooter='<button type="button" class="btn btn-small btn-default" data-dismiss="modal" aria-hidden="true">确定</button>';
+      }
+      $("#tipModalFooter").html(modalFooter);
+      $("#tipModal").modal("show");
+    }
+  })
+}
+
+var saveSong=function(continuityDay,goodsid){
+  var modalTitle="设置赠品";
+  var modalContent='<table style="width:60%;margin:0 auto;">'+
+        '<tr>'+
+          '<td>天数</td>'+
+          '<td><input type="text" id="continuityDay" value="'+continuityDay+'" disabled class="input-small form-control" style="width:150px"></td>'+
+        '</tr>'+
+        '<tr>'+
+          '<td>赠品</td>'+
+          '<td>'+
+            '<select id="goodsid" style="width:150px" class="input-small form-control">'+
+              '{volist name="goodsList" id="list"}'+
+                '<option value="{$list.id}">{$list.name}</option>'+
+              '{/volist}'+
+            '</select>'+
+          '</td>'+
+        '</tr>'+
+      '</table>';
+  var modalFooter='<button type="button" class="btn btn-small btn-default" onclick="saveSongClick()">设置</button>'+
+      '<button type="button" class="btn btn-small btn-default" data-dismiss="modal" aria-hidden="true">关闭</button>';
+  $("#modalTitle").html(modalTitle);
+  $("#modalContent").html(modalContent);
+  $("#modalFooter").html(modalFooter);
+  var goodsidOptions=$("#goodsid").children();
+  goodsidOptions.each(function(i,v){
+    if($(v).attr('value')==goodsid){
+      $(v).attr('selected',true);
+    }
+  });
+  $("#modal").modal("show");
+}
+
+var saveSongClick=function(){
+  var continuityDay=$("#continuityDay").val();
+  var goodsid=$("#goodsid").val();
+  $.ajax({
+    type:"post",
+    dataType:"json",
+    url:"{:url('ajaxSaveSong')}",
+    async:false,
+    data:{
+      continuityDay:continuityDay,
+      goodsid:goodsid
+    },
+    success:function(data){
+      $("#tipModalTitle").html("提示");
+      $("#tipModalContent").html(data.desc);
+      if(data.state){
+        var modalFooter='<button type="button" class="btn btn-small btn-default" onclick="reload()">确定</button>';
+      }else{
+        var modalFooter='<button type="button" class="btn btn-small btn-default" data-dismiss="modal" aria-hidden="true">确定</button>';
+      }
+      $("#tipModalFooter").html(modalFooter);
+      $("#tipModal").modal("show");
+    }
+  })
+}
+
+var delSong=function(){
+  $.ajax({
+    type:"post",
+    dataType:"json",
+    url:"{:url('ajaxDelSong')}",
+    async:false,
+    success:function(data){
+      $("#tipModalTitle").html("提示");
+      $("#tipModalContent").html(data.desc);
+      if(data.state){
+        var modalFooter='<button type="button" class="btn btn-small btn-default" onclick="reload()">确定</button>';
+      }else{
+        var modalFooter='<button type="button" class="btn btn-small btn-default" data-dismiss="modal" aria-hidden="true">确定</button>';
+      }
+      $("#tipModalFooter").html(modalFooter);
+      $("#tipModal").modal("show");
+    }
+  })
+}
+
+var reload=function(){
+  window.location.reload();
+}
+</script>
+{include file="public/bottom"}

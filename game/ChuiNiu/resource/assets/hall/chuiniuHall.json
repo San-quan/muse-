@@ -1,0 +1,13 @@
+{"file":"chuiniuHall.png","frames":{
+"honghei":{"x":1,"y":114,"w":339,"h":111,"offX":0,"offY":0,"sourceW":339,"sourceH":111},
+"laba":{"x":342,"y":114,"w":588,"h":34,"offX":0,"offY":0,"sourceW":588,"sourceH":34},
+"niuniu":{"x":345,"y":1,"w":339,"h":111,"offX":1,"offY":0,"sourceW":340,"sourceH":111},
+"set":{"x":695,"y":150,"w":44,"h":71,"offX":0,"offY":0,"sourceW":44,"sourceH":71},
+"shop":{"x":642,"y":150,"w":51,"h":71,"offX":0,"offY":0,"sourceW":51,"sourceH":71},
+"suohua":{"x":686,"y":1,"w":335,"h":111,"offX":1,"offY":0,"sourceW":336,"sourceH":111},
+"zhanji":{"x":932,"y":114,"w":51,"h":72,"offX":0,"offY":0,"sourceW":51,"sourceH":72},
+"33":{"x":536,"y":150,"w":104,"h":104,"offX":0,"offY":0,"sourceW":104,"sourceH":104},
+"biaozhong":{"x":1,"y":1,"w":342,"h":111,"offX":1,"offY":0,"sourceW":343,"sourceH":111},
+"danji":{"x":342,"y":150,"w":192,"h":67,"offX":0,"offY":0,"sourceW":192,"sourceH":67},
+"find":{"x":741,"y":150,"w":44,"h":70,"offX":0,"offY":0,"sourceW":44,"sourceH":70},
+"hallAdd":{"x":985,"y":114,"w":32,"h":32,"offX":0,"offY":0,"sourceW":32,"sourceH":32}}}

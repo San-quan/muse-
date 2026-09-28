@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="Notice" width="1038" height="640" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+	<e:Image source="mengban_png" x="0" y="0" width="100%" height="100%"/>
+	<e:Group id="mianban" horizontalCenter="0" verticalCenter="0">
+		<e:Image source="tishi_png" horizontalCenter="0" verticalCenter="0"/>
+		<e:Label id="content" text="有游戏囧事打飞机顽皮偶尔感觉咩咩叫纳入规划in鹅肉共河内然后呢容纳后IE男人很" y="76" anchorOffsetX="0" width="380" anchorOffsetY="0" height="138" textAlign="left" verticalAlign="middle" textColor="0xbcbaba" size="22" horizontalCenter="0" lineSpacing="8"/>
+		<e:Image id="confirm" source="yes_xiao_png" x="72" y="252" width="135.5" height="52"/>
+		<e:Image id="cancel" source="quxiao_png" x="273" y="252" width="135.5" height="52"/>
+	</e:Group>
+</e:Skin>

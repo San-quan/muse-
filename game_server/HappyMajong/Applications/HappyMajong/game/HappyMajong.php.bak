@@ -1,0 +1,2037 @@
+<?php
+/**
+ * @property  十三水 房间
+ */
+
+require_once __DIR__ . '/GameManager.php';
+require_once __DIR__ . '/PlayerManager.php';
+require_once __DIR__ . '/HappyMajongGameLogic.php';
+require_once __DIR__ . '/../base/BaseRoom.php';
+
+use Workerman\Lib\Timer;
+class GameRoom extends BaseRoom
+{
+
+	//房间状态
+	const STATE_NONE = 0;
+	const STATE_WAITTING = 1;
+	const STATE_PLAYING = 2;
+	const STATE_END = 3;
+	const STATE_GAMEOVER = 4;
+
+	const GAMESTATE_NONE = 0;
+	const GAMESTATE_READY = 1;
+	const GAMESTATE_BEGIN = 2;
+	const GAMESTATE_OUT = 3;
+	const GAMESTATE_SEND = 4;
+	const GAMESTATE_OPERATE = 5;
+	const GAMESTATE_COMPARE = 6;
+	const GAMESTATE_END = 7;
+
+	//校验类型
+	const EstimatKind_outCard = 1;
+	const EstimatKind_GangCard = 2;
+
+	//游戏状态
+	private $m_gameStatus;
+
+	//==================以下为游戏中数据=======================
+
+	
+	private $m_cbSiceCount = array();			//骰子数据，根据游戏需求，自定义游戏骰子的个数
+	private $m_wBankerUser;						//庄家座位号
+	private $m_cbCardIndex = array();			//4个MAX_INDEX长度的二维数组，用于存储玩家手牌数据
+	private $m_bTrustee = array();				//是否托管，4个长度的BOOL
+
+	//出牌数据
+	private $m_wOutCardUser;					//出牌玩家的座位号
+	private $m_cbOutCardData;					//出牌的麻将
+	private $m_cbDiscardCard = array();			//已经打出的牌的记录，4个纬度的二维数组
+	private $m_cbDiscardCardOndesk = array();			//牌桌显示的牌，4个纬度的二维数组
+
+	//发牌数据
+	private $m_cbSendCardData;					//发牌的麻将
+	private $m_cbLeftCardCount;					//牌池剩余的牌数目
+	private $m_cbLeftCard;						//牌池剩余的牌
+	private $m_cbSendCardCount;					//发出的牌的数目
+
+	//运行数据
+	private $m_wResumeUser;						//当前还原的用户
+	private $m_wCurrentUser;					//当前用户
+	private $m_wProvideUser;					//供应用户
+	private $m_cbProvideCard;					//供应的麻将
+	private $m_OperateNotify;					//当前的动作
+	private $m_cbthisCards;						//本轮摸到的牌
+	// private $m_OperateResult					//当前的动作
+
+	//状态变量
+	private $m_bSendStatus;						//发牌状态
+	private $m_bGangStatus;						//杠开状态
+	private $m_bQiangGang;						//抢杠状态
+	private $m_bBaotouStatus;					//爆头状态
+	private $m_bWealthWind;						//财飘状态
+	private $m_bFollowWind;						//跟飘状态
+	private $m_bGangWealth;						//杠飘状态
+	private $m_bWealthCards;					//."\n".'cards:'.财飘的牌
+	private $m_bLastGang;						//上一轮杠
+	private $m_bFalseWealthWind;				//假飘状态
+
+	private $m_bEnjoinChiHu = array();			//禁止吃胡 size=4
+	private $m_bEnjoinChiHuWinTime = array();	//禁止吃胡的分数 //在胡先不胡后的基础上 增加 胡大不胡小 size=4
+	private $m_bEnjoinChiPeng = array();		//禁止吃碰 size=4
+
+	private $m_cbPlayerCount;					//玩家人数
+	private $m_cbPlayerStatus = array();		//size=4	玩家状态
+
+	//用户状态
+
+	private $m_bResponse = array();				//size=4 响应标志
+	private $m_cbUserAction = array();			//size=4 用户动作
+	private $m_cbOperateCard = array();			//size=4 操作扑克
+	private $m_cbPerformAction = array();		//size=4 执行动作
+	private $m_dwChiHuRight = array();			//size=4 吃胡权位
+
+	private $m_cbWeaveItemCount = array();		//size=4 组合数目
+	private $m_WeaveItemArray = array();		//size=（4个4组tagWeaveItem数据） 组合扑克
+
+	private $m_cbChiHuCard;						//吃胡扑克
+	private $m_cbContinueNT;					//连庄
+
+	private $m_cbAllGiveRecvGang = array();		//size=4个4组int 接放杠信息	
+	private $m_cbGiveRecvGang = array();		//size=4个4组int 接放杠信息	
+	private $m_cbQiangGang = array();			//size=4 抢杠信息
+	private $m_cbLightGang = array();			//size=4 明杠信息
+	private $m_cbLightPengGang = array();		//size=4 碰后杠
+	private $m_cbDarkGang = array();				//size=4 暗杠信息
+	private $m_bGangFlower =array();			//size=4 杠上开花（杠完补牌自摸）
+
+	private $m_cbNotOperate = array();			//用户不能执行的动作
+	//==================以下为房间中数据=======================
+
+	public $m_Room_HuNum = array();			//size=GAMEROUND/4 胡的统计
+	public $m_Room_GangDark = array();			//size=GAMEROUND/4 暗杠统计
+	public $m_Room_GangLight = array();		//size=GAMEROUND/4 明杠统计
+	public $m_Room_PengGangLight = array();	//size=GAMEROUND/4 碰杠统计
+	public $m_Room_GangPot = array();			//size=GAMEROUND/4 点杠统计
+	public $m_Room_ZiMoNum = array();			//size=GAMEROUND/4 自摸统计
+	public $m_Room_RecvGun = array();			//size=GAMEROUND/4 接炮
+	public $m_Room_GiveGun = array();			//size=GAMEROUND/4 点炮
+	public $m_Room_GameScore = array();
+	
+	public $m_lastTime;
+	public $m_lastType;
+	public function __construct($userid,$pwd, $rule)
+	{
+		parent::__construct($userid,$pwd, $rule);
+		$this->m_gameStatus = self::GAMESTATE_READY;
+		$this->m_playGround = GameManager::getInstance()->getCurPlayGroundByPwd($pwd);
+		//初始化房间数据
+		$this->initRoomData();
+		//初始化单局房间数据
+		$this->initSimpleRoomData();
+
+	}
+
+	public function dumpLog($type)
+	{
+		return;
+		$file =  __DIR__ . '/log/' . $this->m_roomPwd . '.txt';
+		if ($type == 1) {
+			//游戏开始
+			$site = '--------------------------'.$this->m_playGround.'-------------------------------'."\n";
+			$this->m_lastTime = microtime(true);
+		}else if($type == 2){
+			$time = microtime(true);
+			$useTime = $time - $this->m_lastTime;
+			$this->m_lastTime = $time;
+			$site = $time.' sendCardsStart ==========>'.$useTime."\n";
+		}else if($type == 3){
+			$time = microtime(true);
+			$useTime = $time - $this->m_lastTime;
+			$this->m_lastTime = $time;
+			$site = $time.' sendCardsEnd ==========>'.$useTime."\n";
+		}else if($type == 4){
+			$time = microtime(true);
+			$useTime = $time - $this->m_lastTime;
+			$this->m_lastTime = $time;
+			$site = $time.' cardsInHandStart ==========>'.$useTime."\n";
+		}else if($type == 5){
+			$time = microtime(true);
+			$useTime = $time - $this->m_lastTime;
+			$this->m_lastTime = $time;
+			$site = $time.' cardsInHandEnd ==========>'.$useTime."\n";
+		}else if($type == 6){
+			$time = microtime(true);
+			$useTime = $time - $this->m_lastTime;
+			$this->m_lastTime = $time;
+			$site = $time.' actionStart ==========>'.$useTime."\n";
+		}else if($type == 7){
+			$time = microtime(true);
+			$useTime = $time - $this->m_lastTime;
+			$this->m_lastTime = $time;
+			$site = $time.' actionEnd ==========>'.$useTime."\n";
+		}else if($type == 8){
+			$time = microtime(true);
+			$useTime = $time - $this->m_lastTime;
+			$this->m_lastTime = $time;
+			$site = $time.' outCardStart ==========>'.$useTime."\n";
+		}else if($type == 9){
+			$time = microtime(true);
+			$useTime = $time - $this->m_lastTime;
+			$this->m_lastTime = $time;
+			$site = $time.' outCarEnd ==========>'.$useTime."\n";
+		}
+		file_put_contents($file, $site, FILE_APPEND | LOCK_EX);
+
+		if (isset($useTime) && $useTime > 0.1 && in_array($type, array(3,5,7,9))) {
+			$site = '=================>use time so long'."\n".'type:'.$type."\n".'outcardsUser:'.$this->m_wOutCardUser."\n".'cards:'.json_encode($this->m_cbCardIndex[$this->m_wOutCardUser])."\n".'ware:'.json_encode($this->m_WeaveItemArray[$this->m_wOutCardUser])."\n".'action:'.json_encode($this->m_OperateNotify)."\n";
+			file_put_contents($file, $site, FILE_APPEND | LOCK_EX);
+		}
+		if ($this->m_lastType == $type) {
+			$site = '=================>more choose button'."\n".'type:'.$type."\n".'outcardsUser:'.$this->m_wOutCardUser."\n".'cards:'.json_encode($this->m_cbCardIndex[$this->m_wOutCardUser])."\n".'ware:'.json_encode($this->m_WeaveItemArray[$this->m_wOutCardUser])."\n".'action:'.json_encode($this->m_OperateNotify)."\n";
+			file_put_contents($file, $site, FILE_APPEND | LOCK_EX);
+		}
+		$this->m_lastType = $type;
+	}
+
+	public function dump($data)
+	{
+		$file =  __DIR__ . '/log/' . $this->m_roomPwd . '.txt';
+
+		$site = json_encode($data)."\n";
+
+		
+		file_put_contents($file, $site, FILE_APPEND | LOCK_EX);
+
+	}
+
+//====================================================================================================
+	//----------------------------------------------房间初始化-------------------------------------------
+	//每局游戏开始 房间初始化
+	public function initRoomData()
+	{
+		for ($j=1; $j <= $this->m_roomRule['gameground']; $j++) { 
+			for ($i=1; $i <= 4; $i++) { 
+				$this->m_Room_HuNum[$j][$i] = 0;		
+				$this->m_Room_GangDark[$j][$i] = 0;		
+				$this->m_Room_GangLight[$j][$i] = 0;	
+				$this->m_Room_PengGangLight[$j][$i] = 0;
+				$this->m_Room_GangPot[$j][$i] = 0;		
+				$this->m_Room_ZiMoNum[$j][$i] = 0;		
+				$this->m_Room_RecvGun[$j][$i] = 0;
+				$this->m_Room_GiveGun[$j][$i] = 0;
+				$this->m_Room_GameScore[$i] = 0;
+			}
+		}
+		
+		$this->m_wBankerUser = -1;
+	}
+
+	//每局游戏的每一把的初始化
+	public function initSimpleRoomData()
+	{
+	// m_cbSiceCount = array();			//骰子数据，根据游戏需求，自定义游戏骰子的个数
+		// m_wBankerUser;						//庄家座位号
+		for ($i=1; $i <= 4; $i++) { 
+			$this->m_cbCardIndex[$i] = array();	
+			$this->m_bTrustee[$i] = array();
+			$this->m_cbDiscardCard[$i] = array();
+			$this->m_cbDiscardCardOndesk[$i] = array();
+			
+			$this->m_cbPlayerStatus[$i] = array();	
+			$this->m_bResponse[$i] = array();	
+			$this->m_cbUserAction[$i] = -1;			
+			$this->m_cbOperateCard[$i] = array();		
+			$this->m_cbPerformAction[$i] = array();
+			$this->m_dwChiHuRight[$i] = array();			
+			$this->m_cbQiangGang[$i] = array();	
+			$this->m_cbLightGang[$i] = array();	
+			$this->m_cbLightPengGang[$i] = array();
+			$this->m_cbDarkGang[$i] = array();		
+			$this->m_bGangFlower[$i] =array();	
+			$this->m_cbWeaveItemCount[$i] = array();
+			$this->m_WeaveItemArray[$i] = array();
+
+			$this->m_bBaotouStatus[$i] = false;
+			$this->m_bWealthWind[$i] = 0;
+			$this->m_bFollowWind[$i] = false;
+			$this->m_bGangWealth[$i] = false;
+
+			$this->m_cbNotOperate[$i]['hucards'] = array();
+			$this->m_cbNotOperate[$i]['pengcards'] = array();
+
+			$this->m_cbthisCards[$i] = -1;
+			$this->m_nextSendCard[$i] = -1;
+			$this->m_bLastGang[$i] = 0;
+			$this->m_bQiangGang[$i]['state'] = 0;					
+			$this->m_bQiangGang[$i]['msg'] = '';
+			$this->m_bFalseWealthWind[$i] = false;
+			for ($j=1; $j <= 4; $j++) { 
+				$this->m_cbGiveRecvGang[$i][$j] = 0;	
+			}		
+		}
+		$this->m_wOutCardUser = -1;
+		$this->m_cbOutCardData = -1;
+		$this->m_cbSendCardData = -1;
+		$this->m_cbLeftCardCount = GR_CONST_CARD_MAX;
+		$this->m_cbLeftCard = -1;
+		$this->m_cbSendCardCount = -1;
+		$this->m_wResumeUser = -1;						
+		$this->m_wCurrentUser = -1;					
+		$this->m_wProvideUser = -1;				
+		$this->m_cbProvideCard = -1;					
+		$this->m_OperateNotify = array();			
+		$this->m_bSendStatus = false;					
+		$this->m_bGangStatus = false;					
+		$this->m_cbChiHuCard = -1;
+		$this->m_bWealthCards = -1;
+		// private m_bEnjoinChiHu = array();			//禁止吃胡 size=4
+		// private m_bEnjoinChiHuWinTime = array();	//禁止吃胡的分数 //在胡先不胡后的基础上 增加 胡大不胡小 size=4
+		// private $m_bEnjoinChiPeng = array();		//禁止吃碰 size=4
+	}
+
+	//====================================================================================================
+
+
+
+
+
+	//====================================================================================================
+	//----------------获取房间数据------------------------------------------------------------
+	public function getRoomData($uid){
+
+		$roomData['roomstatus'] = $this->m_roomStatus;
+		$roomData['gamestatus'] = $this->m_gameStatus;
+		$roomData['click'] = $this->m_roomClickValue;
+
+		$roomData['roomowner'] = $this->m_roomOwner;
+		$roomData['roomownernick'] = isset($this->m_playerList[$this->m_roomOwner])?$this->m_playerList[$this->m_roomOwner]['nickname']:"";
+		$roomData['roompwd'] = $this->m_roomPwd;
+		$roomData['playGround'] = $this->m_playGround;
+		$roomData['rule'] = $this->m_roomRule;
+		// $roomData['macardvalue'] = $this->m_maCardValue;
+		$roomData['playerlist'] = $this->m_playerList;
+		$roomData['deskdata'] = $this->m_deskData;
+		$roomData['comparedata']  = $this->m_compareDataResult;
+		//解散数据
+		//$roomData['waittingdismiss'] = $this->m_waittingDismiss;
+		$roomData['dismissData'] = $this->m_dismissData;
+		$roomData['dismissMark'] = $this->m_dismissMark;
+
+		$roomData['discardCard'] = $this->m_cbDiscardCardOndesk;
+		$roomData['currentUser'] = $this->m_wOutCardUser;	
+		$roomData['cardsdata'] = $this->getUserCardsData($uid);
+		$roomData['cardscount'] = $this->getUserCardsCount();
+		$roomData['weaveItemArray'] = $this->m_WeaveItemArray;
+		$roomData['operateNotify'] = $this->getUserOperateNotify($uid);
+		$roomData['sendCardData'] = $this->getSendCardData($uid);
+		$roomData['leftCardCount'] = $this->m_cbLeftCardCount;	
+		$roomData['bankerUser'] = $this->m_wBankerUser;	
+
+		return $roomData;
+	}
+
+	public function getSendCardData($uid)
+	{
+		foreach ($this->m_deskData as $seatno => $info) {
+			if ($this->m_deskData[$seatno]['uid'] == $uid) {
+				if ($this->m_wOutCardUser == $seatno) {
+					if ($this->m_cbthisCards[$this->m_wOutCardUser] == $this->m_bWealthCards) {
+						return $this->m_bWealthCards;
+					}else{
+						return -1;
+					}		
+				}else{
+					return -1;
+				}
+			break;
+			}
+		}
+		return -1;
+	}
+	public function getUserCardsCount()
+	{
+		$data = array();
+		foreach ($this->m_cbCardIndex as $seatno => $value) {
+			$data[$seatno] = array_sum($this->m_cbCardIndex[$seatno]);
+			if($this->m_gameStatus == self::GAMESTATE_OPERATE && $this->m_wOutCardUser == $seatno && isset($this->m_OperateNotify[$seatno]['cbActionMask']) && $this->m_OperateNotify[$seatno]['cbActionMask'] != WIK_NULL && $this->m_cbSendCardData != -1){
+				$data[$seatno]++;
+			}
+		}
+		return $data;
+	}
+	public function getUserOperateNotify($uid)
+	{
+		foreach ($this->m_deskData as $seatno => $info) {
+			if ($this->m_deskData[$seatno]['uid'] == $uid) {
+				if (isset($this->m_OperateNotify[$seatno]) && count($this->m_OperateNotify[$seatno]) != 0 && $this->m_OperateNotify[$seatno]['cbActionMask'] != 0) {
+					return $this->m_OperateNotify[$seatno];
+				}else{
+					unset($this->m_OperateNotify[$seatno]);
+					$this->m_OperateNotify[$seatno] = array();
+					return $this->m_OperateNotify[$seatno];
+				}
+			}
+		}
+		return array();
+	}
+	public function getUserCardsData($uid)
+	{
+		$cardsdata = array();
+		$outcards = false;
+		if($this->m_gameStatus == self::GAMESTATE_OUT){
+			$outcards = true;
+		}
+		foreach ($this->m_deskData as $seatno => $info) {
+			if ($this->m_deskData[$seatno]['uid'] == $uid) {
+				foreach ($this->m_cbCardIndex[$seatno] as $index => $count) {
+					$card = GameLogic::getInstance()->SwitchToCardData($index);
+					// if ($card == $this->m_cbSendCardData && $outcards) {
+					// 	$count--;
+					// }
+					for ($i=0; $i < $count; $i++) { 
+						$cardsdata[] = $card;
+					}
+				}
+				if($this->m_gameStatus == self::GAMESTATE_OPERATE && $this->m_wOutCardUser == $seatno && isset($this->m_OperateNotify[$seatno]['cbActionMask']) && $this->m_OperateNotify[$seatno]['cbActionMask'] != WIK_NULL && $this->m_cbSendCardData != -1){
+					$cardsdata[] = $this->m_cbSendCardData;
+				}
+				break;
+			}
+		}
+		
+		asort($cardsdata);
+		$cardsdata = array_values($cardsdata);
+		return $cardsdata;
+	}
+	//
+	public function gameReady($uid){
+			if($this->m_gameStatus == self::GAMESTATE_READY){
+				foreach ($this->m_deskData as $seatno => $info) {
+					if($info['uid'] == $uid){
+						if(!$info['ready']){
+							$this->m_deskData[$seatno]['ready'] = true;
+
+							$data['seatno'] = $seatno;
+							$data['uid'] = $info['uid'];
+							$this->sendRoomMessage(GR_GAMEREADYRRESULT,$data);
+
+						}else{
+							echo 'you have ready \n';
+							return;
+						}
+						$this->checkStart();
+						break;
+					}
+				}
+			}else{
+				echo 'not in ready time \n';
+				return ;
+			}
+
+	}
+
+
+	/**
+	*	玩家坐下
+	*/
+	public function sitDownAction($uid,$sendTag = true){
+		//if($this->m_gameStatus != self::GAMESTATE_READY)return ;
+		if($this->sitDown($uid,$sendTag)){
+			//触发游戏
+			if($this->m_gameStatus == self::GAMESTATE_READY){
+				$this->checkStart();
+			}
+		}else{
+			echo "sit down error \n";
+		}
+	}
+	
+	public function checkStart(){
+		if($this->m_roomStatus != self::STATE_NONE){
+			return;
+		}
+
+		//检查是否牌局结束
+		if($this->m_playGround >= $this->m_roomRule['gameground']){
+			$this->gameOver();
+			return ;
+		}
+
+		//检查是否有解散请求
+		if ($this->m_dismissMark) {
+			$this->gameOver();
+			return ;
+		}
+		if ($this->m_playGround == 0) {
+			foreach ($this->m_deskData as $seatno => $info) {
+				if ($this->m_playerList[$this->m_deskData[$seatno]['uid']]['online'] == 0) {
+					return;
+				}
+			}
+		}
+
+		$readyCount = 0;
+		foreach ($this->m_deskData as $seatno => $info) {
+			if($info['ready']){
+				$readyCount++;
+			}
+		}
+
+		if ($this->m_roomRule['peoplecount'] == $readyCount) {
+			$this->gameBegin();
+		}
+
+	}
+	//====================================================================================================
+	//----------------------------------------游戏作弊控制-----------------------------------------------------
+	public function whetherSuperReg($uid)
+	{
+		if ($this->getSuper($uid)) {
+			foreach ($this->m_cbLeftCard as $key => $value) {
+				$data[$value] = isset($data[$value])?$data[$value]+1:1;
+			}
+			return $data;
+		}else{
+			return false;
+		}
+	}
+	public function setNextSendCard($uid,$card)
+	{
+		foreach ($this->m_deskData as $seatno => $info) {
+			if ($uid == $this->m_deskData[$seatno]['uid']) {
+				$nowSeatno = $seatno;
+				break;
+			}
+		}
+		if (in_array($card, $this->m_cbLeftCard)) {
+			$this->m_nextSendCard[$nowSeatno] = $card;
+			return true;
+		}else{
+			return false;
+		}
+	}
+	//====================================================================================================
+	//----------------------------------------房间逻辑-----------------------------------------------------
+	public function roomOwnerStart($uid){
+
+		if($this->m_gameStatus == self::GAMESTATE_READY && $this->m_playGround == 0){
+			if($this->m_roomOwner == $uid && sizeof($this->m_deskData) >= 2){
+				$this->gameBegin();
+			}else{
+				echo "you are not owner or low people \n";
+			}
+		}else{
+			echo "not in ready time or not first ju \n";
+			return ;
+		}
+
+
+	}
+	
+
+	//初始化参数，并且洗牌
+	public function gameBegin(){
+		$this->m_playGround++;
+		GameManager::getInstance()->updateRoomPlayGround($this->m_roomPwd,$this->m_playGround);
+		$this->m_roomStatus = self::STATE_PLAYING;
+		$this->m_gameStatus = self::GAMESTATE_BEGIN;
+
+		//开始定时器
+		$this->addTimeClick(CLICK_NAME_STARTTING,CLICK_VALUE_STARTTING,array($this,'gameBeginCallBack'),array());
+
+		//游戏开始，定时2秒，用于播放开始动画
+		$data['playground'] = $this->m_playGround;
+		$data['totalground'] = $this->m_roomRule['gameground'];
+		$this->sendDeskMessage(GR_GAMESTART,$data);
+
+		//清理数据
+		foreach ($this->m_deskData as $seatno => $info) {
+			if($info['ready']){
+				$this->m_deskData[$seatno]['ingame'] = true;
+				$this->m_deskData[$seatno]['outcardtag'] = 0;
+				$this->m_deskData[$seatno]['outcards'] = array();
+				$this->m_deskData[$seatno]['data'] = array();
+
+			}
+		}
+		$this->m_compareDataResult = array();
+		$this->initSimpleRoomData();
+	}
+
+	public function gameBeginCallBack(){
+		$this->destoryClick(CLICK_NAME_STARTTING);
+		if ($this->m_playGround == 1) {
+			$this->upsetSeatno();
+		}else{
+			//发牌
+			$this->gameSendCards();
+		}
+	}
+
+	public function upsetSeatno()
+	{
+		$seatnoClone = $this->m_deskData;
+		$i = 0;
+		shuffle($seatnoClone);
+		$oldControl = $this->m_controlList;
+		foreach ($this->m_deskData as $seatno => $info) {
+			$this->m_deskData[$seatno] = $seatnoClone[$i];
+			$this->m_controlList[$seatno] = $oldControl[$this->m_playerList[$this->m_deskData[$seatno]['uid']]['seatno']];
+			$this->m_playerList[$this->m_deskData[$seatno]['uid']]['seatno'] = $seatno;
+			$i++;
+		}
+		$this->sendRoomMessage(GR_GAMEUPSETSEATNO,$this->m_playerList);
+		$this->addTimeClick(CLICK_NAME_UPSET_SEATNO,CLICK_VALUE_UPSET_SEATNO,array($this,'gameSendCards'),array());
+	}
+	//-------------------决定出牌顺序-----------------------
+
+	//决定谁是庄家
+	public function gameZhuang()
+	{
+		if ($this->m_wBankerUser == -1) {
+			foreach ($this->m_deskData as $seatno => $info) {
+				$infodata[] = $seatno;
+			}
+			$rand = array_rand($infodata);
+			$this->m_wBankerUser = $infodata[$rand];
+			$this->m_wBankerUser = ($this->m_wBankerUser == -1)?1:$this->m_wBankerUser;
+		}else if($this->m_wBankerUser == -2){
+			$this->findBanker();
+			$this->m_deskData[$this->m_wBankerUser]['isbanker'] = true;
+		}
+		$data = array($this->m_wBankerUser);
+		$this->gameZhuangCallBack(); 
+		$this->saveGameMessage(1,$data);
+		$this->sendRoomMessage(GR_GAME_MJ_ZHUANG,$data);
+	}
+
+	public function findBanker()
+	{
+		reset($this->m_deskData);
+		foreach ($this->m_deskData as $key => $info) {
+			if(key($this->m_deskData) == $this->m_wBankerUser){
+				next($this->m_deskData);
+				$nextSeatno = key($this->m_deskData);
+			}else{
+				next($this->m_deskData);
+			}
+		}
+		if($nextSeatno == NULL){
+			reset($this->m_deskData);
+			$nextSeatno = key($this->m_deskData);
+		}
+		$this->m_wBankerUser = $nextSeatno;
+		if($nextSeatno != NULL && ($this->m_deskData[$nextSeatno]['ingame'] == false)){
+			$nextSeatno = $this->findBanker();
+		}
+		return $nextSeatno;
+	}
+	public function gameZhuangCallBack()
+	{
+		$this->destoryClick(CLICK_NAME_ZHUANG);
+	}
+
+	//轮到谁下一个出牌
+	public function peopleTurn()
+	{
+		reset($this->m_deskData);
+		if ($this->m_wOutCardUser == -1) {
+			$this->m_wOutCardUser = $this->m_wBankerUser;
+			$nextSeatno = $this->m_wBankerUser;
+		}else{
+			$lastSeatno = $this->m_wOutCardUser;
+			foreach ($this->m_deskData as $key => $info) {
+				if(key($this->m_deskData) == $lastSeatno){
+					next($this->m_deskData);
+					$nextSeatno = key($this->m_deskData);
+				}else{
+					next($this->m_deskData);
+				}
+			}
+
+			if($nextSeatno == NULL){
+				reset($this->m_deskData);
+				$nextSeatno = key($this->m_deskData);
+			}
+			if($nextSeatno != NULL && ($this->m_deskData[$nextSeatno]['ingame'] == false)){
+				$nextSeatno = $this->peopleTurn();
+			}
+			$this->m_wOutCardUser = $nextSeatno;
+		}
+		if ($this->m_bWealthWind[$nextSeatno] == 0) {
+			$this->m_bQiangGang[$nextSeatno]['state'] = 0;
+			$this->m_bQiangGang[$nextSeatno]['msg'] = '';
+		}
+		return $nextSeatno;
+	}
+
+	//发送到轮到谁出牌的数据
+	public function gameOutcardTurn()
+	{
+		$this->m_gameStatus = self::GAMESTATE_OUT;
+
+		$this->m_cbNotOperate[$this->m_wOutCardUser]['hucards'] = array();
+		$this->m_cbNotOperate[$this->m_wOutCardUser]['pengcards'] = array();
+
+		$data = array();
+		$data['seatno'] = $this->m_wOutCardUser;
+		$this->sendRoomMessage(GR_GAME_MJ_OUT_CARDS,$data);
+		foreach ($this->m_OperateNotify as $seatno => $info) {
+			$this->m_OperateNotify[$seatno] = array();
+			$this->m_cbUserAction[$seatno] = -1;
+		}
+		if ($this->m_cbLeftCardCount > 20) {
+			$this->gameSendOneCards();
+		}else{
+			$this->gameFinish(WIK_NULL,array(),array());
+		}
+		
+	}
+
+	public function gameOutcardTurnNoCards()
+	{
+		$this->m_gameStatus = self::GAMESTATE_OUT;
+
+		$this->m_cbNotOperate[$this->m_wOutCardUser]['hucards'] = array();
+		$this->m_cbNotOperate[$this->m_wOutCardUser]['pengcards'] = array();
+
+		$data = array();
+		$data['seatno'] = $this->m_wOutCardUser;
+		$this->sendRoomMessage(GR_GAME_MJ_OUT_CARDS,$data);
+		foreach ($this->m_OperateNotify as $seatno => $info) {
+			$this->m_OperateNotify[$seatno] = array();
+			$this->m_cbUserAction[$seatno] = -1;
+		}
+	}
+
+	//----------------------发牌--------------------------
+	public function gameSendCards(){
+
+		$this->saveRoomMessage();
+		$this->gameZhuang();
+		$this->m_gameStatus = self::GAMESTATE_SEND;
+
+		$ingameCount = 0;
+		foreach ($this->m_deskData as $seatno => $info) {
+			if ($info['ingame']) {
+				++$ingameCount;
+			}
+		}
+		$this->m_cbPlayerCount = $ingameCount;
+		$this->m_cbLeftCard = GameLogic::getInstance()->createCards($ingameCount);
+		$handCardsData = array();
+		foreach ($this->m_deskData as $seatno => $info) {
+			$handCards = array();
+			if ($info['ingame']) {
+				if ($this->m_controlList[$seatno][$this->m_playGround]) {
+					foreach ($this->m_cbLeftCard as $key => $value) {
+						if ($value == WEALTHCARD) {
+							unset($this->m_cbLeftCard[$key]);
+							$this->m_cbLeftCard = array_values($this->m_cbLeftCard);
+							break;
+						}
+					}	
+					$handCards[] = WEALTHCARD;
+				}else{
+					$lastCards = array_splice($this->m_cbLeftCard, -1);
+					$handCards[] = $lastCards[0];
+				}
+				$readySendHandCards = array_merge($handCards,array_splice($this->m_cbLeftCard, -12));
+				if ($this->getWeathCount($readySendHandCards,2)) {
+					$handCards = $this->replaceWeath($readySendHandCards);
+					if ($this->getWeathCount($handCards,2)) {
+						$handCards = $this->replaceWeath($handCards);
+					}
+				}else{
+					$handCards = $readySendHandCards;
+				}
+
+				$this->m_cbCardIndex[$seatno] = GameLogic::getInstance()->bubbleCards(GameLogic::getInstance()->cleanHandCards($handCards));
+				asort($handCards);
+				$handCards = array_values($handCards);
+				$handCardsData[$seatno] = $handCards;
+				$this->sendMsgToUser($this->m_deskData[$seatno]['uid'],GR_GAME_MJ_SEND_HANDCARDS,$handCards);
+			}
+		}
+		$this->saveGameMessage(2,$handCardsData);
+		// $this->m_bSendStatus = true;
+		$this->m_cbLeftCardCount = count($this->m_cbLeftCard);
+		$this->addTimeClick(CLICK_NAME_SENDHANDCARDS,CLICK_VALUE_SENDHANDCARDS,array($this,'gameSendCardsCallBack'));
+	}
+
+	public function getWeathCount($handcards,$count)
+	{
+		$cnt = 0;
+		foreach ($handcards as $key => $cards) {
+			if ($cards == WEALTHCARD) {
+				$cnt++;
+			}
+		}
+		if ($cnt >= $count) {
+			return true;
+		}else{
+			return false;
+		}
+	}
+
+	public function replaceWeath($handcards)
+	{
+		foreach ($handcards as $key => $cards) {
+			if ($cards == WEALTHCARD) {
+				unset($handcards[$key]);
+				break;
+			}
+		}
+		$lastCards = array_splice($this->m_cbLeftCard, -1);
+		$handcards[] = $lastCards[0];
+		$handcards = array_values($handcards);
+		$this->m_cbLeftCard[] = WEALTHCARD;
+		srand ((float)microtime()*1000000*(GameManager::$_workerId+1));
+        shuffle($this->m_cbLeftCard);
+        return $handcards;
+	}
+	public function gameSendCardsCallBack(){
+		$this->destoryClick(CLICK_NAME_SENDHANDCARDS);
+		$this->m_wOutCardUser = $this->m_wBankerUser;
+		$this->gameOutcardTurn();
+	}
+
+	public function getNewSendCards()
+	{
+		$rand = array_rand($this->m_cbLeftCard);
+		$cards = $this->m_cbLeftCard[$rand];
+		$cardsCount = array_count_values($this->m_cbLeftCard)[$cards];
+		if (count($this->m_cbLeftCard) <= 4) {
+			return -1;
+		}
+		if (in_array($cards, $this->m_nextSendCard) && $cardsCount <= 1) {
+			return $this->getNewSendCards();
+		}
+		return $cards;
+	}
+	//每个人开始的发牌
+	public function gameSendOneCards()
+	{
+		$this->m_gameStatus = self::GAMESTATE_OUT;
+		$this->m_OperateNotify = array();
+		if ($this->m_nextSendCard[$this->m_wOutCardUser] != -1 && in_array($this->m_nextSendCard[$this->m_wOutCardUser], $this->m_cbLeftCard)) {
+			$cards = $this->m_nextSendCard[$this->m_wOutCardUser];
+			$position = array_search($cards, $this->m_cbLeftCard);
+			unset($this->m_cbLeftCard[$position]);
+			$this->m_cbLeftCard = array_values($this->m_cbLeftCard);
+		}else if($this->m_nextSendCard[$this->m_wOutCardUser] != -1 || !in_array($this->m_nextSendCard[$this->m_wOutCardUser], $this->m_cbLeftCard)){
+			$cards = $this->m_cbLeftCard[count($this->m_cbLeftCard) - 1];
+			$cardsCount = array_count_values($this->m_cbLeftCard)[$cards];
+			if (in_array($cards, $this->m_nextSendCard) && $cardsCount <= 1) {
+				$cards = $this->getNewSendCards();
+				if ($cards != -1) {
+					$position = array_search($cards, $this->m_cbLeftCard);
+					unset($this->m_cbLeftCard[$position]);
+					$this->m_cbLeftCard = array_values($this->m_cbLeftCard);
+				}else{
+					$cards = array_splice($this->m_cbLeftCard, -1)[0];
+				}
+			}else{
+				$cards = array_splice($this->m_cbLeftCard, -1)[0];
+			}
+		}
+		if ($cards == WEALTHCARD) {
+			$value = GameLogic::getInstance()->SwitchToCardIndex(WEALTHCARD);
+			$a = rand(1,100);
+			if ($a <= 2) {
+				$rand = 3;
+			}else{
+				$rand = 2;
+			}
+			if (isset($this->m_cbCardIndex[$this->m_wOutCardUser][$value]) && $this->m_cbCardIndex[$this->m_wOutCardUser][$value] == $rand) {
+				$lastCards = array_splice($this->m_cbLeftCard, -1);
+				$cards = $lastCards[0];
+				$this->m_cbLeftCard[] = WEALTHCARD;
+				$this->m_cbLeftCard = array_values($this->m_cbLeftCard);
+			}
+		}
+		$this->m_cbSendCardCount++;
+		$this->m_cbLeftCardCount--;
+		$this->m_cbSendCardData = $cards;
+		$this->m_bWealthCards = $cards;
+		$this->m_cbthisCards[$this->m_wOutCardUser] = $cards;
+		$seatno = $this->m_wOutCardUser;
+		$data['seatno'] = $seatno;
+		// $data['timer'] = CLICK_VALUE_OUTCARDS;
+		$this->sendRoomMessage(GR_GAME_MJ_SEND_CARDS,$data);
+		$data['card'] = $cards;
+		$this->saveGameMessage(3,$data);
+		$this->sendMsgToUser($this->m_deskData[$seatno]['uid'],GR_GAME_MJ_TOUCH_CARDS,array($cards));
+		// $this->addTimeClick(CLICK_NAME_OUTCARDS,CLICK_VALUE_OUTCARDS,array($this,'gameOutCardsCallBack'),$data);
+		$this->insertCardsToHand($seatno);
+	}
+
+	//轮到某个人的动作
+	public function cardsToHand($seatno)
+	{
+		// $this->m_cbSendCardData = -1;
+		$hadGangCards = array();
+		$hadGang = $this->findAllGang($seatno,$hadGangCards);
+		$this->m_OperateNotify = array();
+
+		if ($hadGang == WIK_GANG) {
+			if (count($hadGangCards) == 1) {
+				$this->m_OperateNotify[$seatno]['wResumeUser'] = $seatno;
+				$this->m_OperateNotify[$seatno]['cbActionMask'] = WIK_GANG;
+				$this->m_OperateNotify[$seatno]['cbActionCard'] = $hadGangCards['0'];
+				$this->m_OperateNotify[$seatno]['GangCardNotice'] = $hadGangCards;
+			}else if (count($hadGangCards) > 1) {
+				$this->m_OperateNotify[$seatno]['wResumeUser'] = $seatno;
+				$this->m_OperateNotify[$seatno]['cbActionMask'] = WIK_GANG;
+				$this->m_OperateNotify[$seatno]['cbActionCard'] = $hadGangCards[0];
+				$this->m_OperateNotify[$seatno]['GangCardNotice'] = $hadGangCards;
+			}
+
+			$this->m_gameStatus = self::GAMESTATE_OPERATE;
+			$this->gameOperateNotify();
+		}
+		
+	}
+
+	//牌进入手中的动作
+	public function insertCardsToHand($seatno)
+	{
+		$ChiHuResult = array();
+		$hadGangCards = array();
+		$gang = $this->judgeGang($this->m_cbCardIndex[$seatno],$this->m_cbSendCardData,$seatno);
+		$hu = $this->judgeHu($this->m_cbCardIndex[$seatno],$this->m_WeaveItemArray[$seatno],$this->m_cbSendCardData,$ChiHuResult,$seatno);
+		$hadGang = $this->findAllGang($seatno,$hadGangCards);
+		$cardsIndex = GameLogic::getInstance()->SwitchToCardIndex($this->m_cbSendCardData);
+		$this->m_OperateNotify = array();
+		$this->m_OperateNotify[$seatno]['cbActionMask'] = WIK_NULL;
+		if ($gang == WIK_NULL && $hu == WIK_NULL && $hadGang == WIK_NULL) {
+			$this->m_cbSendCardData = -1;
+			$this->m_cbCardIndex[$seatno][$cardsIndex] = isset($this->m_cbCardIndex[$seatno][$cardsIndex])?$this->m_cbCardIndex[$seatno][$cardsIndex]+1:1;
+		}
+		if ($gang == WIK_GANG) {
+			$this->m_OperateNotify[$seatno]['wResumeUser'] = $seatno;
+			$this->m_OperateNotify[$seatno]['cbActionMask'] = WIK_GANG;
+			$this->m_OperateNotify[$seatno]['cbActionCard'] = $this->m_cbSendCardData;
+			$this->m_OperateNotify[$seatno]['GangCardNotice'][] = $this->m_cbSendCardData;
+		}
+		if ($hadGang == WIK_GANG) {
+			if (count($hadGangCards) == 1) {
+				$this->m_OperateNotify[$seatno]['wResumeUser'] = $seatno;
+				$this->m_OperateNotify[$seatno]['cbActionMask'] = WIK_GANG;
+				if ($gang == WIK_GANG) {
+					$this->m_OperateNotify[$seatno]['cbActionCard'] = $this->m_cbSendCardData;
+					$this->m_OperateNotify[$seatno]['GangCardNotice'] = $hadGangCards;
+					$this->m_OperateNotify[$seatno]['GangCardNotice'][] = $this->m_cbSendCardData;
+				}else{
+					$this->m_OperateNotify[$seatno]['cbActionCard'] = $hadGangCards['0'];
+					$this->m_OperateNotify[$seatno]['GangCardNotice'] = $hadGangCards;
+				}
+			}else if (count($hadGangCards) > 1) {
+				$this->m_OperateNotify[$seatno]['wResumeUser'] = $seatno;
+				$this->m_OperateNotify[$seatno]['cbActionMask'] = WIK_GANG;
+				if ($gang == WIK_GANG) {
+					$this->m_OperateNotify[$seatno]['cbActionCard'] = $this->m_cbSendCardData;
+					$this->m_OperateNotify[$seatno]['GangCardNotice'] = $hadGangCards;
+					$this->m_OperateNotify[$seatno]['GangCardNotice'][] = $this->m_cbSendCardData;
+				}else{
+					$this->m_OperateNotify[$seatno]['cbActionCard'] = $hadGangCards[0];
+					$this->m_OperateNotify[$seatno]['GangCardNotice'] = $hadGangCards;
+				}
+			}
+		}
+		if ($hu == WIK_CHI_HU) {
+			$this->m_OperateNotify[$seatno]['wResumeUser'] = $seatno;
+			$this->m_OperateNotify[$seatno]['cbActionMask'] |= WIK_CHI_HU;
+			$this->m_OperateNotify[$seatno]['cbActionCard'] = $this->m_cbSendCardData;
+			$this->m_OperateNotify[$seatno]['dwChiHuRight'] = $ChiHuResult;
+		}
+		if ($gang != WIK_NULL || $hu != WIK_NULL || $hadGang != WIK_NULL) {
+			$this->m_gameStatus = self::GAMESTATE_OPERATE;
+			$this->gameOperateNotify();
+		}
+		
+	}
+
+	public function findAllGang($seatno,&$hadGangCards)
+	{
+		$wealthCardIndex = GameLogic::getInstance()->SwitchToCardIndex(WEALTHCARD);
+		foreach ($this->m_cbCardIndex[$seatno] as $cards => $value) {
+			if ($this->m_cbCardIndex[$seatno][$cards] == 4 && $wealthCardIndex != $cards) {
+				$hadGangCards[] = GameLogic::getInstance()->SwitchToCardData($cards);
+			}
+		}
+		if (!$this->sendAndOut($seatno)) {
+			foreach ($this->m_WeaveItemArray[$seatno] as $key => $value) {
+				if ($this->m_WeaveItemArray[$seatno][$key]['cbWeaveKind'] == WIK_PENG && $this->m_WeaveItemArray[$seatno][$key]['cbCenterCard'] == $this->m_cbSendCardData) {
+					$hadGangCards[] = $this->m_cbSendCardData;
+					continue;
+				}
+				if ($this->m_WeaveItemArray[$seatno][$key]['cbWeaveKind'] == WIK_PENG) {
+					foreach ($this->m_cbCardIndex[$seatno] as $cardsIndex => $cardsCount) {
+						if ($cardsCount > 1) {
+							continue;
+						}else if ($cardsCount == 1) {
+							$v = GameLogic::getInstance()->SwitchToCardData($cardsIndex);
+							if ($v == $this->m_WeaveItemArray[$seatno][$key]['cbCenterCard']) {
+								$hadGangCards[] = $v;
+							}
+						}
+					}
+				}
+			}
+		}
+		if (count($hadGangCards) == 0) {
+			return WIK_NULL;
+		}else{
+			return WIK_GANG;
+		}
+	}
+	//发送动作通知
+	public function gameOperateNotify(){
+		foreach ($this->m_OperateNotify as $seatno => $info) {
+			$this->sendMsgToUser($this->m_deskData[$seatno]['uid'],GR_GAME_MJ_OPERATE_NOTIFY,$this->m_OperateNotify[$seatno]);
+		}
+		$this->saveGameMessage(5,$this->m_OperateNotify);
+	}
+
+	//响应动作通知
+	public function gameOperateReg($uid,$cards,$action){
+		//@@ 此处需要校验动作玩家是否有效 判断是否发送过状态
+		if ($this->m_gameStatus != self::GAMESTATE_OPERATE) {
+			return;
+		}
+		$data = array();
+		foreach ($this->m_deskData as $seatno => $info) {
+			if ($this->m_deskData[$seatno]['uid'] == $uid) {
+				$data['seatno'] = $seatno;
+				break;
+			}
+		}
+		$data['cards'] = $cards;
+		$data['action'] = $action;
+		foreach ($this->m_OperateNotify as $seatno => $info) {
+			if ($this->m_cbUserAction[$data['seatno']] != -1) {
+				return ;
+			}
+		}
+		if ($action != WIK_NULL) {
+			if(($this->m_OperateNotify[$data['seatno']]['cbActionMask'] & $action) <= 0){
+				return;
+			}
+			if ($action != WIK_GANG) {
+				if ($this->m_OperateNotify[$data['seatno']]['cbActionCard'] != $cards) {
+					return;
+				}	
+			}else if ($action == WIK_GANG) {
+				if (!isset($this->m_OperateNotify[$data['seatno']]['GangCardNotice']) || !in_array($cards, $this->m_OperateNotify[$data['seatno']]['GangCardNotice'])) {
+					return;
+				}
+			}
+		}else{
+			if (!isset($this->m_OperateNotify[$data['seatno']]['cbActionMask']) || $this->m_OperateNotify[$data['seatno']]['cbActionMask'] == 0) {
+				return;
+			}
+		}
+		if ($action != WIK_NULL && $action != WIK_CHI_HU) {
+			if ($action != WIK_GANG) {
+				switch ($action) {
+					case WIK_LEFT:
+					case WIK_CENTER:
+					case WIK_RIGHT:
+						$res = $this->judgeChi($this->m_cbCardIndex[$data['seatno']],$data['cards'],$data['seatno']);
+						break;
+					case WIK_PENG:
+						$res = $this->judgePeng($this->m_cbCardIndex[$data['seatno']],$data['cards'],$data['seatno']);
+						break;
+					default:
+						# code...
+						break;
+				}
+				if (($res & $action) <= 0) {
+					return;
+				}
+			}else{
+				$res = $this->judgeGang($this->m_cbCardIndex[$data['seatno']],$data['cards'],$data['seatno']);
+				if (($res & $action) <= 0) {
+					$hadGangCards = array();
+					$this->findAllGang($data['seatno'],$hadGangCards);
+					if (!in_array($data['cards'], $hadGangCards)) {
+						return;
+					}
+				}
+			}
+		}
+		if ($action == WIK_NULL) {
+			if (($this->m_OperateNotify[$data['seatno']]['cbActionMask'] & WIK_CHI_HU) > 0) {
+				$this->m_cbNotOperate[$data['seatno']]['hucards'][] = $this->m_OperateNotify[$data['seatno']]['cbActionCard'];
+			}
+			if (($this->m_OperateNotify[$data['seatno']]['cbActionMask'] & WIK_PENG) > 0) {
+				$this->m_cbNotOperate[$data['seatno']]['pengcards'][] = $this->m_OperateNotify[$data['seatno']]['cbActionCard'];
+			}
+		}
+		$action = true;
+		if ($data['action'] == WIK_LEFT ||$data['action'] == WIK_CENTER ||$data['action'] == WIK_RIGHT) {
+			foreach ($this->m_OperateNotify as $seatno => $info) {
+				if ($seatno != $data['seatno'] && $seatno != $this->m_wOutCardUser) {
+					if (count($this->m_OperateNotify[$seatno]) != 0) {
+						$action = false;
+					}
+				}
+			}
+			$OperateResult = array();
+			$OperateResult['wOperateUser'] = $data['seatno'];
+			$OperateResult['wProvideUser'] = $this->m_wOutCardUser;
+			$OperateResult['cbOperateCode'] = $data['action'];
+			$OperateResult['cbOperateCard'] = $data['cards'];
+			$OperateResult['bDarkGuang'] = false;
+			if ($action) {
+				$this->sendRoomMessage(GR_GAME_MJ_OPERATE_RESULT,$OperateResult);
+				$this->gameChiCards($OperateResult);
+			}else{
+				$this->m_cbUserAction[$data['seatno']] = $OperateResult['cbOperateCode'];
+			}
+		}else if ($data['action'] == WIK_PENG) {
+			foreach ($this->m_OperateNotify as $seatno => $info) {
+				if ($seatno != $data['seatno'] && $seatno != $this->m_wOutCardUser) {
+					if (($this->m_OperateNotify[$seatno]['cbActionMask'] & WIK_GANG) > 0||($this->m_OperateNotify[$seatno]['cbActionMask'] & WIK_CHI_HU) > 0) {
+						$action = false;
+					}
+				}
+			}
+			$OperateResult = array();
+			$OperateResult['wOperateUser'] = $data['seatno'];
+			$OperateResult['wProvideUser'] = $this->m_wOutCardUser;
+			$OperateResult['cbOperateCode'] = $data['action'];
+			$OperateResult['cbOperateCard'] = $data['cards'];
+			$OperateResult['bDarkGuang'] = false;
+			if ($action) {
+				$this->sendRoomMessage(GR_GAME_MJ_OPERATE_RESULT,$OperateResult);
+				$this->gamePengCards($OperateResult);
+			}else{
+				$this->m_cbUserAction[$data['seatno']] = $OperateResult['cbOperateCode'];
+			}
+		}else if ($data['action'] == WIK_GANG) {
+			foreach ($this->m_OperateNotify as $seatno => $info) {
+				if ($seatno != $data['seatno'] && $seatno != $this->m_wOutCardUser) {
+					if (($this->m_OperateNotify[$seatno]['cbActionMask'] & WIK_CHI_HU) > 0) {
+						$action = false;
+					}
+				}
+			}
+			$OperateResult = array();
+			$OperateResult['wOperateUser'] = $data['seatno'];
+			$OperateResult['wProvideUser'] = $this->m_wOutCardUser;
+			$OperateResult['cbOperateCode'] = $data['action'];
+			$OperateResult['cbOperateCard'] = $data['cards'];
+
+			
+			if ($data['seatno'] == $this->m_wOutCardUser) {
+				$OperateResult['bDarkGuang'] = true;
+			}else{
+				$OperateResult['bDarkGuang'] = false;
+			}
+			foreach ($this->m_WeaveItemArray[$OperateResult['wOperateUser']] as $key => $value) {
+				if ($this->m_WeaveItemArray[$OperateResult['wOperateUser']][$key]['cbWeaveKind'] == WIK_PENG && $this->m_WeaveItemArray[$OperateResult['wOperateUser']][$key]['cbCenterCard'] == $OperateResult['cbOperateCard']) {
+					$OperateResult['bDarkGuang'] = false;
+				}
+			}
+			if ($action) {
+				$this->sendRoomMessage(GR_GAME_MJ_OPERATE_RESULT,$OperateResult);
+				$this->gameGangCards($OperateResult);
+			}else{
+				$this->m_cbUserAction[$data['seatno']] = $OperateResult['cbOperateCode'];
+			}
+		}else if ($data['action'] == WIK_CHI_HU) {
+			foreach ($this->m_OperateNotify as $seatno => $info) {
+				if ($seatno != $data['seatno'] && $seatno != $this->m_wOutCardUser) {
+					if (($this->m_OperateNotify[$seatno]['cbActionMask'] & WIK_CHI_HU) >0) {
+						$maxSeatno = $this->findMaxHu($data['seatno'],$seatno,$this->m_wOutCardUser);
+						if ($maxSeatno == $seatno) {
+							$action = false;
+						}
+					}
+				}
+			}
+			$OperateResult = array();
+			$OperateResult['wOperateUser'] = $data['seatno'];
+			$OperateResult['wProvideUser'] = $this->m_wOutCardUser;
+			$OperateResult['cbOperateCode'] = $data['action'];
+			$OperateResult['cbOperateCard'] = $data['cards'];
+			$OperateResult['bDarkGuang'] = false;
+
+			if ($action) {
+				$this->sendRoomMessage(GR_GAME_MJ_OPERATE_RESULT,$OperateResult);
+				$this->gameHuCards($OperateResult);
+			}else{
+				$this->m_cbUserAction[$data['seatno']] = $OperateResult['cbOperateCode'];
+			}
+		}else if ($data['action'] == WIK_NULL){
+			foreach ($this->m_OperateNotify as $seatno => $info) {
+				if ($seatno != $data['seatno'] && $seatno != $this->m_wOutCardUser) {
+					if (count($this->m_OperateNotify[$seatno]) != 0) {
+						$action = false;
+					}
+				}
+			}
+			$OperateResult = array();
+			$OperateResult['wOperateUser'] = $data['seatno'];
+			$OperateResult['wProvideUser'] = $this->m_wOutCardUser;
+			$OperateResult['cbOperateCode'] = $data['action'];
+			$OperateResult['cbOperateCard'] = $data['cards'];
+			$OperateResult['bDarkGuang'] = false;
+			if ($action) {
+				$this->saveGameMessage(6,$OperateResult);
+				$this->sendRoomMessage(GR_GAME_MJ_OPERATE_RESULT,$OperateResult);
+				if ($OperateResult['wOperateUser'] != $OperateResult['wProvideUser']) {
+					$this->peopleTurn();
+					$this->gameOutcardTurn();
+				}else{
+					$cardsIndex = GameLogic::getInstance()->SwitchToCardIndex($this->m_cbSendCardData);
+					if ($this->m_cbSendCardData != -1) {
+						$this->m_cbCardIndex[$OperateResult['wOperateUser']][$cardsIndex] = isset($this->m_cbCardIndex[$OperateResult['wOperateUser']][$cardsIndex])?$this->m_cbCardIndex[$OperateResult['wOperateUser']][$cardsIndex]+1:1;
+					}
+					$this->gameOutcardTurnNoCards();
+				}
+			}else{
+				$this->m_cbUserAction[$data['seatno']] = $OperateResult['cbOperateCode'];
+			}
+		}
+		if ($action == false) {
+			$operateNotifyCount = 0;
+			foreach ($this->m_OperateNotify as $seatno => $info){
+				if(count($this->m_OperateNotify[$seatno]) != 0){
+					$operateNotifyCount++;
+				}
+			}
+			$userActionCount = 0;
+			foreach ($this->m_cbUserAction as $seatno => $info){
+				if($this->m_cbUserAction[$seatno] != -1){
+					$userActionCount++;
+				}
+			}
+			if ($operateNotifyCount == $userActionCount) {
+				$maxAction = 0;
+				$maxSeatno = $data['seatno'];
+				foreach ($this->m_cbUserAction as $seatno => $info) {
+					if ($this->m_cbUserAction[$seatno] > $maxAction) {
+						$maxSeatno = $seatno;
+						$maxAction = $this->m_cbUserAction[$seatno];
+					}
+					if ($this->m_cbUserAction[$seatno] == $maxAction && $this->m_cbUserAction[$seatno] == WIK_CHI_HU) {
+						//判断谁胡
+						$maxSeatno = $this->findMaxHu($maxSeatno,$seatno,$this->m_wOutCardUser);
+						
+					}	
+				}
+				$OperateResult = array();
+				$OperateResult['wOperateUser'] = $maxSeatno;
+				$OperateResult['wProvideUser'] = $this->m_wOutCardUser;
+				$OperateResult['cbOperateCode'] = $maxAction;
+				$OperateResult['cbOperateCard'] = $this->m_cbSendCardData;
+				if ($data['seatno'] == $this->m_wOutCardUser && $OperateResult['cbOperateCode'] == WIK_GANG) {
+					$OperateResult['bDarkGuang'] = true;
+				}else{
+					$OperateResult['bDarkGuang'] = false;
+				}
+				$this->sendRoomMessage(GR_GAME_MJ_OPERATE_RESULT,$OperateResult);
+				switch ($OperateResult['cbOperateCode']) {
+					case WIK_NULL:
+						$this->peopleTurn();
+						$this->gameOutcardTurn();
+						break;
+					case WIK_LEFT:
+						$this->gameChiCards($OperateResult);
+						break;
+					case WIK_RIGHT:
+						$this->gameChiCards($OperateResult);
+						break;
+					case WIK_CENTER:
+						$this->gameChiCards($OperateResult);
+						break;
+					case WIK_PENG:
+						$this->gamePengCards($OperateResult);
+						break;
+					case WIK_GANG:
+						$this->gameGangCards($OperateResult);
+						break;
+					case WIK_CHI_HU:
+						$this->gameHuCards($OperateResult);
+						break;
+					default:
+							# code...
+						break;
+					}	
+			}
+		}
+	}
+	public function findMaxHu($maxSeatno,$seatno,$provideUser)
+	{
+		$nextSeatno = $this->findNext();
+		if ($nextSeatno == $maxSeatno) {
+			return $maxSeatno;
+		}else if ($nextSeatno == $seatno) {
+			return $seatno;
+		}else{
+			return $this->findMaxHu($maxSeatno,$seatno,$nextSeatno);
+		}
+	}
+
+	public function findSeatno($cbCardIndex)
+	{
+		foreach ($this->m_cbCardIndex as $seatno => $value) {
+			if ($cbCardIndex == $value) {
+				$nowSeatno = $seatno;
+				break;
+			}
+		}
+		return $nowSeatno;
+	}
+
+	//是否可以进行动作牌
+	public function whetherContract($seatno)
+	{	
+		$seatnoProCount = 0;
+		foreach ($this->m_WeaveItemArray[$seatno] as $key => $value) {
+			if ($value['wProvideUser'] == $this->m_wOutCardUser && $this->m_wOutCardUser != $seatno) {
+				$seatnoProCount++;
+			}
+		}
+		if($seatnoProCount >= 2){
+			return false;
+		}else{
+			return true;
+		}
+	}
+	//是否摸打规则
+	public function sendAndOut($seatno)
+	{
+		$sendAndOut = false;
+		foreach ($this->m_bFalseWealthWind as $seat => $info) {
+			if ($this->m_bFalseWealthWind[$seat]) {
+				$sendAndOut = true;
+			}
+		}
+		if ($this->m_bFalseWealthWind[$seatno]) {
+			$sendAndOut = false;
+		}
+		return $sendAndOut;
+	}
+	//判断爆头
+	public function judgeBaotou($cbCardIndex=array())
+	{
+		return GameLogic::getInstance()->AnalyseBaotou($cbCardIndex);
+	}
+	//判断胡牌
+	public function judgeHu($cbCardIndex=array(),$WeaveItem,$cbCurrentCard,&$ChiHuResult,$seatno)
+	{
+		$nowSeatno = $seatno;
+
+		if (in_array($cbCurrentCard, $this->m_cbNotOperate[$nowSeatno]['hucards'])) {
+			return WIK_NULL;
+		}
+		// return GameLogic::getInstance()->AnalyseChiHuCard($cbCardIndex,$WeaveItem,$cbCurrentCard,$ChiHuResult);
+		$res = GameLogic::getInstance()->lazarilloCard($cbCardIndex,$WeaveItem,$cbCurrentCard,$ChiHuResult,WIK_CHI_HU);
+		return $res;
+		
+	}
+	//判断杠牌
+	public function judgeGang($cbCardIndex=array(), $cbCurrentCard,$seatno)
+	{
+		$nowSeatno = $seatno;
+		if ($this->sendAndOut($nowSeatno)) {
+			return WIK_NULL;
+		}
+		if (!$this->whetherContract($nowSeatno)) {
+			return WIK_NULL;
+		}
+		if ($cbCurrentCard == WEALTHCARD) {
+			return WIK_NULL;
+		}
+		return GameLogic::getInstance()->EstimateGangCard($cbCardIndex, $cbCurrentCard);
+	}
+	//判断听牌
+	public function judgeTing($cbCardIndex=array(), $WeaveItem = array(),&$cbListenCard = array(),$seatno)
+	{
+		$nowSeatno = $seatno;
+		$wealthCardIndex = GameLogic::getInstance()->SwitchToCardIndex(WEALTHCARD);
+		if ($this->judgeBaotou($cbCardIndex)) {
+			for ($i=0; $i < (GR_CONST_MAX_INDEX - 8 - 1); $i++) {
+				$tingCardsOption[] = GameLogic::getInstance()->SwitchToCardData($i);
+			}
+			$this->m_bBaotouStatus[$nowSeatno] = true;
+			return true;
+		}else{
+			$this->m_bBaotouStatus[$nowSeatno] = false;
+		}
+		if (isset($cbCardIndex[$wealthCardIndex]) && $cbCardIndex[$wealthCardIndex] == 3) {
+			$cbListenCard[] = WEALTHCARD;
+			return true;
+		}else if(isset($cbCardIndex[$wealthCardIndex]) && $cbCardIndex[$wealthCardIndex] == 4){
+			$cbListenCard[] = WEALTHCARD;
+			return true;
+		}
+		$tingCardsOption = array();
+		foreach ($this->m_cbCardIndex as $seatno => $info) {
+			if ($seatno != $nowSeatno) {	
+				foreach ($this->m_cbCardIndex[$seatno] as $index => $count) {
+					if ($count != 0) {
+						$tingCardsOption[$index] = $count;
+					}
+				}
+			}
+		}
+		foreach ($this->m_cbLeftCard as $key => $value) {
+			if ($value != WEALTHCARD) {
+				$index = GameLogic::getInstance()->SwitchToCardIndex($value);
+				$tingCardsOption[$index] = isset($tingCardsOption[$index])?$tingCardsOption[$index]+1:1;
+			}
+		}
+		rsort($tingCardsOption);
+		$baotou = false;
+		$res = GameLogic::getInstance()->AnalyseTingCard($cbCardIndex, $WeaveItem,$cbListenCard,$tingCardsOption,$baotou);
+		if ($baotou) {
+			$this->m_bBaotouStatus[$nowSeatno] = true;
+		}
+		return $res;
+	}
+	//判断碰牌
+	public function judgePeng($cbCardIndex=array(), $cbCurrentCard,$seatno)
+	{
+
+		$nowSeatno = $seatno;
+		if (in_array($cbCurrentCard, $this->m_cbNotOperate[$nowSeatno]['pengcards'])) {
+			return WIK_NULL;
+		}
+		if ($cbCurrentCard == WEALTHCARD) {
+			return WIK_NULL;
+		}
+		$gangCards = GameLogic::getInstance()->EstimatePengCard($cbCardIndex, $cbCurrentCard);
+		if ($gangCards == WIK_PENG) {
+			if (!$this->whetherContract($nowSeatno)) {
+				$this->m_cbNotOperate[$nowSeatno]['pengcards'][] = $cbCurrentCard;
+				return WIK_NULL;
+			}
+			if ($this->sendAndOut($nowSeatno)) {
+				$this->m_cbNotOperate[$nowSeatno]['pengcards'][] = $cbCurrentCard;
+				return WIK_NULL;
+			}
+			return WIK_PENG;
+		}else{
+			return WIK_NULL;
+		}
+	}
+	//判断吃牌
+	public function judgeChi($cbCardIndex=array(), $cbCurrentCard,$seatno)
+	{
+		$nowSeatno = $seatno;
+		if ($this->sendAndOut($nowSeatno)) {
+			return WIK_NULL;
+		}
+		if (!$this->whetherContract($nowSeatno)) {
+			return WIK_NULL;
+		}
+		return GameLogic::getInstance()->EstimateEatCard($cbCardIndex, $cbCurrentCard);
+	}
+    //----------------------出牌--------------------------
+	public function gameOutCardReg($uid,$data)
+	{
+		if ($this->m_gameStatus != self::GAMESTATE_OUT) {
+			return;
+		}
+		$normalOutCards = true;
+		foreach ($this->m_bFalseWealthWind as $seatno => $info) {
+			if ($this->m_bFalseWealthWind[$seatno]) {
+				if ($this->m_deskData[$seatno]['uid'] != $uid) {
+					$normalOutCards = false;
+				}
+			}
+		}
+
+		if (!$normalOutCards && $data['data'] != $this->m_bWealthCards && $this->m_bWealthCards != -1) {
+			return;
+		}
+
+		$this->m_OperateNotify = array();
+		$this->destoryClick(CLICK_NAME_OUTCARDS);
+		$haveCards = false;
+		foreach ($this->m_deskData as $seatno => $info) {
+			if ($this->m_deskData[$seatno]['uid'] == $uid && $seatno == $this->m_wOutCardUser) {
+				$cardsIndex = GameLogic::getInstance()->SwitchToCardIndex($data['data']);
+				foreach ($this->m_cbCardIndex[$seatno] as $cards => $value) {
+					if ($cardsIndex == $cards) {
+						$haveCards = true;
+					}
+				}
+				if ($haveCards) {
+					$outCardsSeatno = $seatno;
+					$this->m_cbDiscardCard[$seatno][] = $data['data'];
+					$this->m_cbDiscardCardOndesk[$seatno][] = $data['data'];
+					
+					$this->m_cbCardIndex[$seatno][$cardsIndex]--;
+					if ($this->m_cbCardIndex[$seatno][$cardsIndex] == 0) {
+						unset($this->m_cbCardIndex[$seatno][$cardsIndex]);
+					}
+				}else{
+					return;
+				}
+			}else if($this->m_deskData[$seatno]['uid'] == $uid && $seatno != $this->m_wOutCardUser){
+				return;
+			}
+			if ($this->m_deskData[$seatno]['uid'] == $uid && $seatno == $this->m_wOutCardUser) {
+				$handcards = array();
+				foreach ($this->m_cbCardIndex[$seatno] as $cards => $value) {
+					$cardsdata = GameLogic::getInstance()->SwitchToCardData($cards);
+					for ($m=0; $m < $value; $m++) { 
+						$handcards[] = $cardsdata;
+					}
+				}
+				asort($handcards);
+				$handcards = array_values($handcards);
+			}
+		}
+		$sendData = array();
+		$sendData[$outCardsSeatno] = $data['data'];
+
+		$saveData['seatno'] = $outCardsSeatno;
+		$saveData['card'] = $data['data'];
+		$this->m_bGangWealth[$outCardsSeatno] = false;
+		$this->saveGameMessage(4,$saveData);
+		$this->sendRoomMessage(GR_GAME_MJ_OUT_CARDS_DATA,$sendData);
+
+		$this->sendMsgToUser($uid,GR_GAME_MJ_HANDCARDS,$handcards);
+		$cbListenCard = array();
+		if ($data['data'] == WEALTHCARD) {
+			$canPiao = true;
+			foreach ($this->m_bFalseWealthWind as $key => $value) {
+				if ($value != false) {
+					$canPiao = false;
+					break;
+				}
+			}
+			if (!$this->m_bFalseWealthWind[$outCardsSeatno]) {
+				$this->m_bFalseWealthWind[$outCardsSeatno] = $canPiao;
+			}
+			if ($this->m_bFalseWealthWind[$outCardsSeatno]) {
+				$this->sendRoomMessage(GR_GAME_MJ_CAI_PIAO,array($outCardsSeatno));
+			}
+		}else{
+			$this->m_bFalseWealthWind[$outCardsSeatno] = false;
+		}
+		if ($this->judgeTing($this->m_cbCardIndex[$outCardsSeatno],$this->m_WeaveItemArray[$outCardsSeatno],$cbListenCard,$outCardsSeatno)) {
+			$this->gameTingCards($outCardsSeatno,$cbListenCard);
+			if ($data['data'] == WEALTHCARD && $this->m_bBaotouStatus[$outCardsSeatno]) {
+				$this->m_bWealthWind[$outCardsSeatno]++;
+			}else{
+				$this->m_bWealthWind[$outCardsSeatno] = 0;
+			}
+		}
+		$this->m_cbSendCardData = $data['data'];
+		$action = false;
+		$nextSeatno = $this->findNext($outCardsSeatno);
+		foreach ($this->m_deskData as $seatno => $info) {
+			if ($this->m_deskData[$seatno]['uid'] != $uid) {
+				$ChiHuResult = array();
+				$gang = $this->judgeGang($this->m_cbCardIndex[$seatno],$this->m_cbSendCardData,$seatno);
+				// $hu = $this->judgeHu($this->m_cbCardIndex[$seatno],$this->m_WeaveItemArray[$seatno],$this->m_cbSendCardData,$ChiHuResult);
+				$hu = WIK_NULL;
+				$peng = $this->judgePeng($this->m_cbCardIndex[$seatno],$this->m_cbSendCardData,$seatno);
+				if ($nextSeatno == $seatno) {
+					$chi = $this->judgeChi($this->m_cbCardIndex[$seatno],$this->m_cbSendCardData,$seatno);
+				}else{
+					$chi = WIK_NULL;
+				}
+				if ($gang != WIK_NULL || $hu != WIK_NULL || $chi != WIK_NULL || $peng != WIK_NULL) {
+					$action = true; 
+					$this->m_gameStatus = self::GAMESTATE_OPERATE;
+					$this->m_OperateNotify[$seatno]['wResumeUser'] = $seatno;
+					$this->m_OperateNotify[$seatno]['cbActionMask'] = $gang;
+					// $this->m_OperateNotify[$seatno]['cbActionMask'] |= $hu;
+					$this->m_OperateNotify[$seatno]['cbActionMask'] |= $chi;
+					$this->m_OperateNotify[$seatno]['cbActionMask'] |= $peng;
+					$this->m_OperateNotify[$seatno]['cbActionCard'] = $this->m_cbSendCardData;
+					if ($gang != WIK_NULL) {
+						$this->m_OperateNotify[$seatno]['GangCardNotice'][] = $this->m_cbSendCardData;
+					}
+					// $this->m_OperateNotify[$seatno]['dwChiHuRight'] = $ChiHuResult;
+				}
+			}
+		}
+		if ($action) {
+			$this->gameOperateNotify();
+		}else{
+			$this->peopleTurn();
+			$this->gameOutcardTurn();
+		}
+
+	}
+
+	public function findNext($seatno)
+	{
+		reset($this->m_deskData);
+		$lastSeatno = $seatno;
+		foreach ($this->m_deskData as $key => $info) {
+			if(key($this->m_deskData) == $lastSeatno){
+				next($this->m_deskData);
+				$nextSeatno = key($this->m_deskData);
+			}else{
+				next($this->m_deskData);
+			}
+		}
+		if($nextSeatno == NULL){
+			reset($this->m_deskData);
+			$nextSeatno = key($this->m_deskData);
+		}
+		if($nextSeatno != NULL && ($this->m_deskData[$nextSeatno]['ingame'] == false)){
+			$nextSeatno = $this->findNext($nextSeatno);
+		}
+		return $nextSeatno;
+	}
+	//听牌
+	public function gameTingCards($outCardsSeatno,$cbListenCard){
+		$data = array();
+		$data[$outCardsSeatno] = $cbListenCard;
+
+		$saveData['cbOperateCode'] = WIK_LISTEN;
+		$saveData['cbOperateCard'] = $cbListenCard;
+		$saveData['bDarkGuang'] = false;
+		$saveData['wProvideUser'] = $outCardsSeatno;
+		$saveData['wOperateUser'] = $outCardsSeatno;
+		$this->saveGameMessage(6,$saveData);
+
+		$this->sendRoomMessage(GR_GAME_MJ_TING_NOTICE,$data);	
+	} 
+	//胡牌
+	public function gameHuCards($OperateResult){
+		$ChiHuResult = array();
+		$seatno = $OperateResult['wOperateUser'];
+		$ChiHuResult =  $this->m_OperateNotify[$seatno]['dwChiHuRight'];
+		$hu = $this->m_OperateNotify[$seatno]['dwChiHuRight'];
+
+		$wealthCardIndex = GameLogic::getInstance()->SwitchToCardIndex(WEALTHCARD);
+
+		$wealthCardCount = isset($this->m_cbCardIndex[$seatno][$wealthCardIndex])?$this->m_cbCardIndex[$seatno][$wealthCardIndex]:0;
+		$wealthCardCount += $this->m_bWealthWind[$OperateResult['wOperateUser']];
+		if ($this->m_cbSendCardData == WEALTHCARD) {
+			$wealthCardCount++;
+		}
+		if ($this->m_roomRule['manyWealth'] == 1) {
+			if ($wealthCardCount >= 3) {
+				$ChiHuResult['dwWinTimes'] *= 2;
+			}
+		}else if ($this->m_roomRule['manyWealth'] == 2) {
+			if ($wealthCardCount >= 4) {
+				$ChiHuResult['dwWinTimes'] *= 2;
+			}
+		}
+		$outcardsCount = 0;
+		foreach ($this->m_cbDiscardCard as $seat => $value) {
+			$outcardsCount += count($this->m_cbDiscardCard[$seat]);
+		}
+		if ($outcardsCount == 0) {
+			$ChiHuResult['dwChiHuRight'] = CHR_TIAN;
+			$ChiHuResult['dwWinTimes'] *= 2;
+		}
+		if ($this->m_bQiangGang[$seatno]['state'] != 0) {
+			if ($OperateResult['wProvideUser'] == $OperateResult['wOperateUser']) {
+				$ChiHuResult['dwChiHuRight'] = CHR_GANG_KAI;
+			}else{
+				$ChiHuResult['dwChiHuRight'] = CHR_QIANG_GANG;
+				$this->m_cbGiveRecvGang[$OperateResult['wProvideUser']][$OperateResult['wOperateUser']]--;
+				if ($this->m_bQiangGang[$seatno]['msg'] == 'PengGang') {
+					$this->m_Room_PengGangLight[$this->m_playGround][$OperateResult['wProvideUser']]--;
+				}else if ($this->m_bQiangGang[$seatno]['msg'] == 'Light') {
+					$this->m_Room_GangLight[$this->m_playGround][$OperateResult['wProvideUser']]--;
+				}else if ($this->m_bQiangGang[$seatno]['msg'] == 'Dark') {
+					$this->m_Room_GangDark[$this->m_playGround][$OperateResult['wProvideUser']]--;
+				}
+			}
+			$ChiHuResult['dwWinTimes'] *= pow(2, $this->m_bQiangGang[$seatno]['state']);
+		}else{
+			if ($OperateResult['wProvideUser'] == $OperateResult['wOperateUser']) {
+				$ChiHuResult['dwChiHuRight'] = CHR_ZI_MO;
+			}
+		}
+		$this->m_Room_HuNum[$this->m_playGround][$seatno]++;
+		if ($ChiHuResult['dwChiHuRight'] == CHR_ZI_MO) {
+			$this->m_Room_ZiMoNum[$this->m_playGround][$seatno]++;
+		}else{
+			$this->m_Room_RecvGun[$this->m_playGround][$seatno]++;
+			$this->m_Room_GiveGun[$this->m_playGround][$OperateResult['wProvideUser']]++;
+		}
+		//爆头 财飘 杠飘倍率计算
+		if ($this->m_bBaotouStatus[$OperateResult['wOperateUser']]) {
+			$ChiHuResult['dwWinTimes'] *= 2;
+		}
+
+		$ChiHuResult['dwWinTimes'] *= pow(2, $this->m_bWealthWind[$OperateResult['wOperateUser']]);
+		$ChiHuResult['dwChiHuKind'] = $hu['dwChiHuKind'];
+		$this->saveGameMessage(7,$ChiHuResult);
+		// $this->sendRoomMessage(GR_GAME_MJ_HU_NOTICE,$ChiHuResult);
+		$this->gameFinish(WIK_CHI_HU,$ChiHuResult,$OperateResult);
+	} 
+	//杠牌
+	public function gameGangCards($OperateResult){
+		
+		if ($OperateResult['cbOperateCard'] != $this->m_cbSendCardData && $this->m_cbSendCardData != -1) {
+			$cardsIndex = GameLogic::getInstance()->SwitchToCardIndex($this->m_cbSendCardData);
+			if ($this->m_cbSendCardData != -1) {
+				$this->m_cbCardIndex[$OperateResult['wOperateUser']][$cardsIndex] = isset($this->m_cbCardIndex[$OperateResult['wOperateUser']][$cardsIndex])?$this->m_cbCardIndex[$OperateResult['wOperateUser']][$cardsIndex]+1:1;
+			}
+		}
+		$this->m_cbSendCardData = -1;
+		$this->m_bQiangGang[$OperateResult['wOperateUser']]['state']++;
+		$count = count($this->m_WeaveItemArray[$OperateResult['wOperateUser']]);
+		$this->m_WeaveItemArray[$OperateResult['wOperateUser']][$count]['cbWeaveKind'] = $OperateResult['cbOperateCode'];
+		$this->m_WeaveItemArray[$OperateResult['wOperateUser']][$count]['cbCenterCard'] = $OperateResult['cbOperateCard'];
+		$this->m_WeaveItemArray[$OperateResult['wOperateUser']][$count]['cbPublicCard'] = $OperateResult['bDarkGuang'];
+		$this->m_WeaveItemArray[$OperateResult['wOperateUser']][$count]['wProvideUser'] = $OperateResult['wProvideUser'];
+
+		
+		if ($OperateResult['wProvideUser'] != $OperateResult['wOperateUser']) {
+			array_pop($this->m_cbDiscardCardOndesk[$OperateResult['wProvideUser']]);
+		}
+
+		$cards = GameLogic::getInstance()->SwitchToCardIndex($OperateResult['cbOperateCard']);
+
+		$this->m_Room_GangPot[$this->m_playGround][$OperateResult['wProvideUser']]++;
+		
+		unset($this->m_cbCardIndex[$OperateResult['wOperateUser']][$cards]);
+		foreach ($this->m_WeaveItemArray[$OperateResult['wOperateUser']] as $key => $value) {
+			if ($this->m_WeaveItemArray[$OperateResult['wOperateUser']][$key]['cbWeaveKind'] == WIK_PENG && $this->m_WeaveItemArray[$OperateResult['wOperateUser']][$key]['cbCenterCard'] == $OperateResult['cbOperateCard']) {
+				$this->m_WeaveItemArray[$OperateResult['wOperateUser']][$count]['wProvideUser'] = $this->m_WeaveItemArray[$OperateResult['wOperateUser']][$key]['wProvideUser'];
+				$OperateResult['wProvideUser'] = $this->m_WeaveItemArray[$OperateResult['wOperateUser']][$key]['wProvideUser'];
+
+				$needunset = $key;
+				$this->m_Room_PengGangLight[$this->m_playGround][$OperateResult['wOperateUser']]++;
+				$this->m_WeaveItemArray[$OperateResult['wOperateUser']][$count]['cbPublicCard'] = false;
+
+				$OperateResult['bDarkGuang'] = false;
+				$this->m_bQiangGang[$OperateResult['wOperateUser']]['msg'] = 'PengGang';
+			}
+		}
+		if (isset($needunset)) {
+			unset($this->m_WeaveItemArray[$OperateResult['wOperateUser']][$needunset]);
+		}
+		$this->m_WeaveItemArray[$OperateResult['wOperateUser']] = array_values($this->m_WeaveItemArray[$OperateResult['wOperateUser']]);
+		if ($this->m_bQiangGang[$OperateResult['wOperateUser']]['msg'] != 'PengGang' && $OperateResult['bDarkGuang'] == false) {
+			$this->m_Room_GangLight[$this->m_playGround][$OperateResult['wOperateUser']]++;
+			$this->m_bQiangGang[$OperateResult['wOperateUser']]['msg'] = 'Light';
+		}elseif ($this->m_bQiangGang[$OperateResult['wOperateUser']]['msg'] != 'PengGang' && $OperateResult['bDarkGuang'] == true) {
+			$this->m_Room_GangDark[$this->m_playGround][$OperateResult['wOperateUser']]++;
+			$this->m_bQiangGang[$OperateResult['wOperateUser']]['msg'] = 'Dark';
+		}
+
+		if ($this->judgeBaotou($this->m_cbCardIndex[$OperateResult['wOperateUser']])) {
+			$this->m_bBaotouStatus[$OperateResult['wOperateUser']] = true;
+		}else{
+			$this->m_bBaotouStatus[$OperateResult['wOperateUser']] = false;
+		}
+		$this->m_cbGiveRecvGang[$OperateResult['wProvideUser']][$OperateResult['wOperateUser']]++;
+		$this->saveGameMessage(6,$OperateResult);
+		$this->m_wOutCardUser = $OperateResult['wOperateUser'];
+		$this->gameOutcardTurn();
+	} 
+	//碰牌
+	public function gamePengCards($OperateResult){
+
+		$this->m_cbSendCardData = -1;
+		$count = count($this->m_WeaveItemArray[$OperateResult['wOperateUser']]);
+		$this->m_WeaveItemArray[$OperateResult['wOperateUser']][$count]['cbWeaveKind'] = $OperateResult['cbOperateCode'];
+		$this->m_WeaveItemArray[$OperateResult['wOperateUser']][$count]['cbCenterCard'] = $OperateResult['cbOperateCard'];
+		$this->m_WeaveItemArray[$OperateResult['wOperateUser']][$count]['cbPublicCard'] = $OperateResult['bDarkGuang'];
+		$this->m_WeaveItemArray[$OperateResult['wOperateUser']][$count]['wProvideUser'] = $OperateResult['wProvideUser'];
+
+		$this->m_bWealthWind[$OperateResult['wOperateUser']] = 0;
+		foreach ($this->m_deskData as $key => $value) {
+			$this->m_bQiangGang[$key]['state'] = 0;
+			$this->m_bQiangGang[$key]['msg'] = '';
+		}
+
+		$this->saveGameMessage(6,$OperateResult);
+
+		$seatno = $OperateResult['wOperateUser'];
+		array_pop($this->m_cbDiscardCardOndesk[$OperateResult['wProvideUser']]);
+		$cards = GameLogic::getInstance()->SwitchToCardIndex($OperateResult['cbOperateCard']);
+		$this->m_cbCardIndex[$seatno][$cards] -= 2;
+		if ($this->m_cbCardIndex[$seatno][$cards] == 0) {
+			unset($this->m_cbCardIndex[$seatno][$cards]);
+		}
+		$this->m_wOutCardUser = $OperateResult['wOperateUser'];
+		$this->gameOutcardTurnNoCards();
+		$this->cardsToHand($this->m_wOutCardUser);
+	} 
+	//吃牌
+	public function gameChiCards($OperateResult){
+
+		$this->m_cbSendCardData = -1;
+		$count = count($this->m_WeaveItemArray[$OperateResult['wOperateUser']]);
+		$this->m_WeaveItemArray[$OperateResult['wOperateUser']][$count]['cbWeaveKind'] = $OperateResult['cbOperateCode'];
+		$this->m_WeaveItemArray[$OperateResult['wOperateUser']][$count]['cbCenterCard'] = $OperateResult['cbOperateCard'];
+		$this->m_WeaveItemArray[$OperateResult['wOperateUser']][$count]['cbPublicCard'] = $OperateResult['bDarkGuang'];
+		$this->m_WeaveItemArray[$OperateResult['wOperateUser']][$count]['wProvideUser'] = $OperateResult['wProvideUser'];
+		
+		$this->m_bWealthWind[$OperateResult['wOperateUser']] = 0;
+		foreach ($this->m_deskData as $key => $value) {
+			$this->m_bQiangGang[$key]['state'] = 0;
+			$this->m_bQiangGang[$key]['msg'] = '';
+		}
+		
+		$this->saveGameMessage(6,$OperateResult);
+
+		$seatno = $OperateResult['wOperateUser'];
+		$cbCardBuffer=array();
+		array_pop($this->m_cbDiscardCardOndesk[$OperateResult['wProvideUser']]);
+		GameLogic::getInstance()->GetWaveCard($OperateResult['cbOperateCode'], $OperateResult['cbOperateCard'], $cbCardBuffer);
+		for ($i=0; $i < 3; $i++) { 
+			$cards = GameLogic::getInstance()->SwitchToCardIndex($cbCardBuffer[$i]);
+			if ($cbCardBuffer[$i] != $OperateResult['cbOperateCard']) {
+				$this->m_cbCardIndex[$seatno][$cards] -= 1;
+			}
+			if (isset($this->m_cbCardIndex[$seatno][$cards]) && $this->m_cbCardIndex[$seatno][$cards] == 0) {
+				unset($this->m_cbCardIndex[$seatno][$cards]);
+			}
+		}
+		$this->m_wOutCardUser = $OperateResult['wOperateUser'];
+		$this->gameOutcardTurnNoCards();
+		$this->cardsToHand($this->m_wOutCardUser);
+	} 
+	//结算
+	public function gameFinish($type,$ChiHuResult,$OperateResult)
+	{
+		if ($type == WIK_CHI_HU) {
+			$score = array();
+			for ($j=1; $j <= $this->m_cbPlayerCount; $j++) { 
+				$score[$j] = 0;
+				$gangScore[$j] = 0;
+			}
+			$ChiHuResult['dwWinTimes'] = abs($ChiHuResult['dwWinTimes']);
+			if ($OperateResult['wOperateUser'] == $OperateResult['wProvideUser']) {
+				if ($OperateResult['wOperateUser'] == $this->m_wBankerUser) {
+					$ChiHuResult['dwWinTimes'] *= pow(2, $this->m_roomRule['oldUp']);
+					foreach ($this->m_Room_GameScore as $seatno => $value) {
+						if ($OperateResult['wOperateUser'] != $seatno) {
+							$score[$seatno] = 0 - $ChiHuResult['dwWinTimes'];
+						}else if ($OperateResult['wOperateUser'] == $seatno) {
+							$score[$seatno] = $ChiHuResult['dwWinTimes'] * ($this->m_cbPlayerCount - 1);
+						}
+					}
+				}else{
+					foreach ($this->m_Room_GameScore as $seatno => $value) {
+						if ($OperateResult['wOperateUser'] != $seatno) {
+							if ($seatno == $this->m_wBankerUser) {
+								$score[$seatno] = 0 - $ChiHuResult['dwWinTimes'] * pow(2, $this->m_roomRule['oldUp']);
+							}else{
+								$score[$seatno] = 0 - $ChiHuResult['dwWinTimes'];
+							}
+						}else if ($OperateResult['wOperateUser'] == $seatno) {
+							$score[$seatno] = $ChiHuResult['dwWinTimes'] * ($this->m_cbPlayerCount - 2) + $ChiHuResult['dwWinTimes'] * pow(2, $this->m_roomRule['oldUp']);
+						}
+					}
+				}
+			}else{
+				if ($OperateResult['wOperateUser'] == $this->m_wBankerUser || $OperateResult['wProvideUser'] ==  $this->m_wBankerUser ) {
+					$ChiHuResult['dwWinTimes'] *= pow(2, $this->m_roomRule['oldUp']);
+				}
+				$score[$OperateResult['wOperateUser']] = $ChiHuResult['dwWinTimes'];
+				$score[$OperateResult['wProvideUser']] = 0 - $ChiHuResult['dwWinTimes'];
+			}
+			$this->m_wBankerUser = $OperateResult['wOperateUser'];
+		}else{
+			$score = array();
+			foreach ($this->m_Room_GameScore as $seatno => $value) {
+				$score[$seatno] = 0;
+			}
+			$OperateResult['wOperateUser'] = 0;
+			$OperateResult['wProvideUser'] = 0;
+		}
+		if ($this->m_roomRule['maxScore'] != 0 && $type == WIK_CHI_HU) {
+			$maxTimes = 0;
+			foreach ($score as $seatno => $value) {
+				if ($score[$seatno] < 0 && abs($score[$seatno]) > $this->m_roomRule['maxScore']) {
+					$times = $score[$seatno] / $this->m_roomRule['maxScore'] * -1;
+				}
+				if (isset($times) && $maxTimes < $times) {
+					$maxTimes = $times;
+				}
+			}
+			if ($maxTimes != 0) {
+				foreach ($score as $seatno => $value) {
+					$score[$seatno] /= $maxTimes;
+				}
+			}
+		}
+
+		foreach ($this->m_Room_GameScore as $seatno => $value) {
+			$this->m_Room_GameScore[$seatno] += $score[$seatno];
+		}
+
+		$gangScore = array();
+		for ($i=1; $i <= 4; $i++) { 
+			$gangScore[$i] = 0;
+		}
+		// $this->m_cbAllGiveRecvGang[$this->m_playGround] = $this->m_cbGiveRecvGang;
+		// foreach ($this->m_Room_GameScore as $seatno => $value) {
+		// 	$this->m_Room_GameScore[$seatno] -= array_sum($this->m_cbGiveRecvGang[$seatno]);
+		// 	$gangScore[$seatno] -= array_sum($this->m_cbGiveRecvGang[$seatno]);
+		// 	for ($i=1; $i <= 4; $i++) { 
+		// 		$this->m_Room_GameScore[$seatno] += $this->m_cbGiveRecvGang[$i][$seatno];
+		// 		$gangScore[$seatno] += $this->m_cbGiveRecvGang[$i][$seatno];
+		// 		if ($i == $seatno && $this->m_cbGiveRecvGang[$i][$seatno] != 0) {
+		// 			$this->m_Room_GameScore[$seatno] += $this->m_cbGiveRecvGang[$i][$seatno] * ($this->m_cbPlayerCount - 1);
+		// 			$gangScore[$seatno] += $this->m_cbGiveRecvGang[$i][$seatno] * ($this->m_cbPlayerCount - 1);
+		// 			foreach ($this->m_Room_GameScore as $key => $info) {
+		// 				if ($seatno != $key) {
+		// 					$this->m_Room_GameScore[$key] -= $this->m_cbGiveRecvGang[$i][$seatno];
+		// 					$gangScore[$key] -= $this->m_cbGiveRecvGang[$i][$seatno];
+		// 				}
+		// 			}
+		// 		}
+		// 	}
+		// }
+		$cardsList = array();
+		foreach ($this->m_cbCardIndex as $seatno => $info) {
+			foreach ($this->m_cbCardIndex[$seatno] as $cards => $value) {
+				for ($i=0; $i < $value; $i++) { 
+					$cardsList[$seatno][] = GameLogic::getInstance()->SwitchToCardData($cards);
+				}
+			}
+		}
+		$data = array();
+		foreach ($this->m_deskData as $seatno => $info) {
+			$data[$seatno]['cards'] = $cardsList[$seatno];
+			if ($OperateResult['wOperateUser'] == $seatno) {
+				$data[$seatno]['hucards'] = $this->m_cbSendCardData;
+			}else{
+				$data[$seatno]['hucards'] = -1;
+			}
+			$data[$seatno]['uid'] = $this->m_deskData[$seatno]['uid'];
+			$data[$seatno]['qianggang'] = $this->m_bQiangGang[$seatno];
+
+			$data[$seatno]['score'] = $score[$seatno];
+			$data[$seatno]['gangScore'] = $gangScore[$seatno];
+			$data[$seatno]['curScore'] = $score[$seatno] + $gangScore[$seatno];
+			$data[$seatno]['allScore'] = $this->m_Room_GameScore[$seatno];
+			$data[$seatno]['weaveItem'] = $this->m_WeaveItemArray[$seatno];
+			$data[$seatno]['GiveGang'] = array_sum($this->m_cbGiveRecvGang[$seatno]) - $this->m_cbGiveRecvGang[$seatno][$seatno];
+			for ($i=1; $i <= $this->m_cbPlayerCount; $i++) { 
+				$data[$seatno]['RecvGang'] = isset($data[$seatno]['RecvGang'])?$data[$seatno]['RecvGang']:0;
+				if ($i != $seatno) {
+					$data[$seatno]['RecvGang'] += $this->m_cbGiveRecvGang[$i][$seatno];
+				}
+			}
+			// $data[$seatno]['LightGang'] = $this->m_Room_GangLight[$this->m_playGround][$seatno];
+			$data[$seatno]['DarkGang'] = $this->m_Room_GangDark[$this->m_playGround][$seatno];
+			$data[$seatno]['PengGang'] = $this->m_Room_PengGangLight[$this->m_playGround][$seatno];
+
+			if ($OperateResult['wOperateUser'] == $OperateResult['wProvideUser']) {
+				if ($OperateResult['wOperateUser'] == $seatno) {
+					$data[$seatno]['hu'] = true;
+					$data[$seatno]['dian'] = false;
+				}else{
+					$data[$seatno]['hu'] = false;
+					$data[$seatno]['dian'] = false;
+				}
+			}else{
+				if ($OperateResult['wOperateUser'] == $seatno) {
+					$data[$seatno]['hu'] = true;
+					$data[$seatno]['dian'] = false;
+				}else if($OperateResult['wProvideUser'] == $seatno){
+					$data[$seatno]['hu'] = false;
+					$data[$seatno]['dian'] = true;
+				}else{
+					$data[$seatno]['hu'] = false;
+					$data[$seatno]['dian'] = false;
+				}
+			}
+			if ($data[$seatno]['hu'] && $type == WIK_CHI_HU) {
+				$data[$seatno]['baotou'] = $this->m_bBaotouStatus[$seatno];
+				$data[$seatno]['wealthwind'] = $this->m_bWealthWind[$seatno];
+				$data[$seatno]['dwChiHuKind'] = $ChiHuResult['dwChiHuKind'];
+				$data[$seatno]['dwChiHuRight'] = $ChiHuResult['dwChiHuRight'];
+			}
+		}
+		$alldata = array();
+		$alldata['0'] = $data;
+		if ($type == WIK_CHI_HU && ($ChiHuResult['dwChiHuRight'] == CHR_ZI_MO || $ChiHuResult['dwChiHuRight'] == CHR_GANG_KAI)) {
+			$alldata['1']['kind'] = 1;
+		}else if ($type == WIK_CHI_HU && $ChiHuResult['dwChiHuRight'] != CHR_ZI_MO && $ChiHuResult['dwChiHuRight'] != CHR_GANG_KAI) {
+			$alldata['1']['kind'] = 2;
+		}else if ($type != WIK_CHI_HU) {
+			$alldata['1']['kind'] = 0;
+		}
+		$alldata['1']['time'] = date("Y-m-d H:i:s");
+		$this->saveGameMessage(8,$alldata);
+		$this->sendRoomMessage(GR_GAME_MJ_CALCULATION,$alldata);
+		$this->gameEnd($data);
+	}
+
+
+
+
+	public function gameEnd($score){
+		$this->m_gameStatus = self::GAMESTATE_END;
+		
+		$gamedata = array();
+		$this->sendRoomMessage(GR_GAMEEND,$gamedata);
+
+		//结束定时器
+		//$this->addTimeClick(CLICK_NAME_END,CLICK_VALUE_END,array($this,'gameEndCallBack'),array());
+		foreach ($this->m_deskData as $seatno => $info) {
+			if($info['ingame']){
+				foreach ($this->m_Room_GameScore as $compSeatno => $compInfo) {
+					if($seatno == $compSeatno){
+						$data = array();
+						$data['uid'] = $info['uid'];
+						$data['roompwd'] = $this->m_roomPwd;
+						$data['gamename'] = GAMENAME;
+						$data['playground'] = $this->m_playGround;
+						$data['score'] = $score[$seatno]['curScore'];
+						$data['inserttime'] = date("Y-m-d H:i:s",time());
+
+						$data['carddata'] = '';
+						GameManager::getInstance()->insertRoomRecord($data);
+						$this->m_scoreRecord[$this->m_playGround][$info['uid']] = $compInfo['score'];
+						//更新玩家总积分
+
+						foreach ($this->m_playerList as $uid => $pinfo) {
+							if($seatno == $pinfo['seatno']){
+								$this->m_playerList[$uid]['score'] += $score[$seatno]['curScore'];
+								break;
+							}
+						}
+
+						break;
+					}
+				}
+			}
+		}
+		$this->gameEndCallBack();
+
+	}
+	public function gameEndCallBack(){
+		$this->destoryClick(CLICK_NAME_END);
+		$this->m_roomStatus = self::STATE_NONE;
+		$this->m_gameStatus = self::GAMESTATE_READY;
+		//清理抢庄模式下注倍率的数据
+		// if($this->m_roomRule['playmode'] == PLAYMODE_BANKER_SSW){
+		// 	foreach ($this->m_deskData as $seatno => $info) {
+		// 		$this->m_deskData[$seatno]['xiazhurank'] = -1;
+		// 	}
+		// }
+		//开始下一局之前清理断线玩家
+		//$this->clearOfflinePlayer();
+
+		//清理数据
+		foreach ($this->m_deskData as $seatno => $info) {
+			$this->m_deskData[$seatno]['ready'] = false;
+			$this->m_deskData[$seatno]['ingame'] = false;
+			$this->m_deskData[$seatno]['outcardtag'] = 0;
+			$this->m_deskData[$seatno]['outcards'] = array();
+			$this->m_deskData[$seatno]['data'] = array();
+		}
+		$this->m_compareDataResult = array();
+		//下一局
+		$this->checkStart();
+	}
+}

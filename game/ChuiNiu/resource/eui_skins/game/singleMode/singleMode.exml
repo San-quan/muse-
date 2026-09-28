@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="singleMode" width="640" height="1038" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+	<e:Image source="singlemode_jpg" y="0" width="100%" height="100%" horizontalCenter="0"/>
+	<e:Group id="shaiGroup" y="547.38" horizontalCenter="0">
+		<e:Group id="shaiDrangon" x="0" y="0">
+		<e:Image id="shaizhong" source="shaizhong" x="0" y="0" scaleX="1.3" scaleY="1.3"/>
+		</e:Group>
+		<e:Group id="animate" x="0" y="0" scaleX="1" scaleY="1" visible="false">
+		<e:Image id="baozi" source="leopard" x="-11.810000000000002" y="-30.66" scaleX="1" scaleY="1"/>
+		</e:Group>
+		<e:Group y="133.42" horizontalCenter="0">
+			<e:Image id="shai0" source="mine1" x="19.46" y="0" scaleX="1" scaleY="1"/>
+			<e:Image id="shai1" source="mine1" x="88.05" y="0" scaleX="1" scaleY="1"/>
+			<e:Image id="shai2" source="mine1" x="103.78" y="40" scaleX="1" scaleY="1"/>
+			<e:Image id="shai4" source="mine1" x="4.56" y="40" scaleX="1" scaleY="1"/>
+			<e:Image id="shai3" source="mine1" x="54.12" y="67.1" scaleX="1" scaleY="1"/>
+		</e:Group>
+		<e:Image id="title0" source="" y="73.64" scaleX="1" scaleY="1" horizontalCenter="2" visible="false"/>
+	</e:Group>
+	<e:Button id="reset" label="" y="840.24" horizontalCenter="0">
+		<e:skinName>
+			<e:Skin states="up,down,disabled">
+			<e:Image width="100%" height="100%" source="repeat_png" source.down="repeatclick_png"/>
+			<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+			</e:Skin>
+		</e:skinName>
+	</e:Button>
+	<e:Button id="yaoyiyao" label="" y="840.24" horizontalCenter="0">
+		<e:skinName>
+			<e:Skin states="up,down,disabled">
+			<e:Image width="100%" height="100%" source="shake_png" source.down="shakeclick_png"/>
+			<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+			</e:Skin>
+		</e:skinName>
+	</e:Button>
+	<e:Button id="back" label="" x="12" y="12" scaleX="0.9" scaleY="0.9">
+		<e:skinName>
+			<e:Skin states="up,down,disabled">
+			<e:Image width="100%" height="100%" source="BTN_Back_png" source.down="BTN_BackClick_png"/>
+			<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+			</e:Skin>
+		</e:skinName>
+	</e:Button>
+</e:Skin>

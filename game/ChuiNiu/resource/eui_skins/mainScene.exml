@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="mainScene" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+	<e:Group width="640" x="0" y="0" height="750" id="contentGroup">
+		<e:Group x="247.45000000000002" y="58.80000000000004" scaleX="1" scaleY="1">
+		<e:Group x="0" y="0" width="380" height="130">
+			<e:Button id="biaozhong" label="" horizontalCenter="0" verticalCenter="0">
+			<e:skinName>
+				<e:Skin states="up,down,disabled" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*">
+				<e:Image width="100%" height="100%" source="biaozhong" scaleX.down="1.1" scaleY.down="1.1"/>
+				<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+				</e:Skin>
+			</e:skinName>
+			</e:Button>
+		</e:Group>
+		<e:Group x="0" y="140" width="380" height="130">
+			<e:Button id="suoha" label="" horizontalCenter="0" verticalCenter="0">
+			<e:skinName>
+				<e:Skin states="up,down,disabled" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*">
+				<e:Image width="100%" height="100%" source="suohua" scaleX.down="1.1" scaleY.down="1.1"/>
+				<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+				</e:Skin>
+			</e:skinName>
+			</e:Button>
+		</e:Group>
+		<e:Group x="0" y="280" width="380" height="130">
+			<e:Button id="niuniu" label="" horizontalCenter="0" verticalCenter="0">
+			<e:skinName>
+				<e:Skin states="up,down,disabled" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*">
+				<e:Image width="100%" height="100%" source="niuniu" scaleX.down="1.1" scaleY.down="1.1"/>
+				<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+				</e:Skin>
+			</e:skinName>
+			</e:Button>
+		</e:Group>
+		<e:Group x="0" y="420" width="380" height="130">
+			<e:Button id="honghei" label="" horizontalCenter="0" verticalCenter="0">
+			<e:skinName>
+				<e:Skin states="up,down,disabled" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*">
+				<e:Image width="100%" height="100%" source="honghei" scaleX.down="1.1" scaleY.down="1.1"/>
+				<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+				</e:Skin>
+			</e:skinName>
+			</e:Button>
+		</e:Group>
+		<e:Group y="560" width="240" height="80" right="18">
+			<e:Button id="danji" label="" horizontalCenter="0" verticalCenter="0">
+			<e:skinName>
+				<e:Skin states="up,down,disabled" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*">
+				<e:Image width="100%" height="100%" source="danji" scaleX.down="1.1" scaleY.down="1.1"/>
+				<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+				</e:Skin>
+			</e:skinName>
+			</e:Button>
+		</e:Group>
+		</e:Group>
+	</e:Group>
+</e:Skin>

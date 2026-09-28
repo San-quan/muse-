@@ -1,0 +1,28 @@
+{"mc":{
+	"jinbao1":{
+		"frameRate":2,
+		"labels":[
+			{"name":"1","frame":1,"end":2}
+			
+			],
+		"events":[
+			
+			],
+		"frames":[
+			
+			{
+			"res":"lord_anim_remain_alarm_1",
+			"x":9,
+			"y":20
+			},
+			{
+			"res":"lord_anim_remain_alarm_2",
+			"x":4,
+			"y":15
+			}
+			]
+}},
+	"res":{
+		"lord_anim_remain_alarm_2":{"x":1,"y":1,"w":59,"h":51},
+		"lord_anim_remain_alarm_1":{"x":62,"y":1,"w":49,"h":42}
+	}}

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="shop" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" width="640" height="1038">
+	<e:Image id="menban" source="mengban_png" x="0" y="0" width="100%" height="100%"/>
+	<e:Group horizontalCenter="-5.5" verticalCenter="0">
+		<e:Image source="hall_shop_bg_png" y="0" x="0"/>
+		<e:Group id="item0" y="149.8" x="60.2">
+			<e:Image id="goodsIcon0" source="chuniu_hall_new_json.hall_Icon_D1" x="1.52" verticalCenter="0"/>
+			<e:Image id="songImg0" source="chuniu_hall_new_json.hall_shop_song" x="188.45" verticalCenter="0"/>
+			<e:Group x="69.45" y="13">
+			<e:Image source="chuniu_hall_new_json.hall_yuab_jiao_xing" x="0" y="0"/>
+			<e:Label id="zuannum0" text="99999" x="2.88" size="25" textColor="0xfffc3f" width="100" textAlign="center" y="2"/>
+			</e:Group>
+			<e:Label id="songZuan0" text="99999" x="225.63" textColor="0x000000" verticalCenter="0" size="25" width="100" textAlign="left"/>
+			<e:Group width="89" height="41" x="324" verticalCenter="0">
+			<e:Button id="buyBtn0" label="￥999" scaleX="1" scaleY="1" horizontalCenter="0" verticalCenter="0">
+				<e:skinName>
+				<e:Skin states="up,down,disabled">
+					<e:Image width="100%" height="100%" source="chuniu_hall_new_json.hall_shop_btn_bg"/>
+					<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0" textColor="0x000000" size="25"/>
+				</e:Skin>
+				</e:skinName>
+			</e:Button>
+			</e:Group>
+		</e:Group>
+		<e:Group y="236.16" id="item1" x="60.2">
+			<e:Image x="-4.56" verticalCenter="-6" id="goodsIcon1" source="chuniu_hall_new_json.hall_Icon_D2"/>
+			<e:Image id="songImg1" source="chuniu_hall_new_json.hall_shop_song" x="188.45" verticalCenter="0"/>
+			<e:Group x="69.45" verticalCenter="0">
+			<e:Image source="chuniu_hall_new_json.hall_yuab_jiao_xing" x="0" y="0"/>
+			<e:Label text="99999" x="2.88" size="25" textColor="0xFFFC3F" width="100" textAlign="center" y="2" id="zuannum1"/>
+			</e:Group>
+			<e:Label text="99999" x="225.63" textColor="0x000000" verticalCenter="0" size="25" width="100" textAlign="left" id="songZuan1"/>
+			<e:Group width="89" height="41" x="324" verticalCenter="0">
+			<e:Button id="buyBtn1" label="￥999">
+				<e:skinName>
+				<e:Skin states="up,down,disabled">
+					<e:Image width="100%" height="100%" source="chuniu_hall_new_json.hall_shop_btn_bg"/>
+					<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0" textColor="0x000000" size="25"/>
+				</e:Skin>
+				</e:skinName>
+			</e:Button>
+			</e:Group>
+		</e:Group>
+		<e:Group y="324.05" id="item2" x="60.2">
+			<e:Image x="-3.04" verticalCenter="4" id="goodsIcon2" source="chuniu_hall_new_json.hall_Icon_D3"/>
+			<e:Image id="songImg2" source="chuniu_hall_new_json.hall_shop_song" x="188.45" verticalCenter="0"/>
+			<e:Group x="69.45" verticalCenter="0">
+			<e:Image source="chuniu_hall_new_json.hall_yuab_jiao_xing" x="0" y="0"/>
+			<e:Label text="99999" x="2.88" size="25" textColor="0xFFFC3F" width="100" textAlign="center" y="2" id="zuannum2"/>
+			</e:Group>
+			<e:Label text="99999" x="225.63" textColor="0x000000" verticalCenter="0" size="25" width="100" textAlign="left" id="songZuan2"/>
+			<e:Group width="89" height="41" x="324" verticalCenter="0">
+			<e:Button id="buyBtn2" label="￥999">
+				<e:skinName>
+				<e:Skin states="up,down,disabled">
+					<e:Image width="100%" height="100%" source="chuniu_hall_new_json.hall_shop_btn_bg"/>
+					<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0" textColor="0x000000" size="25"/>
+				</e:Skin>
+				</e:skinName>
+			</e:Button>
+			</e:Group>
+		</e:Group>
+		<e:Group y="411.91" id="item3" x="60.2">
+			<e:Image x="4.56" verticalCenter="0" id="goodsIcon3" source="chuniu_hall_new_json.hall_Icon_DinBag"/>
+			<e:Image id="songImg3" source="chuniu_hall_new_json.hall_shop_song" x="188.45" verticalCenter="0"/>
+			<e:Group x="69.45" y="13">
+			<e:Image source="chuniu_hall_new_json.hall_yuab_jiao_xing" x="0" y="0"/>
+			<e:Label text="99999" x="2.88" size="25" textColor="0xFFFC3F" width="100" textAlign="center" y="2" id="zuannum3"/>
+			</e:Group>
+			<e:Label text="99999" x="225.63" textColor="0x000000" verticalCenter="0" size="25" width="100" textAlign="left" id="songZuan3"/>
+			<e:Group width="89" height="41" x="324" verticalCenter="0">
+			<e:Button id="buyBtn3" label="￥999">
+				<e:skinName>
+				<e:Skin states="up,down,disabled">
+					<e:Image width="100%" height="100%" source="chuniu_hall_new_json.hall_shop_btn_bg"/>
+					<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0" textColor="0x000000" size="25"/>
+				</e:Skin>
+				</e:skinName>
+			</e:Button>
+			</e:Group>
+		</e:Group>
+		<e:Group y="498.26" id="item4" x="60.2">
+			<e:Image x="0" verticalCenter="0" id="goodsIcon4" source="chuniu_hall_new_json.hall_Icon_DinBox2"/>
+			<e:Image id="songImg4" source="chuniu_hall_new_json.hall_shop_song" x="188.45" verticalCenter="0"/>
+			<e:Group x="69.45" y="13">
+			<e:Image source="chuniu_hall_new_json.hall_yuab_jiao_xing" x="0" y="0"/>
+			<e:Label text="99999" x="2.88" size="25" textColor="0xFFFC3F" width="100" textAlign="center" y="2" id="zuannum4"/>
+			</e:Group>
+			<e:Label text="99999" x="222.63" textColor="0x000000" verticalCenter="0.5" size="25" width="100" textAlign="left" id="songZuan4"/>
+			<e:Group width="89" height="41" x="324" verticalCenter="0">
+			<e:Button id="buyBtn4" label="￥999">
+				<e:skinName>
+				<e:Skin states="up,down,disabled">
+					<e:Image width="100%" height="100%" source="chuniu_hall_new_json.hall_shop_btn_bg"/>
+					<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0" textColor="0x000000" size="25"/>
+				</e:Skin>
+				</e:skinName>
+			</e:Button>
+			</e:Group>
+		</e:Group>
+	</e:Group>
+</e:Skin>

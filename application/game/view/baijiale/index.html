@@ -1,0 +1,213 @@
+<html>
+    <head> 
+        <meta charset="utf-8" /> 
+        <meta name="viewport" id="view" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+        <meta name="format-detection" content="telephone=no" /> 
+        <meta name="msapplication-tap-highlight" content="no" /> 
+        <title>号九人房间
+        </title> <!-- 
+        <link rel="stylesheet" type="text/css" href="/static/game9/css/bull_vue-2.0.3.css" /> 
+        <link rel="stylesheet" type="text/css" href="/static/game9/css/alert-1.1.css" /> 
+        <link rel="stylesheet" type="text/css" href="/static/game9/css/bullshop-1.0.css" />  -->
+        <script type="text/javascript" src="/static/baijiale/js/fastclick.js"></script>
+        <script src="__STATIC__/game/js/jquery-1.12.1.js"></script> 
+        <script type="text/javascript" src="/static/js/vue.min.js" ></script>
+        <script type="text/javascript" src="/static/js/vue-resource.min.js" ></script>
+        <script type="text/javascript">
+
+            window.addEventListener('load', function () {
+                FastClick.attach(document.body);
+            }, false);
+
+            var newNum = "";
+            var per = window.innerWidth / 530;
+            var globalData = {
+                // http://wanyouxi.hunzugame.xyz/game.php
+                "socket": "ws://192.168.3.13:16668",
+                "roomID": "{$roominfo.id}",   
+                "roomOwner":"{$roominfo.member_id}",
+                "baseUrl":"{:url('Baijiale/index','room_id='.$roominfo.id)}"
+            };
+           var userData = {
+                "id": "1",
+                "uid": "{$memberinfo['id']}",
+                "nickname": "ww",
+                "avatar": "10",
+                "isAuthPhone": "10",
+                "authCardCount": "11",
+                "phone": "",
+            };
+            var coinList = [1, 2, 4, 5];
+        </script> 
+        <style type="text/css">
+            body{background:url(__STATIC__/baijiale/images/bjltable.png) no-repeat; background-size: 100% auto;background-color: rgb(17, 103, 59);}
+            .ba{
+                background: black;
+                width:100px;
+                height:100px;
+            }
+            .desk .players {
+                width: 4.5rem;
+                position: absolute;
+                bottom: 40%;
+                /*right: -2.7rem;*/
+            }
+            .readyimg {
+                width: 50px !important;
+                height: auto !important;
+                position: absolute;
+                /*display: none;*/
+            }
+            .zhuangimg {
+                width: 20px;
+                position: absolute;
+                left: 0;
+                top: 0;
+                /* display: none; */
+            }
+            .msg .photo p, .desk .photo p {
+                background: rgba(40, 23, 15,0.8);
+                min-width: 3rem;
+                margin-top: 0.2rem;
+                border-radius: 0.2rem;
+                line-height: 0.9rem;
+                -moz-box-shadow: 0px 0px 2px #333,inset 0px 0px 3px #222;
+                -webkit-box-shadow: 0px 0px 2px #333, inset 0px 0px 3px #222;
+                box-shadow: 0px 0px 2px #333, inset 0px 0px 3px #222;
+                text-align: center;
+            }
+            .msg .photo p span:first-child, .desk .photo p span:first-child {
+                display: inline-block;
+                max-width: 3rem;
+                white-space: nowrap;
+                overflow: hidden;
+            }
+            .msg .photo p span, .desk .photo p span {
+                color: #ccc;
+                font-size: 0.6rem;
+            }
+            .desk .photo {
+                text-align: center;
+                float: right;
+                margin-bottom: 2rem;
+                display: none;
+            }
+            .photo {
+                position: relative;
+            }
+            .photo p span:last-child {
+                color: orange;
+            }
+            .kongwei{
+                width: 53%;
+                
+                /*background: url(/static/baijiale/images/kongwei.png) no-repeat;*/
+                
+                position: absolute; 
+            }
+            .kongwei img{
+                width: 100%;
+            }
+            .headimg{
+                width: 2rem;
+                height:2rem;
+            }
+            .boardjuang{
+                width:1rem;
+            }
+        </style>
+    </head> 
+    <body> 
+        <div style="position: fixed; width: 100%; height: 100%; top: 0px; left: 0px; background: rgb(0, 0, 0); z-index: 115; display: none;" id="loading"> 
+            <div class="load4"> 
+                <div class="loader">
+                    Loading...
+                </div> 
+            </div> 
+        </div>
+        <div class="container">
+            <div class="desk">
+                    <div class="players" style="bottom: 39%;left: -5%;">
+                        <div class="photo" id="player_1" >
+                            <img class="headimg" src="__STATIC__/game/img/33.png" styl>
+                            <!-- <img style="right: -28px;bottom: 93px;" class="readyimg" src="__STATIC__/game/img/ready1.png" style="width: 2.5rem;height: 2.5rem;"> -->
+                            <img class="zhuangimg" src="__STATIC__/game/img/zhuang.png">
+                            <p class="boardjuang"><span style="max-width: 2.2rem;font-size: 0.6rem;" class="nickname">不一样的烟火不一样的烟火</span><br/><span class="money">34</span></p>
+                            <span class="gameret"></span>
+                            
+                        </div>
+                        <div class="kongwei" style="left: 1.7rem;top: -7rem;"><img src="__STATIC__/baijiale/images/kongwei.png"></div>
+                      
+                    </div>
+                     <div class="players" style="bottom: 27%;left: -5%;">
+                        <div class="photo" id="player_1" style="display:block">
+                            <img class="headimg" src="__STATIC__/game/img/33.png" >
+                            <!-- <img style="right: -28px;bottom: 93px;" class="readyimg" src="__STATIC__/game/img/ready1.png" style="width: 2.5rem;height: 2.5rem;"> -->
+                            <img class="zhuangimg" src="__STATIC__/game/img/zhuang.png">
+                            <p class="boardjuang"><span style="max-width: 2.2rem;font-size: 0.6rem;" class="nickname">不一样的烟火不一样的烟火</span><br/><span class="money">34</span></p>
+                            <span class="gameret"></span>
+                            
+                        </div>
+                        <div class="kongwei" style="left: 1.7rem;top: -7rem;"><img src="__STATIC__/baijiale/images/kongwei.png"></div>
+                      
+                    </div>
+                     
+                    <img src="__STATIC__/baijiale/images/guangxian.png" style="width: 72%;
+    /* margin: auto 0; */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -9.3rem;
+    margin-top: -3.5rem;">
+                  
+                    
+                   
+
+
+
+
+
+
+                    <div class="cards">
+                       
+
+
+
+                         <div class="xiazhu" style="display: none; margin-top:12px;">
+
+                            <img onclick="setmultiple(1);" src="__STATIC__/game/img/one.png">
+                            <img onclick="setmultiple(2);" src="__STATIC__/game/img/two.png">
+                            <img onclick="setmultiple(4);" src="__STATIC__/game/img/4.png">
+                            <img onclick="setmultiple(5);" src="__STATIC__/game/img/five.png">
+                            <!-- <img onclick="setmultiple(8);" src="__STATIC__/game/img/1x8.png"> -->
+                        </div>
+                        
+                    </div>
+                </div>
+        </div> 
+        <div id="app-main">
+            
+            <button v-on:click="clickSendReady('准备')" id="imready" style="display:none;">准备</button>
+            <div id="joinroom" style="display:none;"><button v-on:click="clickJoinRoom(9)">确定</button><a href="{:url('index/index69')}"><button >取消</button></a></div>
+            <button v-on:click="clickSetMultiple('xiandui',10)">下注</button>
+            <button v-on:click="clickSitDown(9)">坐下</button>
+            <button id="chongzhi" style="display:none;">充值</button>
+            <button id="jinzhiCreate" style="display:none;">禁止创建</button>
+            <button id="jinzhiJoin" style="display:none;">禁止加入</button>
+        </div>
+        
+        <!-- <script type="text/javascript" src="/static/game9/js/canvas.js"></script>  -->
+        <script type="text/javascript" src="/static/baijiale/js/baijiale.js"></script>
+
+        <iframe id="ping_iframe" src=" weixinping://iframe " style="display: none;"></iframe>
+        <iframe id="__WeixinJSBridgeIframe_SetResult" src="weixin://private/setresult/SCENE_HANDLEMSGFROMWX&amp;ZHVtbXk=" style="display: none;"></iframe>
+        <iframe id="__WeixinJSBridgeIframe" src="weixin://dispatch_message/" style="display: none;"></iframe>
+    </body>
+    <script type="text/javascript">
+       window.onload=function(){
+               var wid=$(window).width()/414;
+               $('#view').attr('content','initial-scale='+wid+',maximum-scale=1,user-scalable=no');
+        }
+    </script>
+     
+</html>

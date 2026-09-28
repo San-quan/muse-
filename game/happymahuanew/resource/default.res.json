@@ -1,0 +1,2593 @@
+{
+	"groups": [
+		{
+			"keys": "loading_hall_png,loading_BG_png,guidao_png,guidao2_png,hall_loading_di_png,sss_loading_guidao_png,sss_loading_bg_png,sss_loading_guidao2_png,sfp_loading_bg_png,hzmj_loading_bg_png,ddz_loading_bg_png,pdk_loading_bg_png",
+			"name": "load"
+		},
+		{
+			"keys": "emo_json,emo_png,juhua_png,guidao_png,guidao2_png,halltitle_png,loading_BG_png,loading_hall_png,mengban_png,fomale1_mp3,fomale10_mp3,fomale2_mp3,fomale3_mp3,fomale4_mp3,fomale5_mp3,fomale6_mp3,fomale7_mp3,fomale8_mp3,fomale9_mp3,male1_mp3,male10_mp3,male2_mp3,male3_mp3,male4_mp3,male5_mp3,male6_mp3,male7_mp3,male8_mp3,male9_mp3,1_png,10_png,11_png,12_png,13_png,14_png,15_png,2_png,3_png,4_png,5_png,6_png,7_png,8_png,9_png,rule13_png,jujue_png,quxiao_png,tishi_png,tongyi_png,yes_xiao_png,13GameAni_ske_json,13GameAni_tex_json,13GameAni_tex_png,13ShuiTable_png,clubEmpty_png,dalaba_png,donghicon10_png,donghicon11_png,donghicon14_png,donghicon8_png,donghicon9_png,headGuang_png,ingameTip_png,jiqiang_ske_json,jiqiang_tex_json,jiqiang_tex_png,lipaiDi_png,mAndTguang_png,myInfo_png,offline2_png,single_png,bigWin_png,resultcoin_lose_fnt,resultcoin_lose_png,resultcoin_win_fnt,resultcoin_win_png,totalBack_png,totalBg_png,totalLose_png,totalShare_png,666662_png,hua_ske_json,hua_tex_json,hua_tex_png,jiezhi_ske_json,jiezhi_tex_json,jiezhi_tex_png,poshui_ske_json,poshui_tex_json,poshui_tex_png,hua_mp3,jiezhi_mp3,poshui_mp3,tuoxie_mp3,zhuantou_mp3,tuoxie_ske_json,tuoxie_tex_json,tuoxie_tex_png,zhuantou_ske_json,zhuantou_tex_json,zhuantou_tex_png,jinbi_png,beatAllBomb_mp3,bgm_mp3,bomb_bomb_mp3,card_click_mp3,coin_mp3,daqiang1_mp3,daqiang2_mp3,end_mp3,failue_mp3,gun_mp3,hallBgMisc_mp3,jiqiang_mp3,music_1_mp3,music_10_mp3,music_2_mp3,music_21_mp3,music_22_mp3,music_23_mp3,music_24_mp3,music_25_mp3,music_26_mp3,music_27_mp3,music_28_mp3,music_29_mp3,music_3_mp3,music_30_mp3,music_31_mp3,music_32_mp3,music_35_mp3,music_4_mp3,music_5_mp3,music_6_mp3,music_7_mp3,music_8_mp3,music_9_mp3,nobanker_mp3,out_chong3_mp3,out_midhulu_mp3,pk_lose_star_mp3,robbanker_mp3,special1_mp3,start_compare_mp3,start_mp3,times1_mp3,times10_mp3,times2_mp3,times3_mp3,times4_mp3,times5_mp3,win_mp3,jiesan_json,inviteJIANtou_png,inGameImage_json,common_ic_guanbi_png,shui_png,sss_set_json,soundguidao_png,soundkuai_png,special_png,type1_png,type10_png,type2_png,type21_png,type22_png,type23_png,type24_png,type25_png,type26_png,type27_png,type28_png,type29_png,type3_png,type30_png,type31_png,type32_png,type33_png,type34_png,type35_png,type4_png,type5_png,type6_png,type7_png,type8_png,type9_png,kxmh_message_json,pai_json,sss_local_shi_png,sss_location_xu_png,sss_myinfo_bg_png,sss_special_bg_png,sss_special_confirm_png,otherInfoKuang_png,public_icon_zuanshi_png",
+			"name": "shisanshui"
+		},
+		{
+			"keys": "juhua_png,guidao_png,guidao2_png,halltitle_png,loading_BG_png,loading_hall_png,mengban_png,jujue_png,quxiao_png,tishi_png,tongyi_png,yes_xiao_png,666662_png,card_click_mp3,hall_faxian_bg_png,hall_lunbo_example_png,hall_shop_bg_png,hall_qiandao_bg_png,hall_zhanji_bg_png,ssh_create_bg_png,sss_join_bg_png,hall_zhanji_sbg_white_png,hall_zhanji_sbg_red_png,mahuaSSHcreate_json,total_mid_bg_png,total_title_bg_png,headBg_png,total_scorel_png,inviteJIANtou_png,fuwuTExt_png,create_bg_png,create_jushu_png,create_renshu_png,sfp_create_dujiang_png,sfp_create_xipai_png,sfp_create_zhengdian_png,pai_json,sfp_create_maque_png,create_hzmj_fending_png,create_hzmj_jiafan_png,create_hzmj_laoqi_png,gang_11_png,hallImage2_json,zhanji_sss_json,hallImage_json,hall_bg_png,hallImage3_json,hzmj_loading_title_png,hzmj_loading_bar_ding_png,hzmj_loading_bar_di_png,pdk_loading_bar_ding_png,pdk_loading_title_png,pdk_loading_bar_di_png,sss_loading_title_png,sfp_loading_bar_di_png,sfp_loading_bar_ding_png,sfp_loading_title_png,hall_setting_title_png,hall_title_bg_png",
+			"name": "preload"
+		},
+		{
+			"keys": "blue_fnt,blue_png,deskDJS_fnt,deskDJS_png,hzmj_bg_png,hzmj_player_json,hzmj_singleResult_json,hzmj_totalResult_json,leftYaoqing_png,MJCard_json,red_fnt,red_png,jujue_png,quxiao_png,tishi_png,tongyi_png,yes_xiao_png,emo_json,emo_png,common_ic_guanbi_png,fuwuTExt_png,inviteJIANtou_png,juhua_png,mengban_png,fomale1_mp3,fomale10_mp3,fomale2_mp3,fomale3_mp3,fomale4_mp3,fomale5_mp3,fomale6_mp3,fomale7_mp3,fomale8_mp3,fomale9_mp3,male1_mp3,male10_mp3,male2_mp3,male3_mp3,male4_mp3,male5_mp3,male6_mp3,male7_mp3,male8_mp3,male9_mp3,1_png,10_png,11_png,12_png,13_png,14_png,15_png,2_png,3_png,4_png,5_png,6_png,7_png,8_png,9_png,soundguidao_png,soundkuai_png,sss_set_json,action_card_position_bottom_png,action_card_position_left_png,action_card_position_right_png,action_card_position_top_png,kxmh_message_json,jiesan_json,hzmj_tuxin_png,sfp_jiesuan_bg_png,hzmj_single_bg_png,resultcoin_lose_fnt,resultcoin_win_fnt,resultcoin_win_png,resultcoin_lose_png,hzmj_ht_bg_png,hzmj_ht_dontaccept_png,hzmj_ht_accept_png,hzmj_ht_select_png,HZMJDesk_json,donghicon9_png,donghicon14_png,donghicon11_png,donghicon10_png,donghicon8_png,sss_local_shi_png,sss_location_xu_png,sss_myinfo_bg_png,sss_special_bg_png,sss_special_confirm_png,hua_ske_json,hua_tex_json,hua_tex_png,jiezhi_ske_json,jiezhi_tex_json,jiezhi_tex_png,poshui_ske_json,poshui_tex_json,poshui_tex_png,hua_mp3,jiezhi_mp3,poshui_mp3,tuoxie_mp3,zhuantou_mp3,tuoxie_ske_json,tuoxie_tex_json,tuoxie_tex_png,zhuantou_ske_json,zhuantou_tex_json,zhuantou_tex_png,hzmj_ani_jiantou_tex_png,hzmj_ani_jiantou_mc_json,hzmj_man_1_mp3,hzmj_man_17_mp3,hzmj_man_18_mp3,hzmj_man_19_mp3,hzmj_man_2_mp3,hzmj_man_20_mp3,hzmj_man_21_mp3,hzmj_man_22_mp3,hzmj_man_23_mp3,hzmj_man_24_mp3,hzmj_man_25_mp3,hzmj_man_3_mp3,hzmj_man_33_mp3,hzmj_man_34_mp3,hzmj_man_35_mp3,hzmj_man_36_mp3,hzmj_man_37_mp3,hzmj_man_38_mp3,hzmj_man_39_mp3,hzmj_man_4_mp3,hzmj_man_40_mp3,hzmj_man_41_mp3,hzmj_man_49_mp3,hzmj_man_5_mp3,hzmj_man_50_mp3,hzmj_man_51_mp3,hzmj_man_52_mp3,hzmj_man_53_mp3,hzmj_man_54_mp3,hzmj_man_55_mp3,hzmj_man_6_mp3,hzmj_man_7_mp3,hzmj_man_8_mp3,hzmj_man_9_mp3,hzmj_man_chi_mp3,hzmj_man_gang_mp3,hzmj_man_hu_mp3,hzmj_man_hua_mp3,hzmj_man_peng_mp3,hzmj_man_zimo_mp3,hzmj_audio_card_out_mp3,hzmj_audio_liuju_mp3,hzmj_audio_lose_mp3,hzmj_boy_ready_mp3,hzmj_btnpress_mp3,hzmj_gamebgm_mp3,hzmj_gamestart_mp3,hzmj_girl_ready_mp3,hzmj_mywin_mp3,rule_hzmj_png,hzmj_dalaba_png,card_click_mp3,ingameTip_png,hzmj_caipiao_png,public_icon_zuanshi_png",
+			"name": "hzmj"
+		},
+		{
+			"keys": "sfp_BG_png,sfp_jiesuan_bg_png,sfp_jiesuan_item_bg_png,sfp_total_item_bg_png,fomale1_mp3,fomale10_mp3,fomale2_mp3,fomale3_mp3,fomale4_mp3,fomale5_mp3,fomale6_mp3,fomale7_mp3,fomale8_mp3,fomale9_mp3,male1_mp3,male10_mp3,male2_mp3,male3_mp3,male4_mp3,male5_mp3,male6_mp3,male7_mp3,male8_mp3,male9_mp3,1_png,10_png,11_png,12_png,13_png,14_png,15_png,2_png,3_png,4_png,5_png,6_png,7_png,8_png,9_png,soundkuai_png,soundguidao_png,sss_set_json,common_ic_guanbi_png,juhua_png,inviteJIANtou_png,emo_json,emo_png,jujue_png,quxiao_png,tishi_png,tongyi_png,yes_xiao_png,donghicon10_png,donghicon14_png,donghicon9_png,donghicon8_png,donghicon11_png,hua_ske_json,hua_tex_json,hua_tex_png,jiezhi_ske_json,jiezhi_tex_json,jiezhi_tex_png,poshui_ske_json,poshui_tex_json,poshui_tex_png,hua_mp3,jiezhi_mp3,poshui_mp3,tuoxie_mp3,zhuantou_mp3,tuoxie_ske_json,tuoxie_tex_json,tuoxie_tex_png,zhuantou_ske_json,zhuantou_tex_json,zhuantou_tex_png,mengban_png,kxmh_message_json,jiesan_json,card_click_mp3,bomb_tex_png,bomb_mc_json,sfp_bg_music_mp3,sfp_1wang2_mp3,sfp_2wang0_mp3,sfp_2wang1_mp3,sfp_2wang2_mp3,sfp_lord_v_1card_10_mp3,sfp_lord_v_1card_11_mp3,sfp_lord_v_1card_12_mp3,sfp_lord_v_1card_13_mp3,sfp_lord_v_1card_2_mp3,sfp_lord_v_1card_3_mp3,sfp_lord_v_1card_4_mp3,sfp_lord_v_1card_5_mp3,sfp_lord_v_1card_6_mp3,sfp_lord_v_1card_7_mp3,sfp_lord_v_1card_8_mp3,sfp_lord_v_1card_9_mp3,sfp_lord_v_1card_big_joker_mp3,sfp_lord_v_1card_small_joker_mp3,sfp_lord_v_2card_10_mp3,sfp_lord_v_2card_11_mp3,sfp_lord_v_2card_12_mp3,sfp_lord_v_2card_13_mp3,sfp_lord_v_2card_14_mp3,sfp_lord_v_2card_2_mp3,sfp_lord_v_2card_3_mp3,sfp_lord_v_2card_4_mp3,sfp_lord_v_2card_5_mp3,sfp_lord_v_2card_6_mp3,sfp_lord_v_2card_7_mp3,sfp_lord_v_2card_8_mp3,sfp_lord_v_2card_9_mp3,sfp_lord_v_3card_10_mp3,sfp_lord_v_3card_11_mp3,sfp_lord_v_3card_12_mp3,sfp_lord_v_3card_13_mp3,sfp_lord_v_3card_14_mp3,sfp_lord_v_3card_2_mp3,sfp_lord_v_3card_3_mp3,sfp_lord_v_3card_4_mp3,sfp_lord_v_3card_5_mp3,sfp_lord_v_3card_6_mp3,sfp_lord_v_3card_7_mp3,sfp_lord_v_3card_8_mp3,sfp_lord_v_3card_9_mp3,sfp_lord_v_bomb_2_mp3,sfp_lord_v_bomb_3_mp3,sfp_lord_v_pass_4_mp3,sfp_lord_v_runaway_1_mp3,sfp_lord_v_runaway_2_mp3,sfp_Special_Bomb_mp3,sfp_lord_v_1card_14_mp3,sfp_pai_json,resultcoin_lose_fnt,resultcoin_win_fnt,resultcoin_win_png,resultcoin_lose_png,sfp_chupai_mp3,sfp_click_card_mp3,sfp_fail_mp3,sfp_notice_mp3,sfp_pass_mp3,sfp_send_card_mp3,sfp_win_mp3,sss_local_shi_png,sss_location_xu_png,sss_myinfo_bg_png,sss_special_bg_png,sss_special_confirm_png,zhanji_bg8_png,zhanji_bg9_png,zhanji_bg7_png,zhanji_bg6_png,zhanji_bg10_png,zhanji_game_back_png,otherInfoKuang_png,rule_sfp_png,sfp_result_di_png,ingameTip_png,sfp_table_json,public_icon_zuanshi_png,ddz_loading_bg_png,pdk_loading_bg_png",
+			"name": "sifupai"
+		},
+		{
+			"keys": "ddzAnimate_json,ddzAnimate_png,ddzYanwu_json,ddzYanwu_png,jingbao_json,jingbao_png,lianshun_json,lianshun_png,lord_anim_plane_back_png,lord_anim_plane_shadow_png,lord_anim_rocket_png,coin_action_blue_fnt,coin_action_blue_png,coin_action_fnt,coin_action_png,ddzlose_png,ddzwin_png,desk_douzi_png,failtitle2_png,wintitle2_png,ddz_lord_v_2card_10_mp3,ddz_lord_v_2card_2_mp3,ddz_lord_v_2card_3_mp3,ddz_lord_v_2card_4_mp3,ddz_lord_v_2card_5_mp3,ddz_lord_v_2card_6_mp3,ddz_lord_v_2card_7_mp3,ddz_lord_v_2card_8_mp3,ddz_lord_v_2card_9_mp3,ddz_lord_v_2card_a_mp3,ddz_lord_v_2card_j_mp3,ddz_lord_v_2card_k_mp3,ddz_lord_v_2card_q_mp3,ddz_lord_v_4with1_mp3,ddz_click_mp3,ddz_lord_v_callscore_0_mp3,ddz_lord_v_discard_2_mp3,ddz_lord_v_pass_3_mp3,ddz_lord_v_remain_last_1_mp3,ddz_lord_v_remain_last_2_mp3,ddz_lord_v_runaway_1_mp3,ddz_lord_v_runaway_2_mp3,ddz_lordhl_v_call_lord_mp3,ddz_lordhl_v_double1_mp3,ddz_lordhl_v_no_double2_mp3,ddz_lordhl_v_no_rob_mp3,ddz_lordhl_v_rob3_mp3,ddz_lordhl_v_show_cards_mp3,ddz_sendCard_mp3,ddz_lord_v_1card_10_mp3,ddz_lord_v_1card_2_mp3,ddz_lord_v_1card_3_mp3,ddz_lord_v_1card_4_mp3,ddz_lord_v_1card_5_mp3,ddz_lord_v_1card_6_mp3,ddz_lord_v_1card_7_mp3,ddz_lord_v_1card_8_mp3,ddz_lord_v_1card_9_mp3,ddz_lord_v_1card_a_mp3,ddz_lord_v_1card_big_joker_mp3,ddz_lord_v_1card_j_mp3,ddz_lord_v_1card_k_mp3,ddz_lord_v_1card_q_mp3,ddz_lord_v_1card_small_joker_mp3,ddz_lord_s_spring_fail_voice1_mp3,ddz_lord_s_spring_win_voice1_mp3,ddz_lord_two_plane_mp3,ddz_lord_v_bomb_2_mp3,ddz_lord_v_chainpairs_mp3,ddz_lord_v_plane_1_mp3,ddz_lord_v_rocket1_mp3,ddz_lord_v_straight_mp3,ddz_lord_v_3card_10_mp3,ddz_lord_v_3card_2_mp3,ddz_lord_v_3card_3_mp3,ddz_lord_v_3card_4_mp3,ddz_lord_v_3card_5_mp3,ddz_lord_v_3card_6_mp3,ddz_lord_v_3card_7_mp3,ddz_lord_v_3card_8_mp3,ddz_lord_v_3card_9_mp3,ddz_lord_v_3card_a_mp3,ddz_lord_v_3card_j_mp3,ddz_lord_v_3card_k_mp3,ddz_lord_v_3card_q_mp3,ddz_lord_v_3with1_mp3,ddz_lord_v_3with2_mp3,result-export1_fnt,result-export1_png,result-export2_fnt,result-export2_png,mengban_png,juhua_png,inviteJIANtou_png,rule_hzmj_png,sss_set_json,soundguidao_png,soundkuai_png,jujue_png,quxiao_png,tishi_png,tongyi_png,yes_xiao_png,donghicon11_png,donghicon14_png,donghicon9_png,donghicon8_png,donghicon10_png,dalaba_png,ddz_deskbg_png,pai_json,kxmh_message_json,fomale1_mp3,fomale10_mp3,fomale2_mp3,fomale3_mp3,fomale4_mp3,fomale5_mp3,fomale6_mp3,fomale7_mp3,fomale8_mp3,fomale9_mp3,male1_mp3,male10_mp3,male2_mp3,male3_mp3,male4_mp3,male5_mp3,male6_mp3,male7_mp3,male8_mp3,male9_mp3,1_png,10_png,11_png,12_png,13_png,14_png,15_png,2_png,3_png,4_png,5_png,6_png,7_png,8_png,9_png,lord_v_callscore_1_mp3,lord_v_callscore_2_mp3,lord_v_callscore_3_mp3,card_click_mp3,emo_json,emo_png,jiesan_json,hua_ske_json,hua_tex_json,hua_tex_png,jiezhi_ske_json,jiezhi_tex_json,jiezhi_tex_png,poshui_ske_json,poshui_tex_json,poshui_tex_png,hua_mp3,jiezhi_mp3,poshui_mp3,tuoxie_mp3,zhuantou_mp3,tuoxie_ske_json,tuoxie_tex_json,tuoxie_tex_png,zhuantou_ske_json,zhuantou_tex_json,zhuantou_tex_png,hzmj_totalResult_json,resultcoin_lose_fnt,resultcoin_win_fnt,resultcoin_win_png,resultcoin_lose_png,hzmj_player_json,ddz_desk_json,ddz_cardPopup_mp3,ddz_Less_Then_Ten_mp3,ddz_pass_mp3,ddz_bblord_play_bg_mp3,ddz_failue_mp3,ddz_hllord_play_bg1_mp3,ddz_win_mp3,rule_ddz_png",
+			"name": "Doudz"
+		},
+		{
+			"keys": "ddzAnimate_json,ddzAnimate_png,ddzYanwu_json,ddzYanwu_png,jingbao_json,jingbao_png,lianshun_json,lianshun_png,lord_anim_plane_back_png,lord_anim_plane_shadow_png,lord_anim_rocket_png,coin_action_blue_fnt,coin_action_blue_png,coin_action_fnt,coin_action_png,ddzlose_png,ddzwin_png,desk_douzi_png,failtitle2_png,wintitle2_png,ddz_lord_v_2card_10_mp3,ddz_lord_v_2card_2_mp3,ddz_lord_v_2card_3_mp3,ddz_lord_v_2card_4_mp3,ddz_lord_v_2card_5_mp3,ddz_lord_v_2card_6_mp3,ddz_lord_v_2card_7_mp3,ddz_lord_v_2card_8_mp3,ddz_lord_v_2card_9_mp3,ddz_lord_v_2card_a_mp3,ddz_lord_v_2card_j_mp3,ddz_lord_v_2card_k_mp3,ddz_lord_v_2card_q_mp3,ddz_lord_v_4with1_mp3,ddz_click_mp3,ddz_lord_v_callscore_0_mp3,ddz_lord_v_discard_2_mp3,ddz_lord_v_pass_3_mp3,ddz_lord_v_remain_last_1_mp3,ddz_lord_v_remain_last_2_mp3,ddz_lord_v_runaway_1_mp3,ddz_lord_v_runaway_2_mp3,ddz_lordhl_v_call_lord_mp3,ddz_lordhl_v_double1_mp3,ddz_lordhl_v_no_double2_mp3,ddz_lordhl_v_no_rob_mp3,ddz_lordhl_v_rob3_mp3,ddz_lordhl_v_show_cards_mp3,ddz_sendCard_mp3,ddz_lord_v_1card_10_mp3,ddz_lord_v_1card_2_mp3,ddz_lord_v_1card_3_mp3,ddz_lord_v_1card_4_mp3,ddz_lord_v_1card_5_mp3,ddz_lord_v_1card_6_mp3,ddz_lord_v_1card_7_mp3,ddz_lord_v_1card_8_mp3,ddz_lord_v_1card_9_mp3,ddz_lord_v_1card_a_mp3,ddz_lord_v_1card_big_joker_mp3,ddz_lord_v_1card_j_mp3,ddz_lord_v_1card_k_mp3,ddz_lord_v_1card_q_mp3,ddz_lord_v_1card_small_joker_mp3,ddz_lord_s_spring_fail_voice1_mp3,ddz_lord_s_spring_win_voice1_mp3,ddz_lord_two_plane_mp3,ddz_lord_v_bomb_2_mp3,ddz_lord_v_chainpairs_mp3,ddz_lord_v_plane_1_mp3,ddz_lord_v_rocket1_mp3,ddz_lord_v_straight_mp3,ddz_lord_v_3card_10_mp3,ddz_lord_v_3card_2_mp3,ddz_lord_v_3card_3_mp3,ddz_lord_v_3card_4_mp3,ddz_lord_v_3card_5_mp3,ddz_lord_v_3card_6_mp3,ddz_lord_v_3card_7_mp3,ddz_lord_v_3card_8_mp3,ddz_lord_v_3card_9_mp3,ddz_lord_v_3card_a_mp3,ddz_lord_v_3card_j_mp3,ddz_lord_v_3card_k_mp3,ddz_lord_v_3card_q_mp3,ddz_lord_v_3with1_mp3,ddz_lord_v_3with2_mp3,result-export1_fnt,result-export1_png,result-export2_fnt,result-export2_png,mengban_png,juhua_png,inviteJIANtou_png,rule_hzmj_png,sss_set_json,soundguidao_png,soundkuai_png,jujue_png,quxiao_png,tishi_png,tongyi_png,yes_xiao_png,donghicon11_png,donghicon14_png,donghicon9_png,donghicon8_png,donghicon10_png,dalaba_png,pai_json,kxmh_message_json,fomale1_mp3,fomale10_mp3,fomale2_mp3,fomale3_mp3,fomale4_mp3,fomale5_mp3,fomale6_mp3,fomale7_mp3,fomale8_mp3,fomale9_mp3,male1_mp3,male10_mp3,male2_mp3,male3_mp3,male4_mp3,male5_mp3,male6_mp3,male7_mp3,male8_mp3,male9_mp3,1_png,10_png,11_png,12_png,13_png,14_png,15_png,2_png,3_png,4_png,5_png,6_png,7_png,8_png,9_png,lord_v_callscore_1_mp3,lord_v_callscore_2_mp3,lord_v_callscore_3_mp3,card_click_mp3,emo_json,emo_png,jiesan_json,hua_ske_json,hua_tex_json,hua_tex_png,jiezhi_ske_json,jiezhi_tex_json,jiezhi_tex_png,poshui_ske_json,poshui_tex_json,poshui_tex_png,hua_mp3,jiezhi_mp3,poshui_mp3,tuoxie_mp3,zhuantou_mp3,tuoxie_ske_json,tuoxie_tex_json,tuoxie_tex_png,zhuantou_ske_json,zhuantou_tex_json,zhuantou_tex_png,hzmj_totalResult_json,resultcoin_lose_fnt,resultcoin_win_fnt,resultcoin_win_png,resultcoin_lose_png,hzmj_player_json,pdk_desk_bg_png,ddz_desk_json,pdk_desk_imgs_json,ddz_cardPopup_mp3,ddz_Less_Then_Ten_mp3,ddz_pass_mp3,ddz_failue_mp3,ddz_bblord_play_bg_mp3,ddz_hllord_play_bg1_mp3,ddz_win_mp3,rule_pdk_png",
+			"name": "Runfast"
+		}
+	],
+	"resources": [
+		{
+			"url": "config/description.json",
+			"type": "json",
+			"name": "description_json"
+		},
+		{
+			"url": "assets/public/mengban.png",
+			"type": "image",
+			"name": "mengban_png"
+		},
+		{
+			"url": "assets/notice/quxiao.png",
+			"type": "image",
+			"name": "quxiao_png"
+		},
+		{
+			"url": "assets/notice/tishi.png",
+			"type": "image",
+			"name": "tishi_png"
+		},
+		{
+			"url": "assets/notice/yes_xiao.png",
+			"type": "image",
+			"name": "yes_xiao_png"
+		},
+		{
+			"url": "assets/notice/tongyi.png",
+			"type": "image",
+			"name": "tongyi_png"
+		},
+		{
+			"url": "assets/notice/jujue.png",
+			"type": "image",
+			"name": "jujue_png"
+		},
+		{
+			"url": "assets/public/loading/hall/halltitle.png",
+			"type": "image",
+			"name": "halltitle_png"
+		},
+		{
+			"url": "assets/public/loading/hall/loading_hall.png",
+			"type": "image",
+			"name": "loading_hall_png"
+		},
+		{
+			"url": "config/description.json",
+			"type": "json",
+			"name": "description2_json"
+		},
+		{
+			"url": "assets/shisanshui/music/card_click.mp3",
+			"type": "sound",
+			"name": "card_click_mp3"
+		},
+		{
+			"url": "assets/shisanshui/music/bgm.mp3",
+			"type": "sound",
+			"name": "bgm_mp3"
+		},
+		{
+			"url": "assets/shisanshui/music/failue.mp3",
+			"type": "sound",
+			"name": "failue_mp3"
+		},
+		{
+			"url": "assets/shisanshui/music/win.mp3",
+			"type": "sound",
+			"name": "win_mp3"
+		},
+		{
+			"url": "assets/shisanshui/music/end.mp3",
+			"type": "sound",
+			"name": "end_mp3"
+		},
+		{
+			"url": "assets/shisanshui/music/start.mp3",
+			"type": "sound",
+			"name": "start_mp3"
+		},
+		{
+			"url": "assets/shisanshui/music/music_3.mp3",
+			"type": "sound",
+			"name": "music_3_mp3"
+		},
+		{
+			"url": "assets/shisanshui/music/music_2.mp3",
+			"type": "sound",
+			"name": "music_2_mp3"
+		},
+		{
+			"url": "assets/shisanshui/music/music_5.mp3",
+			"type": "sound",
+			"name": "music_5_mp3"
+		},
+		{
+			"url": "assets/shisanshui/music/music_7.mp3",
+			"type": "sound",
+			"name": "music_7_mp3"
+		},
+		{
+			"url": "assets/shisanshui/music/music_6.mp3",
+			"type": "sound",
+			"name": "music_6_mp3"
+		},
+		{
+			"url": "assets/shisanshui/music/music_8.mp3",
+			"type": "sound",
+			"name": "music_8_mp3"
+		},
+		{
+			"url": "assets/shisanshui/music/music_9.mp3",
+			"type": "sound",
+			"name": "music_9_mp3"
+		},
+		{
+			"url": "assets/shisanshui/music/music_21.mp3",
+			"type": "sound",
+			"name": "music_21_mp3"
+		},
+		{
+			"url": "assets/shisanshui/music/music_22.mp3",
+			"type": "sound",
+			"name": "music_22_mp3"
+		},
+		{
+			"url": "assets/shisanshui/music/music_24.mp3",
+			"type": "sound",
+			"name": "music_24_mp3"
+		},
+		{
+			"url": "assets/shisanshui/music/music_23.mp3",
+			"type": "sound",
+			"name": "music_23_mp3"
+		},
+		{
+			"url": "assets/shisanshui/music/music_25.mp3",
+			"type": "sound",
+			"name": "music_25_mp3"
+		},
+		{
+			"url": "assets/shisanshui/music/music_27.mp3",
+			"type": "sound",
+			"name": "music_27_mp3"
+		},
+		{
+			"url": "assets/shisanshui/music/music_26.mp3",
+			"type": "sound",
+			"name": "music_26_mp3"
+		},
+		{
+			"url": "assets/shisanshui/music/music_28.mp3",
+			"type": "sound",
+			"name": "music_28_mp3"
+		},
+		{
+			"url": "assets/shisanshui/music/music_29.mp3",
+			"type": "sound",
+			"name": "music_29_mp3"
+		},
+		{
+			"url": "assets/shisanshui/music/music_30.mp3",
+			"type": "sound",
+			"name": "music_30_mp3"
+		},
+		{
+			"url": "assets/shisanshui/music/music_31.mp3",
+			"type": "sound",
+			"name": "music_31_mp3"
+		},
+		{
+			"url": "assets/shisanshui/music/music_35.mp3",
+			"type": "sound",
+			"name": "music_35_mp3"
+		},
+		{
+			"url": "assets/shisanshui/music/music_32.mp3",
+			"type": "sound",
+			"name": "music_32_mp3"
+		},
+		{
+			"url": "assets/shisanshui/music/bomb_bomb.mp3",
+			"type": "sound",
+			"name": "bomb_bomb_mp3"
+		},
+		{
+			"url": "assets/shisanshui/music/music_4.mp3",
+			"type": "sound",
+			"name": "music_4_mp3"
+		},
+		{
+			"url": "assets/shisanshui/music/coin.mp3",
+			"type": "sound",
+			"name": "coin_mp3"
+		},
+		{
+			"url": "assets/shisanshui/music/gun.mp3",
+			"type": "sound",
+			"name": "gun_mp3"
+		},
+		{
+			"url": "assets/shisanshui/music/out_midhulu.mp3",
+			"type": "sound",
+			"name": "out_midhulu_mp3"
+		},
+		{
+			"url": "assets/shisanshui/music/out_chong3.mp3",
+			"type": "sound",
+			"name": "out_chong3_mp3"
+		},
+		{
+			"url": "assets/shisanshui/music/nobanker.mp3",
+			"type": "sound",
+			"name": "nobanker_mp3"
+		},
+		{
+			"url": "assets/shisanshui/music/times2.mp3",
+			"type": "sound",
+			"name": "times2_mp3"
+		},
+		{
+			"url": "assets/shisanshui/music/times3.mp3",
+			"type": "sound",
+			"name": "times3_mp3"
+		},
+		{
+			"url": "assets/shisanshui/music/robbanker.mp3",
+			"type": "sound",
+			"name": "robbanker_mp3"
+		},
+		{
+			"url": "assets/shisanshui/music/times4.mp3",
+			"type": "sound",
+			"name": "times4_mp3"
+		},
+		{
+			"url": "assets/shisanshui/music/times5.mp3",
+			"type": "sound",
+			"name": "times5_mp3"
+		},
+		{
+			"url": "assets/shisanshui/music/times10.mp3",
+			"type": "sound",
+			"name": "times10_mp3"
+		},
+		{
+			"url": "assets/shisanshui/music/times1.mp3",
+			"type": "sound",
+			"name": "times1_mp3"
+		},
+		{
+			"url": "assets/shisanshui/music/special1.mp3",
+			"type": "sound",
+			"name": "special1_mp3"
+		},
+		{
+			"url": "assets/shisanshui/music/start_compare.mp3",
+			"type": "sound",
+			"name": "start_compare_mp3"
+		},
+		{
+			"url": "assets/shisanshui/music/beatAllBomb.mp3",
+			"type": "sound",
+			"name": "beatAllBomb_mp3"
+		},
+		{
+			"url": "assets/shisanshui/music/daqiang2.mp3",
+			"type": "sound",
+			"name": "daqiang2_mp3"
+		},
+		{
+			"url": "assets/shisanshui/music/daqiang1.mp3",
+			"type": "sound",
+			"name": "daqiang1_mp3"
+		},
+		{
+			"url": "assets/shisanshui/music/music_10.mp3",
+			"type": "sound",
+			"name": "music_10_mp3"
+		},
+		{
+			"url": "assets/shisanshui/music/music_1.mp3",
+			"type": "sound",
+			"name": "music_1_mp3"
+		},
+		{
+			"url": "assets/public/rule/rule13.png",
+			"type": "image",
+			"name": "rule13_png"
+		},
+		{
+			"url": "assets/public/juhua.png",
+			"type": "image",
+			"name": "juhua_png"
+		},
+		{
+			"url": "assets/public/message/img/biaoqing/1.png",
+			"type": "image",
+			"name": "1_png"
+		},
+		{
+			"url": "assets/public/message/img/biaoqing/10.png",
+			"type": "image",
+			"name": "10_png"
+		},
+		{
+			"url": "assets/public/message/img/biaoqing/11.png",
+			"type": "image",
+			"name": "11_png"
+		},
+		{
+			"url": "assets/public/message/img/biaoqing/12.png",
+			"type": "image",
+			"name": "12_png"
+		},
+		{
+			"url": "assets/public/message/img/biaoqing/13.png",
+			"type": "image",
+			"name": "13_png"
+		},
+		{
+			"url": "assets/public/message/img/biaoqing/14.png",
+			"type": "image",
+			"name": "14_png"
+		},
+		{
+			"url": "assets/public/message/img/biaoqing/15.png",
+			"type": "image",
+			"name": "15_png"
+		},
+		{
+			"url": "assets/public/message/img/biaoqing/2.png",
+			"type": "image",
+			"name": "2_png"
+		},
+		{
+			"url": "assets/public/message/img/biaoqing/3.png",
+			"type": "image",
+			"name": "3_png"
+		},
+		{
+			"url": "assets/public/message/img/biaoqing/4.png",
+			"type": "image",
+			"name": "4_png"
+		},
+		{
+			"url": "assets/public/message/img/biaoqing/5.png",
+			"type": "image",
+			"name": "5_png"
+		},
+		{
+			"url": "assets/public/message/img/biaoqing/6.png",
+			"type": "image",
+			"name": "6_png"
+		},
+		{
+			"url": "assets/public/message/img/biaoqing/7.png",
+			"type": "image",
+			"name": "7_png"
+		},
+		{
+			"url": "assets/public/message/img/biaoqing/8.png",
+			"type": "image",
+			"name": "8_png"
+		},
+		{
+			"url": "assets/public/message/img/biaoqing/9.png",
+			"type": "image",
+			"name": "9_png"
+		},
+		{
+			"url": "assets/public/loading/hall/loading_BG.png",
+			"type": "image",
+			"name": "loading_BG_png"
+		},
+		{
+			"url": "assets/public/animate/emo.png",
+			"type": "image",
+			"name": "emo_png"
+		},
+		{
+			"url": "assets/public/animate/emo.json",
+			"type": "json",
+			"name": "emo_json"
+		},
+		{
+			"url": "assets/avatar/666662.png",
+			"type": "image",
+			"name": "666662_png"
+		},
+		{
+			"url": "assets/game/13ShuiTable.png",
+			"type": "image",
+			"name": "13ShuiTable_png"
+		},
+		{
+			"url": "assets/game/totalResult/totalBack.png",
+			"type": "image",
+			"name": "totalBack_png"
+		},
+		{
+			"url": "assets/game/totalResult/totalShare.png",
+			"type": "image",
+			"name": "totalShare_png"
+		},
+		{
+			"url": "assets/game/totalResult/totalBg.png",
+			"type": "image",
+			"name": "totalBg_png"
+		},
+		{
+			"url": "assets/game/totalResult/totalLose.png",
+			"type": "image",
+			"name": "totalLose_png"
+		},
+		{
+			"url": "assets/game/lipaiDi.png",
+			"type": "image",
+			"name": "lipaiDi_png"
+		},
+		{
+			"url": "assets/public/loading/hall/guidao.png",
+			"type": "image",
+			"name": "guidao_png"
+		},
+		{
+			"url": "assets/public/loading/hall/guidao2.png",
+			"type": "image",
+			"name": "guidao2_png"
+		},
+		{
+			"url": "assets/game/jiqiang_tex.png",
+			"type": "image",
+			"name": "jiqiang_tex_png"
+		},
+		{
+			"url": "assets/game/jiqiang_ske.json",
+			"type": "json",
+			"name": "jiqiang_ske_json"
+		},
+		{
+			"url": "assets/game/jiqiang_tex.json",
+			"type": "json",
+			"name": "jiqiang_tex_json"
+		},
+		{
+			"url": "assets/game/totalResult/resultcoin_lose.fnt",
+			"type": "font",
+			"name": "resultcoin_lose_fnt"
+		},
+		{
+			"url": "assets/game/totalResult/resultcoin_lose.png",
+			"type": "image",
+			"name": "resultcoin_lose_png"
+		},
+		{
+			"url": "assets/game/totalResult/resultcoin_win.fnt",
+			"type": "font",
+			"name": "resultcoin_win_fnt"
+		},
+		{
+			"url": "assets/game/totalResult/resultcoin_win.png",
+			"type": "image",
+			"name": "resultcoin_win_png"
+		},
+		{
+			"url": "assets/game/single.png",
+			"type": "image",
+			"name": "single_png"
+		},
+		{
+			"url": "assets/game/13GameAni_ske.json",
+			"type": "json",
+			"name": "13GameAni_ske_json"
+		},
+		{
+			"url": "assets/game/13GameAni_tex.json",
+			"type": "json",
+			"name": "13GameAni_tex_json"
+		},
+		{
+			"url": "assets/game/13GameAni_tex.png",
+			"type": "image",
+			"name": "13GameAni_tex_png"
+		},
+		{
+			"url": "assets/game/offline.png",
+			"type": "image",
+			"name": "offline2_png"
+		},
+		{
+			"url": "assets/shisanshui/jinbi.png",
+			"type": "image",
+			"name": "jinbi_png"
+		},
+		{
+			"url": "assets/game/headGuang.png",
+			"type": "image",
+			"name": "headGuang_png"
+		},
+		{
+			"url": "assets/game/mAndTguang.png",
+			"type": "image",
+			"name": "mAndTguang_png"
+		},
+		{
+			"url": "assets/game/ingameTip.png",
+			"type": "image",
+			"name": "ingameTip_png"
+		},
+		{
+			"url": "assets/shisanshui/music/hallBgMisc.mp3",
+			"type": "sound",
+			"name": "hallBgMisc_mp3"
+		},
+		{
+			"url": "assets/shisanshui/music/pk_lose_star.mp3",
+			"type": "sound",
+			"name": "pk_lose_star_mp3"
+		},
+		{
+			"url": "assets/shisanshui/music/jiqiang.mp3",
+			"type": "sound",
+			"name": "jiqiang_mp3"
+		},
+		{
+			"url": "assets/game/clubEmpty.png",
+			"type": "image",
+			"name": "clubEmpty_png"
+		},
+		{
+			"url": "assets/game/donghicon11.png",
+			"type": "image",
+			"name": "donghicon11_png"
+		},
+		{
+			"url": "assets/game/donghicon14.png",
+			"type": "image",
+			"name": "donghicon14_png"
+		},
+		{
+			"url": "assets/game/donghicon8.png",
+			"type": "image",
+			"name": "donghicon8_png"
+		},
+		{
+			"url": "assets/game/donghicon9.png",
+			"type": "image",
+			"name": "donghicon9_png"
+		},
+		{
+			"url": "assets/game/donghicon10.png",
+			"type": "image",
+			"name": "donghicon10_png"
+		},
+		{
+			"url": "assets/animate/zhuantou/zhuantou_ske.json",
+			"type": "json",
+			"name": "zhuantou_ske_json"
+		},
+		{
+			"url": "assets/animate/zhuantou/zhuantou_tex.json",
+			"type": "json",
+			"name": "zhuantou_tex_json"
+		},
+		{
+			"url": "assets/animate/zhuantou/zhuantou_tex.png",
+			"type": "image",
+			"name": "zhuantou_tex_png"
+		},
+		{
+			"url": "assets/animate/hua/hua_ske.json",
+			"type": "json",
+			"name": "hua_ske_json"
+		},
+		{
+			"url": "assets/animate/hua/hua_tex.json",
+			"type": "json",
+			"name": "hua_tex_json"
+		},
+		{
+			"url": "assets/animate/hua/hua_tex.png",
+			"type": "image",
+			"name": "hua_tex_png"
+		},
+		{
+			"url": "assets/animate/jiezhi/jiezhi_ske.json",
+			"type": "json",
+			"name": "jiezhi_ske_json"
+		},
+		{
+			"url": "assets/animate/jiezhi/jiezhi_tex.json",
+			"type": "json",
+			"name": "jiezhi_tex_json"
+		},
+		{
+			"url": "assets/animate/jiezhi/jiezhi_tex.png",
+			"type": "image",
+			"name": "jiezhi_tex_png"
+		},
+		{
+			"url": "assets/animate/poshui/poshui_ske.json",
+			"type": "json",
+			"name": "poshui_ske_json"
+		},
+		{
+			"url": "assets/animate/poshui/poshui_tex.json",
+			"type": "json",
+			"name": "poshui_tex_json"
+		},
+		{
+			"url": "assets/animate/poshui/poshui_tex.png",
+			"type": "image",
+			"name": "poshui_tex_png"
+		},
+		{
+			"url": "assets/animate/tuoxie/tuoxie_ske.json",
+			"type": "json",
+			"name": "tuoxie_ske_json"
+		},
+		{
+			"url": "assets/animate/tuoxie/tuoxie_tex.json",
+			"type": "json",
+			"name": "tuoxie_tex_json"
+		},
+		{
+			"url": "assets/animate/tuoxie/tuoxie_tex.png",
+			"type": "image",
+			"name": "tuoxie_tex_png"
+		},
+		{
+			"url": "assets/game/myInfo.png",
+			"type": "image",
+			"name": "myInfo_png"
+		},
+		{
+			"url": "assets/animate/sound/tuoxie.mp3",
+			"type": "sound",
+			"name": "tuoxie_mp3"
+		},
+		{
+			"url": "assets/animate/sound/hua.mp3",
+			"type": "sound",
+			"name": "hua_mp3"
+		},
+		{
+			"url": "assets/animate/sound/poshui.mp3",
+			"type": "sound",
+			"name": "poshui_mp3"
+		},
+		{
+			"url": "assets/animate/sound/zhuantou.mp3",
+			"type": "sound",
+			"name": "zhuantou_mp3"
+		},
+		{
+			"url": "assets/animate/sound/jiezhi.mp3",
+			"type": "sound",
+			"name": "jiezhi_mp3"
+		},
+		{
+			"url": "assets/public/message/chat/male/male1.mp3",
+			"type": "sound",
+			"name": "male1_mp3"
+		},
+		{
+			"url": "assets/public/message/chat/male/male2.mp3",
+			"type": "sound",
+			"name": "male2_mp3"
+		},
+		{
+			"url": "assets/public/message/chat/male/male3.mp3",
+			"type": "sound",
+			"name": "male3_mp3"
+		},
+		{
+			"url": "assets/public/message/chat/male/male4.mp3",
+			"type": "sound",
+			"name": "male4_mp3"
+		},
+		{
+			"url": "assets/public/message/chat/male/male5.mp3",
+			"type": "sound",
+			"name": "male5_mp3"
+		},
+		{
+			"url": "assets/public/message/chat/male/male6.mp3",
+			"type": "sound",
+			"name": "male6_mp3"
+		},
+		{
+			"url": "assets/public/message/chat/male/male7.mp3",
+			"type": "sound",
+			"name": "male7_mp3"
+		},
+		{
+			"url": "assets/public/message/chat/male/male8.mp3",
+			"type": "sound",
+			"name": "male8_mp3"
+		},
+		{
+			"url": "assets/public/message/chat/male/male9.mp3",
+			"type": "sound",
+			"name": "male9_mp3"
+		},
+		{
+			"url": "assets/public/message/chat/male/male10.mp3",
+			"type": "sound",
+			"name": "male10_mp3"
+		},
+		{
+			"url": "assets/public/message/chat/fomale/fomale1.mp3",
+			"type": "sound",
+			"name": "fomale1_mp3"
+		},
+		{
+			"url": "assets/public/message/chat/fomale/fomale2.mp3",
+			"type": "sound",
+			"name": "fomale2_mp3"
+		},
+		{
+			"url": "assets/public/message/chat/fomale/fomale3.mp3",
+			"type": "sound",
+			"name": "fomale3_mp3"
+		},
+		{
+			"url": "assets/public/message/chat/fomale/fomale4.mp3",
+			"type": "sound",
+			"name": "fomale4_mp3"
+		},
+		{
+			"url": "assets/public/message/chat/fomale/fomale5.mp3",
+			"type": "sound",
+			"name": "fomale5_mp3"
+		},
+		{
+			"url": "assets/public/message/chat/fomale/fomale6.mp3",
+			"type": "sound",
+			"name": "fomale6_mp3"
+		},
+		{
+			"url": "assets/public/message/chat/fomale/fomale7.mp3",
+			"type": "sound",
+			"name": "fomale7_mp3"
+		},
+		{
+			"url": "assets/public/message/chat/fomale/fomale8.mp3",
+			"type": "sound",
+			"name": "fomale8_mp3"
+		},
+		{
+			"url": "assets/public/message/chat/fomale/fomale9.mp3",
+			"type": "sound",
+			"name": "fomale9_mp3"
+		},
+		{
+			"url": "assets/public/message/chat/fomale/fomale10.mp3",
+			"type": "sound",
+			"name": "fomale10_mp3"
+		},
+		{
+			"url": "assets/game/totalResult/bigWin.png",
+			"type": "image",
+			"name": "bigWin_png"
+		},
+		{
+			"url": "assets/game/dalaba.png",
+			"type": "image",
+			"name": "dalaba_png"
+		},
+		{
+			"url": "assets/huanleHall/hall_faxian_bg.png",
+			"type": "image",
+			"name": "hall_faxian_bg_png"
+		},
+		{
+			"url": "assets/huanleHall/hall_lunbo_example.png",
+			"type": "image",
+			"name": "hall_lunbo_example_png"
+		},
+		{
+			"url": "assets/huanleHall/hall_shop_bg.png",
+			"type": "image",
+			"name": "hall_shop_bg_png"
+		},
+		{
+			"url": "assets/huanleHall/hall_qiandao_bg.png",
+			"type": "image",
+			"name": "hall_qiandao_bg_png"
+		},
+		{
+			"url": "assets/huanleHall/hall_zhanji_bg.png",
+			"type": "image",
+			"name": "hall_zhanji_bg_png"
+		},
+		{
+			"url": "assets/createAndJoin/shisanshui/ssh_create_bg.png",
+			"type": "image",
+			"name": "ssh_create_bg_png"
+		},
+		{
+			"url": "assets/createAndJoin/shisanshui/sss_join_bg.png",
+			"type": "image",
+			"name": "sss_join_bg_png"
+		},
+		{
+			"url": "assets/zhanji/shisanshui/hall_zhanji_sbg_white.png",
+			"type": "image",
+			"name": "hall_zhanji_sbg_white_png"
+		},
+		{
+			"url": "assets/zhanji/shisanshui/hall_zhanji_sbg_red.png",
+			"type": "image",
+			"name": "hall_zhanji_sbg_red_png"
+		},
+		{
+			"url": "assets/createAndJoin/shisanshui/mahuaSSHcreate.json",
+			"type": "sheet",
+			"name": "mahuaSSHcreate_json",
+			"subkeys": "hall_join_btn,sss_create_create_btn,sss_create_danxuan_empty,sss_create_danxuan_selecter,sss_create_fuxuan_empty,sss_create_fuxuan_selected,sss_join_0_btn,sss_join_1_btn,sss_join_2_btn,sss_join_3_btn,sss_join_4_btn,sss_join_5_btn,sss_join_6_btn,sss_join_7_btn,sss_join_8_btn,sss_join_9_btn,sss_join_delete_btn,sss_join_reset_btn"
+		},
+		{
+			"url": "assets/game/totalResult/total_mid_bg.png",
+			"type": "image",
+			"name": "total_mid_bg_png"
+		},
+		{
+			"url": "assets/game/totalResult/total_title_bg.png",
+			"type": "image",
+			"name": "total_title_bg_png"
+		},
+		{
+			"url": "assets/game/totalResult/headBg.png",
+			"type": "image",
+			"name": "headBg_png"
+		},
+		{
+			"url": "assets/game/totalResult/total_scorel.png",
+			"type": "image",
+			"name": "total_scorel_png"
+		},
+		{
+			"url": "assets/game/jiesan.json",
+			"type": "sheet",
+			"name": "jiesan_json",
+			"subkeys": "disbandClock,jiesanAgree,jiesanBg,jiesanRefuse,sss_Image_Kuang,sss_gz_title,sss_jiesan_agree,sss_jiesan_defaulthead,sss_jiesan_mid_bg,sss_jiesan_title,sss_jiesan_waiting,voiceBG,voice_1,voice_2,voice_3,voice_4"
+		},
+		{
+			"url": "assets/public/inviteJIANtou.png",
+			"type": "image",
+			"name": "inviteJIANtou_png"
+		},
+		{
+			"url": "assets/game/inGameImage.json",
+			"type": "sheet",
+			"name": "inGameImage_json",
+			"subkeys": "InGameReadyBtn,aniKuang,autoPai,biaoqingmsg,biaoqingmsg2,chupaiInGame,default,disband,duizi,duiziAn,examp2,fiveSame,fiveSameAn,formal,hasReady,headBoxDi,huliAn,hulu,inGameDaojishiD,inGameDaojishiH,inGameExit,inGameSet,inGameSit,ingameInvite,leftmsgqipao,liangdui,liangduiAn,lipaitoudong,lipaiweidong,lipaizhongodng,male,menu,messageBg,otherInfoDi,otherInfoKuang,paibei,pangguan,peipai,rightmsgqipao,roomOwnerLogo,santiao,santiaoAn,shunzi,shunziAn,startGame,startGameAn,textmsg,textmsg2,tonghua,tonghuaAn,tonghuashun,tonghuashunAn,wanfa,yuying,yyxiaoxi,zhadan,zhadanAn"
+		},
+		{
+			"url": "assets/public/common_ic_guanbi.png",
+			"type": "image",
+			"name": "common_ic_guanbi_png"
+		},
+		{
+			"url": "assets/public/fuwuTExt.png",
+			"type": "image",
+			"name": "fuwuTExt_png"
+		},
+		{
+			"url": "assets/game/shui.png",
+			"type": "image",
+			"name": "shui_png"
+		},
+		{
+			"url": "assets/public/loading/hall/hall_loading_di.png",
+			"type": "image",
+			"name": "hall_loading_di_png"
+		},
+		{
+			"url": "assets/public/loading/shishanshui/sss_loading_guidao.png",
+			"type": "image",
+			"name": "sss_loading_guidao_png"
+		},
+		{
+			"url": "assets/public/loading/shishanshui/sss_loading_bg.png",
+			"type": "image",
+			"name": "sss_loading_bg_png"
+		},
+		{
+			"url": "assets/public/loading/shishanshui/sss_loading_guidao2.png",
+			"type": "image",
+			"name": "sss_loading_guidao2_png"
+		},
+		{
+			"url": "assets/public/sss_set.json",
+			"type": "sheet",
+			"name": "sss_set_json",
+			"subkeys": "setmusic,setsound,soundbg,soundguidao,soundkuai,soundoff,soundon,soundthumb"
+		},
+		{
+			"url": "assets/public/soundguidao.png",
+			"type": "image",
+			"name": "soundguidao_png"
+		},
+		{
+			"url": "assets/public/soundkuai.png",
+			"type": "image",
+			"name": "soundkuai_png"
+		},
+		{
+			"url": "assets/shisanshui/type/special.png",
+			"type": "image",
+			"name": "special_png"
+		},
+		{
+			"url": "assets/shisanshui/type/type2.png",
+			"type": "image",
+			"name": "type2_png"
+		},
+		{
+			"url": "assets/shisanshui/type/type3.png",
+			"type": "image",
+			"name": "type3_png"
+		},
+		{
+			"url": "assets/shisanshui/type/type4.png",
+			"type": "image",
+			"name": "type4_png"
+		},
+		{
+			"url": "assets/shisanshui/type/type5.png",
+			"type": "image",
+			"name": "type5_png"
+		},
+		{
+			"url": "assets/shisanshui/type/type6.png",
+			"type": "image",
+			"name": "type6_png"
+		},
+		{
+			"url": "assets/shisanshui/type/type7.png",
+			"type": "image",
+			"name": "type7_png"
+		},
+		{
+			"url": "assets/shisanshui/type/type8.png",
+			"type": "image",
+			"name": "type8_png"
+		},
+		{
+			"url": "assets/shisanshui/type/type9.png",
+			"type": "image",
+			"name": "type9_png"
+		},
+		{
+			"url": "assets/shisanshui/type/type10.png",
+			"type": "image",
+			"name": "type10_png"
+		},
+		{
+			"url": "assets/shisanshui/type/type21.png",
+			"type": "image",
+			"name": "type21_png"
+		},
+		{
+			"url": "assets/shisanshui/type/type22.png",
+			"type": "image",
+			"name": "type22_png"
+		},
+		{
+			"url": "assets/shisanshui/type/type23.png",
+			"type": "image",
+			"name": "type23_png"
+		},
+		{
+			"url": "assets/shisanshui/type/type24.png",
+			"type": "image",
+			"name": "type24_png"
+		},
+		{
+			"url": "assets/shisanshui/type/type25.png",
+			"type": "image",
+			"name": "type25_png"
+		},
+		{
+			"url": "assets/shisanshui/type/type26.png",
+			"type": "image",
+			"name": "type26_png"
+		},
+		{
+			"url": "assets/shisanshui/type/type27.png",
+			"type": "image",
+			"name": "type27_png"
+		},
+		{
+			"url": "assets/shisanshui/type/type28.png",
+			"type": "image",
+			"name": "type28_png"
+		},
+		{
+			"url": "assets/shisanshui/type/type29.png",
+			"type": "image",
+			"name": "type29_png"
+		},
+		{
+			"url": "assets/shisanshui/type/type30.png",
+			"type": "image",
+			"name": "type30_png"
+		},
+		{
+			"url": "assets/shisanshui/type/type31.png",
+			"type": "image",
+			"name": "type31_png"
+		},
+		{
+			"url": "assets/shisanshui/type/type32.png",
+			"type": "image",
+			"name": "type32_png"
+		},
+		{
+			"url": "assets/shisanshui/type/type33.png",
+			"type": "image",
+			"name": "type33_png"
+		},
+		{
+			"url": "assets/shisanshui/type/type34.png",
+			"type": "image",
+			"name": "type34_png"
+		},
+		{
+			"url": "assets/shisanshui/type/type35.png",
+			"type": "image",
+			"name": "type35_png"
+		},
+		{
+			"url": "assets/shisanshui/type/type1.png",
+			"type": "image",
+			"name": "type1_png"
+		},
+		{
+			"url": "assets/majiang/blue.fnt",
+			"type": "font",
+			"name": "blue_fnt"
+		},
+		{
+			"url": "assets/majiang/blue.png",
+			"type": "image",
+			"name": "blue_png"
+		},
+		{
+			"url": "assets/majiang/deskDJS.fnt",
+			"type": "font",
+			"name": "deskDJS_fnt"
+		},
+		{
+			"url": "assets/majiang/deskDJS.png",
+			"type": "image",
+			"name": "deskDJS_png"
+		},
+		{
+			"url": "assets/majiang/hzmj_bg.png",
+			"type": "image",
+			"name": "hzmj_bg_png"
+		},
+		{
+			"url": "assets/majiang/leftYaoqing.png",
+			"type": "image",
+			"name": "leftYaoqing_png"
+		},
+		{
+			"url": "assets/majiang/red.fnt",
+			"type": "font",
+			"name": "red_fnt"
+		},
+		{
+			"url": "assets/majiang/red.png",
+			"type": "image",
+			"name": "red_png"
+		},
+		{
+			"url": "assets/majiang/hzmj_player.json",
+			"type": "sheet",
+			"name": "hzmj_player_json",
+			"subkeys": "hzmj_head_banker,hzmj_head_defult,hzmj_huzi,hzmj_kk,hzmj_roomOwener"
+		},
+		{
+			"url": "assets/majiang/MJCard.json",
+			"type": "sheet",
+			"name": "MJCard_json",
+			"subkeys": "an_leftRight,left_card,leftfeng_1,leftfeng_2,leftfeng_3,leftfeng_4,leftfeng_5,leftfeng_6,leftfeng_7,lefttiao_1,lefttiao_2,lefttiao_3,lefttiao_4,lefttiao_5,lefttiao_6,lefttiao_7,lefttiao_8,lefttiao_9,lefttong_1,lefttong_2,lefttong_3,lefttong_4,lefttong_5,lefttong_6,lefttong_7,lefttong_8,lefttong_9,leftw_1,leftw_2,leftw_3,leftw_4,leftw_5,leftw_6,leftw_7,leftw_8,leftw_9,otherMark,ownMark,ownfeng_1,ownfeng_2,ownfeng_3,ownfeng_4,ownfeng_5,ownfeng_6,ownfeng_7,owntiao_1,owntiao_2,owntiao_3,owntiao_4,owntiao_5,owntiao_6,owntiao_7,owntiao_8,owntiao_9,owntong_1,owntong_2,owntong_3,owntong_4,owntong_5,owntong_6,owntong_7,owntong_8,owntong_9,ownw_1,ownw_2,ownw_3,ownw_4,ownw_5,ownw_6,ownw_7,ownw_8,ownw_9,right_card,rightfeng_1,rightfeng_2,rightfeng_3,rightfeng_4,rightfeng_5,rightfeng_6,rightfeng_7,righttiao_1,righttiao_2,righttiao_3,righttiao_4,righttiao_5,righttiao_6,righttiao_7,righttiao_8,righttiao_9,righttong_1,righttong_2,righttong_3,righttong_4,righttong_5,righttong_6,righttong_7,righttong_8,righttong_9,rightw_1,rightw_2,rightw_3,rightw_4,rightw_5,rightw_6,rightw_7,rightw_8,rightw_9,top_card,zhengfeng_1,zhengfeng_2,zhengfeng_3,zhengfeng_4,zhengfeng_5,zhengfeng_6,zhengfeng_7,zhengtiao_1,zhengtiao_2,zhengtiao_3,zhengtiao_4,zhengtiao_5,zhengtiao_6,zhengtiao_7,zhengtiao_8,zhengtiao_9,zhengtong_1,zhengtong_2,zhengtong_3,zhengtong_4,zhengtong_5,zhengtong_6,zhengtong_7,zhengtong_8,zhengtong_9,zhengw_1,zhengw_2,zhengw_3,zhengw_4,zhengw_5,zhengw_6,zhengw_7,zhengw_8,zhengw_9,zhengwenhao"
+		},
+		{
+			"url": "assets/majiang/hzmj_totalResult.json",
+			"type": "sheet",
+			"name": "hzmj_totalResult_json",
+			"subkeys": "hzmj_bigWin,hzmj_item0,hzmj_result_bg,hzmj_tBack,hzmj_tRoomowner,hzmj_tShare,hzmj_trTit"
+		},
+		{
+			"url": "assets/majiang/hzmj_singleResult.json",
+			"type": "sheet",
+			"name": "hzmj_singleResult_json",
+			"subkeys": "hamj_gangfen,hzmj_dianpao,hzmj_duijia,hzmj_hufen,hzmj_liuju,hzmj_sContinu,hzmj_sShare,hzmj_shangjia,hzmj_srTit,hzmj_xiajia,hzmj_zhuangjia,hzmj_zimo,hzmj_zongfen"
+		},
+		{
+			"url": "assets/majiang/action_card_position_bottom.png",
+			"type": "image",
+			"name": "action_card_position_bottom_png"
+		},
+		{
+			"url": "assets/majiang/action_card_position_left.png",
+			"type": "image",
+			"name": "action_card_position_left_png"
+		},
+		{
+			"url": "assets/majiang/action_card_position_right.png",
+			"type": "image",
+			"name": "action_card_position_right_png"
+		},
+		{
+			"url": "assets/majiang/action_card_position_top.png",
+			"type": "image",
+			"name": "action_card_position_top_png"
+		},
+		{
+			"url": "assets/public/loading/sifupai/sfp_loading_bg.png",
+			"type": "image",
+			"name": "sfp_loading_bg_png"
+		},
+		{
+			"url": "assets/sifupai/sfp_BG.png",
+			"type": "image",
+			"name": "sfp_BG_png"
+		},
+		{
+			"url": "assets/sifupai/sfp_jiesuan_bg.png",
+			"type": "image",
+			"name": "sfp_jiesuan_bg_png"
+		},
+		{
+			"url": "assets/sifupai/sfp_jiesuan_item_bg.png",
+			"type": "image",
+			"name": "sfp_jiesuan_item_bg_png"
+		},
+		{
+			"url": "assets/sifupai/sfp_total_item_bg.png",
+			"type": "image",
+			"name": "sfp_total_item_bg_png"
+		},
+		{
+			"url": "assets/public/message/kxmh_message.json",
+			"type": "sheet",
+			"name": "kxmh_message_json",
+			"subkeys": "kxmh_biaoqingmsg,kxmh_biaoqingmsg2,kxmh_leftmsgqipao,kxmh_messageBg,kxmh_rightmsgqipao,kxmh_textmsg,kxmh_textmsg2"
+		},
+		{
+			"url": "assets/game/pai.json",
+			"type": "sheet",
+			"name": "pai_json",
+			"subkeys": "f10,f11,f12,f13,f14,f2,f3,f4,f5,f6,f7,f8,f9,ht10,ht11,ht12,ht13,ht14,ht2,ht3,ht4,ht5,ht6,ht7,ht8,ht9,m10,m11,m12,m13,m14,m2,m3,m4,m5,m6,m7,m8,m9,poke61,t10,t11,t12,t13,t14,t2,t3,t4,t5,t6,t7,t8,t9,w0,w1,w2"
+		},
+		{
+			"url": "assets/sifupai/bomb_tex.png",
+			"type": "image",
+			"name": "bomb_tex_png"
+		},
+		{
+			"url": "assets/sifupai/bomb_mc.json",
+			"type": "json",
+			"name": "bomb_mc_json"
+		},
+		{
+			"url": "assets/sifupai/music/sfp_bg_music.mp3",
+			"type": "sound",
+			"name": "sfp_bg_music_mp3"
+		},
+		{
+			"url": "assets/sifupai/music/audio/sfp_1wang2.mp3",
+			"type": "sound",
+			"name": "sfp_1wang2_mp3"
+		},
+		{
+			"url": "assets/sifupai/music/audio/sfp_2wang0.mp3",
+			"type": "sound",
+			"name": "sfp_2wang0_mp3"
+		},
+		{
+			"url": "assets/sifupai/music/audio/sfp_2wang1.mp3",
+			"type": "sound",
+			"name": "sfp_2wang1_mp3"
+		},
+		{
+			"url": "assets/sifupai/music/audio/sfp_2wang2.mp3",
+			"type": "sound",
+			"name": "sfp_2wang2_mp3"
+		},
+		{
+			"url": "assets/sifupai/music/audio/sfp_Special_Bomb.mp3",
+			"type": "sound",
+			"name": "sfp_Special_Bomb_mp3"
+		},
+		{
+			"url": "assets/sifupai/music/audio/sfp_lord_v_1card_10.mp3",
+			"type": "sound",
+			"name": "sfp_lord_v_1card_10_mp3"
+		},
+		{
+			"url": "assets/sifupai/music/audio/sfp_lord_v_1card_11.mp3",
+			"type": "sound",
+			"name": "sfp_lord_v_1card_11_mp3"
+		},
+		{
+			"url": "assets/sifupai/music/audio/sfp_lord_v_1card_12.mp3",
+			"type": "sound",
+			"name": "sfp_lord_v_1card_12_mp3"
+		},
+		{
+			"url": "assets/sifupai/music/audio/sfp_lord_v_1card_13.mp3",
+			"type": "sound",
+			"name": "sfp_lord_v_1card_13_mp3"
+		},
+		{
+			"url": "assets/sifupai/music/audio/sfp_lord_v_1card_2.mp3",
+			"type": "sound",
+			"name": "sfp_lord_v_1card_2_mp3"
+		},
+		{
+			"url": "assets/sifupai/music/audio/sfp_lord_v_1card_3.mp3",
+			"type": "sound",
+			"name": "sfp_lord_v_1card_3_mp3"
+		},
+		{
+			"url": "assets/sifupai/music/audio/sfp_lord_v_1card_4.mp3",
+			"type": "sound",
+			"name": "sfp_lord_v_1card_4_mp3"
+		},
+		{
+			"url": "assets/sifupai/music/audio/sfp_lord_v_1card_5.mp3",
+			"type": "sound",
+			"name": "sfp_lord_v_1card_5_mp3"
+		},
+		{
+			"url": "assets/sifupai/music/audio/sfp_lord_v_1card_6.mp3",
+			"type": "sound",
+			"name": "sfp_lord_v_1card_6_mp3"
+		},
+		{
+			"url": "assets/sifupai/music/audio/sfp_lord_v_1card_7.mp3",
+			"type": "sound",
+			"name": "sfp_lord_v_1card_7_mp3"
+		},
+		{
+			"url": "assets/sifupai/music/audio/sfp_lord_v_1card_8.mp3",
+			"type": "sound",
+			"name": "sfp_lord_v_1card_8_mp3"
+		},
+		{
+			"url": "assets/sifupai/music/audio/sfp_lord_v_1card_9.mp3",
+			"type": "sound",
+			"name": "sfp_lord_v_1card_9_mp3"
+		},
+		{
+			"url": "assets/sifupai/music/audio/sfp_lord_v_1card_big_joker.mp3",
+			"type": "sound",
+			"name": "sfp_lord_v_1card_big_joker_mp3"
+		},
+		{
+			"url": "assets/sifupai/music/audio/sfp_lord_v_1card_small_joker.mp3",
+			"type": "sound",
+			"name": "sfp_lord_v_1card_small_joker_mp3"
+		},
+		{
+			"url": "assets/sifupai/music/audio/sfp_lord_v_2card_10.mp3",
+			"type": "sound",
+			"name": "sfp_lord_v_2card_10_mp3"
+		},
+		{
+			"url": "assets/sifupai/music/audio/sfp_lord_v_2card_11.mp3",
+			"type": "sound",
+			"name": "sfp_lord_v_2card_11_mp3"
+		},
+		{
+			"url": "assets/sifupai/music/audio/sfp_lord_v_2card_12.mp3",
+			"type": "sound",
+			"name": "sfp_lord_v_2card_12_mp3"
+		},
+		{
+			"url": "assets/sifupai/music/audio/sfp_lord_v_2card_13.mp3",
+			"type": "sound",
+			"name": "sfp_lord_v_2card_13_mp3"
+		},
+		{
+			"url": "assets/sifupai/music/audio/sfp_lord_v_2card_14.mp3",
+			"type": "sound",
+			"name": "sfp_lord_v_2card_14_mp3"
+		},
+		{
+			"url": "assets/sifupai/music/audio/sfp_lord_v_2card_2.mp3",
+			"type": "sound",
+			"name": "sfp_lord_v_2card_2_mp3"
+		},
+		{
+			"url": "assets/sifupai/music/audio/sfp_lord_v_2card_3.mp3",
+			"type": "sound",
+			"name": "sfp_lord_v_2card_3_mp3"
+		},
+		{
+			"url": "assets/sifupai/music/audio/sfp_lord_v_2card_4.mp3",
+			"type": "sound",
+			"name": "sfp_lord_v_2card_4_mp3"
+		},
+		{
+			"url": "assets/sifupai/music/audio/sfp_lord_v_2card_5.mp3",
+			"type": "sound",
+			"name": "sfp_lord_v_2card_5_mp3"
+		},
+		{
+			"url": "assets/sifupai/music/audio/sfp_lord_v_2card_6.mp3",
+			"type": "sound",
+			"name": "sfp_lord_v_2card_6_mp3"
+		},
+		{
+			"url": "assets/sifupai/music/audio/sfp_lord_v_2card_7.mp3",
+			"type": "sound",
+			"name": "sfp_lord_v_2card_7_mp3"
+		},
+		{
+			"url": "assets/sifupai/music/audio/sfp_lord_v_2card_8.mp3",
+			"type": "sound",
+			"name": "sfp_lord_v_2card_8_mp3"
+		},
+		{
+			"url": "assets/sifupai/music/audio/sfp_lord_v_2card_9.mp3",
+			"type": "sound",
+			"name": "sfp_lord_v_2card_9_mp3"
+		},
+		{
+			"url": "assets/sifupai/music/audio/sfp_lord_v_3card_10.mp3",
+			"type": "sound",
+			"name": "sfp_lord_v_3card_10_mp3"
+		},
+		{
+			"url": "assets/sifupai/music/audio/sfp_lord_v_3card_11.mp3",
+			"type": "sound",
+			"name": "sfp_lord_v_3card_11_mp3"
+		},
+		{
+			"url": "assets/sifupai/music/audio/sfp_lord_v_3card_12.mp3",
+			"type": "sound",
+			"name": "sfp_lord_v_3card_12_mp3"
+		},
+		{
+			"url": "assets/sifupai/music/audio/sfp_lord_v_3card_13.mp3",
+			"type": "sound",
+			"name": "sfp_lord_v_3card_13_mp3"
+		},
+		{
+			"url": "assets/sifupai/music/audio/sfp_lord_v_3card_14.mp3",
+			"type": "sound",
+			"name": "sfp_lord_v_3card_14_mp3"
+		},
+		{
+			"url": "assets/sifupai/music/audio/sfp_lord_v_3card_2.mp3",
+			"type": "sound",
+			"name": "sfp_lord_v_3card_2_mp3"
+		},
+		{
+			"url": "assets/sifupai/music/audio/sfp_lord_v_3card_3.mp3",
+			"type": "sound",
+			"name": "sfp_lord_v_3card_3_mp3"
+		},
+		{
+			"url": "assets/sifupai/music/audio/sfp_lord_v_3card_4.mp3",
+			"type": "sound",
+			"name": "sfp_lord_v_3card_4_mp3"
+		},
+		{
+			"url": "assets/sifupai/music/audio/sfp_lord_v_3card_5.mp3",
+			"type": "sound",
+			"name": "sfp_lord_v_3card_5_mp3"
+		},
+		{
+			"url": "assets/sifupai/music/audio/sfp_lord_v_3card_6.mp3",
+			"type": "sound",
+			"name": "sfp_lord_v_3card_6_mp3"
+		},
+		{
+			"url": "assets/sifupai/music/audio/sfp_lord_v_3card_7.mp3",
+			"type": "sound",
+			"name": "sfp_lord_v_3card_7_mp3"
+		},
+		{
+			"url": "assets/sifupai/music/audio/sfp_lord_v_3card_8.mp3",
+			"type": "sound",
+			"name": "sfp_lord_v_3card_8_mp3"
+		},
+		{
+			"url": "assets/sifupai/music/audio/sfp_lord_v_3card_9.mp3",
+			"type": "sound",
+			"name": "sfp_lord_v_3card_9_mp3"
+		},
+		{
+			"url": "assets/sifupai/music/audio/sfp_lord_v_bomb_2.mp3",
+			"type": "sound",
+			"name": "sfp_lord_v_bomb_2_mp3"
+		},
+		{
+			"url": "assets/sifupai/music/audio/sfp_lord_v_bomb_3.mp3",
+			"type": "sound",
+			"name": "sfp_lord_v_bomb_3_mp3"
+		},
+		{
+			"url": "assets/sifupai/music/audio/sfp_lord_v_pass_4.mp3",
+			"type": "sound",
+			"name": "sfp_lord_v_pass_4_mp3"
+		},
+		{
+			"url": "assets/sifupai/music/audio/sfp_lord_v_runaway_1.mp3",
+			"type": "sound",
+			"name": "sfp_lord_v_runaway_1_mp3"
+		},
+		{
+			"url": "assets/sifupai/music/audio/sfp_lord_v_runaway_2.mp3",
+			"type": "sound",
+			"name": "sfp_lord_v_runaway_2_mp3"
+		},
+		{
+			"url": "assets/sifupai/music/audio/sfp_lord_v_1card_14.mp3",
+			"type": "sound",
+			"name": "sfp_lord_v_1card_14_mp3"
+		},
+		{
+			"url": "assets/createAndJoin/create_bg.png",
+			"type": "image",
+			"name": "create_bg_png"
+		},
+		{
+			"url": "assets/createAndJoin/create_jushu.png",
+			"type": "image",
+			"name": "create_jushu_png"
+		},
+		{
+			"url": "assets/createAndJoin/create_renshu.png",
+			"type": "image",
+			"name": "create_renshu_png"
+		},
+		{
+			"url": "assets/createAndJoin/sifupai/sfp_create_dujiang.png",
+			"type": "image",
+			"name": "sfp_create_dujiang_png"
+		},
+		{
+			"url": "assets/createAndJoin/sifupai/sfp_create_xipai.png",
+			"type": "image",
+			"name": "sfp_create_xipai_png"
+		},
+		{
+			"url": "assets/createAndJoin/sifupai/sfp_create_zhengdian.png",
+			"type": "image",
+			"name": "sfp_create_zhengdian_png"
+		},
+		{
+			"url": "assets/sifupai/sfp_pai.json",
+			"type": "sheet",
+			"name": "sfp_pai_json",
+			"subkeys": "sfp_f10,sfp_f11,sfp_f12,sfp_f13,sfp_f14,sfp_f2,sfp_f3,sfp_f4,sfp_f5,sfp_f6,sfp_f7,sfp_f8,sfp_f9,sfp_ht10,sfp_ht11,sfp_ht12,sfp_ht13,sfp_ht14,sfp_ht2,sfp_ht3,sfp_ht4,sfp_ht5,sfp_ht6,sfp_ht7,sfp_ht8,sfp_ht9,sfp_m10,sfp_m11,sfp_m12,sfp_m13,sfp_m14,sfp_m2,sfp_m3,sfp_m4,sfp_m5,sfp_m6,sfp_m7,sfp_m8,sfp_m9,sfp_poke61,sfp_t10,sfp_t11,sfp_t12,sfp_t13,sfp_t14,sfp_t2,sfp_t3,sfp_t4,sfp_t5,sfp_t6,sfp_t7,sfp_t8,sfp_t9,sfp_w0,sfp_w1,sfp_w2"
+		},
+		{
+			"url": "assets/sifupai/music/audio/sfp_chupai.mp3",
+			"type": "sound",
+			"name": "sfp_chupai_mp3"
+		},
+		{
+			"url": "assets/sifupai/music/audio/sfp_click_card.mp3",
+			"type": "sound",
+			"name": "sfp_click_card_mp3"
+		},
+		{
+			"url": "assets/sifupai/music/audio/sfp_fail.mp3",
+			"type": "sound",
+			"name": "sfp_fail_mp3"
+		},
+		{
+			"url": "assets/sifupai/music/audio/sfp_notice.mp3",
+			"type": "sound",
+			"name": "sfp_notice_mp3"
+		},
+		{
+			"url": "assets/sifupai/music/audio/sfp_pass.mp3",
+			"type": "sound",
+			"name": "sfp_pass_mp3"
+		},
+		{
+			"url": "assets/sifupai/music/audio/sfp_send_card.mp3",
+			"type": "sound",
+			"name": "sfp_send_card_mp3"
+		},
+		{
+			"url": "assets/sifupai/music/audio/sfp_win.mp3",
+			"type": "sound",
+			"name": "sfp_win_mp3"
+		},
+		{
+			"url": "assets/game/location/sss_local_shi.png",
+			"type": "image",
+			"name": "sss_local_shi_png"
+		},
+		{
+			"url": "assets/game/location/sss_location_xu.png",
+			"type": "image",
+			"name": "sss_location_xu_png"
+		},
+		{
+			"url": "assets/game/location/sss_myinfo_bg.png",
+			"type": "image",
+			"name": "sss_myinfo_bg_png"
+		},
+		{
+			"url": "assets/game/location/sss_special_bg.png",
+			"type": "image",
+			"name": "sss_special_bg_png"
+		},
+		{
+			"url": "assets/game/location/sss_special_confirm.png",
+			"type": "image",
+			"name": "sss_special_confirm_png"
+		},
+		{
+			"url": "assets/zhanji/zhanji_bg8.png",
+			"type": "image",
+			"name": "zhanji_bg8_png"
+		},
+		{
+			"url": "assets/zhanji/zhanji_bg9.png",
+			"type": "image",
+			"name": "zhanji_bg9_png"
+		},
+		{
+			"url": "assets/zhanji/zhanji_bg7.png",
+			"type": "image",
+			"name": "zhanji_bg7_png"
+		},
+		{
+			"url": "assets/zhanji/zhanji_bg6.png",
+			"type": "image",
+			"name": "zhanji_bg6_png"
+		},
+		{
+			"url": "assets/zhanji/zhanji_bg10.png",
+			"type": "image",
+			"name": "zhanji_bg10_png"
+		},
+		{
+			"url": "assets/zhanji/zhanji_game_back.png",
+			"type": "image",
+			"name": "zhanji_game_back_png"
+		},
+		{
+			"url": "assets/public/otherInfoKuang.png",
+			"type": "image",
+			"name": "otherInfoKuang_png"
+		},
+		{
+			"url": "assets/public/rule/rule_sfp.png",
+			"type": "image",
+			"name": "rule_sfp_png"
+		},
+		{
+			"url": "assets/sifupai/sfp_result_di.png",
+			"type": "image",
+			"name": "sfp_result_di_png"
+		},
+		{
+			"url": "assets/createAndJoin/sifupai/sfp_create_maque.png",
+			"type": "image",
+			"name": "sfp_create_maque_png"
+		},
+		{
+			"url": "assets/createAndJoin/hzmj/create_hzmj_fending.png",
+			"type": "image",
+			"name": "create_hzmj_fending_png"
+		},
+		{
+			"url": "assets/createAndJoin/hzmj/create_hzmj_jiafan.png",
+			"type": "image",
+			"name": "create_hzmj_jiafan_png"
+		},
+		{
+			"url": "assets/createAndJoin/hzmj/create_hzmj_laoqi.png",
+			"type": "image",
+			"name": "create_hzmj_laoqi_png"
+		},
+		{
+			"url": "assets/majiang/hzmj_tuxin.png",
+			"type": "image",
+			"name": "hzmj_tuxin_png"
+		},
+		{
+			"url": "assets/majiang/hzmj_single_bg.png",
+			"type": "image",
+			"name": "hzmj_single_bg_png"
+		},
+		{
+			"url": "assets/public/loading/hanghzoumajiang/hzmj_loading_bg.png",
+			"type": "image",
+			"name": "hzmj_loading_bg_png"
+		},
+		{
+			"url": "assets/gang_11.png",
+			"type": "image",
+			"name": "gang_11_png"
+		},
+		{
+			"url": "assets/majiang/houtai/hzmj_ht_bg.png",
+			"type": "image",
+			"name": "hzmj_ht_bg_png"
+		},
+		{
+			"url": "assets/majiang/houtai/hzmj_ht_dontaccept.png",
+			"type": "image",
+			"name": "hzmj_ht_dontaccept_png"
+		},
+		{
+			"url": "assets/majiang/houtai/hzmj_ht_accept.png",
+			"type": "image",
+			"name": "hzmj_ht_accept_png"
+		},
+		{
+			"url": "assets/majiang/houtai/hzmj_ht_select.png",
+			"type": "image",
+			"name": "hzmj_ht_select_png"
+		},
+		{
+			"url": "assets/majiang/HZMJDesk.json",
+			"type": "sheet",
+			"name": "HZMJDesk_json",
+			"subkeys": "HJMJbtn_type1,HZMJbtn_start,HZMJbtn_type2,HZMJbtn_type3,HZMJbtn_type4,HZMJbtn_type5,HZMJdown,HZMJinfo,HZMJinfo2,HZMJju,HZMJkuang,HZMJleft,HZMJloading2,HZMJright,HZMJselectTitle,HZMJset,HZMJturn,HZMJup,HZMJword_ready,HZMJyuyin,HZMJzhang,btn_type6,hamj_btn_js,hamj_cardBg,hzmj_cardBtn,hzmj_disband,hzmj_inGameExit,hzmj_inGameSet,hzmj_menu,hzmj_wanfa,hzmj_yuying,hzmj_yyxiaoxi,offLine,sit,sss_topNotice,yaoqing"
+		},
+		{
+			"url": "assets/majiang/ani/hzmj_ani_jiantou_tex.png",
+			"type": "image",
+			"name": "hzmj_ani_jiantou_tex_png"
+		},
+		{
+			"url": "assets/majiang/ani/hzmj_ani_jiantou_mc.json",
+			"type": "json",
+			"name": "hzmj_ani_jiantou_mc_json"
+		},
+		{
+			"url": "assets/majiang/Music/hzmj_audio_card_out.mp3",
+			"type": "sound",
+			"name": "hzmj_audio_card_out_mp3"
+		},
+		{
+			"url": "assets/majiang/Music/hzmj_audio_liuju.mp3",
+			"type": "sound",
+			"name": "hzmj_audio_liuju_mp3"
+		},
+		{
+			"url": "assets/majiang/Music/hzmj_audio_lose.mp3",
+			"type": "sound",
+			"name": "hzmj_audio_lose_mp3"
+		},
+		{
+			"url": "assets/majiang/Music/hzmj_boy_ready.mp3",
+			"type": "sound",
+			"name": "hzmj_boy_ready_mp3"
+		},
+		{
+			"url": "assets/majiang/Music/hzmj_btnpress.mp3",
+			"type": "sound",
+			"name": "hzmj_btnpress_mp3"
+		},
+		{
+			"url": "assets/majiang/Music/hzmj_gamebgm.mp3",
+			"type": "sound",
+			"name": "hzmj_gamebgm_mp3"
+		},
+		{
+			"url": "assets/majiang/Music/hzmj_gamestart.mp3",
+			"type": "sound",
+			"name": "hzmj_gamestart_mp3"
+		},
+		{
+			"url": "assets/majiang/Music/hzmj_girl_ready.mp3",
+			"type": "sound",
+			"name": "hzmj_girl_ready_mp3"
+		},
+		{
+			"url": "assets/majiang/Music/hzmj_mywin.mp3",
+			"type": "sound",
+			"name": "hzmj_mywin_mp3"
+		},
+		{
+			"url": "assets/majiang/Music/cardAudio/hzmj_man_1.mp3",
+			"type": "sound",
+			"name": "hzmj_man_1_mp3"
+		},
+		{
+			"url": "assets/majiang/Music/cardAudio/hzmj_man_17.mp3",
+			"type": "sound",
+			"name": "hzmj_man_17_mp3"
+		},
+		{
+			"url": "assets/majiang/Music/cardAudio/hzmj_man_18.mp3",
+			"type": "sound",
+			"name": "hzmj_man_18_mp3"
+		},
+		{
+			"url": "assets/majiang/Music/cardAudio/hzmj_man_19.mp3",
+			"type": "sound",
+			"name": "hzmj_man_19_mp3"
+		},
+		{
+			"url": "assets/majiang/Music/cardAudio/hzmj_man_2.mp3",
+			"type": "sound",
+			"name": "hzmj_man_2_mp3"
+		},
+		{
+			"url": "assets/majiang/Music/cardAudio/hzmj_man_20.mp3",
+			"type": "sound",
+			"name": "hzmj_man_20_mp3"
+		},
+		{
+			"url": "assets/majiang/Music/cardAudio/hzmj_man_21.mp3",
+			"type": "sound",
+			"name": "hzmj_man_21_mp3"
+		},
+		{
+			"url": "assets/majiang/Music/cardAudio/hzmj_man_22.mp3",
+			"type": "sound",
+			"name": "hzmj_man_22_mp3"
+		},
+		{
+			"url": "assets/majiang/Music/cardAudio/hzmj_man_23.mp3",
+			"type": "sound",
+			"name": "hzmj_man_23_mp3"
+		},
+		{
+			"url": "assets/majiang/Music/cardAudio/hzmj_man_24.mp3",
+			"type": "sound",
+			"name": "hzmj_man_24_mp3"
+		},
+		{
+			"url": "assets/majiang/Music/cardAudio/hzmj_man_25.mp3",
+			"type": "sound",
+			"name": "hzmj_man_25_mp3"
+		},
+		{
+			"url": "assets/majiang/Music/cardAudio/hzmj_man_3.mp3",
+			"type": "sound",
+			"name": "hzmj_man_3_mp3"
+		},
+		{
+			"url": "assets/majiang/Music/cardAudio/hzmj_man_33.mp3",
+			"type": "sound",
+			"name": "hzmj_man_33_mp3"
+		},
+		{
+			"url": "assets/majiang/Music/cardAudio/hzmj_man_34.mp3",
+			"type": "sound",
+			"name": "hzmj_man_34_mp3"
+		},
+		{
+			"url": "assets/majiang/Music/cardAudio/hzmj_man_35.mp3",
+			"type": "sound",
+			"name": "hzmj_man_35_mp3"
+		},
+		{
+			"url": "assets/majiang/Music/cardAudio/hzmj_man_36.mp3",
+			"type": "sound",
+			"name": "hzmj_man_36_mp3"
+		},
+		{
+			"url": "assets/majiang/Music/cardAudio/hzmj_man_37.mp3",
+			"type": "sound",
+			"name": "hzmj_man_37_mp3"
+		},
+		{
+			"url": "assets/majiang/Music/cardAudio/hzmj_man_38.mp3",
+			"type": "sound",
+			"name": "hzmj_man_38_mp3"
+		},
+		{
+			"url": "assets/majiang/Music/cardAudio/hzmj_man_39.mp3",
+			"type": "sound",
+			"name": "hzmj_man_39_mp3"
+		},
+		{
+			"url": "assets/majiang/Music/cardAudio/hzmj_man_4.mp3",
+			"type": "sound",
+			"name": "hzmj_man_4_mp3"
+		},
+		{
+			"url": "assets/majiang/Music/cardAudio/hzmj_man_40.mp3",
+			"type": "sound",
+			"name": "hzmj_man_40_mp3"
+		},
+		{
+			"url": "assets/majiang/Music/cardAudio/hzmj_man_41.mp3",
+			"type": "sound",
+			"name": "hzmj_man_41_mp3"
+		},
+		{
+			"url": "assets/majiang/Music/cardAudio/hzmj_man_49.mp3",
+			"type": "sound",
+			"name": "hzmj_man_49_mp3"
+		},
+		{
+			"url": "assets/majiang/Music/cardAudio/hzmj_man_5.mp3",
+			"type": "sound",
+			"name": "hzmj_man_5_mp3"
+		},
+		{
+			"url": "assets/majiang/Music/cardAudio/hzmj_man_50.mp3",
+			"type": "sound",
+			"name": "hzmj_man_50_mp3"
+		},
+		{
+			"url": "assets/majiang/Music/cardAudio/hzmj_man_51.mp3",
+			"type": "sound",
+			"name": "hzmj_man_51_mp3"
+		},
+		{
+			"url": "assets/majiang/Music/cardAudio/hzmj_man_52.mp3",
+			"type": "sound",
+			"name": "hzmj_man_52_mp3"
+		},
+		{
+			"url": "assets/majiang/Music/cardAudio/hzmj_man_53.mp3",
+			"type": "sound",
+			"name": "hzmj_man_53_mp3"
+		},
+		{
+			"url": "assets/majiang/Music/cardAudio/hzmj_man_54.mp3",
+			"type": "sound",
+			"name": "hzmj_man_54_mp3"
+		},
+		{
+			"url": "assets/majiang/Music/cardAudio/hzmj_man_55.mp3",
+			"type": "sound",
+			"name": "hzmj_man_55_mp3"
+		},
+		{
+			"url": "assets/majiang/Music/cardAudio/hzmj_man_6.mp3",
+			"type": "sound",
+			"name": "hzmj_man_6_mp3"
+		},
+		{
+			"url": "assets/majiang/Music/cardAudio/hzmj_man_7.mp3",
+			"type": "sound",
+			"name": "hzmj_man_7_mp3"
+		},
+		{
+			"url": "assets/majiang/Music/cardAudio/hzmj_man_8.mp3",
+			"type": "sound",
+			"name": "hzmj_man_8_mp3"
+		},
+		{
+			"url": "assets/majiang/Music/cardAudio/hzmj_man_9.mp3",
+			"type": "sound",
+			"name": "hzmj_man_9_mp3"
+		},
+		{
+			"url": "assets/majiang/Music/cardAudio/hzmj_man_chi.mp3",
+			"type": "sound",
+			"name": "hzmj_man_chi_mp3"
+		},
+		{
+			"url": "assets/majiang/Music/cardAudio/hzmj_man_gang.mp3",
+			"type": "sound",
+			"name": "hzmj_man_gang_mp3"
+		},
+		{
+			"url": "assets/majiang/Music/cardAudio/hzmj_man_hu.mp3",
+			"type": "sound",
+			"name": "hzmj_man_hu_mp3"
+		},
+		{
+			"url": "assets/majiang/Music/cardAudio/hzmj_man_hua.mp3",
+			"type": "sound",
+			"name": "hzmj_man_hua_mp3"
+		},
+		{
+			"url": "assets/majiang/Music/cardAudio/hzmj_man_peng.mp3",
+			"type": "sound",
+			"name": "hzmj_man_peng_mp3"
+		},
+		{
+			"url": "assets/majiang/Music/cardAudio/hzmj_man_zimo.mp3",
+			"type": "sound",
+			"name": "hzmj_man_zimo_mp3"
+		},
+		{
+			"url": "assets/public/rule/rule_hzmj.png",
+			"type": "image",
+			"name": "rule_hzmj_png"
+		},
+		{
+			"url": "assets/majiang/hzmj_dalaba.png",
+			"type": "image",
+			"name": "hzmj_dalaba_png"
+		},
+		{
+			"url": "assets/sifupai/sfp_table.json",
+			"type": "sheet",
+			"name": "sfp_table_json",
+			"subkeys": "sfp_back_hall_btn,sfp_benlun_score,sfp_big_win,sfp_chupai_btn,sfp_chupai_btn_an,sfp_continue_btn,sfp_dalaba,sfp_disband,sfp_fen_bg,sfp_first_run,sfp_formal,sfp_fouth_run,sfp_hasReady,sfp_headBoxDi,sfp_inGameExit,sfp_inGameSet,sfp_inGameSit,sfp_ingameInvite,sfp_jiesuan,sfp_jiesuan_head_di,sfp_jiesuan_title,sfp_male,sfp_maque_icon,sfp_menu,sfp_myInfo,sfp_offline,sfp_otherInfoDi,sfp_pangguan,sfp_pass_card,sfp_qinyou_pop_time_bg,sfp_ready_btn,sfp_roomOwnerLogo,sfp_rule,sfp_share_btn,sfp_single_fenenenen,sfp_single_one_jia,sfp_single_shang_fen,sfp_single_three_jia,sfp_single_two_jia,sfp_single_win,sfp_third_run,sfp_tips_onlypass,sfp_tishi_btn,sfp_total_fen,sfp_total_title,sfp_twoth_run,sfp_user_invite_btn,sfp_user_sit_btn,sfp_wanfa,sfp_yuying,sfp_yyxiaoxi"
+		},
+		{
+			"url": "assets/majiang/hzmj_caipiao.png",
+			"type": "image",
+			"name": "hzmj_caipiao_png"
+		},
+		{
+			"url": "assets/huanleHall/hallImage2.json",
+			"type": "sheet",
+			"name": "hallImage2_json",
+			"subkeys": "hall_bottom,hall_creat_paodekuai,hall_creat_shisanshui,hall_create_doudizhu,hall_create_fourPoker,hall_create_hzmj,hall_top"
+		},
+		{
+			"url": "assets/public/public_icon_zuanshi.png",
+			"type": "image",
+			"name": "public_icon_zuanshi_png"
+		},
+		{
+			"url": "assets/doudizhu/result-export1.fnt",
+			"type": "font",
+			"name": "result-export1_fnt"
+		},
+		{
+			"url": "assets/doudizhu/result-export1.png",
+			"type": "image",
+			"name": "result-export1_png"
+		},
+		{
+			"url": "assets/doudizhu/result-export2.fnt",
+			"type": "font",
+			"name": "result-export2_fnt"
+		},
+		{
+			"url": "assets/doudizhu/result-export2.png",
+			"type": "image",
+			"name": "result-export2_png"
+		},
+		{
+			"url": "assets/doudizhu/animate/ddzAnimate.png",
+			"type": "image",
+			"name": "ddzAnimate_png"
+		},
+		{
+			"url": "assets/doudizhu/animate/ddzYanwu.png",
+			"type": "image",
+			"name": "ddzYanwu_png"
+		},
+		{
+			"url": "assets/doudizhu/animate/jingbao.png",
+			"type": "image",
+			"name": "jingbao_png"
+		},
+		{
+			"url": "assets/doudizhu/animate/lianshun.png",
+			"type": "image",
+			"name": "lianshun_png"
+		},
+		{
+			"url": "assets/doudizhu/animate/lord_anim_plane_back.png",
+			"type": "image",
+			"name": "lord_anim_plane_back_png"
+		},
+		{
+			"url": "assets/doudizhu/animate/lord_anim_plane_shadow.png",
+			"type": "image",
+			"name": "lord_anim_plane_shadow_png"
+		},
+		{
+			"url": "assets/doudizhu/animate/lord_anim_rocket.png",
+			"type": "image",
+			"name": "lord_anim_rocket_png"
+		},
+		{
+			"url": "assets/doudizhu/desk/coin_action.fnt",
+			"type": "font",
+			"name": "coin_action_fnt"
+		},
+		{
+			"url": "assets/doudizhu/desk/coin_action.png",
+			"type": "image",
+			"name": "coin_action_png"
+		},
+		{
+			"url": "assets/doudizhu/desk/coin_action_blue.fnt",
+			"type": "font",
+			"name": "coin_action_blue_fnt"
+		},
+		{
+			"url": "assets/doudizhu/desk/coin_action_blue.png",
+			"type": "image",
+			"name": "coin_action_blue_png"
+		},
+		{
+			"url": "assets/doudizhu/desk/ddzlose.png",
+			"type": "image",
+			"name": "ddzlose_png"
+		},
+		{
+			"url": "assets/doudizhu/desk/ddzwin.png",
+			"type": "image",
+			"name": "ddzwin_png"
+		},
+		{
+			"url": "assets/doudizhu/desk/desk_douzi.png",
+			"type": "image",
+			"name": "desk_douzi_png"
+		},
+		{
+			"url": "assets/doudizhu/desk/failtitle2.png",
+			"type": "image",
+			"name": "failtitle2_png"
+		},
+		{
+			"url": "assets/doudizhu/desk/wintitle2.png",
+			"type": "image",
+			"name": "wintitle2_png"
+		},
+		{
+			"url": "assets/doudizhu/musicDdz/ddz_bblord_play_bg.mp3",
+			"type": "sound",
+			"name": "ddz_bblord_play_bg_mp3"
+		},
+		{
+			"url": "assets/doudizhu/musicDdz/ddz_failue.mp3",
+			"type": "sound",
+			"name": "ddz_failue_mp3"
+		},
+		{
+			"url": "assets/doudizhu/musicDdz/ddz_hllord_play_bg1.mp3",
+			"type": "sound",
+			"name": "ddz_hllord_play_bg1_mp3"
+		},
+		{
+			"url": "assets/doudizhu/musicDdz/ddz_win.mp3",
+			"type": "sound",
+			"name": "ddz_win_mp3"
+		},
+		{
+			"url": "assets/doudizhu/musicDdz/double/ddz_lord_v_2card_10.mp3",
+			"type": "sound",
+			"name": "ddz_lord_v_2card_10_mp3"
+		},
+		{
+			"url": "assets/doudizhu/musicDdz/double/ddz_lord_v_2card_2.mp3",
+			"type": "sound",
+			"name": "ddz_lord_v_2card_2_mp3"
+		},
+		{
+			"url": "assets/doudizhu/musicDdz/double/ddz_lord_v_2card_3.mp3",
+			"type": "sound",
+			"name": "ddz_lord_v_2card_3_mp3"
+		},
+		{
+			"url": "assets/doudizhu/musicDdz/double/ddz_lord_v_2card_4.mp3",
+			"type": "sound",
+			"name": "ddz_lord_v_2card_4_mp3"
+		},
+		{
+			"url": "assets/doudizhu/musicDdz/double/ddz_lord_v_2card_5.mp3",
+			"type": "sound",
+			"name": "ddz_lord_v_2card_5_mp3"
+		},
+		{
+			"url": "assets/doudizhu/musicDdz/double/ddz_lord_v_2card_6.mp3",
+			"type": "sound",
+			"name": "ddz_lord_v_2card_6_mp3"
+		},
+		{
+			"url": "assets/doudizhu/musicDdz/double/ddz_lord_v_2card_7.mp3",
+			"type": "sound",
+			"name": "ddz_lord_v_2card_7_mp3"
+		},
+		{
+			"url": "assets/doudizhu/musicDdz/double/ddz_lord_v_2card_8.mp3",
+			"type": "sound",
+			"name": "ddz_lord_v_2card_8_mp3"
+		},
+		{
+			"url": "assets/doudizhu/musicDdz/double/ddz_lord_v_2card_9.mp3",
+			"type": "sound",
+			"name": "ddz_lord_v_2card_9_mp3"
+		},
+		{
+			"url": "assets/doudizhu/musicDdz/double/ddz_lord_v_2card_a.mp3",
+			"type": "sound",
+			"name": "ddz_lord_v_2card_a_mp3"
+		},
+		{
+			"url": "assets/doudizhu/musicDdz/double/ddz_lord_v_2card_j.mp3",
+			"type": "sound",
+			"name": "ddz_lord_v_2card_j_mp3"
+		},
+		{
+			"url": "assets/doudizhu/musicDdz/double/ddz_lord_v_2card_k.mp3",
+			"type": "sound",
+			"name": "ddz_lord_v_2card_k_mp3"
+		},
+		{
+			"url": "assets/doudizhu/musicDdz/double/ddz_lord_v_2card_q.mp3",
+			"type": "sound",
+			"name": "ddz_lord_v_2card_q_mp3"
+		},
+		{
+			"url": "assets/doudizhu/musicDdz/four/ddz_lord_v_4with1.mp3",
+			"type": "sound",
+			"name": "ddz_lord_v_4with1_mp3"
+		},
+		{
+			"url": "assets/doudizhu/musicDdz/otherAudio/ddz_click.mp3",
+			"type": "sound",
+			"name": "ddz_click_mp3"
+		},
+		{
+			"url": "assets/doudizhu/musicDdz/otherAudio/ddz_lord_v_callscore_0.mp3",
+			"type": "sound",
+			"name": "ddz_lord_v_callscore_0_mp3"
+		},
+		{
+			"url": "assets/doudizhu/musicDdz/otherAudio/ddz_lord_v_discard_2.mp3",
+			"type": "sound",
+			"name": "ddz_lord_v_discard_2_mp3"
+		},
+		{
+			"url": "assets/doudizhu/musicDdz/otherAudio/ddz_lord_v_pass_3.mp3",
+			"type": "sound",
+			"name": "ddz_lord_v_pass_3_mp3"
+		},
+		{
+			"url": "assets/doudizhu/musicDdz/otherAudio/ddz_lord_v_remain_last_1.mp3",
+			"type": "sound",
+			"name": "ddz_lord_v_remain_last_1_mp3"
+		},
+		{
+			"url": "assets/doudizhu/musicDdz/otherAudio/ddz_lord_v_remain_last_2.mp3",
+			"type": "sound",
+			"name": "ddz_lord_v_remain_last_2_mp3"
+		},
+		{
+			"url": "assets/doudizhu/musicDdz/otherAudio/ddz_lord_v_runaway_1.mp3",
+			"type": "sound",
+			"name": "ddz_lord_v_runaway_1_mp3"
+		},
+		{
+			"url": "assets/doudizhu/musicDdz/otherAudio/ddz_lord_v_runaway_2.mp3",
+			"type": "sound",
+			"name": "ddz_lord_v_runaway_2_mp3"
+		},
+		{
+			"url": "assets/doudizhu/musicDdz/otherAudio/ddz_lordhl_v_call_lord.mp3",
+			"type": "sound",
+			"name": "ddz_lordhl_v_call_lord_mp3"
+		},
+		{
+			"url": "assets/doudizhu/musicDdz/otherAudio/ddz_lordhl_v_double1.mp3",
+			"type": "sound",
+			"name": "ddz_lordhl_v_double1_mp3"
+		},
+		{
+			"url": "assets/doudizhu/musicDdz/otherAudio/ddz_lordhl_v_no_double2.mp3",
+			"type": "sound",
+			"name": "ddz_lordhl_v_no_double2_mp3"
+		},
+		{
+			"url": "assets/doudizhu/musicDdz/otherAudio/ddz_lordhl_v_no_rob.mp3",
+			"type": "sound",
+			"name": "ddz_lordhl_v_no_rob_mp3"
+		},
+		{
+			"url": "assets/doudizhu/musicDdz/otherAudio/ddz_lordhl_v_rob3.mp3",
+			"type": "sound",
+			"name": "ddz_lordhl_v_rob3_mp3"
+		},
+		{
+			"url": "assets/doudizhu/musicDdz/otherAudio/ddz_lordhl_v_show_cards.mp3",
+			"type": "sound",
+			"name": "ddz_lordhl_v_show_cards_mp3"
+		},
+		{
+			"url": "assets/doudizhu/musicDdz/otherAudio/ddz_sendCard.mp3",
+			"type": "sound",
+			"name": "ddz_sendCard_mp3"
+		},
+		{
+			"url": "assets/doudizhu/musicDdz/singlePai/ddz_lord_v_1card_10.mp3",
+			"type": "sound",
+			"name": "ddz_lord_v_1card_10_mp3"
+		},
+		{
+			"url": "assets/doudizhu/musicDdz/singlePai/ddz_lord_v_1card_2.mp3",
+			"type": "sound",
+			"name": "ddz_lord_v_1card_2_mp3"
+		},
+		{
+			"url": "assets/doudizhu/musicDdz/singlePai/ddz_lord_v_1card_3.mp3",
+			"type": "sound",
+			"name": "ddz_lord_v_1card_3_mp3"
+		},
+		{
+			"url": "assets/doudizhu/musicDdz/singlePai/ddz_lord_v_1card_4.mp3",
+			"type": "sound",
+			"name": "ddz_lord_v_1card_4_mp3"
+		},
+		{
+			"url": "assets/doudizhu/musicDdz/singlePai/ddz_lord_v_1card_5.mp3",
+			"type": "sound",
+			"name": "ddz_lord_v_1card_5_mp3"
+		},
+		{
+			"url": "assets/doudizhu/musicDdz/singlePai/ddz_lord_v_1card_6.mp3",
+			"type": "sound",
+			"name": "ddz_lord_v_1card_6_mp3"
+		},
+		{
+			"url": "assets/doudizhu/musicDdz/singlePai/ddz_lord_v_1card_7.mp3",
+			"type": "sound",
+			"name": "ddz_lord_v_1card_7_mp3"
+		},
+		{
+			"url": "assets/doudizhu/musicDdz/singlePai/ddz_lord_v_1card_8.mp3",
+			"type": "sound",
+			"name": "ddz_lord_v_1card_8_mp3"
+		},
+		{
+			"url": "assets/doudizhu/musicDdz/singlePai/ddz_lord_v_1card_9.mp3",
+			"type": "sound",
+			"name": "ddz_lord_v_1card_9_mp3"
+		},
+		{
+			"url": "assets/doudizhu/musicDdz/singlePai/ddz_lord_v_1card_a.mp3",
+			"type": "sound",
+			"name": "ddz_lord_v_1card_a_mp3"
+		},
+		{
+			"url": "assets/doudizhu/musicDdz/singlePai/ddz_lord_v_1card_big_joker.mp3",
+			"type": "sound",
+			"name": "ddz_lord_v_1card_big_joker_mp3"
+		},
+		{
+			"url": "assets/doudizhu/musicDdz/singlePai/ddz_lord_v_1card_j.mp3",
+			"type": "sound",
+			"name": "ddz_lord_v_1card_j_mp3"
+		},
+		{
+			"url": "assets/doudizhu/musicDdz/singlePai/ddz_lord_v_1card_k.mp3",
+			"type": "sound",
+			"name": "ddz_lord_v_1card_k_mp3"
+		},
+		{
+			"url": "assets/doudizhu/musicDdz/singlePai/ddz_lord_v_1card_q.mp3",
+			"type": "sound",
+			"name": "ddz_lord_v_1card_q_mp3"
+		},
+		{
+			"url": "assets/doudizhu/musicDdz/singlePai/ddz_lord_v_1card_small_joker.mp3",
+			"type": "sound",
+			"name": "ddz_lord_v_1card_small_joker_mp3"
+		},
+		{
+			"url": "assets/doudizhu/musicDdz/special/ddz_lord_s_spring_fail_voice1.mp3",
+			"type": "sound",
+			"name": "ddz_lord_s_spring_fail_voice1_mp3"
+		},
+		{
+			"url": "assets/doudizhu/musicDdz/special/ddz_lord_s_spring_win_voice1.mp3",
+			"type": "sound",
+			"name": "ddz_lord_s_spring_win_voice1_mp3"
+		},
+		{
+			"url": "assets/doudizhu/musicDdz/special/ddz_lord_two_plane.mp3",
+			"type": "sound",
+			"name": "ddz_lord_two_plane_mp3"
+		},
+		{
+			"url": "assets/doudizhu/musicDdz/special/ddz_lord_v_bomb_2.mp3",
+			"type": "sound",
+			"name": "ddz_lord_v_bomb_2_mp3"
+		},
+		{
+			"url": "assets/doudizhu/musicDdz/special/ddz_lord_v_chainpairs.mp3",
+			"type": "sound",
+			"name": "ddz_lord_v_chainpairs_mp3"
+		},
+		{
+			"url": "assets/doudizhu/musicDdz/special/ddz_lord_v_plane_1.mp3",
+			"type": "sound",
+			"name": "ddz_lord_v_plane_1_mp3"
+		},
+		{
+			"url": "assets/doudizhu/musicDdz/special/ddz_lord_v_rocket1.mp3",
+			"type": "sound",
+			"name": "ddz_lord_v_rocket1_mp3"
+		},
+		{
+			"url": "assets/doudizhu/musicDdz/special/ddz_lord_v_straight.mp3",
+			"type": "sound",
+			"name": "ddz_lord_v_straight_mp3"
+		},
+		{
+			"url": "assets/doudizhu/musicDdz/three/ddz_lord_v_3card_10.mp3",
+			"type": "sound",
+			"name": "ddz_lord_v_3card_10_mp3"
+		},
+		{
+			"url": "assets/doudizhu/musicDdz/three/ddz_lord_v_3card_2.mp3",
+			"type": "sound",
+			"name": "ddz_lord_v_3card_2_mp3"
+		},
+		{
+			"url": "assets/doudizhu/musicDdz/three/ddz_lord_v_3card_3.mp3",
+			"type": "sound",
+			"name": "ddz_lord_v_3card_3_mp3"
+		},
+		{
+			"url": "assets/doudizhu/musicDdz/three/ddz_lord_v_3card_4.mp3",
+			"type": "sound",
+			"name": "ddz_lord_v_3card_4_mp3"
+		},
+		{
+			"url": "assets/doudizhu/musicDdz/three/ddz_lord_v_3card_5.mp3",
+			"type": "sound",
+			"name": "ddz_lord_v_3card_5_mp3"
+		},
+		{
+			"url": "assets/doudizhu/musicDdz/three/ddz_lord_v_3card_6.mp3",
+			"type": "sound",
+			"name": "ddz_lord_v_3card_6_mp3"
+		},
+		{
+			"url": "assets/doudizhu/musicDdz/three/ddz_lord_v_3card_7.mp3",
+			"type": "sound",
+			"name": "ddz_lord_v_3card_7_mp3"
+		},
+		{
+			"url": "assets/doudizhu/musicDdz/three/ddz_lord_v_3card_8.mp3",
+			"type": "sound",
+			"name": "ddz_lord_v_3card_8_mp3"
+		},
+		{
+			"url": "assets/doudizhu/musicDdz/three/ddz_lord_v_3card_9.mp3",
+			"type": "sound",
+			"name": "ddz_lord_v_3card_9_mp3"
+		},
+		{
+			"url": "assets/doudizhu/musicDdz/three/ddz_lord_v_3card_a.mp3",
+			"type": "sound",
+			"name": "ddz_lord_v_3card_a_mp3"
+		},
+		{
+			"url": "assets/doudizhu/musicDdz/three/ddz_lord_v_3card_j.mp3",
+			"type": "sound",
+			"name": "ddz_lord_v_3card_j_mp3"
+		},
+		{
+			"url": "assets/doudizhu/musicDdz/three/ddz_lord_v_3card_k.mp3",
+			"type": "sound",
+			"name": "ddz_lord_v_3card_k_mp3"
+		},
+		{
+			"url": "assets/doudizhu/musicDdz/three/ddz_lord_v_3card_q.mp3",
+			"type": "sound",
+			"name": "ddz_lord_v_3card_q_mp3"
+		},
+		{
+			"url": "assets/doudizhu/musicDdz/three/ddz_lord_v_3with1.mp3",
+			"type": "sound",
+			"name": "ddz_lord_v_3with1_mp3"
+		},
+		{
+			"url": "assets/doudizhu/musicDdz/three/ddz_lord_v_3with2.mp3",
+			"type": "sound",
+			"name": "ddz_lord_v_3with2_mp3"
+		},
+		{
+			"url": "assets/doudizhu/animate/jingbao.json",
+			"type": "json",
+			"name": "jingbao_json"
+		},
+		{
+			"url": "assets/doudizhu/animate/ddzYanwu.json",
+			"type": "json",
+			"name": "ddzYanwu_json"
+		},
+		{
+			"url": "assets/doudizhu/animate/ddzAnimate.json",
+			"type": "json",
+			"name": "ddzAnimate_json"
+		},
+		{
+			"url": "assets/doudizhu/animate/lianshun.json",
+			"type": "json",
+			"name": "lianshun_json"
+		},
+		{
+			"url": "assets/doudizhu/ddz_deskbg.png",
+			"type": "image",
+			"name": "ddz_deskbg_png"
+		},
+		{
+			"url": "assets/doudizhu/musicDdz/otherAudio/lord_v_callscore_1.mp3",
+			"type": "sound",
+			"name": "lord_v_callscore_1_mp3"
+		},
+		{
+			"url": "assets/doudizhu/musicDdz/otherAudio/lord_v_callscore_2.mp3",
+			"type": "sound",
+			"name": "lord_v_callscore_2_mp3"
+		},
+		{
+			"url": "assets/doudizhu/musicDdz/otherAudio/lord_v_callscore_3.mp3",
+			"type": "sound",
+			"name": "lord_v_callscore_3_mp3"
+		},
+		{
+			"url": "assets/public/loading/paodekuai/pdk_loading_bg.png",
+			"type": "image",
+			"name": "pdk_loading_bg_png"
+		},
+		{
+			"url": "assets/public/loading/doudizhu/ddz_loading_bg.png",
+			"type": "image",
+			"name": "ddz_loading_bg_png"
+		},
+		{
+			"url": "assets/paodekuai/pdk_desk_bg.png",
+			"type": "image",
+			"name": "pdk_desk_bg_png"
+		},
+		{
+			"url": "assets/doudizhu/ddz_desk.json",
+			"type": "sheet",
+			"name": "ddz_desk_json",
+			"subkeys": "call_landlord_d,call_landlord_n,call_one_d,call_one_n,call_one_n_h,call_tree_d,call_tree_n,call_tree_n_h,call_two_d,call_two_n,call_two_n_h,ddzMingpai,ddzReady,ddz_bg2,ddz_deskPoint,ddz_disband,ddz_formal,ddz_hasReady,ddz_head_defult,ddz_img_ddz_choose_bg,ddz_inGameExit,ddz_inGameSet,ddz_ingameInvite,ddz_logo,ddz_male,ddz_menu,ddz_myInfo,ddz_otherInfoDi,ddz_pangguan,ddz_ready_btn,ddz_result_item_bg,ddz_roomOwnerLogo,ddz_startGame,ddz_startGameAn,ddz_topNotice,ddz_user_invite_btn,ddz_user_sit_btn,ddz_wanfa,ddz_yuying,ddz_yy_qp_bg,ddz_yyxiaoxi,ddz_yyxiaoxi_enabled,desk_back,desk_headDi,desk_jipai,desk_set,desk_top,desk_wanfa,double_d,double_n,grab_landlord_d,grab_landlord_n,img_Card_dizhu,img_Card_mingpai,img_GamePlay_OffLine_DDZ,img_GamePlay_Role_DiZhu,img_GamePlay_Timing_bg,img_Gameplay_RestCardBackground,lord_anim_remain_alarm_1,lord_anim_remain_alarm_2,not_call_landlord_d,not_call_landlord_n,not_double_d,not_double_n,not_grab_landlord_d,not_grab_landlord_n,not_out_d,not_out_n,out_d,out_n,player_call_1,player_call_2,player_call_3,player_call_landlord,player_double,player_grab_landlord,player_not_double,player_not_out,player_pass,player_pass_call,player_pass_score,player_ready,player_show_card,tips_d,tips_n,tips_onlypass,tips_outerror,yaobuqibutu"
+		},
+		{
+			"url": "assets/zhanji/shisanshui/zhanji_sss.json",
+			"type": "sheet",
+			"name": "zhanji_sss_json",
+			"subkeys": "BSC_btn_exit,btn_close,common_ic_guanbi,hall_zhanji_s_detail,hall_zhanji_s_ju,hall_zhanji_s_mq,hall_zhanji_s_people,hall_zhanji_s_pwd,hall_zhanji_st_ddz,hall_zhanji_st_hzmj,hall_zhanji_st_pdk,hall_zhanji_st_sfp,hall_zhanji_st_sss,top_btn_back"
+		},
+		{
+			"url": "assets/huanleHall/hallImage.json",
+			"type": "sheet",
+			"name": "hallImage_json",
+			"subkeys": "hall_addBtn,hall_addBtn_yellow,hall_dayuanjiao,hall_faxian,hall_faxian_ddz_enterBtn,hall_faxian_hzmj_enterBtn,hall_faxian_pdk_enterBtn,hall_faxian_sfp_enterBtn,hall_faxian_sss_enterBtn,hall_fuwutiaokuan,hall_head_bg,hall_laba,hall_mainMenu,hall_myinfo_btn,hall_qiandao_btn,hall_qiandao_top_btn,hall_resetSubmit_btn,hall_shopBtn,hall_shop_history_di,hall_shop_price_btn,hall_xiaoyuanjiao,hall_yunwen,hall_zhanji_btn,hall_zhanji_choose_title1,hall_zhanji_choose_title2,hall_zhanji_choose_title3,hall_zhanji_doudizhu,hall_zhanji_fourPoker,hall_zhanji_hzmj,hall_zhanji_pdk,hall_zhanji_shisanshui,hall_zhanji_title1,hall_zhanji_title2,hall_zhanji_title3,hasQiandao,zhanji_ddz_btn,zhanji_mj_btn,zhanji_pdk_btn,zhanji_shisan_btn,zhanji_sifu_btn"
+		},
+		{
+			"url": "assets/paodekuai/pdk_desk_imgs.json",
+			"type": "sheet",
+			"name": "pdk_desk_imgs_json",
+			"subkeys": "pdk_head_banker,pdk_icon_bg,pdk_result_item_bg,pdk_sparing_icon "
+		},
+		{
+			"url": "assets/doudizhu/musicDdz/otherAudio/ddz_Less_Then_Ten.mp3",
+			"type": "sound",
+			"name": "ddz_Less_Then_Ten_mp3"
+		},
+		{
+			"url": "assets/doudizhu/musicDdz/otherAudio/ddz_cardPopup.mp3",
+			"type": "sound",
+			"name": "ddz_cardPopup_mp3"
+		},
+		{
+			"url": "assets/doudizhu/musicDdz/otherAudio/ddz_pass.mp3",
+			"type": "sound",
+			"name": "ddz_pass_mp3"
+		},
+		{
+			"url": "assets/public/rule/rule_ddz.png",
+			"type": "image",
+			"name": "rule_ddz_png"
+		},
+		{
+			"url": "assets/public/rule/rule_pdk.png",
+			"type": "image",
+			"name": "rule_pdk_png"
+		},
+		{
+			"url": "assets/public/ddz_yy_qp_bg.png",
+			"type": "image",
+			"name": "ddz_yy_qp_bg_png"
+		},
+		{
+			"url": "assets/huanleHall/hall_bg.png",
+			"type": "image",
+			"name": "hall_bg_png"
+		},
+		{
+			"url": "assets/huanleHall/hallImage3.json",
+			"type": "sheet",
+			"name": "hallImage3_json",
+			"subkeys": "Img_zuan_210,Img_zuan_211,Img_zuan_212,Img_zuan_213,Img_zuan_214,Img_zuan_216,hall_allrecord,hall_allrecord_click,hall_bottom,hall_cancel_btn,hall_charge_record_bg,hall_charge_record_jiantou,hall_checkbox,hall_checkbox_di,hall_checkbox_ding,hall_close_btn,hall_create_btn,hall_create_tip,hall_createrecord,hall_createrecord_click,hall_dark_bg,hall_delete_btn,hall_detail_btn,hall_diamond,hall_discover_btn,hall_discover_title,hall_ensure_btn,hall_enter_btn,hall_exit_btn,hall_headframe,hall_hzmj,hall_hzmj_btn,hall_hzmj_zhanji,hall_join_0_btn,hall_join_1_btn,hall_join_2_btn,hall_join_3_btn,hall_join_4_btn,hall_join_5_btn,hall_join_6_btn,hall_join_7_btn,hall_join_8_btn,hall_join_9_btn,hall_join_btn,hall_join_num_bg,hall_join_title,hall_joinrecord,hall_joinrecord_click,hall_laba,hall_laba_bg,hall_light_bg,hall_message,hall_pdk,hall_pdk_btn,hall_pdk_zhanji,hall_radio_di,hall_radio_ding,hall_reset_btn,hall_server_btn,hall_setting_btn,hall_setting_heng,hall_sfp,hall_sfp_btn,hall_sfp_zhanji,hall_shop_btn,hall_shop_title,hall_shopitem_di,hall_shopitem_zhe_di,hall_sign_btn,hall_sign_diamond1,hall_sign_diamond2,hall_sign_diamond3,hall_sign_ensure_btn,hall_sign_tip,hall_sign_title,hall_sign_wei,hall_sign_yet_btn,hall_sign_yet_mask,hall_sign_yi,hall_sss,hall_sss_btn,hall_sss_zhanji,hall_title_decoration,hall_top,hall_woman,hall_zhanji_btn,hall_zhanji_dark_bg,hall_zhanji_light_bg,hall_zhanji_title,hall_zhanji_title_bg,poke44,zero"
+		},
+		{
+			"name": "hzmj_loading_title_png",
+			"type": "image",
+			"url": "assets/public/loading/hanghzoumajiang/hzmj_loading_title.png"
+		},
+		{
+			"name": "hzmj_loading_bar_ding_png",
+			"type": "image",
+			"url": "assets/public/loading/hanghzoumajiang/hzmj_loading_bar_ding.png"
+		},
+		{
+			"name": "hzmj_loading_bar_di_png",
+			"type": "image",
+			"url": "assets/public/loading/hanghzoumajiang/hzmj_loading_bar_di.png"
+		},
+		{
+			"name": "pdk_loading_bar_ding_png",
+			"type": "image",
+			"url": "assets/public/loading/paodekuai/pdk_loading_bar_ding.png"
+		},
+		{
+			"name": "pdk_loading_title_png",
+			"type": "image",
+			"url": "assets/public/loading/paodekuai/pdk_loading_title.png"
+		},
+		{
+			"name": "pdk_loading_bar_di_png",
+			"type": "image",
+			"url": "assets/public/loading/paodekuai/pdk_loading_bar_di.png"
+		},
+		{
+			"name": "sss_loading_title_png",
+			"type": "image",
+			"url": "assets/public/loading/shishanshui/sss_loading_title.png"
+		},
+		{
+			"name": "sfp_loading_bar_di_png",
+			"type": "image",
+			"url": "assets/public/loading/sifupai/sfp_loading_bar_di.png"
+		},
+		{
+			"name": "sfp_loading_bar_ding_png",
+			"type": "image",
+			"url": "assets/public/loading/sifupai/sfp_loading_bar_ding.png"
+		},
+		{
+			"name": "sfp_loading_title_png",
+			"type": "image",
+			"url": "assets/public/loading/sifupai/sfp_loading_title.png"
+		},
+		{
+			"name": "hall_setting_title_png",
+			"type": "image",
+			"url": "assets/huanleHall/hall_setting_title.png"
+		},
+		{
+			"name": "hall_title_bg_png",
+			"type": "image",
+			"url": "assets/huanleHall/hall_title_bg.png"
+		}
+	]
+}

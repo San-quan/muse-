@@ -1,0 +1,9 @@
+{"file":"tz_hall_3.png","frames":{
+"shop_item_4":{"x":508,"y":239,"w":505,"h":117,"offX":0,"offY":0,"sourceW":505,"sourceH":117},
+"shop_item_3":{"x":1,"y":1,"w":505,"h":118,"offX":0,"offY":0,"sourceW":505,"sourceH":118},
+"shop_item_2":{"x":508,"y":120,"w":505,"h":117,"offX":0,"offY":0,"sourceW":505,"sourceH":117},
+"shop_item_1":{"x":508,"y":1,"w":505,"h":117,"offX":0,"offY":0,"sourceW":505,"sourceH":117},
+"shop_item_6":{"x":1,"y":121,"w":505,"h":117,"offX":0,"offY":0,"sourceW":505,"sourceH":117},
+"hall_zhanji_s_ju":{"x":1,"y":240,"w":28,"h":28,"offX":0,"offY":0,"sourceW":28,"sourceH":28},
+"hall_zhanji_s_people":{"x":61,"y":240,"w":28,"h":28,"offX":0,"offY":0,"sourceW":28,"sourceH":28},
+"hall_zhanji_s_pwd":{"x":31,"y":240,"w":28,"h":28,"offX":0,"offY":0,"sourceW":28,"sourceH":28}}}

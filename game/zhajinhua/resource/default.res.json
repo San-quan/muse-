@@ -1,0 +1,211 @@
+{
+	"groups": [
+		{
+			"keys": "description_json,dsGame_common_json,hall_bg_jpg,zjh_hall_json,hzmj_btnpress_mp3",
+			"name": "platform"
+		},
+		{
+			"keys": "zjh_bg_jpg,zjh_BACK_MUSIC_mp3,zjh_game_lose_mp3,zjh_game_win_mp3,zjh_result_jpg,electric_tex_png,electric_mc_json,message3_mp3,message4_mp3,message5_mp3,message6_mp3,message7_mp3,message9_mp3,message10_mp3,2f_mp3,4f_mp3,8f_mp3,5f_mp3,10f_mp3,20f_mp3,25f_mp3,50f_mp3,audio1_mp3,audio2_mp3,audio4.mp3_mp3,audio3_mp3,audio5.mp3_mp3,com_mp3,message2_mp3,message8_mp3,message1_mp3,message11_mp3,zjh_game_img_json,hzmj_btnpress_mp3",
+			"name": "zhajinhua6"
+		},
+		{
+			"keys": "hzmj_btnpress_mp3",
+			"name": "preload"
+		}
+	],
+	"resources": [
+		{
+			"url": "config/description.json",
+			"type": "json",
+			"name": "description_json"
+		},
+		{
+			"url": "assets/common/dsGame_common.json",
+			"type": "sheet",
+			"name": "dsGame_common_json",
+			"subkeys": "common_alertBox_success,common_juhua,common_loading_0,common_loading_1,common_loading_2,common_loading_3,common_loading_bg,common_notice_di"
+		},
+		{
+			"url": "assets/huanleHall/hall_bg.jpg",
+			"type": "image",
+			"name": "hall_bg_jpg"
+		},
+		{
+			"url": "assets/zhajinhua/music/zjh_game_lose.mp3",
+			"type": "sound",
+			"name": "zjh_game_lose_mp3"
+		},
+		{
+			"url": "assets/zhajinhua/music/zjh_game_win.mp3",
+			"type": "sound",
+			"name": "zjh_game_win_mp3"
+		},
+		{
+			"url": "assets/zhajinhua/music/zjh_BACK_MUSIC.mp3",
+			"type": "sound",
+			"name": "zjh_BACK_MUSIC_mp3"
+		},
+		{
+			"url": "assets/zhajinhua/zjh_bg.jpg",
+			"type": "image",
+			"name": "zjh_bg_jpg"
+		},
+		{
+			"url": "assets/zhajinhua/zjh_result.jpg",
+			"type": "image",
+			"name": "zjh_result_jpg"
+		},
+		{
+			"url": "assets/zhajinhua/electric_tex.png",
+			"type": "image",
+			"name": "electric_tex_png"
+		},
+		{
+			"url": "assets/zhajinhua/electric_mc.json",
+			"type": "json",
+			"name": "electric_mc_json"
+		},
+		{
+			"url": "assets/common/message3.mp3",
+			"type": "sound",
+			"name": "message3_mp3"
+		},
+		{
+			"url": "assets/common/message4.mp3",
+			"type": "sound",
+			"name": "message4_mp3"
+		},
+		{
+			"url": "assets/common/message5.mp3",
+			"type": "sound",
+			"name": "message5_mp3"
+		},
+		{
+			"url": "assets/common/message6.mp3",
+			"type": "sound",
+			"name": "message6_mp3"
+		},
+		{
+			"url": "assets/common/message7.mp3",
+			"type": "sound",
+			"name": "message7_mp3"
+		},
+		{
+			"url": "assets/common/message9.mp3",
+			"type": "sound",
+			"name": "message9_mp3"
+		},
+		{
+			"url": "assets/common/message10.mp3",
+			"type": "sound",
+			"name": "message10_mp3"
+		},
+		{
+			"url": "assets/zhajinhua/music/2f.mp3",
+			"type": "sound",
+			"name": "2f_mp3"
+		},
+		{
+			"url": "assets/zhajinhua/music/4f.mp3",
+			"type": "sound",
+			"name": "4f_mp3"
+		},
+		{
+			"url": "assets/zhajinhua/music/5f.mp3",
+			"type": "sound",
+			"name": "5f_mp3"
+		},
+		{
+			"url": "assets/zhajinhua/music/8f.mp3",
+			"type": "sound",
+			"name": "8f_mp3"
+		},
+		{
+			"url": "assets/zhajinhua/music/10f.mp3",
+			"type": "sound",
+			"name": "10f_mp3"
+		},
+		{
+			"url": "assets/zhajinhua/music/20f.mp3",
+			"type": "sound",
+			"name": "20f_mp3"
+		},
+		{
+			"url": "assets/zhajinhua/music/25f.mp3",
+			"type": "sound",
+			"name": "25f_mp3"
+		},
+		{
+			"url": "assets/zhajinhua/music/50f.mp3",
+			"type": "sound",
+			"name": "50f_mp3"
+		},
+		{
+			"url": "assets/zhajinhua/music/audio1.mp3",
+			"type": "sound",
+			"name": "audio1_mp3"
+		},
+		{
+			"url": "assets/zhajinhua/music/audio2.mp3",
+			"type": "sound",
+			"name": "audio2_mp3"
+		},
+		{
+			"url": "assets/zhajinhua/music/audio3.mp3",
+			"type": "sound",
+			"name": "audio3_mp3"
+		},
+		{
+			"url": "assets/zhajinhua/music/audio4.mp3.mp3",
+			"type": "sound",
+			"name": "audio4.mp3_mp3"
+		},
+		{
+			"url": "assets/zhajinhua/music/audio5.mp3.mp3",
+			"type": "sound",
+			"name": "audio5.mp3_mp3"
+		},
+		{
+			"url": "assets/zhajinhua/music/com.mp3",
+			"type": "sound",
+			"name": "com_mp3"
+		},
+		{
+			"url": "assets/common/message2.mp3",
+			"type": "sound",
+			"name": "message2_mp3"
+		},
+		{
+			"url": "assets/common/message8.mp3",
+			"type": "sound",
+			"name": "message8_mp3"
+		},
+		{
+			"url": "assets/huanleHall/zjh_hall.json",
+			"type": "sheet",
+			"name": "zjh_hall_json",
+			"subkeys": "alertTipOk,alertTipWarn,banker_selected,btn_off,btn_on,btnselect,button1,button2,cancel,card,createroom2,gonghui,gotohome,hall_gou,hall_gou1,homepage_invite,jgonghui,join_room2,joingonghui,joinroom,kfcx,laba,member_union,mode_selected,mode_unselected,mpzjh,mycode,persional,qzgl,rc_icon_redpackage,rc_icon_rightarrow,rc_icon_sendredpackage,sendcard,tick,topbg,vline,xz,zjh12,zjh6,zjh9"
+		},
+		{
+			"url": "assets/common/message1.mp3",
+			"type": "sound",
+			"name": "message1_mp3"
+		},
+		{
+			"url": "assets/common/message11.mp3",
+			"type": "sound",
+			"name": "message11_mp3"
+		},
+		{
+			"url": "assets/zhajinhua/zjh_game_img.json",
+			"type": "sheet",
+			"name": "zjh_game_img_json",
+			"subkeys": "back,comB,icon_game_message1,zjh_avatar_timer,zjh_btn_abandent,zjh_btn_chang_orange,zjh_btn_chang_purple,zjh_btn_close_blue,zjh_btn_close_purple,zjh_btn_compare_jin,zjh_btn_compare_user,zjh_btn_di_blue,zjh_btn_di_gray0,zjh_btn_di_gray1,zjh_btn_di_gray2,zjh_btn_di_gray3,zjh_btn_di_gray4,zjh_btn_di_green,zjh_btn_di_oramge,zjh_btn_di_orange0,zjh_btn_di_purple,zjh_btn_di_qing,zjh_cardbox_lose,zjh_cardbox_win,zjh_chip10,zjh_chip100,zjh_chip15,zjh_chip2,zjh_chip20,zjh_chip25,zjh_chip4,zjh_chip40,zjh_chip5,zjh_chip50,zjh_chip6,zjh_chip8,zjh_chip80,zjh_comLeft,zjh_comRight,zjh_comS,zjh_comV,zjh_compare_lose,zjh_copyme,zjh_duiziying,zjh_eye_icon,zjh_footer_bull,zjh_fwm,zjh_fwmbg,zjh_game_chatbg0,zjh_game_chatbg1,zjh_game_rule,zjh_gaopaiying,zjh_gou,zjh_guest_avatar,zjh_icon_game_message,zjh_icon_game_rule,zjh_icon_home3,zjh_icon_sound61,zjh_icon_watch,zjh_is_watching,zjh_ka_btn,zjh_kan,zjh_laba,zjh_lookcard,zjh_player,zjh_playerWin,zjh_qi,zjh_rank_bigwinner2,zjh_rank_frame,zjh_ready,zjh_readyButton,zjh_santiaoying,zjh_scoresRank3,zjh_shu,zjh_shunziying,zjh_sitdown_false,zjh_sitdown_true,zjh_time,zjh_title,zjh_tonghuashunying,zjh_tonghuaying,zjh_totalScore,zjh_watch_false,zjh_watch_true,zjh_winner,zjhf1,zjhf10,zjhf11,zjhf12,zjhf13,zjhf2,zjhf3,zjhf4,zjhf5,zjhf6,zjhf7,zjhf8,zjhf9,zjhh1,zjhh10,zjhh11,zjhh12,zjhh13,zjhh2,zjhh3,zjhh4,zjhh5,zjhh6,zjhh7,zjhh8,zjhh9,zjhm1,zjhm10,zjhm11,zjhm12,zjhm13,zjhm2,zjhm3,zjhm4,zjhm5,zjhm6,zjhm7,zjhm8,zjhm9,zjhmCard,zjht1,zjht10,zjht11,zjht12,zjht13,zjht2,zjht3,zjht4,zjht5,zjht6,zjht7,zjht8,zjht9"
+		},
+		{
+			"url": "assets/zhajinhua/music/hzmj_btnpress.mp3",
+			"type": "sound",
+			"name": "hzmj_btnpress_mp3"
+		}
+	]
+}

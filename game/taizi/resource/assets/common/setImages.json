@@ -1,0 +1,9 @@
+{"file":"setImages.png","frames":{
+"soundbg":{"x":9,"y":9,"w":558,"h":317,"offX":0,"offY":0,"sourceW":558,"sourceH":317},
+"setsound":{"x":654,"y":107,"w":60,"h":30,"offX":0,"offY":0,"sourceW":60,"sourceH":30},
+"setmusic":{"x":732,"y":107,"w":59,"h":30,"offX":0,"offY":0,"sourceW":59,"sourceH":30},
+"soundthumb":{"x":935,"y":68,"w":48,"h":48,"offX":0,"offY":0,"sourceW":48,"sourceH":48},
+"soundon":{"x":585,"y":107,"w":51,"h":41,"offX":0,"offY":0,"sourceW":51,"sourceH":41},
+"soundoff":{"x":938,"y":9,"w":59,"h":41,"offX":0,"offY":0,"sourceW":59,"sourceH":41},
+"soundkuai":{"x":585,"y":60,"w":332,"h":29,"offX":0,"offY":0,"sourceW":332,"sourceH":29},
+"soundguidao":{"x":585,"y":9,"w":335,"h":33,"offX":0,"offY":0,"sourceW":335,"sourceH":33}}}

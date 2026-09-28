@@ -1,0 +1,255 @@
+<html>
+    <head> 
+        <meta charset="utf-8" /> 
+        <meta name="viewport" id="view" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+        <meta name="format-detection" content="telephone=no" /> 
+        <meta name="msapplication-tap-highlight" content="no" /> 
+        <title>结算界面
+        </title> <!-- 
+        <link rel="stylesheet" type="text/css" href="/static/game9/css/bull_vue-2.0.3.css" /> 
+        <link rel="stylesheet" type="text/css" href="/static/game9/css/alert-1.1.css" /> 
+        <link rel="stylesheet" type="text/css" href="/static/game9/css/bullshop-1.0.css" />  -->
+       
+        <script type="text/javascript" src="/static/baijiale/js/fastclick.js"></script>
+        <script src="__STATIC__/game/js/jquery-1.12.1.js"></script> 
+        <script type="text/javascript" src="/static/js/vue.min.js" ></script>
+        <script type="text/javascript" src="/static/js/vue-resource.min.js" ></script>
+        <style type="text/css">
+            body{padding:0;margin: 0;}
+            /*.notice{
+                width: 60%;
+                position: absolute;
+                left: 50%;
+                top:30%;
+                margin-left: -7.5rem;
+                display: none;
+            }
+            .last-time{position: absolute;top: 12%;left: 50%;margin-left: -6rem;width: 11.8rem;height:4.8rem;font-size: 0.9rem;color: #ddd;/*background: url(__STATIC__/baijiale/images/daojishi.png) bottom no-repeat;background-size:58%;*/display:none;}
+            .last-time span{text-align: center;display: inline-block;width: 100%;margin-top: 1rem;z-index: 10;}*/
+        </style>
+        <script type="text/javascript">
+            window.addEventListener('load', function () {
+                FastClick.attach(document.body);
+            }, false);
+
+          
+        </script>
+    </head> 
+<body> 
+
+    <canvas id="myCanvas" width="720" height="1144"  >
+        Your browser does not support the HTML5 canvas tag.
+    </canvas>
+<!-- 
+    <img src="" id="imgId" style="width: 100%;height:100%;"> -->
+    <div style="display:none;">
+    	<img src="__STATIC__/baijiale/images/rank.png" id="bg" >
+    	<img src="__STATIC__/baijiale/images/tubiao1.png" id="tubiao0" >
+    	<img src="__STATIC__/baijiale/images/tubiao2.png" id="tubiao1" >
+    	<img src="__STATIC__/baijiale/images/tubiao3.png" id="tubiao2" >
+        <img src="__STATIC__/game/img/long_save.png" id="long" >
+
+    </div>
+    
+<script>
+window.onload=function(){
+ 
+    
+
+        // var wid=$(window).width()/720;
+            // $('#view').attr('content','initial-scale='+wid+',maximum-scale=1,user-scalable=no');
+            $('#myCanvas').css('height','100%');
+            $('#myCanvas').css('width','100%');
+           	var c=document.getElementById("myCanvas");
+        	var ctx=c.getContext("2d");
+            ctx.drawImage($("#bg")[0],0,0);
+            // alert($('#user').val());
+            var obj = eval("(" + $('#user').val() + ")");
+             //圆角矩形的框
+            CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r) {
+                 var min_size = Math.min(w, h);
+                 if (r > min_size / 2) r = min_size / 2;
+                 // 开始绘制
+                 this.beginPath();
+                 this.moveTo(x + r, y);
+                 this.arcTo(x + w, y, x + w, y + h, r);
+                 this.arcTo(x + w, y + h, x, y + h, r);
+                 this.arcTo(x, y + h, x, y, r);
+                 this.arcTo(x, y, x + w, y, r);
+                 this.closePath();
+                 return this;
+             }
+             var height=300
+            // for (var i = 0; i < obj.length+1; i++) {
+            // 	// obj[i]
+            //     var jianju=55;
+            //     if (i==0) {
+            //         ctx.roundRect(115, (height+jianju*i-40), 500, 50, 5).stroke();  
+            //         ctx.fillStyle='rgba(0, 0, 0, 0.5)';
+            //         ctx.fill();
+            //         ctx.font="20px Arial";
+                    
+            //         // ctx.textAlign='center';
+            //         ctx.fillStyle='yellow';
+            //         ctx.fillText("名次",125,(height+jianju*i-5));
+                    
+            //         ctx.fillStyle='white';
+            //         ctx.textAlign='center';
+            //         ctx.fillText("昵称",240,(height+jianju*i-5));
+            //         ctx.fillText('ID',370,(height+jianju*i-5));
+            //         ctx.fillText('总分',500,(height+jianju*i-5));
+            //     }else{
+                    // var j=i-1;
+                    // ctx.roundRect(115, (height+jianju*i-40), 500, 50, 5).stroke();  
+                    // ctx.fillStyle='rgba(0, 0, 0, 0.5)';
+                    // ctx.fill();
+                    // ctx.font="20px Arial";
+                    
+                    // // ctx.textAlign='center';
+                    // if (j>2) {
+                    //     ctx.fillStyle='yellow';
+                    //     ctx.fillText("第"+(j+1)+"名",150,(height+jianju*i)-5);
+                    // }else{
+                    //     ctx.drawImage($('#tubiao'+j)[0],120,(height+jianju*i-40),50,45);
+                    // }
+                    // ctx.fillStyle='white';
+                    // ctx.textAlign='center';
+                    // ctx.fillText(obj[j].nickname,240,(height+jianju*i)-5);
+                    // ctx.fillText(obj[j].member_id,370,(height+jianju*i-5));
+                    // ctx.fillText(obj[j].bet_count,500,(height+jianju*i-5));
+                // }
+            	
+            // }
+            
+
+            ctx.drawImage($('#long')[0],230,950);
+            // for (var i = 0; i < 10; i++) {
+            //     // obj[i]
+            //     ctx.roundRect(115, (height+55*i-40), 500, 50, 5).stroke();  
+            //     ctx.fillStyle='rgba(0, 0, 0, 0.5)';
+            //     ctx.fill();
+            // }
+            // alert(obj);
+// var imgSrc = document.getElementById("myCanvas").toDataURL("image/png");  
+//     document.getElementById("imgId").src = imgSrc;  
+var x,y;
+
+          c.ontouchstart=function(e){
+            // function mousePos(e){
+                // alert('aaa');
+
+                e=e||event;//获取事件对象
+                //获取事件在canvas中发生的位置
+                 x=e.touches[0].clientX-c.offsetLeft;
+                 y=e.touches[0].clientY-c.offsetTop;
+                var xx=$(window).width()/720;
+                var yy=$(window).height()/1144;
+// var long=$('#long')[0].width;
+// var x1=230*xx;
+// var x2=(230+$('#long')[0].width)*xx;
+// var y1=950*yy;
+// var y2=(950+$('#long')[0].height)*yy;
+// console.log(x1+"++"+x+"+"+x2)
+// console.log(y1+"++"+y+"+"+x2)   
+
+   //function
+        if (x > (230*xx) && x <((230+$('#long')[0].width)*xx) && y > (950*yy) && y < ((950+$('#long')[0].height)*yy)) {
+            console.log("商城");
+
+           ctx.drawImage($('#long')[0],225,945,$('#long')[0].width+10,$('#long')[0].height+10);
+           // setTimeout(function(){
+           //       ctx.drawImage($('#long')[0],230,950,$('#long')[0].width,$('#long')[0].height);
+           // },500);
+            return;
+        }
+//          c.onclick=function(e){
+//             // function mousePos(e){
+//                 // alert('aaa');
+
+//                 e=e||event;//获取事件对象
+//                 //获取事件在canvas中发生的位置
+//                 var x=e.touches[0].clientX-c.offsetLeft;
+//                 var y=e.touches[0].clientY-c.offsetTop;
+//                 var xx=$(window).width()/720;
+//                 var yy=$(window).height()/1144;
+// // var long=$('#long')[0].width;
+// // var x1=230*xx;
+// // var x2=(230+$('#long')[0].width)*xx;
+// // var y1=950*yy;
+// // var y2=(950+$('#long')[0].height)*yy;
+// // console.log(x1+"++"+x+"+"+x2)
+// // console.log(y1+"++"+y+"+"+x2)   
+
+//    //function
+//         if (x > (230*xx) && x <((230+$('#long')[0].width)*xx) && y > (950*yy) && y < ((950+$('#long')[0].height)*yy)) {
+//             console.log("商城");
+
+//            // ctx.drawImage($('#long')[0],225,945,$('#long')[0].width+10,$('#long')[0].height+10);
+//            alert('www');
+//            // setTimeout(function(){
+//            //       ctx.drawImage($('#long')[0],230,950,$('#long')[0].width,$('#long')[0].height);
+//            // },500);
+//             return;
+//         }
+        
+    
+
+                
+                
+            
+        }
+        c.ontouchend=function(e){
+            // function mousePos(e){
+                // alert('aaa');
+                e=e||event;//获取事件对象
+                //获取事件在canvas中发生的位置
+                // var x=e.touches[0].clientX-c.offsetLeft;
+                // var y=e.touches[0].clientY-c.offsetTop;
+                var xx=$(window).width()/720;
+                var yy=$(window).height()/1144;
+var long=$('#long')[0].width;
+var x1=230*xx;
+var x2=(230+$('#long')[0].width)*xx;
+var y1=950*yy;
+var y2=(950+$('#long')[0].height)*yy;
+console.log(x1+"++"+x+"+"+x2)
+ console.log(y1+"++"+y+"+"+x2)      
+ctx.clearRect(0, 0, 1000, 1000);
+            ctx.drawImage($("#bg")[0],0,0);
+            // alert($('#user').val());
+            var obj = eval("(" + $('#user').val() + ")");
+             //圆角矩形的框
+            CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r) {
+                 var min_size = Math.min(w, h);
+                 if (r > min_size / 2) r = min_size / 2;
+                 // 开始绘制
+                 this.beginPath();
+                 this.moveTo(x + r, y);
+                 this.arcTo(x + w, y, x + w, y + h, r);
+                 this.arcTo(x + w, y + h, x, y + h, r);
+                 this.arcTo(x, y + h, x, y, r);
+                 this.arcTo(x, y, x + w, y, r);
+                 this.closePath();
+                 return this;
+             }
+             var height=300 
+  //function
+        if (x > (230*xx) && x <((230+$('#long')[0].width)*xx) && y > (950*yy) && y < ((950+$('#long')[0].height)*yy)) {
+            console.log("商城");
+           // ctx.drawImage($('#long')[0],230,950,$('#long')[0].width+10,$('#long')[0].height+10);
+           // setTimeout(function(){
+            // alert('ert');
+             ctx.drawImage($('#long')[0],230,950);
+                 // ctx.drawImage($('#long')[0],230,950,$('#long')[0].width,$('#long')[0].height);
+           // },500);
+        //     return;
+        }
+    }
+
+                }
+                    
+       	
+</script>
+
+</body>
+</html>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="chooseGe" width="72" height="73.6" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+	<e:Group id="chooseShai6" x="1" scaleX="0.8000000000000002" scaleY="0.8000000000000002">
+		<e:Image x="0" y="0" source="number_bg"/>
+		<e:Image id="content" horizontalCenter="0" verticalCenter="0" source="call2"/>
+	</e:Group>
+</e:Skin>

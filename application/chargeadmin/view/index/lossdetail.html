@@ -1,0 +1,171 @@
+{include file="public/top"}
+
+  <section id="content">
+  <style>
+    .mycircle{
+        line-height:29px ;font-size: 18px;
+    }
+    .panel .table td, .panel .table th {
+    padding: 5px 0;
+    border-top: 1px solid #eaedef;
+    text-align: center;
+}
+</style>
+    <section class="main padder">
+  
+      <div class="row">
+        <div class="col-lg-12">
+          <section class="panel">
+            <header class="panel-heading">
+              损耗详情
+            </header>
+            <div class="row text-small">
+            <div class="col-lg-4 m-b-mini">
+              <form action="lossDetail" method="post">
+                <input type="text" style="width:135px;" class="input-small inline form-control" placeholder="请选择日期" name="start" value="{$data.start}" id="startDate">~<input type="text" style="width:135px;" value="{$data.end}"  class="input-small inline form-control" name="end" placeholder="请选择日期" id="endDate">
+              </div>
+              <div class="col-lg-4 m-b-mini">
+                <select class="input-small inline form-control" id="kuisunType" name="type" style="width:130px">
+                  <option value="" {empty name="$data.type"}selected{/empty}>所有类别</option>
+                  <option value="1" {if condition="$data.type eq 1"}selected{/if}>新玩家赠送</option>
+                  <option value="3" {if condition="$data.type eq 3"}selected{/if}>活动赠送</option>
+                  <option value="2" {if condition="$data.type eq 2"}selected{/if}>充值赠送</option>
+                  <option value="4" {if condition="$data.type eq 4"}selected{/if}>手动充值</option>
+                </select>
+                <button class="btn btn-small btn-white" type="submit">搜索</button>                
+              </div>
+              </form>
+             <!--  <div class="col-lg-4">
+                <div class="input-group">
+                  <input type="text" class="input-small form-control" placeholder="Search">
+                  <span class="input-group-btn">
+                    <button class="btn btn-small btn-white" type="button">Go!</button>
+                  </span>
+                </div>
+              </div> -->
+            </div>
+            <div class="pull-out m-t-small">
+              <table class="table table-striped b-t text-small">
+                <thead>
+                  <tr>
+                    <!-- <th width="20"><input type="checkbox"></th> -->
+                    <th >玩家ID
+                      <!-- <span class="th-sort">
+                        <i class="icon-sort-down text"></i>
+                        <i class="icon-sort-up text-active"></i>
+                        <i class="icon-sort"></i>
+                      </span> -->
+                    </th>
+                    <th >损耗种类</th>
+                    <th>损耗产生时间</th>
+                    <th >损耗房卡(张)</th>
+                    <!-- <th width="30"></th> -->
+                  </tr>
+                </thead>
+                <tbody>
+                {volist name='ret' id='list'}
+                  <tr>
+                   
+                    <td>{$list.uid}</td>
+                    <td>{if condition="$list.type eq 1"}
+                          新玩家赠送
+                        {elseif condition="$list.type eq 2"}
+                          充值赠送
+                        {elseif condition="$list.type eq 3"}
+                          活动赠送
+                        {elseif condition="$list.type eq 4"}
+                          手动充值
+                    {/if}</td>
+                    <td>{:date("Y-m-d H:i:s",$list.createTime)}</td>
+                    <td>{$list.coast}</td>
+                    <!--   <td>
+                      <a href="#" class="active" data-toggle="class"><i class="icon-ok icon-large text-success text-active"></i><i class="icon-remove icon-large text-danger text"></i></a>
+                    </td> -->
+                  </tr>
+                {/volist}
+                </tbody>
+              </table>
+            </div>
+            <footer class="panel-footer">
+              <div class="row">
+               <!--  <div class="col-lg-4 hidden-sm">
+                  <select class="input-small inline form-control" style="width:130px">
+                    <option value="0">Bulk action</option>
+                    <option value="1">Delete selected</option>
+                    <option value="2">Bulk edit</option>
+                    <option value="3">Export</option>
+                  </select>
+                  <button class="btn btn-small btn-white">Apply</button>                  
+                </div> -->
+               <!--  <div class="col-lg-4 text-center">
+                  <small class="text-muted inline m-t-small m-b-small">showing 20-30 of 50 items</small>
+                </div> -->
+
+                <div class="col-lg-4 text-right text-center-sm">                
+                  <!-- <ul class="pagination pagination-small m-t-none m-b-none">
+                    <li><a href="#"><i class="icon-chevron-left"></i></a></li>
+                    <li><a href="#">1</a></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">4</a></li>
+                    <li><a href="#">5</a></li>
+                    <li><a href="#"><i class="icon-chevron-right"></i></a></li>
+                  </ul> -->
+                  {$ret->render()}
+                </div>
+              </div>
+            </footer>
+          </section>
+        </div>
+      </div>
+    </section>
+  </section>
+  <!-- .modal -->
+  <div id="modal" class="modal fade">
+    <form class="m-b-none">
+      <div class="modal-dialog pos-abt" style="margin-top:-235px; top:50%">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i></button>
+            <h4 class="modal-title" id="myModalLabel">Post your first idea</h4>
+          </div>
+          <div class="modal-body">          
+            <div class="block">
+              <label class="control-label">Title</label>
+              <input type="text" class="form-control" placeholder="Post title">
+            </div>
+            <div class="block">
+              <label class="control-label">Content</label>
+              <textarea class="form-control" placeholder="Content" rows="5"></textarea>
+            </div>
+            <div class="checkbox">
+              <label>
+                <input type="checkbox"> Share with all memebers of first
+              </label>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-small btn-default" data-dismiss="modal">Save</button>
+            <button type="button" class="btn btn-small btn-primary" data-loading-text="Publishing...">Publish</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div>
+    </form>
+  </div>
+<script src="__STATIC__/laydate/laydate.js"></script> <!-- 改成你的路径 -->
+<script>
+
+
+//执行一个laydate实例
+laydate.render({
+  elem: '#startDate', //指定元素
+  type: 'datetime'
+});
+
+laydate.render({
+  elem: '#endDate', //指定元素
+  type: 'datetime'
+});
+
+</script>
+{include file="public/bottom"}

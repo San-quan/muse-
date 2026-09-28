@@ -1,0 +1,36 @@
+{
+	"skins": {
+		"eui.ProgressBar": "resource/eui_skins/ProgressBarSkin.exml",
+		"Hall": "resource/eui_skins/Hall.exml",
+		"LoadingUI": "resource/eui_skins/henxiangLoadingUI.exml"
+	},
+	"autoGenerateExmlsList": true,
+	"exmls": [
+		"resource/eui_skins/createDdz.exml",
+		"resource/eui_skins/goldNotEnough.exml",
+		"resource/eui_skins/Hall.exml",
+		"resource/eui_skins/henxiangLoadingUI.exml",
+		"resource/eui_skins/Notice.exml",
+		"resource/eui_skins/ProgressBarSkin.exml",
+		"resource/eui_skins/doudizhu/ddzIndex.exml",
+		"resource/eui_skins/doudizhu/ddzSingleResult.exml",
+		"resource/eui_skins/doudizhu/ddzTotalResult.exml",
+		"resource/eui_skins/hall/buxipaiScreen.exml",
+		"resource/eui_skins/hall/coinPaihangItem.exml",
+		"resource/eui_skins/hall/coinScreen.exml",
+		"resource/eui_skins/hall/mainScreen.exml",
+		"resource/eui_skins/public/JoinRoom.exml",
+		"resource/eui_skins/public/newMessage.exml",
+		"resource/eui_skins/public/newsUI.exml",
+		"resource/eui_skins/public/wanfaUI.exml",
+		"resource/eui_skins/shisanShui/setting.exml",
+		"resource/eui_skins/hall/bisai/baoMingItem.exml",
+		"resource/eui_skins/hall/bisai/bisaichangPaihang.exml",
+		"resource/eui_skins/hall/bisai/bisaiScreen.exml",
+		"resource/eui_skins/hall/bisai/paihangItem.exml",
+		"resource/eui_skins/public/hengxiangUI/henxiangNewMessage.exml",
+		"resource/eui_skins/public/hengxiangUI/henxiangNotice.exml",
+		"resource/eui_skins/public/hengxiangUI/henxiangSetting.exml"
+	],
+	"path": "resource/default.thm.json"
+}

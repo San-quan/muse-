@@ -1,0 +1,149 @@
+{include file="public/top"}
+  <section id="content">
+    <div class="main padder">
+      <div class="row">
+        <div class="col-lg-4 col-offset-4 m-t-large">
+          <section class="panel">
+            <header class="panel-heading">
+              我的账户 / 提现申请
+            </header>
+              <div class="block">
+                
+                <label class="control-label">注：每周五统一处理提现申请</label>
+                
+              </div>
+              <div class="block">
+                <label class="control-label">可提现金额:<span id="totalCash">{$memberinfo.mycash}</span></label>
+             
+              </div>
+              <div class="block">
+                
+                <label class="control-label">最小提现金额:<span id="minCash">{$min}</span></label>
+                
+              </div>
+              <div class="block">
+                <!-- <label class="control-label">金额:</label> -->
+                <input type="text" oninput="mycashJudge()"  placeholder="请输入提现金额" id="mycash"  name="mycash" class="form-control">
+              </div>
+              <div class="block">
+                <input type="text"  placeholder="请输入开户行" id="bank"  name="bank" class="form-control">
+              </div>  
+              <div class="block">
+                <input type="text"  placeholder="请输入开户人姓名" id="name"  name="name" class="form-control">
+              </div>  
+              <div class="block">
+                <input type="text"  placeholder="请输入开户账号" id="number"  name="number" class="form-control">
+              </div>  
+              <div class="block">
+                <input type="text"  placeholder="请输入联系方式" id="phone"  name="phone" class="form-control">
+              </div>  
+              <button type="button" class="btn btn-info" onclick="doEdit()">确认提现</button>
+             
+          </section>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div id="modal" class="modal fade">
+    <form class="m-b-none">
+      <div class="modal-dialog pos-abt" style="margin-top:50px;">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i></button>
+            <h4 class="modal-title" id="myModalLabel">提示信息</h4>
+          </div>
+          <div class="modal-body" id="modelContent">          
+            
+          </div>
+          <div class="modal-footer">
+            <!-- <button type="button" class="btn btn-small btn-default" id="editBtn" onclick="doEdit()">修改</button> -->
+            <button type="button" class="btn btn-small btn-default" data-dismiss="modal" aria-hidden="true" onclick="reload()">关闭</button>
+            <!-- <button type="button" class="btn btn-small btn-primary" data-loading-text="Publishing...">Publish</button> -->
+          </div>
+        </div><!-- /.modal-content -->
+      </div>
+    </form>
+  </div>
+  <script>
+    function reload(){
+      window.location.reload();
+    }
+    var doEdit=function(){
+      var mycash=$('#mycash').val();
+      var bank=$('#bank').val();
+      var name=$('#name').val();
+      var number=$('#number').val();
+      var phone=$('#phone').val();
+  
+      if(mycash==''){
+        $('#modal').modal('show');
+        $("#modelContent").html("提现金额不能为空");
+        return; 
+      }else if(bank==''){
+        $('#modal').modal('show');
+        $("#modelContent").html("开户行不能为空");
+        return; 
+      }else if(name==''){
+        $('#modal').modal('show');
+        $("#modelContent").html("开户姓名不能为空");
+        return; 
+      }else if(number==''){
+        $('#modal').modal('show');
+        $("#modelContent").html("开户账号不能为空");
+        return; 
+      }else if(phone.length != 11){
+        $('#modal').modal('show');
+        $("#modelContent").html("联系方式格式不正确");
+        return; 
+      }else{
+        $.post("{:url('Myaccount/applyCash')}",{mycash:mycash,bank:bank,name:name,number:number,phone:phone},function(res){
+            // var res=eval('('+rel+')');
+            $('#modal').modal('show');
+            // if(res.state!=1){
+            //   $("#sureApply").html('<button type="button" class="btn btn-small btn-primary" data-dismiss="modal" aria-hidden="true" >确定</button>');
+            // }else{
+            //   $("#sureApply").html('<button type="button" class="btn btn-small btn-primary" data-dismiss="modal" aria-hidden="true" onclick="goToIndex()" >确定</button>');
+            // }
+            // $("#editBtn").hide();
+            $("#modelContent").html(res.desc);
+        },'json');
+      }
+  }
+  function CheckChinese(val){     
+　　var reg = new RegExp("[\\u4E00-\\u9FFF]+","g");
+  　　if(reg.test(val)){     
+         // alert("不能输入汉字！");  
+         return true;      
+  　　}else{
+        return false;
+      }
+    }
+    function mycashJudge() {
+        var total=$('#totalCash').html();
+        var cash=$('#mycash').val();
+        var pattern = /^[0-9]\d+(\.\d?\d?)?$/; 
+        var pattern1=/^[0-9]\d+(\.)?$/;
+        var pattern2=/^[0-9]$/;
+        var pattern3=/^[0-9]\.(\d?\d?)?$/;
+        var judge=true;
+        var judge1=pattern.test(cash);
+        var judge2=pattern1.test(cash);
+        var judge3=pattern2.test(cash);
+        var judge4=pattern3.test(cash);
+        if (!pattern.test(cash)&&!pattern1.test(cash)&&!pattern2.test(cash)&&!pattern3.test(cash)) {
+            judge=false;
+        }else{
+            judge=true;
+        }    
+        if (!judge||cash=="") {
+            // alert("请输入正确的金额");
+            $('#mycash').val('');
+            $('#mycash').attr('placeholder',0);
+        }
+        else if (cash-total>0) {
+            $('#mycash').val(total);
+        }
+        
+    }
+  </script>
+{include file="public/bottom"}

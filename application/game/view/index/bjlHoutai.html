@@ -1,0 +1,28 @@
+<html>
+    <head> 
+        <meta charset="utf-8" /> 
+        <!-- <meta name="viewport" id="view" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"> -->
+        <meta name="format-detection" content="telephone=no" /> 
+        <meta name="msapplication-tap-highlight" content="no" /> 
+        <title>
+        </title> 
+
+        <script src="__STATIC__/game/js/jquery-1.12.1.js"></script> 
+        </head> 
+<body> 
+   <table style="text-align: center;margin:0 auto;width: 80%;font-size: 40px;" border="1px" cellpadding='0' id="list">
+     <tr >
+         <th>房间号</th>
+         <th>操作</th>
+     </tr>
+       {volist name="list" id="roomlist"}
+          <tr>
+              <td>{$roomlist['roompwd']}</td>
+              <td><a href="{:url('index/bjlHtDetail','pwd='.$roomlist['roompwd'])}">查看</a></td>
+          </tr>
+        {/volist}
+   </table>
+
+
+</body>
+</html>

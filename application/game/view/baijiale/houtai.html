@@ -1,0 +1,158 @@
+<html>
+    <head> 
+        <meta charset="utf-8" /> 
+        <!-- <meta name="viewport" id="view" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"> -->
+        <meta name="format-detection" content="telephone=no" /> 
+        <meta name="msapplication-tap-highlight" content="no" /> 
+        <title>
+        </title> 
+
+        <script src="__STATIC__/game/js/jquery-1.12.1.js"></script> 
+        </head> 
+<body> 
+   <table style="text-align: center;margin:0 auto;width: 80%;font-size: 40px;" border="1px" cellpadding='0' id="list">
+       
+   </table>
+<script>
+    var globalData = {
+                "socket": "ws://192.168.3.4:2130",
+                // "socket": "ws://wbkj.wanyouxi518.cn:2130",
+                'uid':"{$memberinfo.id}"
+            };
+    var 
+    wsOperation = {
+        FindMyRoom:"FindMyRoom",          //连接服务器成功，进入房间
+    },
+
+    wsOperation_server = {
+        FindMyRoom:"FindMyRoom_s",          //连接服务器成功，进入房间
+       
+    },
+    socketModule = {
+    closeSocket: function() {
+        if (ws) try {
+            ws.close()
+        } catch(e) {
+            console.log(e)
+        }
+    },
+    sendData: function(e) {
+        try {
+            if (console.log("websocket state：" + ws.readyState), ws.readyState == WebSocket.CLOSED) return void reconnectSocket();
+            ws.readyState == WebSocket.OPEN ? ws.send(JSON.stringify(e)) : ws.readyState == WebSocket.CONNECTING ? setTimeout(function() {
+                socketModule.sendData(e)
+            },
+            1e3) : console.log("websocket state：" + ws.readyState)
+        } catch(e) {
+            console.log(e)
+        }
+    },
+    FindMyRoom:function(data){
+        console.log(globalData.uid);
+        socketModule.sendData(
+           {
+
+            uid:globalData.uid,
+            operation:wsOperation.FindMyRoom,
+
+           })
+    }
+
+
+}
+    wsOpenCallback = function (e) {
+        // console.log('123');
+        socketModule.FindMyRoom();
+        console.log("websocket is opened");
+    },
+    wsMessageCallback = function wsMessageCallback(evt) {
+        var obj = eval("(" + evt.data + ")");
+        console.log('callback');
+        switch(obj.wsoperate_server)
+        {
+            case wsOperation_server.FindMyRoom:
+               // gameprocess.EnterRoom(obj);
+               if (obj.roomid==-1) {
+                    window.location.href="{:url('index/index69')}";
+                  }
+               $.post('{:url('houtaidata')}',{roomid:obj.roomid},function(ret){
+                  if (ret==-1) {
+                    // alert(ret);
+                    window.location.href="{:url('index/index69')}";
+                  }
+                  // var res = eval("(" +ret+ ")");
+                  var h=" <tr><th>局数</th><th>闲对</th><th>和</th><th>庄对</th><th>闲</th><th>庄</th></tr>"
+                   for (var i = 0; i < ret.length; i++) {
+                     h=h+"<tr><td>第"+(i+1)+"局</td>";
+                      if (ret[i].winmark.xiandui) {
+                        h=h+"<td style='color:green;'>√</td>";
+                      }else{
+                        h=h+"<td style='color:red;'>×</td>";
+                      }
+                      if (ret[i].winmark.he) {
+                        h=h+"<td style='color:green;'>√</td>";
+                      }else{
+                        h=h+"<td style='color:red;'>×</td>";
+                      }
+                      if (ret[i].winmark.zhuangdui) {
+                        h=h+"<td style='color:green;'>√</td>";
+                      }else{
+                        h=h+"<td style='color:red;'>×</td>";
+                      }
+                      if (ret[i].winmark.xian) {
+                        h=h+"<td style='color:green;'>√</td>";
+                      }else{
+                        h=h+"<td style='color:red;'>×</td>";
+                      }
+                      if (ret[i].winmark.zhuang) {
+                        h=h+"<td style='color:green;'>√</td>";
+                      }else{
+                        h=h+"<td style='color:red;'>×</td>";
+                      }
+                  }
+                  
+                  // for (var i = 0; i < ret.length; i++) {
+                  //     h=h+"<tr><td>第"+(i+1)+"局</td><td>"+ret[i].winmark.xiandui+"</td><td>"+ret[i].winmark.he+"</td><td>"+ret[i].winmark.zhuangdui+"</td><td>"+ret[i].winmark.xian+"</td><td>"+ret[i].winmark.zhuang+"</td></tr>";
+                  // }
+                  $("#list").html(h);
+               },'json');
+               console.log(obj);
+                break;
+            default:
+                console.log('++++++++++++++++++++');
+                console.log(obj);
+                break;
+        }
+       
+    },
+    wsCloseCallback = function (e) {
+        console.log("websocket closed："),
+        console.log(e),
+        appData.connectOrNot = !1,
+        reconnectSocket()
+    },
+    wsErrorCallback = function (e) {
+        console.log("websocket onerror："),
+        console.log(e)
+    },
+    connectSocket = function(e, t, a, n, i) {
+        ws = new WebSocket(e),
+        ws.onopen = t,
+        ws.onmessage = a,
+        ws.onclose = n,
+        ws.onerror = i
+    },
+    reconnectSocket = function() {
+        if (appData.isReconnect && 4 != globalData.roomStatus) {
+            console.log("reconnectSocket"),
+            connectSocket(globalData.socket, wsOpenCallback, wsMessageCallback, wsCloseCallback, wsErrorCallback)
+        }
+    };
+
+    $(function() {
+       connectSocket(globalData.socket, wsOpenCallback, wsMessageCallback, wsCloseCallback, wsErrorCallback);
+    });
+</script>
+
+</body>
+</html>

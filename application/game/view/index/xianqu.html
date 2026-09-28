@@ -1,0 +1,722 @@
+<html>
+    <head> 
+        <meta charset="utf-8" /> 
+        <!-- <meta name="viewport" id="view" content="width=device-width,initial-scale=1,minimum-scale:1,maximum-scale=1,user-scalable=no"> -->
+        <meta name="format-detection" content="telephone=no" /> 
+        <meta name="msapplication-tap-highlight" content="no" /> 
+        <title>红狐互娱</title> 
+        <!-- 
+        <link rel="stylesheet" type="text/css" href="/static/game9/css/bull_vue-2.0.3.css" /> 
+        <link rel="stylesheet" type="text/css" href="/static/game9/css/alert-1.1.css" /> 
+        <link rel="stylesheet" type="text/css" href="/static/game9/css/bullshop-1.0.css" />  -->
+       
+        <script type="text/javascript" src="/static/baijiale/js/fastclick.js"></script>
+        <script src="__STATIC__/game/js/jquery-1.12.1.js"></script> 
+        <script type="text/javascript" src="/static/js/vue.min.js" ></script>
+        <script type="text/javascript" src="/static/js/vue-resource.min.js" ></script>
+        <script src="__STATIC__/js/setajax.js"></script>
+        <style type="text/css">
+            body{padding:0;margin: 0;}
+           
+        .danxuanyangzi{width: 45.5px;height:45.5px;float: left;cursor: pointer;text-align: center;background-image: url(/static/game/room/radio.png);background-repeat: no-repeat;background-size: 100%;}
+        .danxuanlab{    line-height: 45px;font-size: 39px;}
+        .on {background-image: url(__STATIC__/game/room/dian.png);}
+        .radioclass {opacity: 0;cursor: pointer;-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";filter: alpha(opacity=0);}
+        .niuniu tr{height: 85px;}
+        input{
+          margin:0;
+        }
+        .msgbox{font-size: 40px;}
+        .selections3_d1{float:left;background: url(/static/game/room/select.png) no-repeat;background-size: 100%; }
+            /*.notice{
+                width: 60%;
+                position: absolute;
+                left: 50%;
+                top:30%;
+                margin-left: -7.5rem;
+                display: none;
+            }
+            .last-time{position: absolute;top: 12%;left: 50%;margin-left: -6rem;width: 11.8rem;height:4.8rem;font-size: 0.9rem;color: #ddd;/*background: url(__STATIC__/baijiale/images/daojishi.png) bottom no-repeat;background-size:58%;*/
+            /*.last-time span{text-align: center;display: inline-block;width: 100%;margin-top: 1rem;z-index: 10;}*/
+            .piaochecked{width:45px;height:45px;}
+            .on_check {background: url(__STATIC__/game/room/gou.png) no-repeat;background-size: 100%;}
+            .notice{
+                width: 80%;
+                position: absolute;
+                left: 50%;
+                top:23%;
+                margin-left: -41%;
+                display: none;
+            }
+            .6niuniu tr{
+              height: 150px;
+            }
+        </style>
+        <script type="text/javascript">
+            window.addEventListener('load', function () {
+                FastClick.attach(document.body);
+            }, false);
+
+          
+        </script>
+    </head> 
+<body> 
+
+    <div id="setact" style="position:fixed; display:none; background:rgba(0,0,0,0.5); z-index:9000; top:0; bottom:0; left:0; right:0;width: 100%;height: 100%;">
+    <div style="height: 63%;width: 85%;padding-bottom: 1rem;z-index: 10;position: absolute;top: 16%;left: 50%;margin-left: -42.5%;background: url(/static/game/room/bg2.png) no-repeat;background-size: 100% 100%;" class="niucreate">
+        <img src="__STATIC__/game/room/baijia.png" style="width:48%;position: absolute;left: 50%;margin-left: -24%;" class="niutitle">
+        <img src="__STATIC__/game/room/close.png" style="width:13%;position: absolute;right: -4%;" class="niuclose">
+      <form action="{:url('Baijiale/CreateRoom')}" method="post" callback="none1" id="createfrom">
+      <table style="    color: white;width: 80%;height: 68%;font-size: 39px;margin: 16.7% 0 0 18%;" class="niuniu">
+        <tr >
+            <td colspan="1">
+              <span class="danxuanyangzi on" name="niujushu" id="niujushu10" style="float: left;">
+                <input name="gamenum" type="radio" value="10:40" class="radioclass" checked="checked" id="bjl10" style="width: 100%;height: 100%;" />
+                </span><label for="" class="danxuanlab" style="float: left;">10局</label>
+            </td>
+            <td colspan="1">          
+                <span class="danxuanyangzi" name="niujushu" id="niujushu20" style="float: left;">
+                    <input name="gamenum" type="radio" value="20:80" class="radioclass" id="bjl20" style="width: 100%;height: 100%;"/>
+                </span><label for="" class="danxuanlab" style="float: left;">20局</label>
+            </td>
+        </tr>
+        <tr style="height:75px;">
+          <td>
+            <span class="danxuanyangzi on" id="" name="bei" style="float: left;">
+                <input name="score" type="radio" value="1" class="radioclass" checked="checked" id="bei1" style="width: 100%;height: 100%;"/>
+            </span><label for="" class="danxuanlab" style="float: left;">1分</label>
+          </td>
+          <td>
+            <span class="danxuanyangzi" id="" name="bei" style="float: left;">
+                <input name="score" type="radio" value="3" class="radioclass" id="bei3" style="width: 100%;height: 100%;"/>
+            </span><label for="" class="danxuanlab" style="float: left;">3分</label>
+          </td>
+          <td>
+            <span class="danxuanyangzi" id="" name="bei" style="float: left;">
+                <input name="score" type="radio" value="5" class="radioclass" id="bei5" style="width: 100%;height: 100%;"/>
+            </span><label for="" class="danxuanlab" style="float: left;">5分</label>
+          </td>
+          <td>
+            <span class="danxuanyangzi" id="" name="bei" style="float: left;">
+                <input name="score" type="radio" value="10" class="radioclass" id="bei10" style="width: 100%;height: 100%;"/>
+            </span><label for="bei10" class="danxuanlab" style="float: left;">10分</label>
+          </td>
+        </tr>
+        <tr style="height:75px;">
+          <td colspan="4">
+            <span class="danxuanyangzi on" id="" name="guize" style="float: left;">
+                <input name="rule" type="radio" value="1" class="radioclass" checked="checked" id="bei1" style="width: 100%;height: 100%;"/>
+            </span><label for="" class="danxuanlab" style="float: left;">牛七,牛八,牛九2倍,牛牛3倍</label>
+          </td>
+        
+        </tr>
+        <tr style="height:75px;">
+          <td colspan="4">
+            <span class="danxuanyangzi" id="" name="guize" style="float: left;">
+                <input name="rule" type="radio" value="1" class="radioclass"  id="bei1" style="width: 100%;height: 100%;"/>
+            </span><label for="" class="danxuanlab" style="float: left;">牛七2倍,牛八3倍,牛九4倍,牛牛5倍</label>
+          </td>
+        </tr>
+        <tr style="height:63px;">
+          <td colspan="2">
+            <div class="selections3_d1">
+              <div class="piaochecked">
+                <input name="types[1]" type="checkbox" value="6" class="radioclass" id="" style="width: 100%;height: 100%;" />
+              </div>
+            </div>
+            <label for="" class="danxuanlab">五花牛6倍</label>
+          </td>
+          <td colspan="2">
+            <div class="selections3_d1">
+              <div class="piaochecked">
+                <input name="types[2]" type="checkbox" value="8" class="radioclass" id="" style="width: 100%;height: 100%;" />
+              </div>
+            </div>
+            <label for="" class="danxuanlab">炸弹牛8倍</label>
+          </td>
+        </tr>
+        <tr style="height:59px;">
+          <td colspan="4">
+            <div class="selections3_d1">
+              <div class="piaochecked">
+                <input name="types[3]" type="checkbox" value="10" class="radioclass" id="" style="width: 100%;height: 100%;" />
+              </div>
+            </div>
+            <label for="" class="danxuanlab">五小牛10倍</label>
+          </td>
+        </tr>
+        <tr style="height:100px;">
+          <td>
+            <span class="danxuanyangzi on" id="" name="zhonglei" style="float: left;">
+                <input name="gametype" type="radio" checked="checked" value="4" class="radioclass" id="bei5" style="width: 100%;height: 100%;"/>
+            </span><label for="" class="danxuanlab" style="float: left;">抢庄</label>
+          </td>
+          <td>
+            <span class="danxuanyangzi " id="" name="zhonglei" style="float: left;">
+                <input name="gametype" type="radio"  value="6" class="radioclass" id="bei3" style="width: 100%;height: 100%;"/>
+            </span><label for="" class="danxuanlab" style="float: left;">轮庄</label>
+          </td>
+           <td>
+            <span class="danxuanyangzi" id="" name="zhonglei" style="float: left;">
+                <input name="gametype" type="radio" value="2" class="radioclass" id="bei10" style="width: 100%;height: 100%;"/>
+            </span><label for="bei10" class="danxuanlab" style="float: left;">固定庄</label>
+          </td>
+        </tr>
+        
+        <tr style="height:110px;">
+          <td colspan="4" class="niuren">开房无消耗，坐下后扣除40钻石，未开局则返还</td>
+        </tr>
+      </table>
+      <div class="confirms" style="text-align: center;">
+                  <img onclick="$('#createfrom').submit();" type="sub" src="__STATIC__/game/room/create.png" style="margin-top: 5%;width: 32%;">
+              </div>
+      </form>
+    </div>
+
+    </div>
+    <div id="6rniuniu" style="position:fixed; display:none; background:rgba(0,0,0,0.5); z-index:9000; top:0; bottom:0; left:0; right:0;width: 100%;height: 100%;">
+    <div style="height: 63%;width: 85%;padding-bottom: 1rem;z-index: 10;position: absolute;top: 16%;left: 50%;margin-left: -42.5%;background: url(__STATIC__/game/img/6rniu/create.png) no-repeat;background-size: 100% 100%;" class="niucreate6">
+        <img src="__STATIC__/game/room/baijia.png" style="width:48%;position: absolute;left: 50%;margin-left: -24%;" class="niutitle6">
+        <img src="__STATIC__/game/room/close.png" style="width:13%;position: absolute;right: -4%;" class="niuclose6">
+      <form action="{:url('Douniuplayxs/roomcreate')}" method="post" callback="none1" id="create6r">
+      <table style="    color: white;width: 80%;height: 59%;font-size: 39px;margin: 25.5% 0 0 21%;" class="6niuniu">
+        <tr >
+            <td colspan="">
+              <span class="danxuanyangzi on" name="niujushu6" id="6niujushu10" style="float: left;">
+                <input name="gamenum" type="radio" value="10:40" class="radioclass" checked="checked" id="bjl10" style="width: 100%;height: 100%;" />
+                </span><label for="" class="danxuanlab" style="float: left;">10局</label>
+            </td>
+            <td colspan="1">          
+                <span class="danxuanyangzi" name="niujushu6" id="6niujushu20" style="float: left;">
+                    <input name="gamenum" type="radio" value="20:80" class="radioclass" id="bjl20" style="width: 100%;height: 100%;"/>
+                </span><label for="" class="danxuanlab" style="float: left;">20局</label>
+            </td>
+        </tr>
+  
+        <tr style="">
+          <td colspan="">
+            <span class="danxuanyangzi on" id="" name="guize6" style="float: left;">
+                <input name="rule" type="radio" value="1" class="radioclass" checked="checked" id="bei1" style="width: 100%;height: 100%;"/>
+            </span><label for="" class="danxuanlab" style="float: left;">3分</label>
+          </td>
+         <td colspan="">
+            <span class="danxuanyangzi" id="" name="guize6" style="float: left;">
+                <input name="rule" type="radio" value="2" class="radioclass"  id="bei1" style="width: 100%;height: 100%;"/>
+            </span><label for="" class="danxuanlab" style="float: left;">5分</label>
+          </td>
+        </tr>
+       <!--  <tr style="height:75px;">
+          <td colspan="4">
+            <span class="danxuanyangzi" id="" name="guize6" style="float: left;">
+                <input name="rule" type="radio" value="1" class="radioclass"  id="bei1" style="width: 100%;height: 100%;"/>
+            </span><label for="" class="danxuanlab" style="float: left;">5分</label>
+          </td>
+        </tr> -->
+   
+        <tr style="">
+          <td>
+             <span class="danxuanyangzi  on" id="" name="zhonglei6" style="float: left;">
+                <input name="gametype" type="radio" checked="checked" value="4" class="radioclass" id="bei5" style="width: 100%;height: 100%;"/>
+            </span><label for="" class="danxuanlab" style="float: left;">抢庄</label>
+         
+          </td>
+          <td>
+            <span class="danxuanyangzi" id="" name="zhonglei6" style="float: left;">
+                <input name="gametype" type="radio"  value="6" class="radioclass" id="bei3" style="width: 100%;height: 100%;"/>
+            </span><label for="" class="danxuanlab" style="float: left;">轮庄</label>
+          </td>
+           <td>
+            <span class="danxuanyangzi" id="" name="zhonglei6" style="float: left;">
+                <input name="gametype" type="radio" value="2" class="radioclass" id="bei10" style="width: 100%;height: 100%;"/>
+            </span><label for="bei10" class="danxuanlab" style="float: left;">固定庄</label>
+          </td>
+        </tr>
+        
+        <tr style="">
+          <td colspan="4" class="niuren6">开房无消耗，坐下后扣除40钻石，未开局则返还</td>
+        </tr>
+      </table>
+      <div class="confirms" style="text-align: center;">
+                  <img onclick="$('#create6r').submit();" type="sub" src="__STATIC__/game/room/create.png" style="margin-top: 5%;width: 32%;">
+              </div>
+      </form>
+    </div>
+
+    </div>
+    <div id="bjlcr" style="position:fixed; display:none; background:rgba(0,0,0,0.5); z-index:9000; top:0; bottom:0; left:0; right:0;">
+    <div style="height: 40%;width: 85%;padding-bottom: 1rem;z-index: 10;position: absolute;top: 25%;left: 50%;margin-left: -42.5%;background: url(/static/game/room/bg3.png);background-size: 100% 100%;" class="bjlcreate">
+        <img src="__STATIC__/game/room/baijia.png" style="width:35%;position: absolute;left: 50%;margin-left: -17%;" >
+        <img src="__STATIC__/game/room/close.png" style="width:13%;position: absolute;right: -4%;" class="bjlclose">
+      <form action="{:url('Baijiale/CreateRoom')}" method="post" callback="none1" id="bjlCreateRoom">
+      <table style="    color: white;width: 80%;height: 49%;font-size: 45.5px;margin: 20.5% 0 0 18%;">
+        <tr >
+            <td colspan="1">
+              <span class="danxuanyangzi on" name="jushu" id="jusu10" style="float: left;">
+                <input name="gamenum" type="radio" value="10" class="radioclass" checked="checked" id="bjl10" style="width: 100%;height: 100%;" />
+                </span><label for="" class="danxuanlab" style="float: left;">10局</label>
+             
+            </td>
+            <td colspan="1">          
+                <span class="danxuanyangzi" name="jushu" id="jusu20" style="float: left;">
+                    <input name="gamenum" type="radio" value="20" class="radioclass" id="bjl20" style="width: 100%;height: 100%;"/>
+                </span><label for="" class="danxuanlab" style="float: left;">20局</label>
+            </td>
+        </tr>
+        <tr>
+          <td>
+            <span class="danxuanyangzi on" id="" name="bei" style="float: left;">
+                <input name="rule" type="radio" value="1" class="radioclass" checked="checked" id="bei1" style="width: 100%;height: 100%;"/>
+            </span><label for="" class="danxuanlab" style="float: left;">1倍</label>
+          </td>
+          <td>
+            <span class="danxuanyangzi" id="" name="bei" style="float: left;">
+                <input name="rule" type="radio" value="4" class="radioclass" id="bei3" style="width: 100%;height: 100%;"/>
+            </span><label for="" class="danxuanlab" style="float: left;">4倍</label>
+          </td>
+          <td>
+            <span class="danxuanyangzi" id="" name="bei" style="float: left;">
+                <input name="rule" type="radio" value="8" class="radioclass" id="bei5" style="width: 100%;height: 100%;"/>
+            </span><label for="" class="danxuanlab" style="float: left;">8倍</label>
+          </td>
+          <!-- <td>
+            <span class="danxuanyangzi" id="" name="bei" style="float: left;font-size: 1.5rem;">
+                <input name="rule" type="radio" value="10" class="radioclass" id="bei10" style="width: 28.5px;height: 28.5px;"/>
+            </span><label for="bei10" class="danxuanlab" style="float: left;font-size: 1.5rem;">10倍</label>
+          </td> -->
+        </tr>
+        <tr>
+          <td colspan="4" class="bjlren" style="font-size:36px;">开房无消耗，坐下后扣除60钻石，未开局则返还</td>
+        </tr>
+      </table>
+      <div class="confirms" style="text-align: center;">
+                  <img onclick="$('#bjlCreateRoom').submit();" type="sub" src="__STATIC__/game/room/create.png" style="margin-top: 3%;width: 32%;">
+              </div>
+      </form>
+    </div>
+
+    </div>
+ <div class="setkuang" style="display:none;position:fixed; background:rgba(0,0,0,0.5); z-index:9000; top:0; bottom:0; left:0; right:0;"></div>
+    <div class='setnei' style="position: absolute;left: 50%;top:23%;margin-left: -40%;text-align: center;width: 80%;height: 36%;background: url(/static/baijiale/images/setting/bg.png) no-repeat;background-size: 100%;/*;margin-top: 41%;*/color: black;display: none;z-index:9001">
+        <img style="    width: 35%;position: absolute;top: 40%;left: 8%;" src="/static/baijiale/images/setting/music.png">
+       <!--  <img style="    width: 35%;position: absolute;top: 51%;left: 8%;" src="/static/baijiale/images/setting/radio.png"> -->
+        <img style="    width: 35%;position: absolute;top: 40%;left:52%;" class="musicswitch" src="/static/baijiale/images/setting/on.png">
+        <!-- <img style="    width: 35%;position: absolute;top: 51%;left:52%;" class="redioswitch" src="/static/baijiale/images/setting/on.png"> -->
+        <!-- <img src="/static/baijiale/images/close.png"> -->
+    </div>
+
+
+    <canvas id="myCanvas" width="560" height="910"  style="width:100%;height:100%;">
+        Your browser does not support the HTML5 canvas tag.
+    </canvas>
+    <div class="noticekuang" style="display:none;position:fixed; background:rgba(0,0,0,0.5); z-index:9000; top:0; bottom:0; left:0; right:0;"></div>
+    <div class="notice" style="z-index:9001;">
+        <img style="width:100%;" src="__STATIC__/game/confirm/tishi.png">
+        <div class="content" style="width: 80%;height: 50%;position: absolute;top: 33%;left: 50%;margin-left: -29%;color: white;font-size: 40px;">游戏正在开发中,敬请期待!</div>
+        <img class="queding" style="width:35%;position: absolute;top:73%;left:50%;margin-left: -18%;"  src="__STATIC__/game/confirm/yes_xiao.png">
+       <!--  <img style="width:100%;" class="quxiao"  src="__STATIC__/game/confirm/quxiao.png"> -->
+    </div>
+
+    <div style="display:none;">
+    	<img src="__STATIC__/game/xindating/background.png" id="bg" >
+<img src="{$useInfo['photo']}" id="img_head">
+<img src="__STATIC__/game/xindating/6niuniu.png" id="6niuniu" >
+<img src="__STATIC__/game/xindating/12niuniu.png" id="12niuniu" >
+<img src="__STATIC__/game/xindating/huanle30.png" id="huanle30" >
+<img src="__STATIC__/game/xindating/doudizhu.png" id="doudizhu" >
+
+<img src="__STATIC__/game/xindating/set.png" id="btn_set" >
+<img src="__STATIC__/game/xindating/store.png" id="btn_store" >
+<img src="__STATIC__/game/xindating/zhanji.png" id="btn_zhanji" >
+<img src="__STATIC__/game/xindating/find.png" id="btn_find" >
+
+<img src="__STATIC__/game/xindating/laba.png" id="img_laba" >
+<img src="__STATIC__/game/xindating/zhuanBg.png" id="img_zhuanbg" >
+<img src="__STATIC__/game/xindating/add.png" id="btn_add" >
+
+    </div>
+    
+<script>
+
+// var notice="欢迎来到红狐互娱sdfasfewt4yfjtykyul.hjm,bnmvhmnfhmtmtyitykjtyjghjyjtryj,123s";
+var notice="{$notice}";
+
+  $(".setkuang").click(function(){
+    $(".setnei").hide();
+    $(".setkuang").hide();
+  })
+  var musicJudge=true;
+  $(".musicswitch").click(function(){
+      if (musicJudge) {
+        musicJudge=false;
+        $(this).attr('src','/static/baijiale/images/setting/off.png');
+      }else{
+        musicJudge=true;
+        $(this).attr('src','/static/baijiale/images/setting/on.png');
+      }
+  })
+  var rediojudge=true
+  $(".redioswitch").click(function(){
+      if (rediojudge) {
+        rediojudge=false;
+        $(this).attr('src','/static/baijiale/images/setting/off.png');
+      }else{
+        rediojudge=true;
+        $(this).attr('src','/static/baijiale/images/setting/on.png');
+      }
+  })
+
+  $('.queding').click(function(){
+      $('.notice').hide();
+      $('.noticekuang').hide();
+  })
+
+
+
+
+  $(".danxuanyangzi").on("click",function(){
+              $(this).addClass("on").siblings().removeClass("on");
+              var name=$(this).attr('name');
+      $('[name='+name+']').removeClass('on');
+      $(this).addClass("on");
+
+              if($('#niujushu20').attr('class')=="danxuanyangzi on"){
+                  $('.niuren').html('开房无消耗，坐下后扣除80钻石，未开局则返还');
+              }
+              if($('#niujushu10').attr('class')=="danxuanyangzi on"){
+                  $('.niuren').html('开房无消耗，坐下后扣除40钻石，未开局则返还');
+                }
+            })
+
+  $(".danxuanyangzi").on("click",function(){
+              $(this).addClass("on").siblings().removeClass("on");
+              var name=$(this).attr('name');
+      $('[name='+name+']').removeClass('on');
+      $(this).addClass("on");
+
+              if($('#6niujushu20').attr('class')=="danxuanyangzi on"){
+                  $('.niuren6').html('开房无消耗，坐下后扣除80钻石，未开局则返还');
+              }
+              if($('#6niujushu10').attr('class')=="danxuanyangzi on"){
+                  $('.niuren6').html('开房无消耗，坐下后扣除40钻石，未开局则返还');
+                }
+            })
+
+
+    $('.niuclose').click(function(){
+      $("#setact").hide();
+    })
+    $('.niuclose6').click(function(){
+      $("#6rniuniu").hide();
+    })
+    $(".danxuanyangzi").on("click",function(){
+      var name=$(this).attr('name');
+      $('[name='+name+']').removeClass('on');
+      $(this).addClass("on");
+      if($('#jusu20').attr('class')=="danxuanyangzi on"){
+          $('.bjlren').html('开房无消耗，坐下后扣除120钻石，未开局则返还');
+        }
+      if($('#jusu10').attr('class')=="danxuanyangzi on"){
+          $('.bjlren').html('开房无消耗，坐下后扣除60钻石，未开局则返还');
+        }
+    })
+     $('#bjlCreateRoom').ajaxsubmit({success:function(ret){
+                      window.location.href=ret.url;
+                }});
+     $('#createfrom').ajaxsubmit({success:function(ret){
+                      window.location.href=ret.url;
+                }});
+     $('#create6r').ajaxsubmit({success:function(ret){
+                      setTimeout(function(){
+                        window.location.href=ret.url;
+                      },10)
+                      
+                }});
+  $('.bjlclose').click(function(){
+        $("#bjlcr").hide();
+  })
+$(".piaochecked").on("click",function(){
+                  $(this).toggleClass( "on_check" );
+            })  
+window.onload=function(){
+
+            // var wid=$(window).width()/560;
+           
+            // $('#view').attr('content','initial-scale='+wid+',maximum-scale=1,user-scalable=no');
+            //  $('#myCanvas').css('height','100%');
+            // // $('#myCanvas').css('width','100%');
+            // $(".game4").click(function(){
+            //       $('#createfrom').attr('action', '{:url('Douniuplayxs/roomcreate')}');
+            //       $('.niutitle6').html('<img src="__STATIC__/game/room/6_ren.png">');
+            //       $('.cons').css('background-image','url(__STATIC__/game/room/bg.png)');
+            //      $(".overlay,.setact").show();
+            //    })
+            //     $(".game2").click(function(){
+            //       $('#createfrom').attr('action', '{:url('Douniuplay12r/roomcreate')}');
+            //       $('.niutitle').attr('src','__STATIC__/game/room/6_ren.png');
+            //       $('.cons').css('background-image','url(__STATIC__/game/room/bg2.png)');
+            //      $(".overlay,.setact").show();
+            //    })
+
+
+                var objpostion={
+            gamebtn:new Array(new Array(260,240),new Array(260,360),new Array(260,480),new Array(260,580)),
+            functionbtn:new Array(new Array(30,810),new Array(160,810),new Array(290,815),new Array(410,815)),
+            excharge:new Array(new Array(505,42)),
+        }
+
+
+          var scalx=0,scaly=0,scalx12=0,scaly12=0,bjlscalx=0,bjlscaly=0,ddzscalx=0,ddzscaly=0;
+          var sscal=0,sscal1=0,sscal2=0,sscal3=0;
+
+          var times=0;
+          var c=document.getElementById("myCanvas");
+        	var ctx=c.getContext("2d");
+          function drawback(){
+            ctx.clearRect(0, 0, 1000, 1000);
+            ctx.drawImage($("#bg")[0],0,0);
+            // alert($('#user').val());
+            var obj = eval("(" + $('#user').val() + ")");
+             //圆角矩形的框
+            CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r) {
+                 var min_size = Math.min(w, h);
+                 if (r > min_size / 2) r = min_size / 2;
+                 // 开始绘制
+                 this.beginPath();
+                 this.moveTo(x + r, y);
+                 this.arcTo(x + w, y, x + w, y + h, r);
+                 this.arcTo(x + w, y + h, x, y + h, r);
+                 this.arcTo(x, y + h, x, y, r);
+                 this.arcTo(x, y, x + w, y, r);
+                 this.closePath();
+                 return this;
+             }
+
+             var draw = function(bx,by,w,h,r) {
+                ctx.save();
+                ctx.translate(bx,by);
+                ctx.roundRect(0, 0, w, h, r);
+                // ctx.fillStyle='rgba(0, 0, 0, 0.8)';
+                // ctx.fill();
+                ctx.clip();      
+                ctx.font="16px Arial";
+                ctx.fillStyle='white';
+                ctx.textAlign="left";
+                times+=1;
+                var a=notice.replace(/[^\u0000-\u00ff]/g,"aa").length;
+                if (-a*8==450-0.5*times) {
+                  times=0;
+                }
+                ctx.fillText(notice,450-0.5*times,20);
+                 // ctx.drawImage(obj,0,0,w,h);   
+                ctx.restore();
+             }  
+            var height=300;
+            ctx.drawImage($('#6niuniu')[0],objpostion.gamebtn[0][0]-scalx/2,objpostion.gamebtn[0][1]-scaly/2,($('#6niuniu')[0].width+scalx),$('#6niuniu')[0].height+scaly);
+            ctx.drawImage($('#12niuniu')[0],objpostion.gamebtn[1][0]-scalx12/2,objpostion.gamebtn[1][1]-scaly12/2,($('#12niuniu')[0].width+scalx12),$('#12niuniu')[0].height+scaly12);
+            ctx.drawImage($('#huanle30')[0],objpostion.gamebtn[2][0]-bjlscalx/2,objpostion.gamebtn[2][1]-bjlscaly/2,($('#huanle30')[0].width+bjlscalx),$('#huanle30')[0].height+bjlscaly);
+             ctx.drawImage($('#doudizhu')[0],objpostion.gamebtn[3][0]-ddzscalx/2,objpostion.gamebtn[3][1]-ddzscaly/2,($('#doudizhu')[0].width+ddzscalx),$('#doudizhu')[0].height+ddzscaly);
+
+             ctx.drawImage($('#btn_set')[0],objpostion.functionbtn[3][0]-sscal/2,objpostion.functionbtn[3][1]-sscal/2,$('#btn_set')[0].width+sscal,$('#btn_set')[0].height+sscal);
+             ctx.drawImage($('#btn_store')[0],objpostion.functionbtn[0][0]-sscal/2,objpostion.functionbtn[0][1]-sscal/2,$('#btn_store')[0].width+sscal,$('#btn_store')[0].height+sscal);
+            ctx.drawImage($('#btn_zhanji')[0],objpostion.functionbtn[1][0]-sscal/2,objpostion.functionbtn[1][1]-sscal/2,$('#btn_zhanji')[0].width+sscal,$('#btn_zhanji')[0].height+sscal);
+            ctx.drawImage($('#btn_find')[0],objpostion.functionbtn[2][0]-sscal/2,objpostion.functionbtn[2][1]-sscal/2,$('#btn_find')[0].width+sscal,$('#btn_find')[0].height+sscal);
+
+            ctx.drawImage($('#img_zhuanbg')[0],340,30);
+            ctx.drawImage($('#btn_add')[0],objpostion.excharge[0][0]-2,objpostion.excharge[0][1]-2,$('#btn_add')[0].width+4,$('#btn_add')[0].height+4);
+
+            ctx.drawImage($('#img_laba')[0],8,120);
+            //头像
+            var headr = 70;
+            ctx.save();
+            ctx.translate(20,11);
+            ctx.roundRect(0, 0, headr,headr, headr/2);
+            ctx.clip();      
+            ctx.drawImage($('#img_head')[0],0,0,headr,headr);   
+            ctx.restore();
+
+
+            draw(80,123,450,30,0);
+           
+
+            
+            
+            // alert(a);
+            ctx.font="18px Arial";
+            ctx.fillText("{$useInfo['nickname']}",100,40);
+            ctx.fillStyle='yellow';
+            ctx.fillText('ID:{$useInfo['id']}',100,70);
+            ctx.font="20px Arial";
+            ctx.fillText('{$useInfo['cards']}',410,65);
+
+        // var c=document.getElementById("myCanvas");
+          requestAnimationFrame(anit);
+        
+
+        }
+        function anit(){
+            drawback();
+        }   
+        drawback();
+        
+        var x,y;
+        c.ontouchstart=function(e){
+          e=e||event;//获取事件对象
+          //获取事件在canvas中发生的位置touches[0]
+           x=e.touches[0].clientX-c.offsetLeft;
+           y=e.touches[0].clientY-c.offsetTop;
+          var xx=$(window).width()/560;
+          var yy=$(window).height()/910;
+         
+         // alert('se');
+        
+          // ,sscal1=10,sscal2=10,sscal3=10,sscal4=4;
+ // ctx.drawImage($('#6niuniu')[0],objpostion.gamebtn[0][0]-scalx/2,objpostion.gamebtn[0][1]-scaly/2,$('#6niuniu')[0].width+scalx,$('#6niuniu')[0]+scaly);
+        //game
+        if (x > (objpostion.gamebtn[0][0]*xx) && x <((objpostion.gamebtn[0][0]+$('#6niuniu')[0].width)*xx) && y > (objpostion.gamebtn[0][1]*yy) && y < ((objpostion.gamebtn[0][1]+$('#6niuniu')[0].height)*yy)) {
+          // alert('ss');
+          scalx=30,scaly=10
+          // ctx.drawImage($('#6niuniu')[0],objpostion.gamebtn[0][0]-scalx/2,objpostion.gamebtn[0][1]-scaly/2,($('#6niuniu')[0].width+scalx),$('#6niuniu')[0].height+scaly);
+            // return;
+        }
+        if (x > (objpostion.gamebtn[1][0]*xx) && x <((objpostion.gamebtn[1][0]+$('#12niuniu')[0].width)*xx) && y > (objpostion.gamebtn[1][1]*yy) && y < ((objpostion.gamebtn[1][1]+$('#12niuniu')[0].height)*yy)) {
+            // ctx.drawImage($('#12niuniu')[0],objpostion.gamebtn[1][0]-scalx/2,objpostion.gamebtn[1][1]-scaly/2,($('#12niuniu')[0].width+scalx),$('#12niuniu')[0].height+scaly);
+            scalx12=30,scaly12=10
+            return;
+        }
+        if (x > (objpostion.gamebtn[2][0]*xx) && x <((objpostion.gamebtn[2][0]+$('#6niuniu')[0].width)*xx) && y > (objpostion.gamebtn[2][1]*yy) && y < ((objpostion.gamebtn[2][1]+$('#6niuniu')[0].height)*yy)) {
+            // ctx.drawImage($('#huanle30')[0],objpostion.gamebtn[2][0]-scalx/2,objpostion.gamebtn[2][1]-scaly/2,($('#huanle30')[0].width+scalx),$('#huanle30')[0].height+scaly);
+            bjlscalx=30,bjlscaly=10
+            return;
+        }
+        if (x > (objpostion.gamebtn[3][0]*xx) && x <((objpostion.gamebtn[3][0]+$('#doudizhu')[0].width)*xx) && y > (objpostion.gamebtn[3][1]*yy) && y < ((objpostion.gamebtn[3][1]+$('#doudizhu')[0].height)*yy)) {
+            // ctx.drawImage($('#doudizhu')[0],objpostion.gamebtn[3][0]-scalx/2,objpostion.gamebtn[3][1]-scaly/2,($('#doudizhu')[0].width+scalx),$('#doudizhu')[0].height+scaly);
+            ddzscalx=30,ddzscaly=10
+            return;
+        }
+
+        //function
+        
+        if (x > (objpostion.functionbtn[0][0]*xx) && x <((objpostion.functionbtn[0][0]+$('#btn_store')[0].width)*xx) && y > (objpostion.functionbtn[0][1]*yy) && y < ((objpostion.functionbtn[0][1]+$('#btn_store')[0].height)*yy)) {
+            // ctx.drawImage($('#btn_store')[0],objpostion.functionbtn[0][0]-sscal/2,objpostion.functionbtn[0][1]-sscal/2,$('#btn_store')[0].width+sscal,$('#btn_store')[0].height+sscal);
+            sscal=10;
+            return;
+        }
+        if (x > (objpostion.functionbtn[1][0]*xx) && x <((objpostion.functionbtn[1][0]+$('#btn_zhanji')[0].width)*xx) && y > (objpostion.functionbtn[1][1]*yy) && y < ((objpostion.functionbtn[1][1]+$('#btn_zhanji')[0].height)*yy)) {
+            // ctx.drawImage($('#btn_zhanji')[0],objpostion.functionbtn[1][0]-sscal1/2,objpostion.functionbtn[1][1]-sscal1/2,$('#btn_zhanji')[0].width+sscal1,$('#btn_zhanji')[0].height+sscal1);
+            sscal1=10;
+            return;
+        }
+        if (x > (objpostion.functionbtn[2][0]*xx) && x <((objpostion.functionbtn[2][0]+$('#btn_find')[0].width)*xx) && y > (objpostion.functionbtn[2][1]*yy) && y < ((objpostion.functionbtn[2][1]+$('#btn_find')[0].height)*yy)) {
+            // ctx.drawImage($('#btn_find')[0],objpostion.functionbtn[2][0]-sscal2/2,objpostion.functionbtn[2][1]-sscal2/2,$('#btn_find')[0].width+sscal2,$('#btn_find')[0].height+sscal2);
+            sscal2=10;
+            return;
+        }
+        if (x > (objpostion.functionbtn[3][0]*xx) && x <((objpostion.functionbtn[3][0]+$('#btn_set')[0].width)*xx) && y > (objpostion.functionbtn[3][1]*yy) && y < ((objpostion.functionbtn[3][1]+$('#btn_set')[0].height)*yy)) {
+            // ctx.drawImage($('#btn_set')[0],objpostion.functionbtn[3][0]-sscal3/2,objpostion.functionbtn[3][1]-sscal3/2,$('#btn_set')[0].width+sscal3,$('#btn_set')[0].height+sscal3);
+            sscal3=10;
+            return;
+        }
+
+        //充值
+        if (x > (objpostion.excharge[0][0]*xx) && x <((objpostion.excharge[0][0]+$('#btn_add')[0].width)*xx) && y > (objpostion.excharge[0][1]*yy) && y < ((objpostion.excharge[0][1]+$('#btn_add')[0].height)*yy)) {
+            // ctx.drawImage($('#btn_add')[0],objpostion.excharge[0][0]-sscal4/2,objpostion.excharge[0][1]-sscal4/2,$('#btn_add')[0].width+sscal4,$('#btn_add')[0].height+sscal4);
+            sscal4=4;
+            return;
+        }
+
+        return;
+
+                
+                
+        }
+        c.ontouchend=function(e){
+                e=e||event;//获取事件对象
+                //获取事件在canvas中发生的位置
+                // var x=e.clientX-c.offsetLeft;
+                // var y=e.clientY-c.offsetTop;
+                var xx=$(window).width()/560;
+                var yy=$(window).height()/910;
+                scalx=0,scaly=0,scalx12=0,scaly12=0,bjlscalx=0,bjlscaly=0,ddzscalx=0,ddzscaly=0;
+                sscal=0,sscal1=0,sscal2=0,sscal3=0;
+                // drawback();
+        //game
+        if (x > (objpostion.gamebtn[0][0]*xx) && x <((objpostion.gamebtn[0][0]+$('#6niuniu')[0].width)*xx) && y > (objpostion.gamebtn[0][1]*yy) && y < ((objpostion.gamebtn[0][1]+$('#6niuniu')[0].height)*yy)) {
+            // console.log("6人牛牛");
+            $('#6rniuniu').show();
+            // $('#createfrom').attr('action', '{:url('Douniuplayxs/roomcreate')}');
+            $('.niutitle6').attr('src','__STATIC__/game/room/6_ren.png');
+            // $('.niucreate6').css('background-image','url(__STATIC__/game/room/bg.png)');
+            return;
+        }
+        if (x > (objpostion.gamebtn[1][0]*xx) && x <((objpostion.gamebtn[1][0]+$('#12niuniu')[0].width)*xx) && y > (objpostion.gamebtn[1][1]*yy) && y < ((objpostion.gamebtn[1][1]+$('#12niuniu')[0].height)*yy)) {
+            // console.log("12人牛牛");
+            $('#setact').show();
+            $('#createfrom').attr('action', '{:url('Douniuplay12r/roomcreate')}');
+            $('.niutitle').attr('src','__STATIC__/game/room/12_ren.png');
+            $('.niucreate').css('background-image','url(__STATIC__/game/room/bg2.png)');
+            return;
+        }
+        if (x > (objpostion.gamebtn[2][0]*xx) && x <((objpostion.gamebtn[2][0]+$('#6niuniu')[0].width)*xx) && y > (objpostion.gamebtn[2][1]*yy) && y < ((objpostion.gamebtn[2][1]+$('#6niuniu')[0].height)*yy)) {
+            // console.log("百家乐");
+            $("#bjlcr").show();
+            return;
+        }
+        if (x > (objpostion.gamebtn[3][0]*xx) && x <((objpostion.gamebtn[3][0]+$('#doudizhu')[0].width)*xx) && y > (objpostion.gamebtn[3][1]*yy) && y < ((objpostion.gamebtn[3][1]+$('#doudizhu')[0].height)*yy)) {
+            // console.log("斗地主");
+
+             $('.notice').show();
+            $('.noticekuang').show();
+            return;
+        }
+
+        //function
+        if (x > (objpostion.functionbtn[0][0]*xx) && x <((objpostion.functionbtn[0][0]+$('#btn_store')[0].width)*xx) && y > (objpostion.functionbtn[0][1]*yy) && y < ((objpostion.functionbtn[0][1]+$('#btn_store')[0].height)*yy)) {
+            console.log("商城");
+            window.location.href='{:url('index/indexShop')}';
+            return;
+        }
+        if (x > (objpostion.functionbtn[1][0]*xx) && x <((objpostion.functionbtn[1][0]+$('#btn_zhanji')[0].width)*xx) && y > (objpostion.functionbtn[1][1]*yy) && y < ((objpostion.functionbtn[1][1]+$('#btn_zhanji')[0].height)*yy)) {
+            console.log("战绩");
+            window.location.href='{:url('index/zhanji')}';
+            return;
+        }
+        if (x > (objpostion.functionbtn[2][0]*xx) && x <((objpostion.functionbtn[2][0]+$('#btn_find')[0].width)*xx) && y > (objpostion.functionbtn[2][1]*yy) && y < ((objpostion.functionbtn[2][1]+$('#btn_find')[0].height)*yy)) {
+            console.log("发现");
+            window.location.href='{:url('index/faxian')}';
+            return;
+        }
+        if (x > (objpostion.functionbtn[3][0]*xx) && x <((objpostion.functionbtn[3][0]+$('#btn_set')[0].width)*xx) && y > (objpostion.functionbtn[3][1]*yy) && y < ((objpostion.functionbtn[3][1]+$('#btn_set')[0].height)*yy)) {
+            console.log("设置");
+            $(".setnei").show();
+            $(".setkuang").show();
+            return;
+        }
+
+        //充值
+        if (x > (objpostion.excharge[0][0]*xx) && x <((objpostion.excharge[0][0]+$('#btn_add')[0].width)*xx) && y > (objpostion.excharge[0][1]*yy) && y < ((objpostion.excharge[0][1]+$('#btn_add')[0].height)*yy)) {
+            console.log("顶部充值");
+            window.location.href='{:url('index/indexShop')}';
+            return;
+        }
+
+        return;
+
+                
+                
+            }
+            requestAnimationFrame(anit);
+          }
+    // var a='顶部充值';     
+    //     a.prototype.getBytesLength=function() { 
+    //     return this.replace(/[^\x00-\xff]/gi, "--").length; 
+    // } 
+      // alert();
+   
+
+    
+    
+       	
+</script>
+
+</body>
+</html>

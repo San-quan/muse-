@@ -1,0 +1,1389 @@
+<?php
+
+/**
+/*欢乐麻将算法
+/*
+/*/
+require_once __DIR__ . '/GameManager.php';
+
+//////////////////////////////////////////////////////////////////////////
+//逻辑掩码
+
+define("MASK_COLOR",0xF0);
+define("MASK_VALUE",0x0F);
+define("WEALTHCARD", 0x37);
+define("GR_CONST_WAN_MIN",  0x01);
+define("GR_CONST_WAN_MAX",  0x09);
+define("GR_CONST_TIAO_MIN", 0x11);
+define("GR_CONST_TIAO_MAX", 0x19);
+define("GR_CONST_TONG_MIN", 0x21);
+define("GR_CONST_TONG_MAX", 0x29);
+define("GR_CONST_ZI_MIN",   0x31);
+define("GR_CONST_ZI_MAX",   0x37);
+//////////////////////////////////////////////////////////////////////////
+//动作定义
+
+//动作标志
+define("WIK_NULL",                    0x00);                                //没有类型
+define("WIK_LEFT",                    0x01);                                //左吃类型
+define("WIK_CENTER",                  0x02);                                //中吃类型
+define("WIK_RIGHT",                   0x04);                               //右吃类型
+define("WIK_PENG",                    0x08);                                //碰牌类型
+define("WIK_GANG",                    0x10);                               //杠牌类型
+define("WIK_LISTEN",                  0x20);                                //听牌类型
+define("WIK_CHI_HU",                  0x40);                               //吃胡类型
+
+// define("WIK_FENG_SHUN",               0x20);                               //风顺类型
+// define("WIK_ZI_SHUN",                 0x80);                                //字顺类型
+
+//////////////////////////////////////////////////////////////////////////
+define("GANG_STRAINT",                0x01);                               //直杠 属于明杠
+define("GANG_BEND",                   0x02);                               //弯杠 属于明杠
+define("GANG_DARK",                   0x03);                                //暗杠
+//胡牌定义
+
+//牌型掩码
+define("CHK_MASK_SMALL",              0x0000FFFF);                         //小胡掩码
+define("CHK_MASK_GREAT",              0xFFFF0000);                         //大胡掩码
+
+//小胡牌型
+define("CHK_NULL",                    0x00000000);                          //非胡类型
+define("CHK_JI_HU",                   0x00000001);                         //鸡胡类型
+define("CHK_PING_HU",                 0x00000002);                         //平胡类型
+define("CHK_QI_XIAO_DUI",             0x00000008);                          //小7对
+define("CHK_SEVEN_STAR",              0x00000010);                          //七星
+define("CHK_SHI_SAN_YAO",             0x00000020);                          //十三不搭
+define("CHK_PENG_PENG",               0x00000040);                          //碰碰胡
+define("CHK_CAI_SHEN",                0x00000080);                          //四财神
+//#define   CHK_BIG_THREE_YUAN          0x00000080                          //大三元
+//define("CHK_ALL_YISE",                0x00000004);                        //字一色清一色 假胡
+
+//define("CHK_LUXURY",                  0x00000010);  //豪华 龙
+//#define CHK_SHI_KADANG                0x00000020  //卡当
+
+//#define CHK_SAN_CAI               0x00000004                          //财神会
+//#define CHK_FOUR_RED              0x00000080                          //四红中
+//#define CHK_ALL_FENG              0x00000010                          //字清 字一色 全风向
+//////////////////////////////////////////////////////////////////////////
+//大胡权位
+define("CHR_DI",                      0x00000100);                          //地胡权位
+define("CHR_TIAN",                    0x00000200);                          //天胡权位
+define("CHR_QING_YI_SE",              0x00000400);                          //清一色牌
+define("CHR_QIANG_GANG",              0x00000800);                          //抢杠权位（杠上点炮胡）
+define("CHR_QING_QI_DUI",             0x00001000);                          //清七对
+define("CHR_GANG_KAI",                0x00002000);                          //杠开权位(南丰杠上开花)
+define("CHR_BAO_TOU",                 0x00004000);                          //爆头
+define("CHR_HUN_YI_SE",               0x00040000);                          //混一色
+define("CHR_ZI_MO",                   0x00080000);                          //自摸
+define("CHR_ZI_YI_SE",                0x00010000);                          //字一色
+
+//define CHR_BU_HUA                  0x00008000                          //补花
+//#define CHR_NONE_DRAGON               0x00010000                          //无龙
+//#define CHR_PAO_MA_HUA              0x00008000                          //抛花
+//#define CHR_DU_DIAO                   0x00004000                          //独吊  抛麻花（单吊牌为财神）  
+//#define CHR_GANG_GUN                0x00004000                          //杠上炮(杠完补牌。然后打出去的牌被人点炮)
+//////////////////////////////////////////////////////////////////////////
+
+
+class GameLogic
+{
+
+    //静态变量保存全局实例
+    private static $_instance = null;
+    //私有构造函数，防止外界实例化对象
+    private function __construct() {
+    }
+    //私有克隆函数，防止外办克隆对象
+    private function __clone() {
+    }
+    //静态方法，单例统一访问入口
+    static public function getInstance() {
+        if (is_null ( self::$_instance ) || isset ( self::$_instance )) {
+            self::$_instance = new self ();
+        }
+        return self::$_instance;
+    }
+
+    private $totalCount = 0;
+    private static $m_cardOne=array(
+        0x01,0x02,0x03,0x04,0x05,0x06,0x07,0x08,0x09,                       //万子
+        0x01,0x02,0x03,0x04,0x05,0x06,0x07,0x08,0x09,                       //万子
+        0x01,0x02,0x03,0x04,0x05,0x06,0x07,0x08,0x09,                       //万子
+        0x01,0x02,0x03,0x04,0x05,0x06,0x07,0x08,0x09,                       //万子
+        0x11,0x12,0x13,0x14,0x15,0x16,0x17,0x18,0x19,                       //索子
+        0x11,0x12,0x13,0x14,0x15,0x16,0x17,0x18,0x19,                       //索子
+        0x11,0x12,0x13,0x14,0x15,0x16,0x17,0x18,0x19,                       //索子
+        0x11,0x12,0x13,0x14,0x15,0x16,0x17,0x18,0x19,                       //索子
+        0x21,0x22,0x23,0x24,0x25,0x26,0x27,0x28,0x29,                       //同子
+        0x21,0x22,0x23,0x24,0x25,0x26,0x27,0x28,0x29,                       //同子
+        0x21,0x22,0x23,0x24,0x25,0x26,0x27,0x28,0x29,                       //同子
+        0x21,0x22,0x23,0x24,0x25,0x26,0x27,0x28,0x29,                       //同子
+        0x31,0x32,0x33,0x34,0x35,0x36,0x37,                                 //番子
+        0x31,0x32,0x33,0x34,0x35,0x36,0x37,                                 //番子
+        0x31,0x32,0x33,0x34,0x35,0x36,0x37,                                 //番子
+        0x31,0x32,0x33,0x34,0x35,0x36,0x37                                 //番子
+       // 0x38,0x39,0x3A,0x3B,0x3C,0x3D,0x3E,0x3F                             //花牌
+    );
+
+    //动作牌组合子项
+    private static $tagWaveItem = array(
+        "cbWeaveKind"   =>0,                        //组合类型
+        "cbCenterCard"  =>0,                       //中心扑克
+        "cbPublicCard"  =>0,                       //公开标志
+        "wProvideUser"  =>0                       //供应用户
+    );
+
+
+    //获取数值
+    public function getCardValue($cardData) { return $cardData&MASK_VALUE; } //十六进制前面四位表示牌的数值
+    //获取花色
+    public function getCardColor($cardData) { return ($cardData&MASK_COLOR)>>4; } //十六进制后面四位表示牌的花色 
+
+
+
+//-===============================================================================
+    public function text($text)
+    {
+        $cards = array(
+        0x01,0x02,0x03,0x04,0x05,0x06,0x07,0x08,0x09,                       //万子
+        0x01,0x02,0x03,0x04,0x05,0x06,0x07,0x08,0x09,                       //万子
+        0x01,0x02,0x03,0x04,0x05,0x06,0x07,0x08,0x09,                       //万子
+        0x01,0x02,0x03,0x04,0x05,0x06,0x07,0x08,0x09,                       //万子
+        0x11,0x12,0x13,0x14,0x15,0x16,0x17,0x18,0x19,                       //索子
+        0x11,0x12,0x13,0x14,0x15,0x16,0x17,0x18,0x19,                       //索子
+        0x11,0x12,0x13,0x14,0x15,0x16,0x17,0x18,0x19,                       //索子
+        0x11,0x12,0x13,0x14,0x15,0x16,0x17,0x18,0x19,                       //索子
+        0x21,0x22,0x23,0x24,0x25,0x26,0x27,0x28,0x29,                       //同子
+        0x21,0x22,0x23,0x24,0x25,0x26,0x27,0x28,0x29,                       //同子
+        0x21,0x22,0x23,0x24,0x25,0x26,0x27,0x28,0x29,                       //同子
+        0x21,0x22,0x23,0x24,0x25,0x26,0x27,0x28,0x29,                       //同子
+        0x31,0x32,0x33,0x34,0x35,0x36,0x37,                                 //番子
+        0x31,0x32,0x33,0x34,0x35,0x36,0x37,                                 //番子
+        0x31,0x32,0x33,0x34,0x35,0x36,0x37,                                 //番子
+        0x31,0x32,0x33,0x34,0x35,0x36,0x37                                 //番子
+       // 0x38,0x39,0x3A,0x3B,0x3C,0x3D,0x3E,0x3F                             //花牌
+    );
+        echo '=================开始================='."\n\n\n";
+        $total = 0;
+        $total1 = 0;
+        $zstime=microtime(true);
+        $zsmemory = memory_get_usage();
+        $hu = 0;
+        for ($i=0; $i < $text; $i++) { 
+            shuffle($cards);
+            $handCards = array_slice($cards,0,14);
+            // var_dump($handCards);
+            $cleanCard = array();
+            for($j = 0;$j < 14; $j++){
+                $key = $this->SwitchToCardIndex($handCards[$j]);
+                $cleanCard[$key] = isset($cleanCard[$key])?$cleanCard[$key]+1:1;
+            }
+            ksort($cleanCard);
+            $a = $i+1;
+            // echo '================================'.$a.'==========================================='."\n";
+            // echo '牌型：    ';
+            // foreach ($cleanCard as $key => $value) {
+            //     if($cleanCard[$key] > 1){
+            //         for ($j=0; $j < $cleanCard[$key]; $j++) { 
+            //             echo $this->SwitchToCardData($key).'    ';
+            //         }
+            //     }else if($cleanCard[$key] == 1){
+            //         echo $this->SwitchToCardData($key).'    ';
+            //     }
+            // }
+            // echo "\n".'胡牌：    '."\n";
+            $AnalyseItemArray = array();
+            $stime=microtime(true);
+            $smemory = memory_get_usage();
+            $this->AnalyseCard($cleanCard,array(),$AnalyseItemArray);
+            if($AnalyseItemArray == null){
+                // echo '无法胡牌'."\n";
+            }else if(count($AnalyseItemArray) == 0){
+                // echo '无法胡牌'."\n";
+            }else if(count($AnalyseItemArray) != 0){
+                ++$hu;
+                echo '================================'.$a.'==========================================='."\n";
+                echo '牌型：    ';
+                foreach ($cleanCard as $key => $value) {
+                    if($cleanCard[$key] > 1){
+                        for ($j=0; $j < $cleanCard[$key]; $j++) { 
+                                echo $this->SwitchToCardData($key).'    ';
+                        }
+                    }else if($cleanCard[$key] == 1){
+                        echo $this->SwitchToCardData($key).'    ';
+                    }
+                }
+                echo "\n".'胡牌：    '."\n";
+                foreach ($AnalyseItemArray as $key => $value) {
+                    echo '将牌：           '.$AnalyseItemArray[$key]['cbCardEye']."\n";
+                    for ($j=0; $j < 4; $j++) { 
+                        echo '类型：  ';
+                        switch ($AnalyseItemArray[$key]['cbWeaveKind'][$j]) {
+                            case WIK_PENG:
+                                echo '碰牌     ';
+                                echo $AnalyseItemArray[$key]['cbCenterCard'][$j]."\n";
+                                break;
+                            case WIK_LEFT:
+                                echo '左吃     '; 
+                                echo $AnalyseItemArray[$key]['cbCenterCard'][$j]."\n";
+                                break;
+                            case WIK_CENTER:
+                                echo '中吃     '; 
+                                echo $AnalyseItemArray[$key]['cbCenterCard'][$j]."\n";
+                                break;
+                            case WIK_RIGHT:
+                                echo '右吃     '; 
+                                echo $AnalyseItemArray[$key]['cbCenterCard'][$j]."\n";
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                }
+                echo '================='."\n";
+                $etime=microtime(true);//获取程序执行结束的时间
+                $ememory = memory_get_usage();
+                $totaltime=$etime-$stime;
+                $totalmemory=($ememory-$smemory)/1024;
+                echo '消耗时间：     '.$totaltime."\n";
+                echo '消耗内存：     '.$totalmemory.'kb'."\n";
+            }
+            // echo '================='."\n";
+            // $etime=microtime(true);//获取程序执行结束的时间
+            // $ememory = memory_get_usage();
+            // $totaltime=$etime-$stime;
+            // $totalmemory=($ememory-$smemory)/1024;
+            // echo '消耗时间：     '.$totaltime."\n";
+            // echo '消耗内存：     '.$totalmemory.'kb'."\n";
+            $etime=microtime(true);//获取程序执行结束的时间
+            $ememory = memory_get_usage();
+            $totaltime=$etime-$stime;
+            $total += $totaltime;
+        }
+        $zetime=microtime(true);//获取程序执行结束的时间
+        $zememory = memory_get_usage();
+        $totalztime=$zetime-$zstime;
+        $totalzmemory=($zememory-$zsmemory)/1024;
+        echo '=================总结数据================='."\n";
+        echo '总胡牌数：     '.$hu."\n";
+        echo '总测试数：     '.$text."\n";
+        echo '消耗总时间：     '.$total."\n";
+        echo '消耗总内存：     '.$totalzmemory.'kb'."\n";
+        echo '=================结束================='."\n";
+    }
+
+
+
+//-===============================================================================
+
+    //冒泡
+     public function sortCards(&$cardsList=array()){
+        $this->initIndex($cardsList);
+
+        $count = sizeof($cardsList);
+          for($k=1;$k<$count;$k++){
+            for($i=0;$i<$count-$k;$i++){
+
+                $cardValue = $this->getCardValue($cardsList[$i]);
+                $cardNextValue = $this->getCardValue($cardsList[$i+1]);
+
+                if($cardValue>$cardNextValue){//相邻比较
+                    $tem=$cardsList[$i];
+                    $cardsList[$i]=$cardsList[$i+1];
+                    $cardsList[$i+1]=$tem;
+                }else if($cardValue == $cardNextValue){
+                    $cardColor = $this->getCardColor($cardsList[$i]);
+                    $cardNextColor = $this->getCardColor($cardsList[$i+1]);
+                    if($cardColor < $cardNextColor){
+                        $tem=$cardsList[$i];
+                        $cardsList[$i]=$cardsList[$i+1];
+                        $cardsList[$i+1]=$tem;
+                    }
+                }
+            }
+        }
+    }
+
+    //重建索引
+    public function initIndex(&$cardsList=array()){
+        $cardNewList = array();
+        foreach ($cardsList as $key => $value) {
+            $cardNewList[] = $value;
+        }
+        $cardsList = $cardNewList;
+    }
+
+    //------------------------------------------------------------------------------------------------------------------
+    //创建一副牌
+    public function createCards($peopleCount){
+        if(!in_array($peopleCount,  array(2,3,4)))$peopleCount = 4;
+        $baseCards = self::$m_cardOne;
+        $filtered = array();
+        foreach ($baseCards as $c) {
+            if ($peopleCount <= 3) {
+                if (($c >= GR_CONST_TIAO_MIN && $c <= GR_CONST_TIAO_MAX) ||
+                    ($c >= GR_CONST_TONG_MIN && $c <= GR_CONST_TONG_MAX)) {
+                    $filtered[] = $c;
+                }
+            } else {
+                if (($c >= GR_CONST_WAN_MIN && $c <= GR_CONST_WAN_MAX) ||
+                    ($c >= GR_CONST_TIAO_MIN && $c <= GR_CONST_TIAO_MAX) ||
+                    ($c >= GR_CONST_TONG_MIN && $c <= GR_CONST_TONG_MAX)) {
+                    $filtered[] = $c;
+                }
+            }
+        }
+        $this->RandCardData($filtered);
+        return $filtered;
+    }
+
+    //混乱麻将牌
+    public function RandCardData(&$CardsData = array()){
+        srand ((float)microtime()*1000000*(GameManager::$_workerId+1));
+        shuffle($CardsData);
+    }
+
+    public function cleanHandCards($cards)
+    {
+        
+        $cleanHandCards = array();
+        foreach ($cards as $key => $value) {
+            $cardIndex = $this->SwitchToCardIndex($value);
+            $cleanHandCards[$cardIndex] = isset($cleanHandCards[$cardIndex])?$cleanHandCards[$cardIndex]+1:1;
+        }
+       
+        return $cleanHandCards;
+    }
+
+    public function bubbleCards($cards)
+    {
+        ksort($cards);
+        return $cards;
+    }
+    //============================《算法部分》=====================
+
+   
+
+    //删除一张麻将牌
+    public function RemoveCard(&$CardsIndex = array(),$cardData){
+        //牌值有效性判断
+        if($this->IsValidCard($cardData))return false;
+
+        //删除逻辑
+
+        return true;
+    }
+
+
+
+    //动作等级
+    public function GetUserActionRank($cbUserAction)
+    {
+        //胡牌等级
+        if ($cbUserAction&WIK_CHI_HU) { return 4; }
+        //杠牌等级
+        if ($cbUserAction&WIK_GANG) { return 3; }
+        //碰牌等级
+        if ($cbUserAction&WIK_PENG) { return 2; }
+        //上牌等级
+        if ($cbUserAction&(WIK_RIGHT|WIK_CENTER|WIK_LEFT)) { return 1; }
+
+        return 0;
+    }
+
+
+    //获取组合牌,返回牌值数组和牌数
+    //@return $tagWaveItem;
+    public function GetWaveCard($cbWeaveKind, $cbCenterCard, &$cbCardBuffer=array()){
+        $cbCardBuffer=array();
+        //组合扑克
+        switch ($cbWeaveKind)
+        {
+        case WIK_LEFT:      //上牌操作
+            {
+                //设置变量
+                $cbCardBuffer[0]=$cbCenterCard;
+                $cbCardBuffer[1]=$cbCenterCard+1;
+                $cbCardBuffer[2]=$cbCenterCard+2;
+                return 3;
+            }
+        case WIK_RIGHT:     //上牌操作
+            {
+                //设置变量
+                $cbCardBuffer[0]=$cbCenterCard;
+                $cbCardBuffer[1]=$cbCenterCard-1;
+                $cbCardBuffer[2]=$cbCenterCard-2;
+                return 3;
+            }
+        case WIK_CENTER:    //上牌操作
+            {
+                //设置变量
+                //设置变量
+                $cbCardBuffer[0]=$cbCenterCard;
+                $cbCardBuffer[1]=$cbCenterCard-1;
+                $cbCardBuffer[2]=$cbCenterCard+1;
+                return 3;
+            }
+        case WIK_PENG:      //碰牌操作
+            {
+                //设置变量
+                $cbCardBuffer[0]=$cbCenterCard;
+                $cbCardBuffer[1]=$cbCenterCard;
+                $cbCardBuffer[2]=$cbCenterCard;
+                return 3;
+            }
+        case WIK_GANG:      //杠牌操作
+            {
+                //设置变量
+                $cbCardBuffer[0]=$cbCenterCard;
+                $cbCardBuffer[1]=$cbCenterCard;
+                $cbCardBuffer[2]=$cbCenterCard;
+                $cbCardBuffer[3]=$cbCenterCard;
+
+                return 4;
+            }
+        default:
+            {
+                return 0;
+            }
+        }
+
+        return 0;
+    }
+
+    //牌值有效判断
+    public function IsValidCard($cardData)
+    {
+        $cbValue=($cardData&MASK_VALUE);
+        $cbColor=($cardData&MASK_COLOR)>>4;
+        return ((($cbValue>=1)&&($cbValue<=9)&&($cbColor<=2))||(($cbValue>=1)&&($cbValue<=7)&&($cbColor==3)));
+        //return (((cbValue>=1)&&(cbValue<=9)&&(cbColor<=2))||((cbValue>=1)&&(cbValue<=15)&&(cbColor==3)));//modify by xlg
+    }
+
+
+
+
+    //吃牌判断
+    public function EstimateEatCard($cbCardIndex=array(), $cbCurrentCard){
+        $colne = array();
+        for ($i=0; $i < GR_CONST_MAX_INDEX; $i++) { 
+            $colne[$i] = 0;
+            foreach ($cbCardIndex as $cards => $value) {
+                if ($cards == $i) {
+                    $colne[$i] = $value;
+                }
+            }
+        }
+        $cbCardIndex = $colne;
+        //校验$cbCardIndex数组为GR_CONST_MAX_INDEX长度
+        if(sizeof($cbCardIndex)!=GR_CONST_MAX_INDEX)return WIK_NULL;
+        //校验 $cbCurrentCard牌值有效性
+        if(!$this->IsValidCard($cbCurrentCard))return WIK_NULL;
+        //过滤判断
+        //番子无连
+        if ($cbCurrentCard >= 0x31 && $cbCurrentCard <= 0x37)
+            return WIK_NULL;
+        //变量定义
+        $cbExcursion=array(0,1,2);
+        $cbItemKind=array(WIK_LEFT,WIK_CENTER,WIK_RIGHT);
+        //吃牌判断
+        $cbEatKind=0;
+        $cbFirstIndex=0;
+        $cbCurrentIndex=$this->SwitchToCardIndex($cbCurrentCard);
+        for ($i=0;$i<count($cbItemKind);$i++)
+        {
+            $cbValueIndex=$cbCurrentIndex%9;
+            if (($cbValueIndex>=$cbExcursion[$i])&&(($cbValueIndex-$cbExcursion[$i])<=6))
+            {
+                //吃牌判断
+                $cbFirstIndex=$cbCurrentIndex-$cbExcursion[$i]; 
+                if ($cbCurrentIndex!=$cbFirstIndex)
+                {
+                    if( $cbCardIndex[$cbFirstIndex]==0)
+                            continue;
+                }
+                if ($cbCurrentIndex!=$cbFirstIndex+1)
+                {
+                    if(  $cbCardIndex[$cbFirstIndex+1]==0)
+                            continue;
+                }
+                if ($cbCurrentIndex!=$cbFirstIndex+2)
+                {
+                   if(  $cbCardIndex[$cbFirstIndex+2]==0)
+                            continue;
+                } 
+                //设置类型
+                $cbEatKind|=$cbItemKind[$i];
+            }
+        }
+
+        return $cbEatKind;
+    }
+    //碰牌判断
+    public function EstimatePengCard($cbCardIndex=array(), $cbCurrentCard){
+        $colne = array();
+        for ($i=0; $i < GR_CONST_MAX_INDEX; $i++) { 
+            $colne[$i] = 0;
+            foreach ($cbCardIndex as $cards => $value) {
+                if ($cards == $i) {
+                    $colne[$i] = $value;
+                }
+            }
+        }
+        $cbCardIndex = $colne;
+        //校验$cbCardIndex数组为GR_CONST_MAX_INDEX长度
+        if(sizeof($cbCardIndex)!=GR_CONST_MAX_INDEX)return WIK_NULL;
+        //校验 $cbCurrentCard牌值有效性
+        if(!$this->IsValidCard($cbCurrentCard))return WIK_NULL;
+
+        //碰牌判断
+        return ($cbCardIndex[$this->SwitchToCardIndex($cbCurrentCard)]>=2)?WIK_PENG:WIK_NULL;
+    }
+    //杠牌判断
+    public function EstimateGangCard($cbCardIndex=array(), $cbCurrentCard){
+        $colne = array();
+        for ($i=0; $i < GR_CONST_MAX_INDEX; $i++) { 
+            $colne[$i] = 0;
+            foreach ($cbCardIndex as $cards => $value) {
+                if ($cards == $i) {
+                    $colne[$i] = $value;
+                }
+            }
+        }
+        $cbCardIndex = $colne;
+        //校验$cbCardIndex数组为GR_CONST_MAX_INDEX长度
+        if(sizeof($cbCardIndex)!=GR_CONST_MAX_INDEX)return WIK_NULL;
+        //校验 $cbCurrentCard牌值有效性
+        if(!$this->IsValidCard($cbCurrentCard))return WIK_NULL;
+        //杠牌判断
+        return ($cbCardIndex[$this->SwitchToCardIndex($cbCurrentCard)]>=3)?WIK_GANG:WIK_NULL;
+    }
+
+    //听牌分析
+    //
+    public function AnalyseTingCard($cbCardIndex=array(), $WeaveItem = array(),&$cbListenCard = array(),$tingCardsOption = array(),&$baotou){
+        //校验$cbCardIndex数组为GR_CONST_MAX_INDEX长度
+        //校验$WeaveItem为0-4的数组长度
+        //校验sum($cbCardIndex) + count($WeaveItem)*3 = 13
+        $cbCardCount = array_sum($cbCardIndex);
+        $WeaveItemCount = isset($WeaveItem[0]['cbWeaveKind'])?count($WeaveItem) * 3:0;
+        if ($cbCardCount + $WeaveItemCount != 13) {
+            return false;
+        }
+        $baotou = true;
+        foreach ($tingCardsOption as $index => $count) {
+            $cbCurrentCard = $this->SwitchToCardData($index);
+            $ChiHuResult = array();
+            // if($this->AnalyseChiHuCard($cbCardIndex, $WeaveItem, $cbCurrentCard,$ChiHuResult)){
+            if($this->lazarilloCard($cbCardIndex, $WeaveItem, $cbCurrentCard,$ChiHuResult,WIK_LISTEN)){
+                $cbListenCard[] = $cbCurrentCard;
+            }else{
+                $baotou = false;
+            }
+        }
+        if (count($cbListenCard) == 0) {
+            return false;
+        }else{
+            return true;
+        }
+
+    }
+    //爆头分析
+    public function AnalyseBaotou($cbCardIndex)
+    {
+        $wealthCardIndex = $this->SwitchToCardIndex(WEALTHCARD);
+        if (count($cbCardIndex) == 1 && isset($cbCardIndex[$wealthCardIndex]) && $cbCardIndex[$wealthCardIndex] == 1) {
+            return true;
+        }
+        if (array_sum($cbCardIndex) % 3 != 1) {
+            return false;
+        }
+        if ($cbCardIndex <= 3) {
+            return false;
+        }
+        if (!isset($cbCardIndex[$wealthCardIndex]) || $cbCardIndex[$wealthCardIndex] == 0) {
+            return false;
+        }
+        //七小对爆头分析
+        $wealthCardCount = $cbCardIndex[$wealthCardIndex];
+        $needWealthCount = 0;
+        foreach ($cbCardIndex as $key => $value) {
+            if ($key != $wealthCardIndex && ($cbCardIndex[$key] == 1 || $cbCardIndex[$key] == 3)) {
+                $needWealthCount++;
+            }
+        }
+        if ($needWealthCount < $wealthCardCount && array_sum($cbCardIndex) == 13) {
+            return true;
+        }
+        //正常牌爆头分析
+        $cbCardIndex[$wealthCardIndex]--;
+        $wealthcnt = $cbCardIndex[$wealthCardIndex];
+        unset($cbCardIndex[$wealthCardIndex]);
+        $cbCardIndexClone = $cbCardIndex;
+        switch ($wealthcnt) {
+            case 4:
+                return;
+                break;
+
+            case 3:
+                for ($m=0; $m < (GR_CONST_MAX_INDEX - 8 - 1); $m++) {
+                    $cbCardIndex = $cbCardIndexClone;
+                    $cbCardIndex[$m] = isset($cbCardIndex[$m])?$cbCardIndex[$m]+1:1;
+                    $cbCardIndexClone_3 = $cbCardIndex;
+                    for ($i=0; $i < (GR_CONST_MAX_INDEX - 8 - 1); $i++) {
+                        $cbCardIndex = $cbCardIndexClone_3;
+                        $cbCardIndex[$i] = isset($cbCardIndex[$i])?$cbCardIndex[$i]+1:1;
+                        $cbCardIndexClone_2 = $cbCardIndex;
+                        for ($j=0; $j < (GR_CONST_MAX_INDEX - 8 - 1); $j++) { 
+                            $cbCardIndex = $cbCardIndexClone_2;
+                            $cbCardIndex[$j] = isset($cbCardIndex[$j])?$cbCardIndex[$j]+1:1;
+                            if($this->findCardsType($cbCardIndex)){
+                                return true;
+                            }
+                        }
+                        
+                    }
+                }
+                break;
+
+            case 2:
+                for ($i=0; $i < (GR_CONST_MAX_INDEX - 8 - 1); $i++) {
+                    $cbCardIndex = $cbCardIndexClone;
+                    $cbCardIndex[$i] = isset($cbCardIndex[$i])?$cbCardIndex[$i]+1:1;
+                    $cbCardIndexClone_2 = $cbCardIndex;
+                    for ($j=0; $j < (GR_CONST_MAX_INDEX - 8 - 1); $j++) { 
+                        $cbCardIndex = $cbCardIndexClone_2;
+                        $cbCardIndex[$j] = isset($cbCardIndex[$j])?$cbCardIndex[$j]+1:1;
+                        if($this->findCardsType($cbCardIndex)){
+                            return true;
+                        }
+                    }
+                    
+                }
+                break;
+
+            case 1:
+                for ($i=0; $i < (GR_CONST_MAX_INDEX - 8 - 1); $i++) {
+                    $cbCardIndex = $cbCardIndexClone;
+                    $cbCardIndex[$i] = isset($cbCardIndex[$i])?$cbCardIndex[$i]+1:1;
+                    if($this->findCardsType($cbCardIndex)){
+                        return true;
+                    }
+                }
+                break;
+
+            case 0:
+                $cbCardIndex = $cbCardIndexClone;
+                if($this->findCardsType($cbCardIndex)){
+                    return true;
+                }
+                break;
+
+            default:
+                return;
+                break;
+        }
+        return false;
+    }
+    public function findCardsType($cbCardIndex)
+    {
+        $Analyse = array();
+        $cbCardCount = array_sum($cbCardIndex);
+        //拆分分析
+        if($cbCardCount >= 3){
+            $cbKindItemCount = 0;
+            for ($i=0; $i < (GR_CONST_MAX_INDEX - 8); $i++) { 
+                //碰牌判断
+                if ( isset( $cbCardIndex[$i] ) && ( $cbCardIndex[$i] >= 3 )) {
+                    $Analyse[$cbKindItemCount]['cbCardIndex'][] = $i;
+                    $Analyse[$cbKindItemCount]['cbCardIndex'][] = $i;
+                    $Analyse[$cbKindItemCount]['cbCardIndex'][] = $i;
+                    $Analyse[$cbKindItemCount]['cbWeaveKind'] = WIK_PENG;
+                    $Analyse[$cbKindItemCount]['cbCenterCard'] = $this->SwitchToCardData($i);
+                    $cbKindItemCount++;
+                }
+            
+                //吃牌判断
+                if(isset( $cbCardIndex[$i] ) && ($i < (GR_CONST_MAX_INDEX - 17)) && ($cbCardIndex[$i] > 0) && (($i % 9) < 7)){
+                    if (isset($cbCardIndex[$i + 1]) && isset($cbCardIndex[$i + 2])) {
+                        for ($j = 1; $j <= $cbCardIndex[$i]; $j++) { 
+                            if ((($cbCardIndex[$i + 1]) >= $j) && (($cbCardIndex[$i + 2])) >= $j) {
+                                $Analyse[$cbKindItemCount]['cbCardIndex'] = array($i,$i+1,$i+2);
+                                $Analyse[$cbKindItemCount]['cbWeaveKind'] = WIK_LEFT;
+                                $Analyse[$cbKindItemCount++]['cbCenterCard'] = $this->SwitchToCardData($i);
+                            }
+                        }
+                    }
+                }
+            } 
+            $cbLessKindItem = $cbCardCount / 3;
+            if ($cbKindItemCount < $cbLessKindItem) {
+                return false;
+            }
+            return $this->compareDanDiao($cbCardIndex,$this->splicingcards($this->combination($Analyse,$cbLessKindItem)));
+        }
+    }
+    //癞子牌分析
+    public function lazarilloCard($cbCardIndex=array(), $WeaveItem = array(), $cbCurrentCard, &$ChiHuResult,$kind)
+    {
+        $qiduiCardIndex = $cbCardIndex;
+        $qiduiCurrentCard = $cbCurrentCard;
+        if ($kind == WIK_CHI_HU && $cbCurrentCard == WEALTHCARD) {
+            $cbCurrentCard = $this->SwitchToCardIndex($cbCurrentCard);
+            $cbCardIndex[$cbCurrentCard] = isset($cbCardIndex[$cbCurrentCard])?$cbCardIndex[$cbCurrentCard]+1:1;
+            $cbCurrentCard = -1;
+        }
+        $wealthCardIndex = $this->SwitchToCardIndex(WEALTHCARD);
+        $maxresult = array();
+        $cbReplaceCard = array();
+        if (isset($cbCardIndex[$wealthCardIndex]) && isset($cbCardIndex[$wealthCardIndex]) != 0) {
+            $wealthcnt = $cbCardIndex[$wealthCardIndex];
+            unset($cbCardIndex[$wealthCardIndex]);
+            $cbCardIndexClone = $cbCardIndex;
+            $canHuCards = false;
+
+            switch ($wealthcnt) {
+                case 4:
+                    //四张癞子牌 直接胡牌
+                    // $ChiHuResult['dwChiHuKind'] = CHK_CAI_SHEN;
+                    // $ChiHuResult['dwChiHuRight'] = CHK_NULL;
+                    // $ChiHuResult['dwWinTimes'] = 16;
+
+                    // $canHuCards = true;
+
+                    // return WIK_CHI_HU;
+                    // break;
+                    for ($n=0; $n < (GR_CONST_MAX_INDEX - 8 - 1); $n++) {
+                        $cbCardIndex = $cbCardIndexClone;
+                        $cbCardIndex[$n] = isset($cbCardIndex[$n])?$cbCardIndex[$n]+1:1;
+
+                        $cbCardIndexClone_4 = $cbCardIndex;
+                        for ($i=0; $i < (GR_CONST_MAX_INDEX - 8 - 1); $i++) {
+
+                            $cbCardIndex = $cbCardIndexClone_4;
+                            $cbCardIndex[$i] = isset($cbCardIndex[$i])?$cbCardIndex[$i]+1:1;
+
+                            $cbCardIndexClone_2 = $cbCardIndex;
+
+                            for ($j=0; $j < (GR_CONST_MAX_INDEX - 8 - 1); $j++) { 
+
+                                $cbCardIndex = $cbCardIndexClone_2;
+
+                                $cbCardIndex[$j] = isset($cbCardIndex[$j])?$cbCardIndex[$j]+1:1;
+
+                                $cbCardIndexClone_3 = $cbCardIndex;
+
+                                for ($m=0; $m < (GR_CONST_MAX_INDEX - 8 - 1); $m++) { 
+                                    $cbCardIndex = $cbCardIndexClone_3;
+                                    $cbCardIndex[$m] = isset($cbCardIndex[$m])?$cbCardIndex[$m]+1:1;
+                                    if($this->AnalyseChiHuCard($cbCardIndex, $WeaveItem, $cbCurrentCard,$ChiHuResult)){
+                                        if (isset($maxresult['dwChiHuKind']) && $ChiHuResult['dwWinTimes'] > $maxresult['dwWinTimes']) {
+                                            $maxresult = $ChiHuResult;
+                                            $cbReplaceCard = array($i,$j,$m,$n);
+                                            $canHuCards = true;
+                                        }else if(!isset($maxresult['dwChiHuKind'])){
+                                            $maxresult = $ChiHuResult;
+                                            $cbReplaceCard = array($i,$j,$m,$n);
+                                            $canHuCards = true;
+                                        }
+                                    }
+                                }
+                            }
+                            
+                        }
+                    }
+
+                    break;
+
+                case 3:
+                    for ($i=0; $i < (GR_CONST_MAX_INDEX - 8 - 1); $i++) {
+
+                        $cbCardIndex = $cbCardIndexClone;
+                        $cbCardIndex[$i] = isset($cbCardIndex[$i])?$cbCardIndex[$i]+1:1;
+
+                        $cbCardIndexClone_2 = $cbCardIndex;
+
+                        for ($j=0; $j < (GR_CONST_MAX_INDEX - 8 - 1); $j++) { 
+
+                            $cbCardIndex = $cbCardIndexClone_2;
+
+                            $cbCardIndex[$j] = isset($cbCardIndex[$j])?$cbCardIndex[$j]+1:1;
+
+                            $cbCardIndexClone_3 = $cbCardIndex;
+
+                            for ($m=0; $m < (GR_CONST_MAX_INDEX - 8 - 1); $m++) { 
+                                $cbCardIndex = $cbCardIndexClone_3;
+                                $cbCardIndex[$m] = isset($cbCardIndex[$m])?$cbCardIndex[$m]+1:1;
+                                if($this->AnalyseChiHuCard($cbCardIndex, $WeaveItem, $cbCurrentCard,$ChiHuResult)){
+                                    if (isset($maxresult['dwChiHuKind']) && $ChiHuResult['dwWinTimes'] > $maxresult['dwWinTimes']) {
+                                        $maxresult = $ChiHuResult;
+                                        $cbReplaceCard = array($i,$j,$m);
+                                        $canHuCards = true;
+                                    }else if(!isset($maxresult['dwChiHuKind'])){
+                                        $maxresult = $ChiHuResult;
+                                        $cbReplaceCard = array($i,$j,$m);
+                                        $canHuCards = true;
+                                    }
+                                }
+                            }
+                        }
+                        
+                    }
+
+                    break;
+
+                case 2:
+                    for ($i=0; $i < (GR_CONST_MAX_INDEX - 8 - 1); $i++) {
+
+                        $cbCardIndex = $cbCardIndexClone;
+                        $cbCardIndex[$i] = isset($cbCardIndex[$i])?$cbCardIndex[$i]+1:1;
+
+                        $cbCardIndexClone_2 = $cbCardIndex;
+
+                        for ($j=0; $j < (GR_CONST_MAX_INDEX - 8 - 1); $j++) { 
+                            $cbCardIndex = $cbCardIndexClone_2;
+                            $cbCardIndex[$j] = isset($cbCardIndex[$j])?$cbCardIndex[$j]+1:1;
+
+                            if($this->AnalyseChiHuCard($cbCardIndex, $WeaveItem, $cbCurrentCard,$ChiHuResult)){
+                                if (isset($maxresult['dwChiHuKind']) && $ChiHuResult['dwWinTimes'] > $maxresult['dwWinTimes']) {
+                                    $maxresult = $ChiHuResult;
+                                    $cbReplaceCard = array($i,$j);
+                                    $canHuCards = true;
+                                }else if(!isset($maxresult['dwChiHuKind'])){
+                                    $maxresult = $ChiHuResult;
+                                    $cbReplaceCard = array($i,$j);
+                                    $canHuCards = true;
+                                }
+                            }
+                        }
+                        
+                    }
+                    break;
+
+                case 1:
+                    for ($i=0; $i < (GR_CONST_MAX_INDEX - 8 - 1); $i++) {
+                        $cbCardIndex = $cbCardIndexClone;
+                        $cbCardIndex[$i] = isset($cbCardIndex[$i])?$cbCardIndex[$i]+1:1;
+                        if($this->AnalyseChiHuCard($cbCardIndex, $WeaveItem, $cbCurrentCard,$ChiHuResult)){
+                            if (isset($maxresult['dwChiHuKind']) && $ChiHuResult['dwWinTimes'] > $maxresult['dwWinTimes']) {
+                                $maxresult = $ChiHuResult;
+                                $cbReplaceCard = array($i);
+                                $canHuCards = true;
+                            }else if(!isset($maxresult['dwChiHuKind'])){
+                                $maxresult = $ChiHuResult;
+                                $cbReplaceCard = array($i);
+                                $canHuCards = true;
+                            }
+                        }
+                    }
+                    break;
+                default:
+                    # code...
+                    break;
+            }
+
+            if ($canHuCards) {
+                if (($maxresult['dwChiHuKind'] & CHK_QI_XIAO_DUI) > 0) {
+                    
+                    if ($qiduiCurrentCard != -1) {
+                        $qiduiCurrentCard = $this->SwitchToCardIndex($qiduiCurrentCard);
+                        $qiduiCardIndex[$qiduiCurrentCard] = isset($qiduiCardIndex[$qiduiCurrentCard])?$qiduiCardIndex[$qiduiCurrentCard]+1:1;
+                    }
+                    $luxury = $this->IsLuxury($qiduiCardIndex,$WeaveItem);
+                    $maxresult['luxury'] = $luxury;
+                    $maxresult['dwWinTimes'] = 2 * pow(2, $luxury);
+                }
+                $ChiHuResult = $maxresult;
+                return WIK_CHI_HU;
+            }else{
+                return WIK_NULL;
+            }
+        }else{
+            return $this->AnalyseChiHuCard($cbCardIndex, $WeaveItem, $cbCurrentCard, $ChiHuResult);
+        }
+    }
+
+    //胡牌分析
+    public function AnalyseChiHuCard($cbCardIndex=array(), $WeaveItem = array(), $cbCurrentCard, &$ChiHuResult){
+        if ($cbCurrentCard != -1) {
+            $cbCurrentCard = $this->SwitchToCardIndex($cbCurrentCard);
+            $cbCardIndex[$cbCurrentCard] = isset($cbCardIndex[$cbCurrentCard])?$cbCardIndex[$cbCurrentCard]+1:1;
+        }
+        
+        $AnalyseItemArray = array();
+        $this->AnalyseCard($cbCardIndex, $WeaveItem, $AnalyseItemArray);
+        $dwChiHuKind = 0;
+        if ($AnalyseItemArray != null && count($AnalyseItemArray) >= 1) {
+            //能够通过胡牌算法算出的胡牌类型 平胡 鸡胡 碰碰胡
+            $type = array();
+            $dwWinTimes = 0;
+            foreach ($AnalyseItemArray as $key => $value) {
+                $type[$key] = CHK_JI_HU;
+                // $type[$key] |= $this->IsPingHu($AnalyseItemArray[$key],$WeaveItem)?CHK_PING_HU:CHK_NULL;
+                // $type[$key] |= $this->IsDaDuiDui($AnalyseItemArray[$key],$WeaveItem)?CHK_PENG_PENG:CHK_NULL;
+                // $type[$key] |= ($type[$key] == CHK_NULL)?CHK_JI_HU:$type[$key];
+            }
+            $maxType = array_keys($type,max($type));
+            $dwChiHuKind = $type[$maxType[0]];
+            $dwWinTimes = 1;
+        }
+
+        $dwChiHuKind |= $this->IsQiXiaoDui($cbCardIndex,$WeaveItem)?CHK_QI_XIAO_DUI:CHK_NULL;
+        if (($dwChiHuKind & CHK_QI_XIAO_DUI) > 0) {
+            $dwWinTimes = 7;
+            $luxury = 0;
+            $ChiHuResult['luxury'] = $luxury;
+        }
+        
+        if($dwChiHuKind != CHK_NULL){
+            $dwChiHuRight = 0;
+            if($this->IsQingYiSe($cbCardIndex,$WeaveItem) && $this->IsQiXiaoDui($cbCardIndex,$WeaveItem)){
+                $dwChiHuRight |= CHR_QING_QI_DUI;
+            }else if($this->IsQingYiSe($cbCardIndex,$WeaveItem)){
+                $dwChiHuRight |= CHR_QING_YI_SE;
+            }
+
+            if($this->IsHunYiSe($cbCardIndex,$WeaveItem)){
+                $dwChiHuRight |= CHR_HUN_YI_SE;
+            }
+
+            if($this->IsZiYiSe($cbCardIndex,$WeaveItem)){
+                $dwChiHuRight |= CHR_ZI_YI_SE;
+            }
+
+            $dwChiHuRight &= ~CHR_DI;
+
+            $ChiHuResult['dwChiHuKind'] = $dwChiHuKind;
+            $ChiHuResult['dwChiHuRight'] = $dwChiHuRight;
+            $ChiHuResult['dwWinTimes'] = $dwWinTimes;
+            return WIK_CHI_HU;
+        }
+
+        return WIK_NULL;
+    }
+
+    //判断是否平胡 发送已经进行胡牌分析的数组
+    public function IsPingHu($cbCardIndex=array(), $WeaveItem = array())
+    {
+        $cbCardCount = array_sum($cbCardIndex);
+        $WeaveItemCount = isset($WeaveItem[0]['cbWeaveKind'])?count($WeaveItem) * 3:0;
+        if ($cbCardCount + $WeaveItemCount != 14) {
+            return false;
+        }
+
+
+        $cbLessKindItem = ($cbCardCount - 2) / 3;
+        if(($cbCardCount < 2) || ($cbCardCount > 14) || (($cbCardCount - 2) % 3 != 0)){
+            return false;
+        }
+
+        $isPingHu = true;
+        foreach ($cbCardIndex['cbWeaveKind'] as $key => $value) {
+            if ($cbCardIndex['cbWeaveKind'][$key] == WIK_PENG) {
+                $isPingHu = false;
+            }
+        }
+
+         foreach ($WeaveItem as $key => $value) {
+            if ($WeaveItem[$key]['cbWeaveKind'] == WIK_PENG || $WeaveItem[$key]['cbWeaveKind'] == WIK_GANG) {
+                $isPingHu = false;
+            }
+        }
+        return $isPingHu;
+    }
+
+
+
+    //清一色牌
+    public function IsQingYiSe($cbCardIndex=array(), $WeaveItem = array()){
+        //校验$cbCardIndex数组为GR_CONST_MAX_INDEX长度
+        //校验sum($cbCardIndex) + count($WeaveItem)*3 = 14
+        $cbCardCount = array_sum($cbCardIndex);
+        $WeaveItemCount = isset($WeaveItem[0]['cbWeaveKind'])?count($WeaveItem) * 3:0;
+        if ($cbCardCount + $WeaveItemCount != 14) {
+            return false;
+        }
+
+
+        $cbLessKindItem = ($cbCardCount - 2) / 3;
+        if(($cbCardCount < 2) || ($cbCardCount > 14) || (($cbCardCount - 2) % 3 != 0)){
+            return false;
+        }
+
+        $isQingYiSe = true;
+        $i = 0;
+        $judge = array();
+        foreach ($cbCardIndex as $key => $value) {
+            $judge[$i] = $cbCardIndex[$key] % 9;
+            if(isset($judge[$i-1])){
+                if($judge[$i-1] != $judge[$i]){
+                    $isQingYiSe = false;
+                }
+            }
+        }
+
+        foreach ($WeaveItem as $key => $value) {
+            if ($judge[0] != ($this->SwitchToCardIndex($WeaveItem[$key]['cbCenterCard']) % 9)) {
+                $isQingYiSe = false;
+            }
+        }
+        return $isQingYiSe;
+    }
+     //字一色
+    public function IsZiYiSe($cbCardIndex=array(), $WeaveItem = array()){
+        //校验$cbCardIndex数组为GR_CONST_MAX_INDEX长度
+        //校验sum($cbCardIndex) + count($WeaveItem)*3 = 14
+
+        $cbCardCount = array_sum($cbCardIndex);
+        $WeaveItemCount = isset($WeaveItem[0]['cbWeaveKind'])?count($WeaveItem) * 3:0;
+        if ($cbCardCount + $WeaveItemCount != 14) {
+            return false;
+        }
+
+
+        $cbLessKindItem = ($cbCardCount - 2) / 3;
+        if(($cbCardCount < 2) || ($cbCardCount > 14) || (($cbCardCount - 2) % 3 != 0)){
+            return false;
+        }
+
+        $isZiYiSe = true;
+        $judge = array();
+        foreach ($cbCardIndex as $key => $value) {
+            if($cbCardIndex[$key] % 9 != 3){
+                $isZiYiSe = false;
+            }
+        }
+
+        foreach ($WeaveItem as $key => $value) {
+            if (($this->SwitchToCardIndex($WeaveItem[$key]['cbCenterCard']) % 9) != 3) {
+                $isZiYiSe = false;
+            }
+        }
+        return $isZiYiSe;
+    }
+    //混一色牌
+    public function IsHunYiSe($cbCardIndex=array(), $WeaveItem = array()){
+
+        $cbCardCount = array_sum($cbCardIndex);
+        $WeaveItemCount = isset($WeaveItem[0]['cbWeaveKind'])?count($WeaveItem) * 3:0;
+        if ($cbCardCount + $WeaveItemCount != 14) {
+            return false;
+        }
+
+
+        $cbLessKindItem = ($cbCardCount - 2) / 3;
+        if(($cbCardCount < 2) || ($cbCardCount > 14) || (($cbCardCount - 2) % 3 != 0)){
+            return false;
+        }
+
+        $isHunYiSe = true;
+        foreach ($cbCardIndex as $key => $value) {
+            if (isset($judge)) {
+                if($cbCardIndex[$key] % 9 != $judge && $cbCardIndex[$key] % 9 != 3){
+                    $isZiYiSe = false;
+                }
+            }else{
+                if ($cbCardIndex[$key] % 9 != 3) {
+                    $judge = $cbCardIndex[$key] % 9;  
+                }
+            }
+            
+        }
+
+        foreach ($WeaveItem as $key => $value) {
+            $color = $this->SwitchToCardIndex($WeaveItem[$key]['cbCenterCard']) % 9;
+            if ($color != 3 && $color != $judge) {
+                $isHunYiSe = false;
+            }
+        }
+        return $isHunYiSe;
+    }
+    //七小对牌
+    public function IsQiXiaoDui($cbCardIndex=array(), $WeaveItem = array()){
+        //校验$cbCardIndex数组为GR_CONST_MAX_INDEX长度
+        //校验sum($cbCardIndex) + count($WeaveItem)*3 = 14
+        $cbCardCount = array_sum($cbCardIndex);
+        $WeaveItemCount = isset($WeaveItem[0]['cbWeaveKind'])?count($WeaveItem) * 3:0;
+        if ($cbCardCount + $WeaveItemCount != 14) {
+            return false;
+        }
+
+
+        $cbLessKindItem = ($cbCardCount - 2) / 3;
+        if(($cbCardCount < 2) || ($cbCardCount > 14) || (($cbCardCount - 2) % 3 != 0)){
+            return false;
+        }
+
+        $isQiXiaoDui = true;
+        foreach ($cbCardIndex as $key => $value) {
+            if ($cbCardIndex[$key] != 2 && $cbCardIndex[$key] != 4) {
+                $isQiXiaoDui = false;
+            }
+        }
+
+        if (count($WeaveItem) != 0) {
+            $isQiXiaoDui = false;
+        }
+        return $isQiXiaoDui;
+
+    }
+    //七对 豪华，双豪华，三豪华
+    public function IsLuxury($cbCardIndex=array(), $WeaveItem = array()){
+        return 0;
+    }
+
+
+
+    //全清七对
+    //public function IsQingQiDui(BYTE cbCardIndex[MAX_INDEX], tagWeaveItem WeaveItem[], BYTE cbItemCount);
+    //十三夭牌 十三不搭 
+    //public function IsShiSanYao(BYTE cbCardIndex[MAX_INDEX], tagWeaveItem WeaveItem[], BYTE cbWeaveCount);
+    //public function IsShiSanBuDa(BYTE cbCardIndex[MAX_INDEX], tagWeaveItem WeaveItem[], BYTE cbWeaveCount);
+    //七星(七风 不搭)
+    //public function IsServerBuDa(BYTE cbCardIndex[MAX_INDEX], tagWeaveItem WeaveItem[], BYTE cbWeaveCount);
+    //字清 全风向 字一色
+    //public function IsAllFeng(BYTE cbCardIndex[MAX_INDEX], tagWeaveItem WeaveItem[], BYTE cbWeaveCount,BYTE cbDaCardIndex);
+   
+    //大对对,碰碰胡
+    public function IsDaDuiDui($cbCardIndex=array(), $WeaveItem = array()){
+        //校验$cbCardIndex数组为GR_CONST_MAX_INDEX长度
+        //校验sum($cbCardIndex) + count($WeaveItem)*3 = 14
+        $cbCardCount = array_sum($cbCardIndex);
+        $WeaveItemCount = isset($WeaveItem[0]['cbWeaveKind'])?count($WeaveItem) * 3:0;
+        if ($cbCardCount + $WeaveItemCount != 14) {
+            return false;
+        }
+
+
+        $cbLessKindItem = ($cbCardCount - 2) / 3;
+        if(($cbCardCount < 2) || ($cbCardCount > 14) || (($cbCardCount - 2) % 3 != 0)){
+            return false;
+        }
+
+        $isDaDuiDui = true;
+        $jiang = 0;
+        foreach ($cbCardIndex as $key => $value) {
+            if ($cbCardIndex[$key] == 2) {
+                ++$jiang;
+                if ($jiang > 1) {
+                    $isDaDuiDui = false;
+                }
+            }else if($cbCardIndex[$key] == 3){
+
+            }else{
+                $isDaDuiDui = false;
+            }
+        }
+
+       foreach ($WeaveItem as $key => $value) {
+            if ($WeaveItem[$key]['cbWeaveKind'] != WIK_PENG || $WeaveItem[$key]['cbWeaveKind'] != WIK_GANG ) {
+                $isDaDuiDui = false;
+            }
+        }
+
+        return $isDaDuiDui;
+
+    }
+
+
+    //扑克转换 index ->value
+    public function SwitchToCardData($cbCardIndex){
+        if($cbCardIndex >= GR_CONST_MAX_INDEX)return false;
+        if ($cbCardIndex >= 27)
+        {
+            return (0x30|($cbCardIndex-26));
+        }
+        else
+            return (($cbCardIndex/9)<<4)|($cbCardIndex%9+1);
+    }
+    //扑克转换 value->index
+    public function SwitchToCardIndex($cbCardData){
+        if(!$this->IsValidCard($cbCardData))return false;
+        return (($cbCardData&MASK_COLOR)>>4)*9+($cbCardData&MASK_VALUE)-1;
+    }
+    //扑克转换
+    //public function SwitchToCardData(BYTE cbCardIndex[MAX_INDEX], BYTE cbCardData[MAX_COUNT]);
+    //扑克转换
+    //public function SwitchToCardIndex(BYTE cbCardData[], BYTE cbCardCount, BYTE cbCardIndex[MAX_INDEX]);
+
+    //内部函数 分析扑克，列出所有三张牌的有效组合
+    private function AnalyseCard($cbCardIndex=array(), $WeaveItem = array(), &$AnalyseItemArray){
+        //校验$cbCardIndex数组为GR_CONST_MAX_INDEX长度想·
+        //校验sum($cbCardIndex) + count($WeaveItem)*3 = 14`
+
+        //基本校验 牌的数量是否合理
+        $cbCardCount = array_sum($cbCardIndex);
+        $WeaveItemCount = isset($WeaveItem[0]['cbWeaveKind'])?count($WeaveItem) * 3:0;
+        
+        if ($cbCardCount + $WeaveItemCount != 14) {
+            return false;
+        }
+
+
+        $cbLessKindItem = ($cbCardCount - 2) / 3;
+        if(($cbCardCount < 2) || ($cbCardCount > 14) || (($cbCardCount - 2) % 3 != 0)){
+            return false;
+        }
+
+
+        $Analyse = array();
+        //拆分分析
+        if($cbCardCount >= 5){
+            $cbKindItemCount = 0;
+            
+            foreach ($cbCardIndex as $i => $value) { 
+                //碰牌判断
+                if ( isset( $cbCardIndex[$i] ) && ( $cbCardIndex[$i] >= 3 )) {
+                    $Analyse[$cbKindItemCount]['cbCardIndex'] = array($i,$i,$i);
+                    $Analyse[$cbKindItemCount]['cbWeaveKind'] = WIK_PENG;
+                    $Analyse[$cbKindItemCount++]['cbCenterCard'] = $this->SwitchToCardData($i);
+                }
+                //吃牌判断
+                if(isset( $cbCardIndex[$i] ) && ($i < (GR_CONST_MAX_INDEX - 17)) && ($cbCardIndex[$i] > 0) && (($i % 9) < 7)){
+                    if (isset($cbCardIndex[$i + 1]) && isset($cbCardIndex[$i + 2])) {
+                        for ($j = 1; $j <= $cbCardIndex[$i]; $j++) { 
+                            if ((($cbCardIndex[$i + 1]) >= $j) && (($cbCardIndex[$i + 2])) >= $j) {
+                                $Analyse[$cbKindItemCount]['cbCardIndex'] = array($i,$i+1,$i+2);
+                                $Analyse[$cbKindItemCount]['cbWeaveKind'] = WIK_LEFT;
+                                $Analyse[$cbKindItemCount++]['cbCenterCard'] = $this->SwitchToCardData($i);
+                            }
+                        }
+                    }
+                }
+            }
+            if ($cbKindItemCount < $cbLessKindItem) {
+                return;
+            }
+
+            $successCards = $this->compareRusult($cbCardIndex,$this->splicingcards($this->combination($Analyse,$cbLessKindItem)));
+            $i = 0;
+            foreach ($successCards as $key => $value) {
+                $AnalyseItemArray[$i]['cbCardEye'] = $this->SwitchToCardData($successCards[$key]['cbCardEye']);
+                $cou = count($successCards[$key]) - 1;
+                for ($m=0; $m < $cou ; $m++) { 
+                    $AnalyseItemArray[$i]['cbWeaveKind'][$m] = $successCards[$key][$m]['cbWeaveKind'];
+                    $AnalyseItemArray[$i]['cbCenterCard'][$m] = $successCards[$key][$m]['cbCenterCard'];
+                }
+                for ($n = $m; $n < 4; $n++) { 
+                    $AnalyseItemArray[$i]['cbWeaveKind'][$n] = $WeaveItem[$n - $m]['cbWeaveKind'];
+                    $AnalyseItemArray[$i]['cbCenterCard'][$n] = $WeaveItem[$n - $m]['cbCenterCard'];
+                }
+                $i++;
+            }
+
+        }else if ($cbCardCount == 2) {
+            $lastCards = key($cbCardIndex);
+            if (count($cbCardIndex) == 1 && $cbCardIndex[$lastCards] == 2) {
+                $AnalyseItemArray[0]['cbCardEye'] = $this->SwitchToCardData($lastCards);
+                for ($n=0; $n < 4; $n++) { 
+                        $AnalyseItemArray[0]['cbWeaveKind'][$n] = $WeaveItem[$n]['cbWeaveKind'];
+                        $AnalyseItemArray[0]['cbCenterCard'][$n] = $WeaveItem[$n]['cbCenterCard'];
+                }
+            }
+        }
+    }
+
+    //判断是否为单吊将
+    public function compareDanDiao($cbCardIndex,$analyseResult)
+    {
+        foreach ($analyseResult as $key => $value) {
+            $cbCardIndexCopy = $cbCardIndex;
+            $analyseResultCopy = $analyseResult[$key]['oneCards'];
+            foreach ($analyseResultCopy as $cards => $count) {
+                $success = true;
+                if (isset($cbCardIndexCopy[$cards]) && $cbCardIndexCopy[$cards] > 0) {
+                    
+                    $cbCardIndexCopy[$cards] -= $analyseResultCopy[$cards];
+                    $analyseResultCopy[$cards] -= $analyseResultCopy[$cards];
+                    if($cbCardIndexCopy[$cards] == 0){
+                        unset($cbCardIndexCopy[$cards]);
+                    }else if($cbCardIndexCopy[$cards] < 0){
+                        $success = false;
+                        break;
+                    }
+                }else{
+                    $success = false;
+                    break;
+                }
+            }
+            if ($success) {
+                return true;
+            }
+        }
+        return false;
+    }
+    //分析比较组合出来的牌型和原牌型是否一致 一致能否胡牌
+    public function compareRusult($cbCardIndex,$analyseResult)
+    {
+        $successCards = array();
+        foreach ($analyseResult as $key => $value) {
+            $cbCardIndexCopy = $cbCardIndex;
+            $analyseResultCopy = $analyseResult[$key]['oneCards'];
+            foreach ($analyseResultCopy as $cards => $count) {
+                $success = true;
+                if (isset($cbCardIndexCopy[$cards]) && $cbCardIndexCopy[$cards] > 0) {
+                    
+                    $cbCardIndexCopy[$cards] -= $analyseResultCopy[$cards];
+                    $analyseResultCopy[$cards] -= $analyseResultCopy[$cards];
+                    if($cbCardIndexCopy[$cards] == 0){
+                        unset($cbCardIndexCopy[$cards]);
+                    }else if($cbCardIndexCopy[$cards] < 0){
+                        $success = false;
+                        break;
+                    }
+                }else{
+                    $success = false;
+                    break;
+                }
+            }
+            if ($success && count($cbCardIndexCopy) == 1 && $cbCardIndexCopy[key($cbCardIndexCopy)] == 2) {
+                $analyseResult[$key]['oneCardsKind']['cbCardEye'] = key($cbCardIndexCopy);
+                $successCards[] = $analyseResult[$key]['oneCardsKind'];
+            }
+        }
+        return $successCards;
+    }
+    //列出所有的组合combination
+    public function combination($arr, $m)
+    {
+        $r = array();
+        $arrClone = array_unique($arr,SORT_REGULAR);
+        foreach($arrClone as $key => $value){
+            if($m == 1){
+                $r[] = array($arrClone[$key]);
+            }else{
+                $lastArr = array_slice($arr, $key + 1);
+                $c = $this->combination($lastArr, $m-1);
+                foreach ($c as $v) {
+                    $r[] = array_merge(array($arrClone[$key]), $v);
+                }
+            }
+            
+            
+        }
+        return $r;
+    }
+
+    //将所有的组合拼接成牌的组合
+    public function splicingcards($a)
+    {
+        $analyseResult = array();
+        $i = 0;
+        foreach ($a as $key => $value) {
+            $oneCards = array();
+            foreach ($a[$key] as $type => $cards) {
+
+                $oneCards[$a[$key][$type]['cbCardIndex']['0']] = isset($oneCards[$a[$key][$type]['cbCardIndex']['0']])?$oneCards[$a[$key][$type]['cbCardIndex']['0']]+1:1;
+
+                $oneCards[$a[$key][$type]['cbCardIndex']['1']] = isset($oneCards[$a[$key][$type]['cbCardIndex']['1']])?$oneCards[$a[$key][$type]['cbCardIndex']['1']]+1:1;
+
+                $oneCards[$a[$key][$type]['cbCardIndex']['2']] = isset($oneCards[$a[$key][$type]['cbCardIndex']['2']])?$oneCards[$a[$key][$type]['cbCardIndex']['2']]+1:1;
+
+            }
+            $analyseResult[$i]['oneCards'] = $oneCards;
+            $analyseResult[$i]['oneCardsKind'] = $a[$key];
+            $i++;
+        }
+        return $analyseResult;
+    }
+}

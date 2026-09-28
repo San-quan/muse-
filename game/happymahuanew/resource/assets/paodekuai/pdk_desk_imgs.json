@@ -1,0 +1,5 @@
+{"file":"pdk_desk_imgs.png","frames":{
+"pdk_head_banker":{"x":401,"y":60,"w":32,"h":34,"offX":0,"offY":0,"sourceW":32,"sourceH":34},
+"pdk_icon_bg":{"x":221,"y":2,"w":176,"h":73,"offX":0,"offY":0,"sourceW":176,"sourceH":73},
+"pdk_result_item_bg":{"x":2,"y":2,"w":215,"h":185,"offX":0,"offY":0,"sourceW":215,"sourceH":185},
+"pdk_sparing_icon ":{"x":401,"y":2,"w":90,"h":54,"offX":0,"offY":0,"sourceW":90,"sourceH":54}}}

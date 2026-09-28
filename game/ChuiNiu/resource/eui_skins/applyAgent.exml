@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="applyAgent" width="640" height="750" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+	<e:Group y="28" horizontalCenter="0">
+		<e:Image source="chuniu_hall_new_json.hall_agent_bg" horizontalCenter="0" verticalCenter="0" width="550" height="700" scale9Grid="6,6,42,41"/>
+		<e:Image source="hall_apply_agent_bg_png" horizontalCenter="0" verticalCenter="-7.5"/>
+		<e:EditableText id="realname" width="350" height="25" text="" x="157" y="172" promptColor="0xFFFFFF" strokeColor="0xFFFFFF" prompt="请输入真实姓名" size="25"/>
+		<e:EditableText id="phone" width="350" height="25" text="" x="157" y="248" promptColor="0xFFFFFF" strokeColor="0xFFFFFF" prompt="请输入手机号" size="25"/>
+		<e:EditableText id="weixin" width="350" height="25" text="" x="157" y="319" promptColor="0xFFFFFF" strokeColor="0xFFFFFF" prompt="请输入微信号" size="25"/>
+		<e:EditableText id="passward" width="350" height="25" text="" x="157" y="388" promptColor="0xFFFFFF" strokeColor="0xFFFFFF" prompt="请输入密码" displayAsPassword="true" size="25"/>
+		<e:EditableText id="confirePD" width="350" height="25" text="" x="157" y="459" promptColor="0xFFFFFF" strokeColor="0xFFFFFF" prompt="请确认密码" displayAsPassword="true" size="25"/>
+		<e:EditableText id="invitecode" width="350" height="25" text="" x="157" y="531" promptColor="0xFFFFFF" strokeColor="0xFFFFFF" prompt="请输入邀请码" size="25"/>
+		<e:Image source="chuniu_hall_new_json.hall_applygent_btn" y="18" horizontalCenter="0"/>
+		<e:Group width="20" height="20" y="644" horizontalCenter="0">
+			<e:Button id="zhuceBtn" label="" scaleX="1" scaleY="1" horizontalCenter="0.5" verticalCenter="2.5">
+				<e:skinName>
+				<e:Skin states="up,down,disabled">
+					<e:Image width="100%" height="100%" source="chuniu_hall_new_json.hall_zhuce_btn" scaleX.down="1.1" scaleY.down="1.1"/>
+					<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+				</e:Skin>
+				</e:skinName>
+			</e:Button>
+		</e:Group>
+		<e:Label id="adminWeb" text="已有账号登陆" x="375" y="644" size="25"/>
+		<e:EditableText id="username" width="350" text="" x="157" y="102" promptColor="0xffffff" strokeColor="0xffffff" prompt="请输入用户名" size="25" verticalAlign="middle" height="25"/>
+	</e:Group>
+</e:Skin>

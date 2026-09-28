@@ -1,0 +1,5 @@
+{"file":"hallBgImage.png","frames":{
+"signBg":{"x":1,"y":1,"w":67,"h":69,"offX":0,"offY":0,"sourceW":67,"sourceH":69},
+"zhanjiBg":{"x":70,"y":68,"w":40,"h":65,"offX":0,"offY":0,"sourceW":40,"sourceH":65},
+"findBg":{"x":70,"y":1,"w":56,"h":65,"offX":0,"offY":0,"sourceW":56,"sourceH":65},
+"shopBottomBg":{"x":1,"y":72,"w":44,"h":40,"offX":0,"offY":0,"sourceW":44,"sourceH":40}}}

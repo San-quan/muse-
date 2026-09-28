@@ -1,0 +1,193 @@
+<!DOCTYPE>
+<html>
+<head>
+    <title>结算界面</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge，chrome=1">
+    <meta name="description" content="不超过150个字符"/>
+    <meta name="keywords" content="">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="robots" content="index,follow"/>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta name="HandheldFriendly" content="true">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <!-- <link rel="stylesheet" type="text/css" href="__STATIC__/game/css/play.css"> -->
+    <style>
+        *{margin:0;padding: 0;}
+        body{background: #140C09;}
+        body>img{position: absolute;top:0;left: 0;width: 100%;z-index: -1;}
+        .content{width: 74%;margin-left: 13%;margin-top: 30%;text-align: center;}
+        .times{display: inline-block;background:#5B5211; border-radius: 0.6rem;height: 1.2rem;line-height:1.2rem;font-size: 0.6rem;color:#D6BC71;padding: 0 0.3rem;border:1px solid #ccc;}
+        ul{width: 90%;margin-left: 5%;margin-top: 1.2rem;}
+        ul li{background:#1C1606;color: white;list-style: none;width: 96%;margin-left: 2%;margin-top: 2%;height: 2.2rem;line-height: 2.2rem;font-size: 0.8rem;opacity: 0.9;}
+        
+        ul li span:first-child{float: left;margin-left: 2rem;max-width: 5rem;overflow: hidden; text-overflow:ellipsis;white-space:nowrap;}
+        ul li span:last-child{float: right;margin-right: 2rem;}
+        .add{color:#F5D203!important;}
+        .win{background: url(__STATIC__/game/img/win.png) left top no-repeat;background-size: 12%;}
+    </style>
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body onclick="mp3play('bau');">
+
+
+    <canvas id="myCanvas" width="720" height="1144"  style="">
+        Your browser does not support the HTML5 canvas tag.
+    </canvas>
+
+<div style="width: 80%;height: 80%;position: fixed;top: 10%;left: 10%;display:none;" class="jie">长按图片分享<img src="" id="imgId" style="width: 100%;height:100%;z-index: 1000;box-shadow:0px 0px 6px yellow;"></div>
+
+    <div style="display:none;">
+        <img src="__STATIC__/game/img/result.png" id="bg" >
+        <img src="__STATIC__/baijiale/images/tubiao1.png" id="tubiao0" >
+        <img src="__STATIC__/baijiale/images/tubiao2.png" id="tubiao1" >
+        <img src="__STATIC__/baijiale/images/tubiao3.png" id="tubiao2" >
+        <img src="__STATIC__/game/img/long_save.png" id="long" >
+        <img src="__STATIC__/game/result/back.png" id="back" >
+        <img src="__STATIC__/game/result/jiepin.png" id="jiepin" >
+        
+        <input type="hidden" name="" value='{$list}' id="user">
+        <input type="hidden" name="" value="{:date('Y-m-d H:i',$room['taipaitime'])}" id="date">
+    </div>
+<script src="__STATIC__/game/js/jquery-1.12.1.js"></script>
+<audio id="bau" autoplay="autoplay" loop="loop" src="__STATIC__/game/video/background.mp3"></audio>
+
+<script>
+    function mp3play(id){
+        document.getElementById(id).play();
+    }
+    window.onload=function(){
+     
+        
+                // var gloable={
+                //     userinfo:"{$list}"
+                // }
+            // var wid=$(window).width()/720;
+                // $('#view').attr('content','initial-scale='+wid+',maximum-scale=1,user-scalable=no');
+                $('#myCanvas').css('height','100%');
+                $('#myCanvas').css('width','100%');
+                var c=document.getElementById("myCanvas");
+                var ctx=c.getContext("2d");
+                ctx.drawImage($("#bg")[0],0,0);
+                // alert($('#user').val());
+                var obj = eval("(" + $('#user').val() + ")");
+                 //圆角矩形的框
+                CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r) {
+                     var min_size = Math.min(w, h);
+                     if (r > min_size / 2) r = min_size / 2;
+                     // 开始绘制
+                     this.beginPath();
+                     this.moveTo(x + r, y);
+                     this.arcTo(x + w, y, x + w, y + h, r);
+                     this.arcTo(x + w, y + h, x, y + h, r);
+                     this.arcTo(x, y + h, x, y, r);
+                     this.arcTo(x, y, x + w, y, r);
+                     this.closePath();
+                     return this;
+                 }
+                 var height=300;
+                 var zi=13;
+                for (var i = 0; i < obj.length+1; i++) {
+                    // obj[i]
+                    var jianju=44;
+                    if (i==0) {
+                        ctx.roundRect(115, (height+jianju*i-40), 500, 40, 5).stroke();  
+                        ctx.fillStyle='rgba(0, 0, 0, 0.5)';
+                        ctx.fill();
+                        ctx.font="20px Arial";
+                        
+                        // ctx.textAlign='center';
+                        ctx.fillStyle='yellow';
+                        ctx.fillText("名次",125,(height+jianju*i-zi));
+                        
+                        ctx.fillStyle='white';
+                        ctx.textAlign='center';
+                        ctx.fillText("昵称",240,(height+jianju*i-zi));
+                        ctx.fillText('ID',370,(height+jianju*i-zi));
+                        ctx.fillText('总分',500,(height+jianju*i-zi));
+                    }else{
+                        var j=i-1;
+                        ctx.roundRect(115, (height+jianju*i-40), 500, 40, 5).stroke();  
+                        ctx.fillStyle='rgba(0, 0, 0, 0.5)';
+                        ctx.fill();
+                        ctx.font="20px Arial";
+                        
+                        // ctx.textAlign='center';
+                        if (j>2) {
+                            ctx.fillStyle='yellow';
+                            ctx.fillText("第"+(j+1)+"名",150,(height+jianju*i)-zi);
+                        }else{
+                            ctx.drawImage($('#tubiao'+j)[0],120,(height+jianju*i-40),40,35);
+                        }
+                        ctx.fillStyle='white';
+                        ctx.textAlign='center';
+                        ctx.fillText(obj[j].nickname,240,(height+jianju*i)-zi);
+                        ctx.fillText(obj[j].member_id,370,(height+jianju*i-zi));
+                        ctx.fillText(obj[j].money,500,(height+jianju*i-zi));
+                    }
+                    
+                }
+                ctx.textAlign='center';
+                
+                ctx.fillText('房间号：{$room.room_num}',230,900);
+                ctx.fillText('时间：'+$("#date").val(),450,900);
+                // ctx.drawImage($('#long')[0],230,950);
+                ctx.drawImage($('#back')[0],80,950);
+                ctx.drawImage($('#jiepin')[0],380,945);
+                // for (var i = 0; i < 13; i++) {
+                //     // obj[i]
+                //     ctx.roundRect(115, (height+jianju*i-40), 500, 40, 5).stroke();  
+                //     ctx.fillStyle='rgba(0, 0, 0, 0.5)';
+                //     ctx.fill();
+                // }
+                // alert(obj);
+                // var imgSrc = document.getElementById("myCanvas").toDataURL("image/png");  
+                // document.getElementById("imgId").src = imgSrc;  
+                $('.jie').click(function(){
+                    $('.jie').hide();
+                });
+                 c.onclick=function(e){
+                e=e||event;//获取事件对象
+                //获取事件在canvas中发生的位置
+                var x=e.clientX-c.offsetLeft;
+                var y=e.clientY-c.offsetTop;
+                var xx=$(window).width()/720;
+                var yy=$(window).height()/1144;
+
+                //如果事件位置在矩形区域中
+                 // ctx.globalAlpha =0.1;
+                 //坐下点击事件
+                 
+
+                    if(x>=80*xx&&x<=(80+$('#back')[0].width)*xx&&y>=950*yy&&y<=(950+$('#back')[0].height)*yy){
+                        // head.head1(allLocation.head[i],player[i].headurl);
+                        window.location.href="{:url('index/index69')}";
+                         // sitdown[i]=0;
+                        
+                    }
+                    if(x>=380*xx&&x<=(380+$('#jiepin')[0].width)*xx&&y>=945*yy&&y<=(945+$('#jiepin')[0].height)*yy){
+                        // head.head1(allLocation.head[i],player[i].headurl);
+                        var imgSrc = document.getElementById("myCanvas").toDataURL("image/png");  
+                        document.getElementById("imgId").src = imgSrc;
+                        $('.jie').show();
+                         // sitdown[i]=0;
+                         
+                    }
+                 
+             }
+            }
+            
+    
+
+
+
+</script>
+</body>
+</html>

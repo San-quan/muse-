@@ -1,0 +1,8 @@
+{"file":"tz_hall_4.png","frames":{
+"button_game_item_4":{"x":1,"y":343,"w":544,"h":112,"offX":0,"offY":0,"sourceW":544,"sourceH":112},
+"button_game_item_3":{"x":1,"y":229,"w":544,"h":112,"offX":0,"offY":0,"sourceW":544,"sourceH":112},
+"button_game_item_2":{"x":1,"y":115,"w":544,"h":112,"offX":0,"offY":0,"sourceW":544,"sourceH":112},
+"button_game_item_5":{"x":1,"y":1,"w":544,"h":112,"offX":0,"offY":0,"sourceW":544,"sourceH":112},
+"loading2":{"x":547,"y":1,"w":95,"h":90,"offX":0,"offY":0,"sourceW":95,"sourceH":90},
+"hall_sign":{"x":718,"y":1,"w":51,"h":77,"offX":0,"offY":0,"sourceW":51,"sourceH":77},
+"hall_head_default":{"x":644,"y":1,"w":72,"h":72,"offX":0,"offY":0,"sourceW":72,"sourceH":72}}}

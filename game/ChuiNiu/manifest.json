@@ -1,0 +1,19 @@
+{
+	"initial": [
+		"js/egret.min_601b204f.js",
+		"js/egret.web.min_ac98ba75.js",
+		"js/eui.min_a000ba3b.js",
+		"js/assetsmanager.min_2319fee8.js",
+		"js/tween.min_6c5a88f9.js",
+		"js/game.min_3c096da1.js",
+		"js/dragonBones.min_1bd06760.js",
+		"js/socket.min_8b4cb752.js",
+		"js/experimental.min_31954293.js",
+		"js/promise.min_83a6a5d.js",
+		"js/weixinapi.min_6729a0d7.js"
+	],
+	"game": [
+		"js/default.thm_2c284a1.js",
+		"js/main.min_f4c18089.js"
+	]
+}

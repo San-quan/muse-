@@ -1,0 +1,52 @@
+{"mc":{
+	"liandui":{
+		"frameRate":3,
+		"labels":[
+			{"name":"1","frame":1,"end":2}
+			
+			],
+		"events":[
+			
+			],
+		"frames":[
+			
+			{
+			"res":"img_GameAction_DouDiZhu_Liandui1",
+			"x":0,
+			"y":0
+			},
+			{
+			"res":"img_GameAction_DouDiZhu_Liandui2",
+			"x":0,
+			"y":0
+			}
+			]
+},"shunzi":{
+		"frameRate":3,
+		"labels":[
+			{"name":"2","frame":1,"end":2}
+			
+			],
+		"events":[
+			
+			],
+		"frames":[
+			
+			{
+			"res":"img_GameAction_DouDiZhu_Shunzi1",
+			"x":0,
+			"y":0
+			},
+			{
+			"res":"img_GameAction_DouDiZhu_Shunzi2",
+			"x":0,
+			"y":0
+			}
+			]
+}},
+	"res":{
+		"img_GameAction_DouDiZhu_Shunzi2":{"x":0,"y":0,"w":252,"h":238},
+		"img_GameAction_DouDiZhu_Liandui2":{"x":0,"y":238,"w":248,"h":231},
+		"img_GameAction_DouDiZhu_Shunzi1":{"x":252,"y":0,"w":252,"h":237},
+		"img_GameAction_DouDiZhu_Liandui1":{"x":252,"y":237,"w":255,"h":233}
+	}}

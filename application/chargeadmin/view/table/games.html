@@ -1,0 +1,272 @@
+{include file="public/top"}
+
+  <section id="content">
+  <style>
+    .mycircle{
+        line-height:29px ;font-size: 18px;
+    }
+    .panel .table td, .panel .table th {
+    padding: 0;
+    border-top: 1px solid #eaedef;
+    text-align: center;
+    line-height: 32px;
+    font-size: 11px;
+}
+</style>
+    <section class="main padder">
+  
+      <div class="row">
+        <div class="col-lg-12">
+          <section class="panel">
+            <header class="panel-heading">
+              游戏房间 / 游戏列表
+            </header>
+            <div class="col-lg-4 m-b-mini" style="margin-bottom: 30px"><button onclick="addGame()" class="file-input-wrapper btn btn btn-small btn-info">添加</button></div>
+            <div class="row text-small">
+            <form action="{:url('table/index')}" method="get">
+            
+
+              </form>
+            </div>
+            <div class="pull-out m-t-small">
+              <table class="table table-striped b-t text-small">
+                <thead>
+                  <tr>
+                    <!-- <th width="20"><input type="checkbox"></th> -->
+                    <th>游戏名</th>
+                    <th>游戏状态</th>
+                    <th>游戏排名</th>
+                    <th>游戏说明</th>
+                    <th>操作</th>
+                    <!-- <th width="30"></th> -->
+                  </tr>
+                </thead>
+                <tbody>
+                {volist name='games' id='list'}
+                  <tr>
+                   
+                    <td>{$list.gamename}</td>
+                    <td>
+                      {if condition="$list.state eq 1"}
+                      <span style="color: green;">开启</span>
+                      {elseif condition="$list.state eq 2"}
+                      <span style="color: red;">关闭</span>
+                      {/if}
+                    </td>
+                    <td>{$list.gameorder}</td>
+                    <td style="max-width: 50px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">
+                      {$list.message}
+                    </td>
+                    <td>
+                      <span class="file-input-wrapper btn btn btn-small btn-info" style="font-size: 11px;" onclick="gameDetail('{$list.id}')">设置</span>
+                      <span class="file-input-wrapper btn btn btn-small btn-info" style="font-size: 11px;" onclick="delGame('{$list.id}')">删除</span>
+                    </td>
+                    <!--   <td>
+                      <a href="#" class="active" data-toggle="class"><i class="icon-ok icon-large text-success text-active"></i><i class="icon-remove icon-large text-danger text"></i></a>
+                    </td> -->
+                  </tr>
+                {/volist}
+                </tbody>
+              </table>
+            </div>
+            <footer class="panel-footer">
+              <div class="row">
+                <div class="col-lg-4 text-right text-center-sm">
+                  {$games->render()}
+                </div>
+              </div>
+            </footer>
+          </section>
+        </div>
+      </div>
+    </section>
+  </section>
+  <!-- .modal -->
+  <div id="modal" class="modal fade">
+    <form class="m-b-none">
+      <div class="modal-dialog pos-abt" style="margin-top:50px;">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i></button>
+            <h4 class="modal-title" id="myModalLabel">游戏信息</h4>
+          </div>
+          <div class="modal-body" style="padding:0;">
+            <section id="modelContent"  class="panel-content scrollbar scroll-y scroll-x">
+              <table class="table table-striped b-t text-small" style="width:100%;max-width:none;">
+                <tr>
+                  <th>游戏名</th>
+                  <td>
+                    <input type="text" id="gamename" class="input-small inline form-control" style="width: 150px;">
+                    <input type="hidden" id="gameid">
+                  </td>
+                </tr>
+                <tr>
+                  <th>状态</th>
+                  <td>
+                    <select id="state" class="input-small inline form-control" style="width: 150px;">
+                      <option value="1">开启</option>
+                      <option value="2">关闭</option>
+                    </select>
+                  </td>
+                </tr>
+                <tr>
+                  <th>游戏排名</th>
+                  <td>
+                    <input type="number" id="gameorder" class="input-small inline form-control" style="width: 150px;">
+                  </td>
+                </tr>
+                <tr>
+                  <th>游戏说明</th>
+                  <td>
+                    <textarea class="input form-control" id="message" rows="5"></textarea>
+                  </td>
+                </tr>
+              </table>
+            </section>
+          </div>
+          <div class="modal-footer" id="modalFooter">
+            <button type="button" class="btn btn-small btn-default" onclick="editGame()">修改</button>
+            <button type="button" class="btn btn-small btn-default" data-dismiss="modal" aria-hidden="true">取消</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div>
+    </form>
+  </div>
+
+  <div id="tipModal" class="modal fade">
+    <form class="m-b-none">
+      <div class="modal-dialog pos-abt" style="margin-top:50px;">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i></button>
+            <h4 class="modal-title">提示</h4>
+          </div>
+          <div class="modal-body">
+            <section id="tipModalContent"  class="panel-content scrollbar scroll-y scroll-x">
+              
+            </section>
+          </div>
+          <div class="modal-footer" id="tipModalFooter">
+            <button type="button" class="btn btn-small btn-default" data-dismiss="modal" aria-hidden="true">确定</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div>
+    </form>
+  </div>
+<script src="__STATIC__/laydate/laydate.js"></script> <!-- 改成你的路径 -->
+<script>
+  //执行一个laydate实例
+
+laydate.render({
+  elem: '#startDate', //指定元素
+  type: 'datetime'
+});
+laydate.render({
+  elem: '#endDate', //指定元素
+  type: 'datetime'
+});
+
+var gameDetail=function(id){
+  $.ajax({
+    type:"post",
+    dataType:"json",
+    url:"{:url('ajaxGetGameInfo')}",
+    async:false,
+    data:{id:id},
+    success:function(data){
+      $("#gameid").val(data.id);
+      $("#gamename").val(data.gamename);
+      $("#state").val(data.state);
+      $("#gameorder").val(data.gameorder);
+      $("#message").val(data.message);
+      $("#modalFooter").html('<button type="button" class="btn btn-small btn-default" onclick="editGame()">修改</button> <button type="button" class="btn btn-small btn-default" data-dismiss="modal" aria-hidden="true">取消</button>');
+      $("#modal").modal("show");
+    }
+  });
+}
+
+var editGame=function(){
+  var id=$("#gameid").val();
+  var gamename=$("#gamename").val();
+  var state=$("#state").val();
+  var gameorder=$("#gameorder").val();
+  var message=$("#message").val();
+  $.ajax({
+    type:"post",
+    dataType:"json",
+    url:"{:url('ajaxEditGame')}",
+    async:false,
+    data:{
+      id:id,
+      gamename:gamename,
+      state:state,
+      gameorder:gameorder,
+      message:message
+    },
+    success:function(data){
+      $("#tipModalContent").html(data.desc);
+      if(data.status){
+        $("#tipModalFooter").html('<button type="button" class="btn btn-small btn-default" onclick="window.location.reload()">确定</button>');
+      }else{
+        $("#tipModalFooter").html('<button type="button" class="btn btn-small btn-default" data-dismiss="modal" aria-hidden="true">确定</button>')
+      }
+      $("#tipModal").modal("show");
+    }
+  });
+}
+
+var addGame=function(){
+  $("#gamename").val('');
+  $("#state").val('');
+  $("#gameorder").val('');
+  $("#message").val('');
+  $("#modalFooter").html('<button type="button" class="btn btn-small btn-default" onclick="addGameClick()">添加</button><button type="button" class="btn btn-small btn-default" data-dismiss="modal" aria-hidden="true">取消</button>');
+  $("#modal").modal("show");
+}
+
+var addGameClick=function(){
+  var gamename=$("#gamename").val();
+  var state=$("#state").val();
+  var gameorder=$("#gameorder").val();
+  var message=$("#message").val();
+  $.ajax({
+    type:"post",
+    dataType:"json",
+    url:"{:url('ajaxAddGame')}",
+    data:{
+      gamename:gamename,
+      state:state,
+      gameorder:gameorder,
+      message:message
+    },
+    success:function(data){
+      $("#tipModalContent").html(data.desc);
+      if(data.status){
+        $("#tipModalFooter").html('<button type="button" class="btn btn-small btn-default" onclick="window.location.reload()">确定</button>');
+      }else{
+        $("#tipModalFooter").html('<button type="button" class="btn btn-small btn-default" data-dismiss="modal" aria-hidden="true">确定</button>')
+      }
+      $("#tipModal").modal("show");
+    }
+  })
+}
+
+var delGame=function(id){
+  $.ajax({
+    type:"post",
+    dataType:"json",
+    url:"{:url('ajaxDelGame')}",
+    data:{id:id},
+    success:function(data){
+      $("#tipModalContent").html(data.desc);
+      if(data.status){
+        $("#tipModalFooter").html('<button type="button" class="btn btn-small btn-default" onclick="window.location.reload()">确定</button>');
+      }else{
+        $("#tipModalFooter").html('<button type="button" class="btn btn-small btn-default" data-dismiss="modal" aria-hidden="true">确定</button>')
+      }
+      $("#tipModal").modal("show");
+    }
+  })
+}
+</script>
+{include file="public/bottom"}

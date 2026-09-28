@@ -1,0 +1,170 @@
+<html>
+    <head> 
+        <meta charset="utf-8" /> 
+        <!-- <meta name="viewport" id="view" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"> -->
+        <meta name="format-detection" content="telephone=no" /> 
+        <meta name="msapplication-tap-highlight" content="no" /> 
+        <title>欢乐30秒房间
+        </title> <!-- 
+        <link rel="stylesheet" type="text/css" href="/static/game9/css/bull_vue-2.0.3.css" /> 
+        <link rel="stylesheet" type="text/css" href="/static/game9/css/alert-1.1.css" /> 
+        <link rel="stylesheet" type="text/css" href="/static/game9/css/bullshop-1.0.css" />  -->
+       
+        <script type="text/javascript" src="/static/baijiale/js/fastclick.js"></script>
+        <script src="__STATIC__/game/js/jquery-1.12.1.js"></script> 
+        <script type="text/javascript" src="/static/js/vue.min.js" ></script>
+        <script type="text/javascript" src="/static/js/vue-resource.min.js" ></script>
+        <style type="text/css">
+            body{padding:0;margin: 0;width: 100%;}
+            .notice{
+                width: 80%;
+                position: absolute;
+                left: 50%;
+                top:23%;
+                margin-left: -41%;
+                display: none;
+            }
+            .last-time{position: absolute;top: 14%;left: 50%;margin-left: -20%;width: 40%;height: 4.8rem;font-size: 0.9rem;color: #ddd;display: none;}
+            .last-time span{text-align: center;display: inline-block;width: 100%;margin-top: 28px;z-index: 10;}
+        </style>
+        <script type="text/javascript">
+            window.addEventListener('load', function () {
+                FastClick.attach(document.body);
+            }, false);
+
+            var newNum = "";
+            var per = window.innerWidth / 530;
+            var globalData = {
+                // "socket": "ws://wbkj.wanyouxi518.cn:2130",
+                "socket": "ws://192.168.3.4:2130",
+                "roomID": "{$roominfo.id}",   
+                "roomOwner":"{$roominfo.member_id}",
+                "baseUrl":"{:url('Baijiale/index','room_id='.$roominfo.id)}",
+                "dating":"{:url('index/index')}",
+                "chongzhi":"{:url('Paymethod/index','memberid='.$memberinfo['id'])}",
+                "beilv":"{$rule.rule}",
+                'gamenum':"{$rule.gamenum}",
+                'musicurl':"192.168.3.4:8088/"
+            };
+           var userData = {
+                "id": "1",
+                "uid": "{$memberinfo['id']}",
+                "nickname": "ww",
+                "avatar": "10",
+                "isAuthPhone": "10",
+                "authCardCount": "11",
+                "phone": "",
+            };
+            var coinList = [1, 2, 4, 5];
+        </script>
+    </head> 
+<body> 
+    <div style="position: fixed; width: 100%; height: 100%; top: 0px; left: 0px; background: rgb(0, 0, 0); z-index: 115; display: none;" id="loading"> 
+        <div class="load4"> 
+            <div class="loader">
+                Loading...
+            </div> 
+        </div> 
+    </div>
+
+    <p class="last-time"><img src="__STATIC__/baijiale/images/daojishi.png" style="position: absolute;width: 100%;"><span class="text" style="margin-top:0; width:100%; font-size: 14px;"></span><span class="int" style="position: absolute;left:0;font-size: 56px;">15</span><img id="djstitle" src="__STATIC__/baijiale/images/kongxian.png" style="position: absolute;left: 22%;top: 173%;width: 57%;"></p>
+    <div id="app-main" style="float:left;z-index:9998;    position: absolute;width: 100%;">   
+        <img src="__STATIC__/baijiale/images/ready.png" v-on:click="clickSendReady('准备')" id="imready" style="width: 35%;position: absolute;top: 1000px;left: 50%;margin-left: -18%;display:none;">
+        <img src="__STATIC__/baijiale/images/invate.png" onclick="$('.invite').show();mp3play('click');" class="yaoqing" style="width: 35%;position: absolute;top: 850px;left: 50%;margin-left: -18%;display:none;">
+        <div id="joinroom" style="display:none;float: left;"><button v-on:click="clickJoinRoom(9)">确定</button><a href="{:url('index/index69')}"><button >取消</button></a></div>
+       
+        <button id="chongzhi" style="display:none;">充值</button>
+        <button id="jinzhiCreate" style="display:none;">禁止创建</button>
+        <button id="jinzhiJoin" style="display:none;">禁止加入</button>
+    </div>
+    <div class="invite" style="display:none;position:fixed; background:rgba(0,0,0,0.5); z-index:9999; top:0; bottom:0; left:0; right:0;"  onclick="$('.invite').hide()">
+        <img src="__STATIC__/baijiale/images/share.png" style="position: absolute;right: 0;width:500px;">
+    </div>
+    <div class="notice" >
+        <img style="width:100%;" src="__STATIC__/game/confirm/tishi.png">
+        <div class="content" style="width: 80%;height: 50%;position: absolute;top: 21%;left: 50%;margin-left: -40%;color: white;font-size: 40px;">asfklemwkegnikwnekgn</div>
+        <img class="queding" style="width:35%;position: absolute;top:73%;left:50%;margin-left: -39%;"  src="__STATIC__/game/confirm/yes_xiao.png">
+        <a href="{:url('index/index69')}" style="width:35%;position: absolute;top:73%;left:50%;margin-left: 19px;" id="cancel"><img style="width:100%;" class="quxiao"  src="__STATIC__/game/confirm/quxiao.png"></a>
+    </div>
+    <div class="shownotice" style="position:fixed; display:none; background:rgba(0,0,0,0.5); z-index:9000; top:0; bottom:0; left:0; right:0;"><div  style="position:absolute; top:40%; text-align:center; width:100%;"><span class="msgbox" style="border:1px solid #ffffff;box-shadow: 0px 2px 5px #000;padding:15px 40px; background:#FFFFFF; border-radius:4px;font-size: 40px;">申请成功</span></div></div>
+    <div class="setkuang" style="display:none;position:fixed; background:rgba(0,0,0,0.5); z-index:9000; top:0; bottom:0; left:0; right:0;"></div>
+    <div class='setnei' style="position: absolute;left: 50%;top:23%;margin-left: -40%;text-align: center;width: 80%;height: 36%;background: url(/static/baijiale/images/setting/bg.png) no-repeat;background-size: 100%;/*;margin-top: 41%;*/color: black;display: none;z-index:9001">
+        <img style="    width: 35%;position: absolute;top: 40%;left: 8%;" src="/static/baijiale/images/setting/music.png">
+        <!-- <img style="    width: 35%;position: absolute;top: 51%;left: 8%;" src="/static/baijiale/images/setting/radio.png"> -->
+        <img style="    width: 35%;position: absolute;top: 40%;left:52%;" class="musicswitch" src="/static/baijiale/images/setting/on.png">
+        <!-- <img style="    width: 35%;position: absolute;top: 51%;left:52%;" class="redioswitch" src="/static/baijiale/images/setting/on.png"> -->
+        <!-- <img src="/static/baijiale/images/close.png"> -->
+    </div>
+    <div class="disabledkuang" style="display:none;position:fixed; background:rgba(0,0,0,0.5); z-index:9000; top:0; bottom:0; left:0; right:0;">
+        <div  style="position: absolute;left: 50%;margin-left: -40%;text-align: center;width: 80%;height: 36%;background: url(/static/baijiale/images/disable/bg.png) no-repeat;background-size: 100%;margin-top: 51%;color: white;"><div class="whosetitle" style="width: 90%;height: 50px;line-height: 50px;font-size: 50px;margin: 17% auto 0 auto;">visitor1234567890发起解散</div>
+            <div class="howmany" style="width: 100%;height: 100px;font-size: 40px;line-height: 50px;">当前共有10人<br>现有5人已经同意解散该局游戏</div>
+            <img style="    width: 35%;position: absolute;top: 65%;left: 9%;" class="disableagree" src="/static/baijiale/images/disable/agree.png" onclick="vm.clickGameDisbandResponse(1)">
+            <img style="    width: 35%;position: absolute;top: 65%;left: 56%;"    class="disablerefuse" src="/static/baijiale/images/disable/refuse.png" onclick="vm.clickGameDisbandResponse(2)">
+            <img style="    width: 35%;position: absolute;top: 0;left:33%;" src="/static/baijiale/images/disable/title.png">
+
+            <!-- <img src="/static/baijiale/images/close.png"> -->
+        </div>
+    </div>
+    <canvas id="myCanvas" width="560" height="910"  style="">
+        Your browser does not support the HTML5 canvas tag.
+    </canvas>
+    {include file="baijiale/img"}
+    {include file="baijiale/mp3"}
+    <script type="text/javascript" src="__STATIC__/baijiale/js/zijie.js"></script>
+    <script type="text/javascript" src="__STATIC__/baijiale/js/bjllogic.js"></script>
+    <script type="text/javascript" src="__STATIC__/baijiale/js/baijiale.js"></script>
+    <script src="__STATIC__/js/countdown.js"></script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript" charset="utf-8">
+   
+        wx.ready(function () {
+            var shareData = {
+                title: '【红狐互娱】欢乐30秒',
+                desc: '{$memberinfo.nickname}邀请您加入游戏。倍率：{$rule.rule}倍，局数：{$rule.gamenum}局。',
+                link: '',
+                imgUrl: 'http://wbkj.wanyouxi518.cn/static/game/img/honghu.png',
+                success: function () {
+                    //分享成功
+                }
+            };
+            wx.onMenuShareAppMessage(shareData);
+            wx.onMenuShareTimeline(shareData);
+        });
+</script>
+<script>
+// window.onload=function(){
+//         var wid=$(window).width()/560;
+//             $('#view').attr('content','initial-scale='+wid+',maximum-scale=1,user-scalable=no');
+//         }
+        $('#myCanvas').css('height','100%');
+            $('#myCanvas').css('width','100%');
+        $('.setkuang').click(function(){
+            $(".setkuang").hide();
+            $(".setnei").hide();
+        });
+        var musicJudge=true;
+        $(".musicswitch").click(function(){
+            if (musicJudge) {
+              musicJudge=false;
+              mp3playandpause('background')
+              $(this).attr('src','/static/baijiale/images/setting/off.png');
+            }else{
+              musicJudge=true;
+              mp3play('background');
+              $(this).attr('src','/static/baijiale/images/setting/on.png');
+            }
+        })
+        var rediojudge=true
+        $(".redioswitch").click(function(){
+            if (rediojudge) {
+              rediojudge=false;
+              $(this).attr('src','/static/baijiale/images/setting/off.png');
+            }else{
+              rediojudge=true;
+              $(this).attr('src','/static/baijiale/images/setting/on.png');
+            }
+        })
+</script>
+
+</body>
+</html>

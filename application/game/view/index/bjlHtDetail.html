@@ -1,0 +1,69 @@
+<html>
+    <head> 
+        <meta charset="utf-8" /> 
+        <!-- <meta name="viewport" id="view" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"> -->
+        <meta name="format-detection" content="telephone=no" /> 
+        <meta name="msapplication-tap-highlight" content="no" /> 
+        <title>
+        </title> 
+
+        <script src="__STATIC__/game/js/jquery-1.12.1.js"></script> 
+        </head> 
+<body> 
+   <table style="text-align: center;margin:0 auto;width: 80%;font-size: 40px;" border="1px" cellpadding='0' id="list">
+       
+   </table>
+<script>
+  
+    
+    window.onload=function(){
+             var h=" <tr><th>局数</th><th>闲对</th><th>和</th><th>庄对</th><th>闲</th><th>庄</th></tr>";
+             ret={$detail};
+                   for (var i = 0; i < ret.length; i++) {
+                     h=h+"<tr><td>第"+(i+1)+"局</td>";
+                      if (ret[i].winmark.xiandui) {
+                        h=h+"<td style='color:green;'>√</td>";
+                      }else{
+                        h=h+"<td style='color:red;'>×</td>";
+                      }
+                      if (ret[i].winmark.he) {
+                        h=h+"<td style='color:green;'>√</td>";
+                      }else{
+                        h=h+"<td style='color:red;'>×</td>";
+                      }
+                      if (ret[i].winmark.zhuangdui) {
+                        h=h+"<td style='color:green;'>√</td>";
+                      }else{
+                        h=h+"<td style='color:red;'>×</td>";
+                      }
+                      if (ret[i].winmark.xian) {
+                        h=h+"<td style='color:green;'>√</td>";
+                      }else{
+                        h=h+"<td style='color:red;'>×</td>";
+                      }
+                      if (ret[i].winmark.zhuang) {
+                        h=h+"<td style='color:green;'>√</td>";
+                      }else{
+                        h=h+"<td style='color:red;'>×</td>";
+                      }
+                  }
+                  
+                  // for (var i = 0; i < ret.length; i++) {
+                  //     h=h+"<tr><td>第"+(i+1)+"局</td><td>"+ret[i].winmark.xiandui+"</td><td>"+ret[i].winmark.he+"</td><td>"+ret[i].winmark.zhuangdui+"</td><td>"+ret[i].winmark.xian+"</td><td>"+ret[i].winmark.zhuang+"</td></tr>";
+                  // }
+                  $("#list").html(h);   
+             
+        }
+       
+      
+               
+                  // var res = eval("(" +ret+ ")");
+                  
+               
+               
+                
+    
+</script>
+
+</body>
+</html>

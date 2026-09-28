@@ -1,0 +1,156 @@
+{include file="public/top"}
+<style type="text/css">
+ table{background-color: white;width: 90%;height:20rem;margin:0 auto;border-radius: 2rem;padding:0 1rem 1rem 2rem;text-align: center;}
+ .cem>img{width: 70%;padding-left:-0.5rem;}
+ .zeng>img{width: 70%;}
+ .goumai>img{width: 70%;}
+ th{font-size: 1.5rem;}
+ table td{border-bottom:1px dashed gray;}
+ .last td{border-bottom:none;}
+.overlay{background: rgba(0,0,0,0.8);position: absolute;top: 0;left: 0;bottom: 0;right:0;z-index: 100000;display: none;}
+table tr{line-height: 5rem}
+</style>
+<div style="background: white;width: 90%;margin: 4rem auto 0 auto;border-radius: 1rem;margin-top:16%;">
+	<table>
+		<th colspan="6" style="text-align: center;font-size:3rem;">在线充值</th>
+		
+		  
+		  <tr>
+		  	<td class="cem"><img src="__STATIC__/game/shop/cem_1.png"></td>
+		  	<td>{$goodslist[0]['diamond']}</td>
+		  	<td class="zeng"><img src="__STATIC__/game/shop/zeng.png"></td>
+		  	<td>{$goodslist[0]['award']}</td>
+		  	<td>￥{$goodslist[0]['price']}</td>
+		  	<td class="goumai" width="30%"><img class="czbtn" onclick="goods({$goodslist[0]['id']})" src="__STATIC__/game/shop/goumai.png"></td>
+		  </tr>
+		
+	
+		<tr>
+			<td class="cem"><img src="__STATIC__/game/shop/cem_2.png"></td>
+			<td>{$goodslist[1]['diamond']}</td>
+			<td class="zeng"><img src="__STATIC__/game/shop/zeng.png"></td>
+			<td>{$goodslist[1]['award']}</td>
+			<td>￥{$goodslist[1]['price']}</td>
+			<td class="goumai"><img class="czbtn" onclick="goods({$goodslist[1]['id']})" src="__STATIC__/game/shop/goumai.png"></td>
+		</tr>
+		<tr>
+			<td class="cem"><img src="__STATIC__/game/shop/cem_3.png"></td>
+			<td>{$goodslist[2]['diamond']}</td>
+			<td class="zeng"><img src="__STATIC__/game/shop/zeng.png"></td>
+			<td>{$goodslist[2]['award']}</td>
+			<td>￥{$goodslist[2]['price']}</td>
+			<td class="goumai"><img class="czbtn" onclick="goods({$goodslist[2]['id']})" src="__STATIC__/game/shop/goumai.png"></td>
+		</tr>
+		<tr class="last">
+			<td class="cem"><img src="__STATIC__/game/shop/cem_4.png"></td>
+			<td>{$goodslist[3]['diamond']}</td>
+			<td class="zeng"><img src="__STATIC__/game/shop/zeng.png"></td>
+			<td>{$goodslist[3]['award']}</td>
+			<td>￥{$goodslist[3]['price']}</td>
+			<td class="goumai"><img class="czbtn" onclick="goods({$goodslist[3]['id']})" src="__STATIC__/game/shop/goumai.png"></td>
+		</tr>
+	</table>
+	<input type="hidden" id="memberid" value="{$memberid}">
+	<input type="hidden" id="isingame" value="{$isingame}">
+</div>
+<div class="overlay" >
+  
+   </div>
+</div>
+<div class="invite" style="position: absolute;top: 1rem;width: 100%;z-index: 100000;display: none;">
+    <img src="__STATIC__/game/img/arrow.png" style="width: 5rem;float: right;">
+    <p style="color: white;margin:7rem 5rem;width: 32rem;font-size: 1rem;">
+        <span style="    display: inline-block;width: 3rem;height: 3rem;border-radius: 50%;background: red;color: white;text-align: center;line-height: 3rem;margin-right: 0.3rem;">1</span>请点击右上角<img src="__STATIC__/game/img/ico1.png" style="width: 3rem;vertical-align: middle;margin:0 0.3rem;">按钮<br/><br/>
+        <span style=" display: inline-block;width: 3rem;height: 3rem;border-radius: 50%;background: red;color: white;text-align: center;line-height: 3rem;margin-right: 0.3rem;">2</span><!-- <img src="__STATIC__/game/img/ico2.png" style="width: 3rem;vertical-align: middle;margin:0 0.3rem;"> -->请在浏览器打开支付<br/><br/>
+        <span style="color: #E6A43F;">本产品仅供娱乐，禁止用于赌博</span>
+    </p>
+</div>
+<script id='wpay-jspay-script' src='http://jspay.wiipay.cn/1/jspay/wpayscripts.do?appId={$appid}'></script>
+
+<script type="text/javascript">
+	 var gameStatus=true;
+   $(function () {
+          $(".overlay").click(function () {
+              $(".overlay").hide();
+              $('.invite').hide();
+          });
+          $(".invite").click(function () {
+              $(".overlay").hide();
+              $('.invite').hide();
+          });
+
+         var isingame=$("#isingame").val();
+         if (isingame!=1) {
+           $('.btn_bg').css('display','none');
+         }
+      })
+	
+	
+	 function goods(data) {
+        /**
+         * 2. 需要支付时调用WP.click接口传入参数
+         */
+         var isingame=$("#isingame").val();
+         if (isingame==1) {
+         		// alert('在游戏中');
+         		gameStatus=true;
+         }else{
+         		// alert("不在游戏中");
+         		gameStatus=false;
+         }
+        if (gameStatus==true) {
+        	$(".overlay").show();
+        	$('.invite').show();
+        }else{
+	   var app_id = "";//微派分配的appId,联系运营人员获取，实际项目中请替换真实appId
+       var body = ""; //商品名称，必填项，请勿包含敏感词
+       var callback_url = "";//支付成功后跳转的商户页面(用户看到的页面)
+       var channel_id = "";//渠道编号
+       var out_trade_no =""; //商户单号，确保不重复，如想透传更多参数信息，建议以Json-->String->Base64编码后传输，必填项
+       var total_fee = "";//商品价格(单位:元)，必填项
+       var version = ""; //版本号，默认填写2.0即可，必填项
+       
+       
+       
+       //本签名示例，仅为了演示，实际项目中为了安全考虑，请勿将key对外。字符串拼接规则为，参与签名的参数，按字母序key=value方式然后加上key进行md5,最后sign转大写
+      
+       
+       var sign = ''//签名串,签名规则:MD5，utf-8
+       var memberid=$("#memberid").val()
+      $.post("{:url('Paymethod/goodsPayInfo')}",{goodsID:data,memberid:memberid},function(ret){
+        app_id = ret.appid;
+        body = ret.body; 
+        callback_url = ret.callback;
+        channel_id = ret.channelid;
+        out_trade_no =ret.outtradeno; 
+        total_fee = ret.totalfee;
+        version = ret.version;
+        sign=ret.sign;
+        WP.click({
+      // "instant_channel":"wx",//配置默认支付方式，当仅有一个支付方式时，不会弹出收银台，会直接跳转到支付界面；支付宝ali，微信公众号wx，银联un，网银wy，此参数不参与签名
+      // "debug":1, //开启调试模式，会显示错误信息，注意，上线后需要去掉，此参数不参与签名
+      "body":body, 
+            "callback_url" : callback_url, 
+            "channel_id":channel_id, 
+            "out_trade_no":out_trade_no,
+            "total_fee":total_fee,  
+            "sign":sign,
+            "version":version
+        });
+        
+    
+        /**
+         * click调用错误返回：默认行为console.log(err)
+         */
+        WP.err = function(err) {
+            //err 为object, 例 ｛"ERROR" : "xxxx"｝;
+            console.log(err);
+        } 
+      },'JSON');
+     
+        }
+      
+		
+    };
+</script>
+{include file="public/bottom"}

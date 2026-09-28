@@ -1,0 +1,39 @@
+<html>
+    <head> 
+        <meta charset="utf-8" /> 
+        <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" /> 
+        <meta name="format-detection" content="telephone=no" /> 
+        <meta name="msapplication-tap-highlight" content="no" /> 
+        <title>九人房间
+        </title> 
+        <link rel="stylesheet" type="text/css" href="/static/game9/css/bull_vue-2.0.3.css" /> 
+        <link rel="stylesheet" type="text/css" href="/static/game9/css/alert-1.1.css" /> 
+        <link rel="stylesheet" type="text/css" href="/static/game9/css/bullshop-1.0.css" /> 
+        <script type="text/javascript" src="/static/baijiale/js/fastclick.js"></script>
+        <script src="__STATIC__/game/js/jquery-1.12.1.js"></script> 
+        <script type="text/javascript" src="/static/js/vue.min.js" ></script>
+        <script type="text/javascript" src="/static/js/vue-resource.min.js" ></script>
+       
+    </head> 
+    <body> 
+        <div style="position: fixed; width: 100%; height: 100%; top: 0px; left: 0px; background: rgb(0, 0, 0); z-index: 115; display: none;" id="loading"> 
+            <div class="load4"> 
+                <div class="loader">
+                    Loading...
+                </div> 
+            </div> 
+        </div> 
+        <div id="app-main">
+            <button v-on:click="parent.clickSendReady('准备')">准备</button>
+            <button v-on:click="clickSetBanker('抢庄')">抢庄</button>
+            <button v-on:click="clickSetMultiple('下注')">下注</button>
+            <button v-on:click="clickShowCard('摊牌')">摊牌</button>
+        </div>
+        
+        <!-- <script type="text/javascript" src="/static/game9/js/canvas.js"></script>  -->
+    
+
+        
+    </body>
+    <script type="text/javascript"></script>
+</html>

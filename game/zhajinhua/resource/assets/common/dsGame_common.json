@@ -1,0 +1,9 @@
+{"file":"dsGame_common.png","frames":{
+"common_loading_bg":{"x":1,"y":1,"w":150,"h":243,"offX":0,"offY":0,"sourceW":150,"sourceH":243},
+"common_loading_3":{"x":153,"y":159,"w":68,"h":72,"offX":3,"offY":1,"sourceW":74,"sourceH":74},
+"common_loading_2":{"x":153,"y":83,"w":68,"h":74,"offX":3,"offY":0,"sourceW":74,"sourceH":74},
+"common_loading_1":{"x":153,"y":233,"w":64,"h":74,"offX":5,"offY":0,"sourceW":74,"sourceH":74},
+"common_loading_0":{"x":113,"y":309,"w":70,"h":61,"offX":2,"offY":9,"sourceW":74,"sourceH":74},
+"common_juhua":{"x":1,"y":246,"w":110,"h":110,"offX":0,"offY":0,"sourceW":110,"sourceH":110},
+"common_notice_di":{"x":185,"y":309,"w":50,"h":49,"offX":0,"offY":0,"sourceW":50,"sourceH":49},
+"common_alertBox_success":{"x":153,"y":1,"w":80,"h":80,"offX":0,"offY":0,"sourceW":80,"sourceH":80}}}

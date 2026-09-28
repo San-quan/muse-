@@ -1,0 +1,45 @@
+{
+	"groups": [
+		{
+			"keys": "ddzLoading_png,dataiox_png,weinzidid_png,weinzitop_png,yuanjiaote_png",
+			"name": "load"
+		}
+	],
+	"resources": [
+		{
+			"url": "config/description.json",
+			"type": "json",
+			"name": "description_json"
+		},
+		{
+			"url": "config/description.json",
+			"type": "json",
+			"name": "description2_json"
+		},
+		{
+			"url": "assets/public/loading/doudizhu/ddzLoading.png",
+			"type": "image",
+			"name": "ddzLoading_png"
+		},
+		{
+			"url": "assets/public/loading/doudizhu/yuanjiaote.png",
+			"type": "image",
+			"name": "yuanjiaote_png"
+		},
+		{
+			"url": "assets/public/loading/doudizhu/dataiox.png",
+			"type": "image",
+			"name": "dataiox_png"
+		},
+		{
+			"url": "assets/public/loading/doudizhu/weinzidid.png",
+			"type": "image",
+			"name": "weinzidid_png"
+		},
+		{
+			"url": "assets/public/loading/doudizhu/weinzitop.png",
+			"type": "image",
+			"name": "weinzitop_png"
+		}
+	]
+}

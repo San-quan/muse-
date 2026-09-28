@@ -1,0 +1,6 @@
+{"file":"hzmj_player.png","frames":{
+"hzmj_head_banker":{"x":75,"y":52,"w":32,"h":34,"offX":0,"offY":0,"sourceW":32,"sourceH":34},
+"hzmj_head_defult":{"x":2,"y":2,"w":69,"h":69,"offX":0,"offY":0,"sourceW":69,"sourceH":69},
+"hzmj_huzi":{"x":2,"y":145,"w":56,"h":54,"offX":0,"offY":0,"sourceW":56,"sourceH":54},
+"hzmj_kk":{"x":2,"y":75,"w":66,"h":66,"offX":0,"offY":0,"sourceW":66,"sourceH":66},
+"hzmj_roomOwener":{"x":75,"y":2,"w":50,"h":46,"offX":0,"offY":0,"sourceW":50,"sourceH":46}}}

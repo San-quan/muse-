@@ -1,0 +1,8 @@
+{"file":"xll_shezhi.png","frames":{
+"public_audio_title":{"x":418,"y":38,"w":92,"h":35,"offX":0,"offY":0,"sourceW":92,"sourceH":35},
+"public_lord_game_setting_checked":{"x":198,"y":252,"w":126,"h":46,"offX":0,"offY":0,"sourceW":126,"sourceH":46},
+"public_lord_game_setting_unchecked":{"x":326,"y":252,"w":123,"h":47,"offX":0,"offY":0,"sourceW":123,"sourceH":47},
+"public_music_title":{"x":418,"y":1,"w":92,"h":35,"offX":0,"offY":0,"sourceW":92,"sourceH":35},
+"public_tishi_bg":{"x":1,"y":1,"w":415,"h":249,"offX":0,"offY":0,"sourceW":415,"sourceH":249},
+"public_tankuang_set_title":{"x":418,"y":75,"w":59,"h":28,"offX":0,"offY":0,"sourceW":59,"sourceH":28},
+"public_tankuang_title_bg":{"x":1,"y":252,"w":195,"h":79,"offX":0,"offY":0,"sourceW":195,"sourceH":79}}}

@@ -1,0 +1,1432 @@
+{
+	"groups": [
+		{
+			"keys": "description_json,mengban_png,quxiao_png,tishi_png,yes_xiao_png,invate_png,ready_png,tubiao1_png,tubiao2_png,tubiao3_png,back_png,jiepin_png,tongyi_png,jujue_png,description2_json,juhua_png,emo_png,emo_json,hallBg_png,close2_png,ddz_click_mp3,hallShaizhong_ske_json,hallShaizhong_tex_json,hallShaizhong_tex_png,greenBg_png,totalBg_png,totalResult_json,loss_total_fnt,loss_total_png,win_total_png,win_total_fnt,faxianBg_png,fightAndFind_fnt,fightAndFind_png,zhanjiBg_png,findAndFight_json,createChuiniu_json,click_mp3,homepage_mp3,shaizi_mp3,33_png,repeat_png,repeatclick_png,shake_png,shakeclick_png,singlemode_jpg,BTN_BackClick_png,BTN_Back_png,yaoshaizhong_tex_png,yaoshaizhong_ske_json,yaoshaizhong_tex_json,biaozhunCall_json,bg_png,disband_png,lord_exit_btn_close_d_png,lord_game_setting_checked_png,lord_game_setting_unchecked_png,menulist_png,gameset_png,situp_png,wanfa_png,hall_fankui_kuang_png,hall_shop_bg_png,hall_apply_agent_bg_png,all_defaull_head_png,chuniu_hall_new_json,chuiniuHall_json",
+			"name": "preload"
+		},
+		{
+			"keys": "loading_hall_png,dibuloading_png,huangse_png,waitWenzi_png,loading_BG_png,ddzLoading_png,loadingGBg_png,loadIngGJT_png,loadingHhT_png,loadingShT_png,lodadingNnT_png,loadingBzT_png,loadingGGD_png",
+			"name": "load"
+		},
+		{
+			"keys": "baozi_ske_json,baozi_tex_json,baozi_tex_png,chatpop_png,ddz_click_mp3,shunzi_ske_json,shunzi_tex_json,shunzi_tex_png,yaoshaizhong_ske_json,yaoshaizhong_tex_json,yaoshaizhong_tex_png,biaozhongAni_tex_json,biaozhongAni_ske_json,biaozhongAni_tex_png,jujue_png,quxiao_png,tishi_png,tongyi_png,yes_xiao_png,greenBg_png,totalBg_png,totalResult_json,loss_total_fnt,win_total_fnt,win_total_png,loss_total_png,bei_png,bei2_png,sunshi_png,huoli_png,bzInGame_json,tipsbg_png,lossBei_fnt,lossBei_png,winbei_fnt,winbei_png,zanshui_json,zanshui_png,bg_png,disband_png,lord_exit_btn_close_d_png,lord_game_setting_checked_png,lord_game_setting_unchecked_png,menulist_png,gameset_png,situp_png,wanfa_png,bzWanfa_png,shWanfa_png,hhWanfa_png,nnWanfa_png,wanfaBg_png,wanfaChoosen_png,wanfaTitile_png,1_png,10_png,11_png,12_png,13_png,14_png,15_png,2_png,3_png,4_png,5_png,6_png,7_png,8_png,9_png,biaoqing_png,biaoqingN_png,MessageLaba_png,MessageBg_png,wenziN_png,wenzi_png,yying_png,message1_mp3,message10_mp3,message2_mp3,message3_mp3,message4_mp3,message5_mp3,message6_mp3,message7_mp3,message8_mp3,message9_mp3,juhua_png,mengban_png,click_mp3,countdown_mp3,boy1_mp3,boy10s_mp3,boy11s_mp3,boy12s_mp3,boy13s_mp3,boy14s_mp3,boy15s_mp3,boy16s_mp3,boy17s_mp3,boy18s_mp3,boy19s_mp3,boy2_mp3,boy20s_mp3,boy21s_mp3,boy22s_mp3,boy23s_mp3,boy24s_mp3,boy25s_mp3,boy26s_mp3,boy27s_mp3,boy28s_mp3,boy29s_mp3,boy2s_mp3,boy3_mp3,boy30s_mp3,boy31s_mp3,boy32s_mp3,boy33s_mp3,boy34s_mp3,boy35s_mp3,boy36s_mp3,boy3s_mp3,boy4_mp3,boy4s_mp3,boy5_mp3,boy5s_mp3,boy6_mp3,boy6s_mp3,boy7s_mp3,boy8s_mp3,boy9s_mp3,boyaddchip10x_mp3,boyaddchip1x_mp3,boyaddchip3x_mp3,boyaddchip5x_mp3,boyallin_r1_mp3,boyallin_r2_mp3,boyallin_mp3,boycheck_r1_mp3,boycheck_mp3,boyding_r1_mp3,boyding_r2_mp3,boyding_r3_mp3,boyding_mp3,boyfold_r1_mp3,boyfold_mp3,boyfollow_r1_mp3,boyfollow_r2_mp3,boyfollow_mp3,boykai_r1_mp3,boykai_mp3,boyqiang_mp3,homepage_mp3,shaizi_mp3,lost_mp3,turn_mp3,win_mp3,shunzi_mp3,reward_mp3,baozi_mp3,chouma_mp3,33_png,watching_png,biaozhunCall_json,callRight_png,callLeft_png,dibuBgNew_png,pangGuanBgNew_png,newPublic_json,emo_json,emo_png,invate_png,leftYaoqing_png,liaotian_png,messageBg_png,ready_png,tubiao1_png,tubiao2_png,tubiao3_png,back_png,jiepin_png,dibuloading_png,huangse_png,waitWenzi_png,ddzLoading_png,loading_BG_png,loading_hall_png,loadingBzT_png,loadingGBg_png,loadingGGD_png,loadIngGJT_png,loadingHhT_png,loadingShT_png,lodadingNnT_png,diceout_mp3,qipao_png,backHallBtn_png,all_defaull_head_png,location_btn_png,cn_bzms_jiayige_png,ddz_yy_qp_bg_png,biaozhunIndex_json",
+			"name": "biaozhun"
+		},
+		{
+			"keys": "baozi_ske_json,baozi_tex_json,baozi_tex_png,biaozhongAni_ske_json,biaozhongAni_tex_json,biaozhongAni_tex_png,bzInGame_json,chatpop_png,ddz_click_mp3,greenBg_png,shunzi_ske_json,shunzi_tex_json,shunzi_tex_png,tipsbg_png,yaoshaizhong_ske_json,yaoshaizhong_tex_json,yaoshaizhong_tex_png,bei_png,bei2_png,huoli_png,lossBei_fnt,lossBei_png,sunshi_png,winbei_fnt,winbei_png,jujue_png,quxiao_png,tishi_png,tongyi_png,yes_xiao_png,emo_json,emo_png,loss_total_fnt,loss_total_png,totalBg_png,totalResult_json,win_total_fnt,win_total_png,bg_png,disband_png,lord_exit_btn_close_d_png,lord_game_setting_checked_png,lord_game_setting_unchecked_png,menulist_png,gameset_png,situp_png,wanfa_png,1_png,10_png,11_png,12_png,13_png,14_png,15_png,2_png,3_png,4_png,5_png,6_png,7_png,8_png,9_png,biaoqing_png,biaoqingN_png,MessageLaba_png,MessageBg_png,wenziN_png,wenzi_png,yying_png,message1_mp3,message10_mp3,message2_mp3,message3_mp3,message4_mp3,message5_mp3,message6_mp3,message7_mp3,message8_mp3,message9_mp3,mengban_png,juhua_png,click_mp3,countdown_mp3,homepage_mp3,shaizi_mp3,lost_mp3,turn_mp3,win_mp3,shunzi_mp3,reward_mp3,baozi_mp3,chouma_mp3,33_png,watching_png,suohuaIndex_json,biaozhunCall_json,dibuBgNew_png,pangGuanBgNew_png,newPublic_json,qipao_png,backHallBtn_png,all_defaull_head_png,location_btn_png,ddz_yy_qp_bg_png,biaozhunIndex_json",
+			"name": "suoha"
+		},
+		{
+			"keys": "bei_png,bei2_png,huoli_png,lossBei_fnt,lossBei_png,sunshi_png,winbei_fnt,winbei_png,baozi_ske_json,baozi_tex_json,baozi_tex_png,biaozhongAni_ske_json,biaozhongAni_tex_json,biaozhongAni_tex_png,bzInGame_json,chatpop_png,ddz_click_mp3,greenBg_png,shunzi_ske_json,shunzi_tex_json,shunzi_tex_png,tipsbg_png,yaoshaizhong_ske_json,yaoshaizhong_tex_json,yaoshaizhong_tex_png,jujue_png,quxiao_png,tishi_png,tongyi_png,yes_xiao_png,loss_total_fnt,loss_total_png,totalBg_png,totalResult_json,win_total_fnt,win_total_png,hallShaizhong_tex_json,hallShaizhong_ske_json,hallShaizhong_tex_png,homepage_mp3,baozi_mp3,chouma_mp3,click_mp3,countdown_mp3,lost_mp3,reward_mp3,shaizi_mp3,shunzi_mp3,turn_mp3,win_mp3,bomb_tex_png,bomb_mc_json,diceout_mp3,boyRb11_mp3,boyRb12_mp3,boyRb13_mp3,boyRb21_mp3,boyRb22_mp3,boyRb23_mp3,boyRb31_mp3,boyRb32_mp3,boyRb33_mp3,boyRb41_mp3,boyRb42_mp3,boyRb43_mp3,boyRbKill21_mp3,boyRbKill22_mp3,boyRbKill23_mp3,boyRbKill31_mp3,boyRbKill32_mp3,boyRbKill33_mp3,boyRbKill41_mp3,boyRbKill42_mp3,boyRbKill43_mp3,boyRbKill51_mp3,boyRbKill52_mp3,boyRbKill53_mp3,33_png,watching_png,redBlackIndex_json,biaozhunCall_json,dibuBgNew_png,pangGuanBgNew_png,newPublic_json,1_png,10_png,11_png,12_png,13_png,14_png,15_png,2_png,3_png,4_png,5_png,6_png,7_png,8_png,9_png,biaoqing_png,biaoqingN_png,MessageLaba_png,MessageBg_png,wenziN_png,wenzi_png,yying_png,message1_mp3,message10_mp3,message2_mp3,message3_mp3,message4_mp3,message5_mp3,message6_mp3,message7_mp3,message8_mp3,message9_mp3,emo_json,emo_png,qipao_png,backHallBtn_png,all_defaull_head_png,location_btn_png,ddz_yy_qp_bg_png,biaozhunIndex_json",
+			"name": "redBlack"
+		},
+		{
+			"keys": "baozi_ske_json,baozi_tex_json,baozi_tex_png,biaozhongAni_ske_json,biaozhongAni_tex_json,biaozhongAni_tex_png,bzInGame_json,chatpop_png,ddz_click_mp3,greenBg_png,shunzi_ske_json,shunzi_tex_json,shunzi_tex_png,tipsbg_png,yaoshaizhong_ske_json,yaoshaizhong_tex_json,yaoshaizhong_tex_png,bei_png,bei2_png,huoli_png,lossBei_fnt,lossBei_png,sunshi_png,winbei_fnt,winbei_png,jujue_png,quxiao_png,tishi_png,tongyi_png,yes_xiao_png,loss_total_fnt,loss_total_png,totalBg_png,totalResult_json,win_total_fnt,win_total_png,emo_json,emo_png,bzWanfa_png,hhWanfa_png,nnWanfa_png,shWanfa_png,wanfaBg_png,wanfaChoosen_png,wanfaTitile_png,bg_png,disband_png,lord_exit_btn_close_d_png,lord_game_setting_checked_png,lord_game_setting_unchecked_png,menulist_png,gameset_png,situp_png,wanfa_png,lost_mp3,reward_mp3,turn_mp3,shunzi_mp3,homepage_mp3,countdown_mp3,chouma_mp3,baozi_mp3,click_mp3,diceout_mp3,niu5x_mp3,win_mp3,shaizi_mp3,niuniu_mp3,boyniu0_mp3,boyniu1_mp3,boyniu10_mp3,boyniu11_mp3,boyniu2_mp3,boyniu3_mp3,boyniu4_mp3,boyniu5_mp3,boyniu6_mp3,boyniu7_mp3,boyniu8_mp3,boyniu9_mp3,chuiniu5MN_tex_png,chuiniuNN_tex_png,chuiniu5MN_tex_json,chuiniuNN_ske_json,chuiniu5MN_ske_json,chuiniuNN_tex_json,tongpei_mc_json,tongpei_tex_png,hallShaizhong_tex_png,hallShaizhong_tex_json,hallShaizhong_ske_json,33_png,watching_png,niuniuIndex_json,biaozhunCall_json,dibuBgNew_png,pangGuanBgNew_png,newPublic_json,1_png,10_png,11_png,12_png,13_png,14_png,15_png,2_png,3_png,4_png,5_png,6_png,7_png,8_png,9_png,biaoqing_png,biaoqingN_png,MessageLaba_png,MessageBg_png,wenziN_png,wenzi_png,yying_png,message1_mp3,message10_mp3,message2_mp3,message3_mp3,message4_mp3,message5_mp3,message6_mp3,message7_mp3,message8_mp3,message9_mp3,qipao_png,backHallBtn_png,all_defaull_head_png,location_btn_png,ddz_yy_qp_bg_png,biaozhunIndex_json",
+			"name": "niuniu"
+		}
+	],
+	"resources": [
+		{
+			"url": "config/description.json",
+			"type": "json",
+			"name": "description_json"
+		},
+		{
+			"url": "assets/public/mengban.png",
+			"type": "image",
+			"name": "mengban_png"
+		},
+		{
+			"url": "assets/notice/quxiao.png",
+			"type": "image",
+			"name": "quxiao_png"
+		},
+		{
+			"url": "assets/notice/tishi.png",
+			"type": "image",
+			"name": "tishi_png"
+		},
+		{
+			"url": "assets/notice/yes_xiao.png",
+			"type": "image",
+			"name": "yes_xiao_png"
+		},
+		{
+			"url": "assets/public/gamePublic/GameIndex/invate.png",
+			"type": "image",
+			"name": "invate_png"
+		},
+		{
+			"url": "assets/public/gamePublic/GameIndex/ready.png",
+			"type": "image",
+			"name": "ready_png"
+		},
+		{
+			"url": "assets/public/gamePublic/GameIndex/tubiao1.png",
+			"type": "image",
+			"name": "tubiao1_png"
+		},
+		{
+			"url": "assets/public/gamePublic/GameIndex/tubiao2.png",
+			"type": "image",
+			"name": "tubiao2_png"
+		},
+		{
+			"url": "assets/public/gamePublic/GameIndex/tubiao3.png",
+			"type": "image",
+			"name": "tubiao3_png"
+		},
+		{
+			"url": "assets/public/gamePublic/result/back.png",
+			"type": "image",
+			"name": "back_png"
+		},
+		{
+			"url": "assets/public/gamePublic/result/jiepin.png",
+			"type": "image",
+			"name": "jiepin_png"
+		},
+		{
+			"url": "assets/notice/tongyi.png",
+			"type": "image",
+			"name": "tongyi_png"
+		},
+		{
+			"url": "assets/notice/jujue.png",
+			"type": "image",
+			"name": "jujue_png"
+		},
+		{
+			"url": "assets/public/loading/hall/loading_hall.png",
+			"type": "image",
+			"name": "loading_hall_png"
+		},
+		{
+			"url": "config/description.json",
+			"type": "json",
+			"name": "description2_json"
+		},
+		{
+			"url": "assets/public/gamePublic/GameIndex/messageBg.png",
+			"type": "image",
+			"name": "messageBg_png"
+		},
+		{
+			"url": "assets/public/message/message1.mp3",
+			"type": "sound",
+			"name": "message1_mp3"
+		},
+		{
+			"url": "assets/public/message/message2.mp3",
+			"type": "sound",
+			"name": "message2_mp3"
+		},
+		{
+			"url": "assets/public/message/message3.mp3",
+			"type": "sound",
+			"name": "message3_mp3"
+		},
+		{
+			"url": "assets/public/message/message4.mp3",
+			"type": "sound",
+			"name": "message4_mp3"
+		},
+		{
+			"url": "assets/public/message/message5.mp3",
+			"type": "sound",
+			"name": "message5_mp3"
+		},
+		{
+			"url": "assets/public/message/message6.mp3",
+			"type": "sound",
+			"name": "message6_mp3"
+		},
+		{
+			"url": "assets/public/message/message7.mp3",
+			"type": "sound",
+			"name": "message7_mp3"
+		},
+		{
+			"url": "assets/public/message/message8.mp3",
+			"type": "sound",
+			"name": "message8_mp3"
+		},
+		{
+			"url": "assets/public/message/message9.mp3",
+			"type": "sound",
+			"name": "message9_mp3"
+		},
+		{
+			"url": "assets/public/message/message10.mp3",
+			"type": "sound",
+			"name": "message10_mp3"
+		},
+		{
+			"url": "assets/public/setting/bg.png",
+			"type": "image",
+			"name": "bg_png"
+		},
+		{
+			"url": "assets/public/setting/disband.png",
+			"type": "image",
+			"name": "disband_png"
+		},
+		{
+			"url": "assets/public/setting/lord_exit_btn_close_d.png",
+			"type": "image",
+			"name": "lord_exit_btn_close_d_png"
+		},
+		{
+			"url": "assets/public/setting/lord_game_setting_checked.png",
+			"type": "image",
+			"name": "lord_game_setting_checked_png"
+		},
+		{
+			"url": "assets/public/setting/lord_game_setting_unchecked.png",
+			"type": "image",
+			"name": "lord_game_setting_unchecked_png"
+		},
+		{
+			"url": "assets/public/setting/menulist.png",
+			"type": "image",
+			"name": "menulist_png"
+		},
+		{
+			"url": "assets/public/setting/set.png",
+			"type": "image",
+			"name": "gameset_png"
+		},
+		{
+			"url": "assets/public/setting/situp.png",
+			"type": "image",
+			"name": "situp_png"
+		},
+		{
+			"url": "assets/public/setting/wanfa.png",
+			"type": "image",
+			"name": "wanfa_png"
+		},
+		{
+			"url": "assets/public/loading/13/dibuloading.png",
+			"type": "image",
+			"name": "dibuloading_png"
+		},
+		{
+			"url": "assets/public/loading/13/huangse.png",
+			"type": "image",
+			"name": "huangse_png"
+		},
+		{
+			"url": "assets/public/loading/13/waitWenzi.png",
+			"type": "image",
+			"name": "waitWenzi_png"
+		},
+		{
+			"url": "assets/public/juhua.png",
+			"type": "image",
+			"name": "juhua_png"
+		},
+		{
+			"url": "assets/public/message/img/biaoqingN.png",
+			"type": "image",
+			"name": "biaoqingN_png"
+		},
+		{
+			"url": "assets/public/message/img/biaoqing.png",
+			"type": "image",
+			"name": "biaoqing_png"
+		},
+		{
+			"url": "assets/public/message/img/laba.png",
+			"type": "image",
+			"name": "MessageLaba_png"
+		},
+		{
+			"url": "assets/public/message/img/MessageBg.png",
+			"type": "image",
+			"name": "MessageBg_png"
+		},
+		{
+			"url": "assets/public/message/img/weiziN.png",
+			"type": "image",
+			"name": "wenziN_png"
+		},
+		{
+			"url": "assets/public/message/img/wenzi.png",
+			"type": "image",
+			"name": "wenzi_png"
+		},
+		{
+			"url": "assets/public/message/img/biaoqing/1.png",
+			"type": "image",
+			"name": "1_png"
+		},
+		{
+			"url": "assets/public/message/img/biaoqing/10.png",
+			"type": "image",
+			"name": "10_png"
+		},
+		{
+			"url": "assets/public/message/img/biaoqing/11.png",
+			"type": "image",
+			"name": "11_png"
+		},
+		{
+			"url": "assets/public/message/img/biaoqing/12.png",
+			"type": "image",
+			"name": "12_png"
+		},
+		{
+			"url": "assets/public/message/img/biaoqing/13.png",
+			"type": "image",
+			"name": "13_png"
+		},
+		{
+			"url": "assets/public/message/img/biaoqing/14.png",
+			"type": "image",
+			"name": "14_png"
+		},
+		{
+			"url": "assets/public/message/img/biaoqing/15.png",
+			"type": "image",
+			"name": "15_png"
+		},
+		{
+			"url": "assets/public/message/img/biaoqing/2.png",
+			"type": "image",
+			"name": "2_png"
+		},
+		{
+			"url": "assets/public/message/img/biaoqing/3.png",
+			"type": "image",
+			"name": "3_png"
+		},
+		{
+			"url": "assets/public/message/img/biaoqing/4.png",
+			"type": "image",
+			"name": "4_png"
+		},
+		{
+			"url": "assets/public/message/img/biaoqing/5.png",
+			"type": "image",
+			"name": "5_png"
+		},
+		{
+			"url": "assets/public/message/img/biaoqing/6.png",
+			"type": "image",
+			"name": "6_png"
+		},
+		{
+			"url": "assets/public/message/img/biaoqing/7.png",
+			"type": "image",
+			"name": "7_png"
+		},
+		{
+			"url": "assets/public/message/img/biaoqing/8.png",
+			"type": "image",
+			"name": "8_png"
+		},
+		{
+			"url": "assets/public/message/img/biaoqing/9.png",
+			"type": "image",
+			"name": "9_png"
+		},
+		{
+			"url": "assets/public/message/img/yying.png",
+			"type": "image",
+			"name": "yying_png"
+		},
+		{
+			"url": "assets/public/loading/hall/loading_BG.png",
+			"type": "image",
+			"name": "loading_BG_png"
+		},
+		{
+			"url": "assets/public/animate/emo.png",
+			"type": "image",
+			"name": "emo_png"
+		},
+		{
+			"url": "assets/public/animate/emo.json",
+			"type": "json",
+			"name": "emo_json"
+		},
+		{
+			"url": "assets/public/gamePublic/GameIndex/leftYaoqing.png",
+			"type": "image",
+			"name": "leftYaoqing_png"
+		},
+		{
+			"url": "assets/public/gamePublic/GameIndex/liaotian.png",
+			"type": "image",
+			"name": "liaotian_png"
+		},
+		{
+			"url": "assets/public/loading/doudizhu/ddzLoading.png",
+			"type": "image",
+			"name": "ddzLoading_png"
+		},
+		{
+			"url": "assets/hall/hallBg.png",
+			"type": "image",
+			"name": "hallBg_png"
+		},
+		{
+			"url": "assets/hall/close.png",
+			"type": "image",
+			"name": "close2_png"
+		},
+		{
+			"url": "assets/game/biaozhongIndex/ddz_click.mp3",
+			"type": "sound",
+			"name": "ddz_click_mp3"
+		},
+		{
+			"url": "assets/game/biaozhongIndex/baozi_ske.json",
+			"type": "json",
+			"name": "baozi_ske_json"
+		},
+		{
+			"url": "assets/game/biaozhongIndex/baozi_tex.json",
+			"type": "json",
+			"name": "baozi_tex_json"
+		},
+		{
+			"url": "assets/game/biaozhongIndex/baozi_tex.png",
+			"type": "image",
+			"name": "baozi_tex_png"
+		},
+		{
+			"url": "assets/game/biaozhongIndex/shunzi_ske.json",
+			"type": "json",
+			"name": "shunzi_ske_json"
+		},
+		{
+			"url": "assets/game/biaozhongIndex/shunzi_tex.json",
+			"type": "json",
+			"name": "shunzi_tex_json"
+		},
+		{
+			"url": "assets/game/biaozhongIndex/shunzi_tex.png",
+			"type": "image",
+			"name": "shunzi_tex_png"
+		},
+		{
+			"url": "assets/create/createChuiniu.json",
+			"type": "sheet",
+			"name": "createChuiniu_json",
+			"subkeys": "btnCreateBlue,btnCreateYellow,bzCTB,bzCTY,chuiniuDanxuandian,chuiniuFuxuan,createBg1,createBg2,dianCreate,gouCreate,hhCTB,hhCTY,nnCTB,nnCTY,shCTB,shCTY,startCreate"
+		},
+		{
+			"url": "assets/game/biaozhongIndex/yaoshaizhong_tex.png",
+			"type": "image",
+			"name": "yaoshaizhong_tex_png"
+		},
+		{
+			"url": "assets/game/biaozhongIndex/yaoshaizhong_ske.json",
+			"type": "json",
+			"name": "yaoshaizhong_ske_json"
+		},
+		{
+			"url": "assets/game/biaozhongIndex/yaoshaizhong_tex.json",
+			"type": "json",
+			"name": "yaoshaizhong_tex_json"
+		},
+		{
+			"url": "assets/game/biaozhongIndex/chat/chatpop.png",
+			"type": "image",
+			"name": "chatpop_png"
+		},
+		{
+			"url": "assets/hall/hallShaizhong_ske.json",
+			"type": "json",
+			"name": "hallShaizhong_ske_json"
+		},
+		{
+			"url": "assets/hall/hallShaizhong_tex.json",
+			"type": "json",
+			"name": "hallShaizhong_tex_json"
+		},
+		{
+			"url": "assets/hall/hallShaizhong_tex.png",
+			"type": "image",
+			"name": "hallShaizhong_tex_png"
+		},
+		{
+			"url": "assets/game/biaozhongIndex/greenBg.png",
+			"type": "image",
+			"name": "greenBg_png"
+		},
+		{
+			"url": "assets/game/biaozhongIndex/biaozhongAni_tex.png",
+			"type": "image",
+			"name": "biaozhongAni_tex_png"
+		},
+		{
+			"url": "assets/game/biaozhongIndex/biaozhongAni_tex.json",
+			"type": "json",
+			"name": "biaozhongAni_tex_json"
+		},
+		{
+			"url": "assets/game/biaozhongIndex/biaozhongAni_ske.json",
+			"type": "json",
+			"name": "biaozhongAni_ske_json"
+		},
+		{
+			"url": "assets/totalResult/totalBg.png",
+			"type": "image",
+			"name": "totalBg_png"
+		},
+		{
+			"url": "assets/totalResult/totalResult.json",
+			"type": "sheet",
+			"name": "totalResult_json",
+			"subkeys": "ITemitem,img_rank1,img_rank2,img_rank3,totalBackHall,totalJieping"
+		},
+		{
+			"url": "assets/totalResult/loss_total.fnt",
+			"type": "font",
+			"name": "loss_total_fnt"
+		},
+		{
+			"url": "assets/totalResult/loss_total.png",
+			"type": "image",
+			"name": "loss_total_png"
+		},
+		{
+			"url": "assets/totalResult/win_total.png",
+			"type": "image",
+			"name": "win_total_png"
+		},
+		{
+			"url": "assets/totalResult/win_total.fnt",
+			"type": "font",
+			"name": "win_total_fnt"
+		},
+		{
+			"url": "assets/game/showtime/bei.png",
+			"type": "image",
+			"name": "bei_png"
+		},
+		{
+			"url": "assets/game/showtime/bei2.png",
+			"type": "image",
+			"name": "bei2_png"
+		},
+		{
+			"url": "assets/game/showtime/sunshi.png",
+			"type": "image",
+			"name": "sunshi_png"
+		},
+		{
+			"url": "assets/game/showtime/huoli.png",
+			"type": "image",
+			"name": "huoli_png"
+		},
+		{
+			"url": "assets/hall/faxianBg.png",
+			"type": "image",
+			"name": "faxianBg_png"
+		},
+		{
+			"url": "assets/hall/fightAndFind.fnt",
+			"type": "font",
+			"name": "fightAndFind_fnt"
+		},
+		{
+			"url": "assets/hall/fightAndFind.png",
+			"type": "image",
+			"name": "fightAndFind_png"
+		},
+		{
+			"url": "assets/hall/zhanjiBg.png",
+			"type": "image",
+			"name": "zhanjiBg_png"
+		},
+		{
+			"url": "assets/hall/findAndFight.json",
+			"type": "sheet",
+			"name": "findAndFight_json",
+			"subkeys": "faxianJinru,faxianempty,zafbz,zafhh,zafnn,zafsh,zhanjiDetail,zhanjiempty"
+		},
+		{
+			"url": "assets/game/biaozhongIndex/bzInGame.json",
+			"type": "sheet",
+			"name": "bzInGame_json",
+			"subkeys": "BTN_Close,BTN_CloseClick,betting,bettxt,btngreensmall,btngreensmallclick,dot,fly1,fly2,fly4,fly6,fly8,flytitle,playerphoto,vs"
+		},
+		{
+			"url": "assets/game/biaozhongIndex/tipsbg.png",
+			"type": "image",
+			"name": "tipsbg_png"
+		},
+		{
+			"url": "assets/game/showtime/lossBei.fnt",
+			"type": "font",
+			"name": "lossBei_fnt"
+		},
+		{
+			"url": "assets/game/showtime/lossBei.png",
+			"type": "image",
+			"name": "lossBei_png"
+		},
+		{
+			"url": "assets/game/showtime/winbei.fnt",
+			"type": "font",
+			"name": "winbei_fnt"
+		},
+		{
+			"url": "assets/game/showtime/winbei.png",
+			"type": "image",
+			"name": "winbei_png"
+		},
+		{
+			"url": "assets/zanshui.png",
+			"type": "image",
+			"name": "zanshui_png"
+		},
+		{
+			"url": "assets/zanshui.json",
+			"type": "json",
+			"name": "zanshui_json"
+		},
+		{
+			"url": "assets/public/loading/hall/loadingGBg.png",
+			"type": "image",
+			"name": "loadingGBg_png"
+		},
+		{
+			"url": "assets/public/loading/hall/loadIngGJT.png",
+			"type": "image",
+			"name": "loadIngGJT_png"
+		},
+		{
+			"url": "assets/public/loading/hall/loadingHhT.png",
+			"type": "image",
+			"name": "loadingHhT_png"
+		},
+		{
+			"url": "assets/public/loading/hall/loadingShT.png",
+			"type": "image",
+			"name": "loadingShT_png"
+		},
+		{
+			"url": "assets/public/loading/hall/lodadingNnT.png",
+			"type": "image",
+			"name": "lodadingNnT_png"
+		},
+		{
+			"url": "assets/public/loading/hall/loadingBzT.png",
+			"type": "image",
+			"name": "loadingBzT_png"
+		},
+		{
+			"url": "assets/public/loading/hall/loadingGGD.png",
+			"type": "image",
+			"name": "loadingGGD_png"
+		},
+		{
+			"url": "assets/public/wanfa/bzWanfa.png",
+			"type": "image",
+			"name": "bzWanfa_png"
+		},
+		{
+			"url": "assets/public/wanfa/shWanfa.png",
+			"type": "image",
+			"name": "shWanfa_png"
+		},
+		{
+			"url": "assets/public/wanfa/hhWanfa.png",
+			"type": "image",
+			"name": "hhWanfa_png"
+		},
+		{
+			"url": "assets/public/wanfa/nnWanfa.png",
+			"type": "image",
+			"name": "nnWanfa_png"
+		},
+		{
+			"url": "assets/public/wanfa/wanfaBg.png",
+			"type": "image",
+			"name": "wanfaBg_png"
+		},
+		{
+			"url": "assets/public/wanfa/wanfaChoosen.png",
+			"type": "image",
+			"name": "wanfaChoosen_png"
+		},
+		{
+			"url": "assets/public/wanfa/wanfaTitile.png",
+			"type": "image",
+			"name": "wanfaTitile_png"
+		},
+		{
+			"url": "assets/public/music/baozi.mp3",
+			"type": "sound",
+			"name": "baozi_mp3"
+		},
+		{
+			"url": "assets/public/music/chouma.mp3",
+			"type": "sound",
+			"name": "chouma_mp3"
+		},
+		{
+			"url": "assets/public/music/click.mp3",
+			"type": "sound",
+			"name": "click_mp3"
+		},
+		{
+			"url": "assets/public/music/countdown.mp3",
+			"type": "sound",
+			"name": "countdown_mp3"
+		},
+		{
+			"url": "assets/public/music/homepage.mp3",
+			"type": "sound",
+			"name": "homepage_mp3"
+		},
+		{
+			"url": "assets/public/music/lost.mp3",
+			"type": "sound",
+			"name": "lost_mp3"
+		},
+		{
+			"url": "assets/public/music/reward.mp3",
+			"type": "sound",
+			"name": "reward_mp3"
+		},
+		{
+			"url": "assets/public/music/shaizi.mp3",
+			"type": "sound",
+			"name": "shaizi_mp3"
+		},
+		{
+			"url": "assets/public/music/shunzi.mp3",
+			"type": "sound",
+			"name": "shunzi_mp3"
+		},
+		{
+			"url": "assets/public/music/turn.mp3",
+			"type": "sound",
+			"name": "turn_mp3"
+		},
+		{
+			"url": "assets/public/music/win.mp3",
+			"type": "sound",
+			"name": "win_mp3"
+		},
+		{
+			"url": "assets/public/music/guoyuBoy/boy1.mp3",
+			"type": "sound",
+			"name": "boy1_mp3"
+		},
+		{
+			"url": "assets/public/music/guoyuBoy/boy10s.mp3",
+			"type": "sound",
+			"name": "boy10s_mp3"
+		},
+		{
+			"url": "assets/public/music/guoyuBoy/boy11s.mp3",
+			"type": "sound",
+			"name": "boy11s_mp3"
+		},
+		{
+			"url": "assets/public/music/guoyuBoy/boy12s.mp3",
+			"type": "sound",
+			"name": "boy12s_mp3"
+		},
+		{
+			"url": "assets/public/music/guoyuBoy/boy13s.mp3",
+			"type": "sound",
+			"name": "boy13s_mp3"
+		},
+		{
+			"url": "assets/public/music/guoyuBoy/boy14s.mp3",
+			"type": "sound",
+			"name": "boy14s_mp3"
+		},
+		{
+			"url": "assets/public/music/guoyuBoy/boy15s.mp3",
+			"type": "sound",
+			"name": "boy15s_mp3"
+		},
+		{
+			"url": "assets/public/music/guoyuBoy/boy16s.mp3",
+			"type": "sound",
+			"name": "boy16s_mp3"
+		},
+		{
+			"url": "assets/public/music/guoyuBoy/boy17s.mp3",
+			"type": "sound",
+			"name": "boy17s_mp3"
+		},
+		{
+			"url": "assets/public/music/guoyuBoy/boy18s.mp3",
+			"type": "sound",
+			"name": "boy18s_mp3"
+		},
+		{
+			"url": "assets/public/music/guoyuBoy/boy19s.mp3",
+			"type": "sound",
+			"name": "boy19s_mp3"
+		},
+		{
+			"url": "assets/public/music/guoyuBoy/boy2.mp3",
+			"type": "sound",
+			"name": "boy2_mp3"
+		},
+		{
+			"url": "assets/public/music/guoyuBoy/boy20s.mp3",
+			"type": "sound",
+			"name": "boy20s_mp3"
+		},
+		{
+			"url": "assets/public/music/guoyuBoy/boy21s.mp3",
+			"type": "sound",
+			"name": "boy21s_mp3"
+		},
+		{
+			"url": "assets/public/music/guoyuBoy/boy22s.mp3",
+			"type": "sound",
+			"name": "boy22s_mp3"
+		},
+		{
+			"url": "assets/public/music/guoyuBoy/boy23s.mp3",
+			"type": "sound",
+			"name": "boy23s_mp3"
+		},
+		{
+			"url": "assets/public/music/guoyuBoy/boy24s.mp3",
+			"type": "sound",
+			"name": "boy24s_mp3"
+		},
+		{
+			"url": "assets/public/music/guoyuBoy/boy25s.mp3",
+			"type": "sound",
+			"name": "boy25s_mp3"
+		},
+		{
+			"url": "assets/public/music/guoyuBoy/boy26s.mp3",
+			"type": "sound",
+			"name": "boy26s_mp3"
+		},
+		{
+			"url": "assets/public/music/guoyuBoy/boy27s.mp3",
+			"type": "sound",
+			"name": "boy27s_mp3"
+		},
+		{
+			"url": "assets/public/music/guoyuBoy/boy28s.mp3",
+			"type": "sound",
+			"name": "boy28s_mp3"
+		},
+		{
+			"url": "assets/public/music/guoyuBoy/boy29s.mp3",
+			"type": "sound",
+			"name": "boy29s_mp3"
+		},
+		{
+			"url": "assets/public/music/guoyuBoy/boy2s.mp3",
+			"type": "sound",
+			"name": "boy2s_mp3"
+		},
+		{
+			"url": "assets/public/music/guoyuBoy/boy3.mp3",
+			"type": "sound",
+			"name": "boy3_mp3"
+		},
+		{
+			"url": "assets/public/music/guoyuBoy/boy30s.mp3",
+			"type": "sound",
+			"name": "boy30s_mp3"
+		},
+		{
+			"url": "assets/public/music/guoyuBoy/boy31s.mp3",
+			"type": "sound",
+			"name": "boy31s_mp3"
+		},
+		{
+			"url": "assets/public/music/guoyuBoy/boy32s.mp3",
+			"type": "sound",
+			"name": "boy32s_mp3"
+		},
+		{
+			"url": "assets/public/music/guoyuBoy/boy33s.mp3",
+			"type": "sound",
+			"name": "boy33s_mp3"
+		},
+		{
+			"url": "assets/public/music/guoyuBoy/boy34s.mp3",
+			"type": "sound",
+			"name": "boy34s_mp3"
+		},
+		{
+			"url": "assets/public/music/guoyuBoy/boy35s.mp3",
+			"type": "sound",
+			"name": "boy35s_mp3"
+		},
+		{
+			"url": "assets/public/music/guoyuBoy/boy36s.mp3",
+			"type": "sound",
+			"name": "boy36s_mp3"
+		},
+		{
+			"url": "assets/public/music/guoyuBoy/boy3s.mp3",
+			"type": "sound",
+			"name": "boy3s_mp3"
+		},
+		{
+			"url": "assets/public/music/guoyuBoy/boy4.mp3",
+			"type": "sound",
+			"name": "boy4_mp3"
+		},
+		{
+			"url": "assets/public/music/guoyuBoy/boy4s.mp3",
+			"type": "sound",
+			"name": "boy4s_mp3"
+		},
+		{
+			"url": "assets/public/music/guoyuBoy/boy5.mp3",
+			"type": "sound",
+			"name": "boy5_mp3"
+		},
+		{
+			"url": "assets/public/music/guoyuBoy/boy5s.mp3",
+			"type": "sound",
+			"name": "boy5s_mp3"
+		},
+		{
+			"url": "assets/public/music/guoyuBoy/boy6.mp3",
+			"type": "sound",
+			"name": "boy6_mp3"
+		},
+		{
+			"url": "assets/public/music/guoyuBoy/boy6s.mp3",
+			"type": "sound",
+			"name": "boy6s_mp3"
+		},
+		{
+			"url": "assets/public/music/guoyuBoy/boy7s.mp3",
+			"type": "sound",
+			"name": "boy7s_mp3"
+		},
+		{
+			"url": "assets/public/music/guoyuBoy/boy8s.mp3",
+			"type": "sound",
+			"name": "boy8s_mp3"
+		},
+		{
+			"url": "assets/public/music/guoyuBoy/boy9s.mp3",
+			"type": "sound",
+			"name": "boy9s_mp3"
+		},
+		{
+			"url": "assets/public/music/guoyuBoy/boyaddchip10x.mp3",
+			"type": "sound",
+			"name": "boyaddchip10x_mp3"
+		},
+		{
+			"url": "assets/public/music/guoyuBoy/boyaddchip1x.mp3",
+			"type": "sound",
+			"name": "boyaddchip1x_mp3"
+		},
+		{
+			"url": "assets/public/music/guoyuBoy/boyaddchip3x.mp3",
+			"type": "sound",
+			"name": "boyaddchip3x_mp3"
+		},
+		{
+			"url": "assets/public/music/guoyuBoy/boyaddchip5x.mp3",
+			"type": "sound",
+			"name": "boyaddchip5x_mp3"
+		},
+		{
+			"url": "assets/public/music/guoyuBoy/boyallin.mp3",
+			"type": "sound",
+			"name": "boyallin_mp3"
+		},
+		{
+			"url": "assets/public/music/guoyuBoy/boyallin_r1.mp3",
+			"type": "sound",
+			"name": "boyallin_r1_mp3"
+		},
+		{
+			"url": "assets/public/music/guoyuBoy/boyallin_r2.mp3",
+			"type": "sound",
+			"name": "boyallin_r2_mp3"
+		},
+		{
+			"url": "assets/public/music/guoyuBoy/boycheck.mp3",
+			"type": "sound",
+			"name": "boycheck_mp3"
+		},
+		{
+			"url": "assets/public/music/guoyuBoy/boycheck_r1.mp3",
+			"type": "sound",
+			"name": "boycheck_r1_mp3"
+		},
+		{
+			"url": "assets/public/music/guoyuBoy/boyding.mp3",
+			"type": "sound",
+			"name": "boyding_mp3"
+		},
+		{
+			"url": "assets/public/music/guoyuBoy/boyding_r1.mp3",
+			"type": "sound",
+			"name": "boyding_r1_mp3"
+		},
+		{
+			"url": "assets/public/music/guoyuBoy/boyding_r2.mp3",
+			"type": "sound",
+			"name": "boyding_r2_mp3"
+		},
+		{
+			"url": "assets/public/music/guoyuBoy/boyding_r3.mp3",
+			"type": "sound",
+			"name": "boyding_r3_mp3"
+		},
+		{
+			"url": "assets/public/music/guoyuBoy/boyfold.mp3",
+			"type": "sound",
+			"name": "boyfold_mp3"
+		},
+		{
+			"url": "assets/public/music/guoyuBoy/boyfold_r1.mp3",
+			"type": "sound",
+			"name": "boyfold_r1_mp3"
+		},
+		{
+			"url": "assets/public/music/guoyuBoy/boyfollow.mp3",
+			"type": "sound",
+			"name": "boyfollow_mp3"
+		},
+		{
+			"url": "assets/public/music/guoyuBoy/boyfollow_r1.mp3",
+			"type": "sound",
+			"name": "boyfollow_r1_mp3"
+		},
+		{
+			"url": "assets/public/music/guoyuBoy/boyfollow_r2.mp3",
+			"type": "sound",
+			"name": "boyfollow_r2_mp3"
+		},
+		{
+			"url": "assets/public/music/guoyuBoy/boykai.mp3",
+			"type": "sound",
+			"name": "boykai_mp3"
+		},
+		{
+			"url": "assets/public/music/guoyuBoy/boykai_r1.mp3",
+			"type": "sound",
+			"name": "boykai_r1_mp3"
+		},
+		{
+			"url": "assets/public/music/guoyuBoy/boyqiang.mp3",
+			"type": "sound",
+			"name": "boyqiang_mp3"
+		},
+		{
+			"url": "assets/game/redBlack/bomb_tex.png",
+			"type": "image",
+			"name": "bomb_tex_png"
+		},
+		{
+			"url": "assets/game/redBlack/bomb_mc.json",
+			"type": "json",
+			"name": "bomb_mc_json"
+		},
+		{
+			"url": "assets/public/music/diceout.mp3",
+			"type": "sound",
+			"name": "diceout_mp3"
+		},
+		{
+			"url": "assets/public/music/niu5x.mp3",
+			"type": "sound",
+			"name": "niu5x_mp3"
+		},
+		{
+			"url": "assets/public/music/niuniu.mp3",
+			"type": "sound",
+			"name": "niuniu_mp3"
+		},
+		{
+			"url": "assets/public/music/guoyuBoy/redblack/boyRb11.mp3",
+			"type": "sound",
+			"name": "boyRb11_mp3"
+		},
+		{
+			"url": "assets/public/music/guoyuBoy/redblack/boyRb12.mp3",
+			"type": "sound",
+			"name": "boyRb12_mp3"
+		},
+		{
+			"url": "assets/public/music/guoyuBoy/redblack/boyRb13.mp3",
+			"type": "sound",
+			"name": "boyRb13_mp3"
+		},
+		{
+			"url": "assets/public/music/guoyuBoy/redblack/boyRb21.mp3",
+			"type": "sound",
+			"name": "boyRb21_mp3"
+		},
+		{
+			"url": "assets/public/music/guoyuBoy/redblack/boyRb22.mp3",
+			"type": "sound",
+			"name": "boyRb22_mp3"
+		},
+		{
+			"url": "assets/public/music/guoyuBoy/redblack/boyRb23.mp3",
+			"type": "sound",
+			"name": "boyRb23_mp3"
+		},
+		{
+			"url": "assets/public/music/guoyuBoy/redblack/boyRb31.mp3",
+			"type": "sound",
+			"name": "boyRb31_mp3"
+		},
+		{
+			"url": "assets/public/music/guoyuBoy/redblack/boyRb32.mp3",
+			"type": "sound",
+			"name": "boyRb32_mp3"
+		},
+		{
+			"url": "assets/public/music/guoyuBoy/redblack/boyRb33.mp3",
+			"type": "sound",
+			"name": "boyRb33_mp3"
+		},
+		{
+			"url": "assets/public/music/guoyuBoy/redblack/boyRb41.mp3",
+			"type": "sound",
+			"name": "boyRb41_mp3"
+		},
+		{
+			"url": "assets/public/music/guoyuBoy/redblack/boyRb42.mp3",
+			"type": "sound",
+			"name": "boyRb42_mp3"
+		},
+		{
+			"url": "assets/public/music/guoyuBoy/redblack/boyRb43.mp3",
+			"type": "sound",
+			"name": "boyRb43_mp3"
+		},
+		{
+			"url": "assets/public/music/guoyuBoy/redblack/boyRbKill21.mp3",
+			"type": "sound",
+			"name": "boyRbKill21_mp3"
+		},
+		{
+			"url": "assets/public/music/guoyuBoy/redblack/boyRbKill22.mp3",
+			"type": "sound",
+			"name": "boyRbKill22_mp3"
+		},
+		{
+			"url": "assets/public/music/guoyuBoy/redblack/boyRbKill23.mp3",
+			"type": "sound",
+			"name": "boyRbKill23_mp3"
+		},
+		{
+			"url": "assets/public/music/guoyuBoy/redblack/boyRbKill31.mp3",
+			"type": "sound",
+			"name": "boyRbKill31_mp3"
+		},
+		{
+			"url": "assets/public/music/guoyuBoy/redblack/boyRbKill32.mp3",
+			"type": "sound",
+			"name": "boyRbKill32_mp3"
+		},
+		{
+			"url": "assets/public/music/guoyuBoy/redblack/boyRbKill33.mp3",
+			"type": "sound",
+			"name": "boyRbKill33_mp3"
+		},
+		{
+			"url": "assets/public/music/guoyuBoy/redblack/boyRbKill41.mp3",
+			"type": "sound",
+			"name": "boyRbKill41_mp3"
+		},
+		{
+			"url": "assets/public/music/guoyuBoy/redblack/boyRbKill42.mp3",
+			"type": "sound",
+			"name": "boyRbKill42_mp3"
+		},
+		{
+			"url": "assets/public/music/guoyuBoy/redblack/boyRbKill43.mp3",
+			"type": "sound",
+			"name": "boyRbKill43_mp3"
+		},
+		{
+			"url": "assets/public/music/guoyuBoy/redblack/boyRbKill51.mp3",
+			"type": "sound",
+			"name": "boyRbKill51_mp3"
+		},
+		{
+			"url": "assets/public/music/guoyuBoy/redblack/boyRbKill52.mp3",
+			"type": "sound",
+			"name": "boyRbKill52_mp3"
+		},
+		{
+			"url": "assets/public/music/guoyuBoy/redblack/boyRbKill53.mp3",
+			"type": "sound",
+			"name": "boyRbKill53_mp3"
+		},
+		{
+			"url": "assets/public/music/guoyuBoy/niuniu/boyniu0.mp3",
+			"type": "sound",
+			"name": "boyniu0_mp3"
+		},
+		{
+			"url": "assets/public/music/guoyuBoy/niuniu/boyniu1.mp3",
+			"type": "sound",
+			"name": "boyniu1_mp3"
+		},
+		{
+			"url": "assets/public/music/guoyuBoy/niuniu/boyniu10.mp3",
+			"type": "sound",
+			"name": "boyniu10_mp3"
+		},
+		{
+			"url": "assets/public/music/guoyuBoy/niuniu/boyniu11.mp3",
+			"type": "sound",
+			"name": "boyniu11_mp3"
+		},
+		{
+			"url": "assets/public/music/guoyuBoy/niuniu/boyniu2.mp3",
+			"type": "sound",
+			"name": "boyniu2_mp3"
+		},
+		{
+			"url": "assets/public/music/guoyuBoy/niuniu/boyniu3.mp3",
+			"type": "sound",
+			"name": "boyniu3_mp3"
+		},
+		{
+			"url": "assets/public/music/guoyuBoy/niuniu/boyniu4.mp3",
+			"type": "sound",
+			"name": "boyniu4_mp3"
+		},
+		{
+			"url": "assets/public/music/guoyuBoy/niuniu/boyniu5.mp3",
+			"type": "sound",
+			"name": "boyniu5_mp3"
+		},
+		{
+			"url": "assets/public/music/guoyuBoy/niuniu/boyniu6.mp3",
+			"type": "sound",
+			"name": "boyniu6_mp3"
+		},
+		{
+			"url": "assets/public/music/guoyuBoy/niuniu/boyniu7.mp3",
+			"type": "sound",
+			"name": "boyniu7_mp3"
+		},
+		{
+			"url": "assets/public/music/guoyuBoy/niuniu/boyniu8.mp3",
+			"type": "sound",
+			"name": "boyniu8_mp3"
+		},
+		{
+			"url": "assets/public/music/guoyuBoy/niuniu/boyniu9.mp3",
+			"type": "sound",
+			"name": "boyniu9_mp3"
+		},
+		{
+			"url": "assets/game/niuniu/chuiniu5MN_tex.png",
+			"type": "image",
+			"name": "chuiniu5MN_tex_png"
+		},
+		{
+			"url": "assets/game/niuniu/chuiniuNN_tex.png",
+			"type": "image",
+			"name": "chuiniuNN_tex_png"
+		},
+		{
+			"url": "assets/game/niuniu/chuiniu5MN_tex.json",
+			"type": "json",
+			"name": "chuiniu5MN_tex_json"
+		},
+		{
+			"url": "assets/game/niuniu/chuiniuNN_ske.json",
+			"type": "json",
+			"name": "chuiniuNN_ske_json"
+		},
+		{
+			"url": "assets/game/niuniu/chuiniu5MN_ske.json",
+			"type": "json",
+			"name": "chuiniu5MN_ske_json"
+		},
+		{
+			"url": "assets/game/niuniu/chuiniuNN_tex.json",
+			"type": "json",
+			"name": "chuiniuNN_tex_json"
+		},
+		{
+			"url": "assets/game/niuniu/tongpei_tex.png",
+			"type": "image",
+			"name": "tongpei_tex_png"
+		},
+		{
+			"url": "assets/game/niuniu/tongpei_mc.json",
+			"type": "json",
+			"name": "tongpei_mc_json"
+		},
+		{
+			"url": "assets/hall/33.png",
+			"type": "image",
+			"name": "33_png"
+		},
+		{
+			"url": "assets/game/watching.png",
+			"type": "image",
+			"name": "watching_png"
+		},
+		{
+			"url": "assets/game/singleMode/repeat.png",
+			"type": "image",
+			"name": "repeat_png"
+		},
+		{
+			"url": "assets/game/singleMode/repeatclick.png",
+			"type": "image",
+			"name": "repeatclick_png"
+		},
+		{
+			"url": "assets/game/singleMode/shake.png",
+			"type": "image",
+			"name": "shake_png"
+		},
+		{
+			"url": "assets/game/singleMode/shakeclick.png",
+			"type": "image",
+			"name": "shakeclick_png"
+		},
+		{
+			"url": "assets/game/singleMode/singlemode.jpg",
+			"type": "image",
+			"name": "singlemode_jpg"
+		},
+		{
+			"url": "assets/game/singleMode/BTN_BackClick.png",
+			"type": "image",
+			"name": "BTN_BackClick_png"
+		},
+		{
+			"url": "assets/game/singleMode/BTN_Back.png",
+			"type": "image",
+			"name": "BTN_Back_png"
+		},
+		{
+			"url": "assets/game/biaozhongIndex/biaozhunCall.json",
+			"type": "sheet",
+			"name": "biaozhunCall_json",
+			"subkeys": "call10,call11,call12,call13,call14,call15,call16,call17,call18,call19,call2,call20,call21,call22,call23,call24,call25,call26,call27,call28,call29,call3,call30,call31,call32,call33,call34,call35,call36,call4,call5,call6,call7,call8,call9,number_bg"
+		},
+		{
+			"url": "assets/game/niuniu/niuniuIndex.json",
+			"type": "sheet",
+			"name": "niuniuIndex_json",
+			"subkeys": "dealer,minered1,minered2,minered3,minered4,minered5,minered6,niuTitle0,niuTitle1,niuTitle10,niuTitle11,niuTitle12,niuTitle2,niuTitle3,niuTitle4,niuTitle5,niuTitle6,niuTitle7,niuTitle8,niuTitle9,niubk1,niubk2,niubtnshake,niubtnshakeclick,niubtnshakedisable,niudicebk,niuselected,red0,red1,red2,red3,red4,red5,red6,tongpeititle,tongsha"
+		},
+		{
+			"url": "assets/game/suoha/suohuaIndex.json",
+			"type": "sheet",
+			"name": "suohuaIndex_json",
+			"subkeys": "bk,bkd,bkt,btnshake,btnshakeclick,btnshakedisable,dicebk,minCard,now,selected,suohaType0,suohaType1,suohaType2,suohaType3,suohaType4,suohaType5,suohaType6"
+		},
+		{
+			"url": "assets/game/redBlack/redBlackIndex.json",
+			"type": "sheet",
+			"name": "redBlackIndex_json",
+			"subkeys": "Rb1ge,Rb2ge,Rb2kill,Rb3ge,Rb3kill,Rb4ge,Rb4kill,Rb5ge,Rb5kill,bei,boom_0002,numbg,out,rBDojiBg,rBbg,select1,select1click,select1gray,select2,select2click,select2gray,select3,select3click,select3gray,select4,select4click,select4gray"
+		},
+		{
+			"url": "assets/game/biaozhongIndex/callRight.png",
+			"type": "image",
+			"name": "callRight_png"
+		},
+		{
+			"url": "assets/game/biaozhongIndex/callLeft.png",
+			"type": "image",
+			"name": "callLeft_png"
+		},
+		{
+			"url": "assets/game/dibuBgNew.png",
+			"type": "image",
+			"name": "dibuBgNew_png"
+		},
+		{
+			"url": "assets/game/pangGuanBgNew.png",
+			"type": "image",
+			"name": "pangGuanBgNew_png"
+		},
+		{
+			"url": "assets/game/newPublic.json",
+			"type": "sheet",
+			"name": "newPublic_json",
+			"subkeys": "dibuMsg,dibuPlayerList,dibuYY,isLuying,playingNew,watchingNew,zhengzaishuohua"
+		},
+		{
+			"url": "assets/game/qipao.png",
+			"type": "image",
+			"name": "qipao_png"
+		},
+		{
+			"url": "assets/game/biaozhongIndex/backHallBtn.png",
+			"type": "image",
+			"name": "backHallBtn_png"
+		},
+		{
+			"url": "assets/hall/hall_fankui_kuang.png",
+			"type": "image",
+			"name": "hall_fankui_kuang_png"
+		},
+		{
+			"url": "assets/hall/hall_shop_bg.png",
+			"type": "image",
+			"name": "hall_shop_bg_png"
+		},
+		{
+			"url": "assets/hall/hall_apply_agent_bg.png",
+			"type": "image",
+			"name": "hall_apply_agent_bg_png"
+		},
+		{
+			"url": "assets/public/all_defaull_head.png",
+			"type": "image",
+			"name": "all_defaull_head_png"
+		},
+		{
+			"url": "assets/public/location_btn.png",
+			"type": "image",
+			"name": "location_btn_png"
+		},
+		{
+			"url": "assets/hall/chuniu_hall_new.json",
+			"type": "sheet",
+			"name": "chuniu_hall_new_json",
+			"subkeys": "hall_Icon_D1,hall_Icon_D2,hall_Icon_D3,hall_Icon_DinBag,hall_Icon_DinBox2,hall_agent_bg,hall_apply_agent_btn,hall_applygent_btn,hall_fankui_btn,hall_fankui_title,hall_find_btn,hall_jijiao_btn,hall_set_btn,hall_shop_btn,hall_shop_btn_bg,hall_shop_song,hall_yuab_jiao_xing,hall_zhanji_btn,hall_zhuce_btn"
+		},
+		{
+			"url": "assets/game/biaozhongIndex/cn_bzms_jiayige.png",
+			"type": "image",
+			"name": "cn_bzms_jiayige_png"
+		},
+		{
+			"url": "assets/public/ddz_yy_qp_bg.png",
+			"type": "image",
+			"name": "ddz_yy_qp_bg_png"
+		},
+		{
+			"url": "assets/game/biaozhongIndex/biaozhunIndex.json",
+			"type": "sheet",
+			"name": "biaozhunIndex_json",
+			"subkeys": "baotip,biaozhongDi,biaozhongHeadDi,biaozhongHeadKuang,biaozhongJiaodian,biaozhongMenu,bzHeadkuang,bzIndexBack,bzIndexSet,bzJiaodian,call,callclick,callgray,chips,final,fly,gameStart,gameset,headdikuang,help,jiaoDianDi,jiesan,kai1,kai2,kai4,kai6,kai8,leftkai1,leopard,menu,mine1,mine2,mine3,mine4,mine5,mine6,myInfo,offline,pinshai1,pinshai2,pinshai3,pinshai4,pinshai5,pinshai6,readyBtn,readyStatus,reshake,reshakeclick,shaizhong,share,shuntip,sit,situp,topNotice,typebg,yaoqing,yourTurn"
+		},
+		{
+			"url": "assets/hall/chuiniuHall.json",
+			"type": "sheet",
+			"name": "chuiniuHall_json",
+			"subkeys": "33,biaozhong,danji,find,hallAdd,hall_bottom,hall_dikuang,hall_role,hall_top,honghei,laba,niuniu,set,shop,suohua,zhanji"
+		}
+	]
+}

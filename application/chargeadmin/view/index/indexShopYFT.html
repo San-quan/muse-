@@ -1,0 +1,258 @@
+<html>
+    <head> 
+        <meta charset="utf-8" /> 
+        <!-- <meta name="viewport" id="view" content="width=device-width,initial-scale=1,minimum-scale:1,maximum-scale=1,user-scalable=no"> -->
+        <meta name="format-detection" content="telephone=no" /> 
+        <meta name="msapplication-tap-highlight" content="no" /> 
+        <title>充值</title> 
+       
+        <script src="__STATIC__/game/js/jquery-1.12.1.js"></script> 
+
+        <style type="text/css">
+    .wxtips {
+            text-align: center;
+            font-size: 16px;
+            max-width: 100%;
+            height: 100%;
+            margin-top: 20px;
+            color: #fff;
+            font-family: '';
+            width: 260px;
+            margin: 0 auto;
+            display: none;
+        }
+
+        .wxtips div:nth-child(1) {
+            margin-top: 11px;
+        }
+        .wxtips div:nth-child(2) {
+            border: 1px solid #ccc;
+            -moz-border-radius: 7px;
+            -webkit-border-radius: 7px;
+            border-radius: 7px;
+            color: #333;
+            background: #e6e6fa;
+            width: 260px;
+            margin: 0 auto;
+            padding-top: 20px;
+            padding-bottom: 20px;
+            margin-top: 4px;
+            line-height: 25px;
+        }
+
+        .wxtips div:nth-child(2) span:nth-child(2) {
+            color: #0EAAF4;
+            font-weight: bold;
+        }
+
+       .wxtips {
+            display: none;
+            position:fixed;
+            left: 0;
+            top:0 ;
+            bottom: 0;
+            background: rgba(0,0,0,0.8);
+            filter: alpha(opacity=80);
+            height: 100%;
+            width: 100%;
+            z-index: 100;
+        }
+        .wxtips img{
+           width: 88% ;
+        }
+</style>
+    
+    </head> 
+<body style="background-image: url(__STATIC__/admin/images/shop/bg.png);background-size: 100%;"> 
+    <div class="wxtips">          
+        <img src="__STATIC__/admin/images/joingame.png"/>
+    </div>
+   
+    <style type="text/css">
+ 
+    </style>
+<div style="background-image: url(/static/admin/images/shop/baidi.png);background-size: 100%;width: 80%;border-radius: 1rem;margin-top: 16%;z-index: 25;position: absolute;top: 15%;left: 94px;    height: 720px;overflow: hidden;">
+<div style="
+    position: relative;
+    top: 57px;
+">
+  <div style="    font-size: 45px;height: 80px;position: absolute;top: 86px;left: 219px;width: 78%;color: white;">{$userinfo['nickname']}</div>
+  <div style="font-size: 45px;height: 80px;position: absolute;width: 78%;top: 193px;left: 219px;color: white;">{$userinfo['id']}</div>
+</div>
+<div style=" position: relative;
+    top: 269px;
+    left: 123px;
+">
+  <div style="float:left;margin: 19px auto;width: 74%;height: 189px;">
+   
+    <span style="width: 238px;height: 68px;font-size: 45px;color: white;position: absolute;left: 95px;top: 62px;">{$goodsInfo['diamond']+$goodsInfo['award']}钻石</span>
+  </div>
+
+</div>
+  
+  <div style="margin: 433px auto 52px 210px;font-size: 45px;height: 80px;color: white;">￥ {$goodsInfo['price']}</div>
+
+  <!-- <img src="/static/admin/images/shop/buyBtn.png" style="width:330px;height: 78px;margin-left: 52px;" onclick="goodsZFB({$goodsInfo['id']})"/> -->
+  <img src="/static/admin/images/shop/wxBtn.png" style="width:330px;height: 78px;margin-left: 213px;" onclick="goodsWX({$goodsInfo['id']})"/>
+  <!-- <img src="/static/admin/images/shop/wxBtn.png" style="width:330px;height: 78px;margin-left: 13px;" onclick="goodsWX({$goodsInfo['id']})"/> -->
+  <!-- <input type="hidden" id="memberid" value="-1"> -->
+
+</div>
+
+
+<div style="width: 80%;margin-top: 20px;z-index: 25;position: absolute;left: 94px;top: 1170px;height: 300px;overflow: hidden;">
+    <div style="font-size: 45px;height: 80px;position: absolute; width: 78%;color: white;">下单说明</div>
+    <div style="font-size: 35px;height: 80px;position: absolute;top: 86px;color: white;">1、钻石商品为虚拟用品，一经售出，概不退还</div>
+    <div style="font-size: 35px;height: 80px;position: absolute;width: 78%;top: 150px;color: white;">2、支付遇到问题？请联系客服</div>
+    
+</div>
+
+
+</div>
+<input type="hidden" id="memberid" value="{$memberid}">
+
+<form name='yeepay' id="yeepay" action='http://order.veppay.com/jh-web-order/order/receiveOrder'  method='post' >
+    <input type='hidden' id="p1_yingyongnum" name='p1_yingyongnum'      value=''>
+    <input type='hidden' id="p2_ordernumber" name='p2_ordernumber'      value=''>
+    <input type='hidden' id="p3_money" name='p3_money'        value=''>
+    <input type='hidden' id="p6_ordertime" name='p6_ordertime'        value=''>
+    <input type='hidden' id="p7_productcode" name='p7_productcode'      value=''>
+    <input type='hidden' id="p8_sign" name='p8_sign'       value=''>
+    <input type='hidden' id="p9_signtype" name='p9_signtype'       value=''>
+    <input type='hidden' id="p25_terminal" name='p25_terminal'        value=''>
+
+  </form>
+<script type="text/javascript">
+      // window.load=function(){
+
+
+
+ 
+
+ var shebeiJudge=1;
+ var isWeixin = function(){ //判断是否是微信
+        var ua = navigator.userAgent.toLowerCase();
+        if (ua.match(/MicroMessenger/i) == "micromessenger") {
+            return true;
+        } else {
+            return false;
+        }
+        return false;
+    }
+  var openApp=function(){
+        var this_  =  this;
+        //微信
+        // if(this_.isWeixin()){
+        //     $(".weixin-tip").css("height",$(window).height());
+        //     $(".weixin-tip").show();
+        //     $('.weixin-tip').on('touchstart', function () {
+        //         $(".weixin-tip").hide();
+        //     });
+        //     $(".wxtips").css('display', 'block');
+        // }else{
+        // //非微信浏览器
+        //   //alert('000');
+        //     if (navigator.userAgent.match(/(iPhone|iPod|iPad);?/i)) {
+        //        shebeiJudge=2;
+        //     }else if (navigator.userAgent.match(/android/i)) {
+
+        //        shebeiJudge=3;
+
+        //     }
+        // }
+    }
+    openApp();
+    
+ 
+
+
+
+   var gameStatus=true;
+   $(function () {
+         if($("#memberid").val()==-1){
+          alert('玩家ID错误，请返回重试');
+         } 
+    })
+  
+    function goodsWX(data){
+        if (navigator.userAgent.match(/(iPhone|iPod|iPad);?/i)) {
+               shebeiJudge=2;
+            }else if (navigator.userAgent.match(/android/i)) {
+
+               shebeiJudge=3;
+
+            }
+            var memberid=$("#memberid").val()
+              $.post("{:url('Paymethod/getYFTWXgoods')}",{goodsID:data,memberid:memberid,type:shebeiJudge},function(ret){
+                $("#p1_yingyongnum").val(ret.p1_yingyongnum);
+                $("#p2_ordernumber").val(ret.p2_ordernumber);
+                $("#p3_money").val(ret.p3_money);
+                $("#p6_ordertime").val(ret.p6_ordertime);
+                $("#p7_productcode").val(ret.p7_productcode);
+                $("#p8_sign").val(ret.p8_sign);
+                $("#p9_signtype").val(ret.p9_signtype);
+                $("#p25_terminal").val(ret.p25_terminal);
+                $("#yeepay").submit();
+                console.log(ret);
+              },'JSON');
+    }
+   function goodsZFB(data) {
+        /**
+         * 2. 需要支付时调用WP.click接口传入参数
+         */
+         // var isingame=$("#isingame").val();
+        //  if (isingame==1) {
+        //     // alert('在游戏中');
+        //     gameStatus=true;
+        //  }else{
+        //     // alert("不在游戏中");
+        //     gameStatus=false;
+        //  }
+        // if (gameStatus==true) {
+        //   $(".overlay").show();
+        //   $('.invite').show();
+        var this_  =  this;
+        //微信
+        if(this_.isWeixin()){
+            $(".weixin-tip").css("height",$(window).height());
+            $(".weixin-tip").show();
+            $('.weixin-tip').on('touchstart', function () {
+                $(".weixin-tip").hide();
+            });
+            $(".wxtips").css('display', 'block');
+        }else{
+        //非微信浏览器
+          //alert('000');
+            if (navigator.userAgent.match(/(iPhone|iPod|iPad);?/i)) {
+               shebeiJudge=2;
+            }else if (navigator.userAgent.match(/android/i)) {
+
+               shebeiJudge=3;
+
+            }
+            var memberid=$("#memberid").val()
+              $.post("{:url('Paymethod/getYFTZFBgoods')}",{goodsID:data,memberid:memberid,type:shebeiJudge},function(ret){
+                $("#p1_yingyongnum").val(ret.p1_yingyongnum);
+                $("#p2_ordernumber").val(ret.p2_ordernumber);
+                $("#p3_money").val(ret.p3_money);
+                $("#p6_ordertime").val(ret.p6_ordertime);
+                $("#p7_productcode").val(ret.p7_productcode);
+                $("#p8_sign").val(ret.p8_sign);
+                $("#p9_signtype").val(ret.p9_signtype);
+                $("#p25_terminal").val(ret.p25_terminal);
+                $("#yeepay").submit();
+                console.log(ret);
+              },'JSON');
+        }
+      
+     
+        // }
+      
+    
+    };
+
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="wantchScene" width="640" height="1038" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+	<e:Image id="menban" source="mengban_png" x="0" y="0" width="100%" height="100%"/>
+	<e:Group id="showGroup" x="329" y="0">
+		<e:Image source="pangGuanBgNew_png" x="0" y="0"/>
+		<e:Label id="baseScore" text="0" x="88" y="140.69" size="25"/>
+		<e:Label id="playgound" text="10/10" x="88" y="183.7" size="25"/>
+		<e:Scroller width="300" height="700" horizontalCenter="0.5" y="324.04">
+		<e:Group id="playerList">
+			<e:Group y="0" scaleX="1" scaleY="1" horizontalCenter="0">
+				<e:Image x="0" y="0" source="33_png" scaleX="0.7" scaleY="0.7"/>
+				<e:Label id="nickname" text="婚族网路互娱一天也" x="88.98" size="20" verticalCenter="0.5" width="120"/>
+				<e:Label text="-99999" x="226.08" size="20" verticalCenter="0.5"/>
+			</e:Group>
+		</e:Group>
+		</e:Scroller>
+	</e:Group>
+</e:Skin>

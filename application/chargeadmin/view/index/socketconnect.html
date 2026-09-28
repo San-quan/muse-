@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Home</title>
+<!-- for-mobile-apps -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+
+<script src="__STATIC__/admin/jquery-1.10.2.min.js"></script>
+</head>
+<body>
+
+</body>
+<script>
+var ws;
+var globalData={
+	socket:'ws://47.98.105.178:8282'
+}
+	//当页面加载完成后链接socket
+	$(function() {
+	   connectSocket(globalData.socket, wsOpenCallback, wsMessageCallback, wsCloseCallback, wsErrorCallback);
+	});
+wsOpenCallback = function (e) {
+        // logMessage("websocket is opened"),
+        console.log("websocket is opened");
+        setInterval(function(){
+        	sendData({mainid:'system'});
+        },5000);
+        // socketModule.prepareEnterRoom();
+},
+wsMessageCallback = function wsMessageCallback(evt) {
+	console.log(evt);
+        // var obj = eval("(" + evt + ")");
+        var obj=evt.data;
+        // console.log('callback');
+        switch(obj.type)
+        {
+            case "system":
+            	console.log(obj);
+            	break;
+            case "ping":
+            	sendData(obj);
+            	break;
+        }
+       
+    },
+    wsCloseCallback = function (e) {
+        // logMessage("websocket closed："),
+        // logMessage(e),
+        // appData.connectOrNot = !1,
+        // reconnectSocket()
+    },
+    wsErrorCallback = function (e) {
+        console.log("websocket onerror："),
+        console.log(e)
+        
+    },
+connectSocket = function(e, t, a, n, i) {
+    ws = new WebSocket(e),
+    ws.onopen = t,
+    ws.onmessage = a,
+    ws.onclose = n,
+    ws.onerror = i
+},
+reconnectSocket = function() {
+        connectSocket(globalData.socket, wsOpenCallback, wsMessageCallback, wsCloseCallback, wsErrorCallback)
+    
+};
+closeSocket= function() {
+        if (ws) try {
+            ws.close()
+        } catch(e) {
+            console.log(e)
+        }
+    }
+    sendData= function(e) {
+        try {
+            if (console.log("websocket state：" + ws.readyState), ws.readyState == WebSocket.CLOSED) return void reconnectSocket();
+            ws.readyState == WebSocket.OPEN ? ws.send(JSON.stringify(e)) : ws.readyState == WebSocket.CONNECTING ? setTimeout(function() {
+                socketModule.sendData(e)
+            },
+            1e3) : console.log("websocket state：" + ws.readyState)
+        } catch(e) {
+            console.log(e)
+        }
+    }
+</script>
+</html>

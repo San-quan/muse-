@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="creaet6n" width="640" height="1038" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+	<e:Image id="m_menban" width="100%" height="100%" x="0" y="0" source="mengban_png"/>
+	<e:Group id="m_mianban" verticalCenter="0" horizontalCenter="0">
+		<e:Group x="0" y="0">
+		<e:Image y="-3" anchorOffsetX="0" anchorOffsetY="0" horizontalCenter="0" source="createBg1"/>
+			<e:Image source="createBg2" x="41.71" y="185.58"/>
+			<e:Group x="63.5" y="142.43">
+				<e:Group id="gtGroup0" x="-7" y="0">
+					<e:Image id="gameType0" x="0" y="0" source="btnCreateYellow"/>
+					<e:Image id="gameTitle0" y="12" horizontalCenter="0" source="bzCTY"/>
+				</e:Group>
+				<e:Group id="gtGroup1" x="100" y="0">
+					<e:Image id="gameType1" x="0" y="0" source="btnCreateBlue"/>
+					<e:Image id="gameTitle1" source="shCTB" y="12" horizontalCenter="0"/>
+				</e:Group>
+				<e:Group id="gtGroup2" x="207" y="0">
+					<e:Image id="gameType2" x="0" y="0" source="btnCreateBlue"/>
+					<e:Image id="gameTitle2" source="nnCTB" y="12" horizontalCenter="0"/>
+				</e:Group>
+				<e:Group id="gtGroup3" x="314" y="0">
+					<e:Image id="gameType3" x="0" y="0" source="btnCreateBlue"/>
+					<e:Image id="gameTitle3" source="hhCTB" y="12" horizontalCenter="0"/>
+				</e:Group>
+			</e:Group>
+		<e:Group id="m_jushu" x="156" y="260.07" anchorOffsetY="0">
+			<e:RadioButton id="m_jushu2" label="20局" x="109" y="-2.48" width="30" height="30" groupName="m_jushu" value="20">
+				<e:skinName>
+					<e:Skin states="up,down,disabled">
+					<e:Image width="100%" height="100%" source="dianCreate" source.down="chuiniuDanxuandian"/>
+					<e:Label id="labelDisplay" x="35" verticalCenter="0" size="23" textColor="0x697699"/>
+					</e:Skin>
+				</e:skinName>
+			</e:RadioButton>
+			<e:RadioButton id="m_jushu3" label="30局" x="217" y="-2.48" width="30" height="30" groupName="m_jushu" value="30">
+				<e:skinName>
+					<e:Skin states="up,down,disabled">
+					<e:Image width="100%" height="100%" source="dianCreate" source.down="chuiniuDanxuandian"/>
+					<e:Label id="labelDisplay" x="35" verticalCenter="0" size="23" textColor="0x697699"/>
+					</e:Skin>
+				</e:skinName>
+			</e:RadioButton>
+			<e:RadioButton id="m_jushu1" label="10局" x="5.5" y="-2.48" width="30" height="30" groupName="m_jushu" enabled="true" selected="true" value="10">
+				<e:skinName>
+					<e:Skin states="up,down,disabled">
+					<e:Image width="100%" height="100%" source="dianCreate" source.down="chuiniuDanxuandian"/>
+					<e:Label id="labelDisplay" x="35" verticalCenter="0" size="23" textColor="0x697699"/>
+					</e:Skin>
+				</e:skinName>
+			</e:RadioButton>
+		</e:Group>
+		<e:Group id="m_wanfa" x="156" y="330.3">
+			<e:RadioButton id="m_fengding3" label="100倍" y="0" width="30" height="30" groupName="m_wanfa" value="100" x="217" visible="false">
+				<e:skinName>
+					<e:Skin states="up,down,disabled">
+					<e:Image width="100%" height="100%" source="dianCreate" source.down="chuiniuDanxuandian"/>
+					<e:Label id="labelDisplay" x="35" verticalCenter="0" size="23" textColor="0x697699"/>
+					</e:Skin>
+				</e:skinName>
+			</e:RadioButton>
+			<e:RadioButton id="m_fengding1" label="1倍" x="5.5" y="0" width="30" height="30" groupName="m_wanfa" selected="true" value="1">
+				<e:skinName>
+					<e:Skin states="up,down,disabled">
+					<e:Image width="100%" height="100%" source="dianCreate" source.down="chuiniuDanxuandian"/>
+					<e:Label id="labelDisplay" x="35" verticalCenter="0" size="23" textColor="0x697699"/>
+					</e:Skin>
+				</e:skinName>
+			</e:RadioButton>
+			<e:RadioButton id="m_fengding2" label="10倍" x="109" y="0" groupName="m_wanfa" value="10" width="30" height="30" visible="false">
+				<e:skinName>
+					<e:Skin states="up,down,disabled">
+					<e:Image width="100%" height="100%" source="dianCreate" source.down="chuiniuDanxuandian"/>
+					<e:Label id="labelDisplay" x="35" verticalCenter="0" size="23" textColor="0x697699"/>
+					</e:Skin>
+				</e:skinName>
+			</e:RadioButton>
+		</e:Group>
+			<e:Group id="m_renshu" x="156" y="397.84">
+				<e:RadioButton id="m_renshu2" label="6人" x="109" y="0" width="30" height="30" groupName="m_renshu" value="6" selected="true">
+				<e:skinName>
+					<e:Skin states="up,down,disabled">
+					<e:Image width="100%" height="100%" source="dianCreate" source.down="chuiniuDanxuandian"/>
+					<e:Label id="labelDisplay" x="35" verticalCenter="0" size="23" textColor="0x697699"/>
+					</e:Skin>
+				</e:skinName>
+				</e:RadioButton>
+				<e:RadioButton id="m_renshu0" label="单挑" x="5.5" y="0" width="30" height="30" groupName="m_renshu" selected="false" value="2">
+				<e:skinName>
+					<e:Skin states="up,down,disabled">
+					<e:Image width="100%" height="100%" source="dianCreate" source.down="chuiniuDanxuandian"/>
+					<e:Label id="labelDisplay" x="35" verticalCenter="0" size="23" textColor="0x697699"/>
+					</e:Skin>
+				</e:skinName>
+				</e:RadioButton>
+				<e:RadioButton id="m_renshu1" label="3人" x="109" y="0" groupName="m_renshu" value="3" width="30" height="30" visible="false">
+				<e:skinName>
+					<e:Skin states="up,down,disabled">
+					<e:Image width="100%" height="100%" source="dianCreate" source.down="chuiniuDanxuandian"/>
+					<e:Label id="labelDisplay" x="35" verticalCenter="0" size="23" textColor="0x697699"/>
+					</e:Skin>
+				</e:skinName>
+				</e:RadioButton>
+			</e:Group>
+		<e:Button id="m_create" label="" y="668.66" horizontalCenter="0">
+			<e:skinName>
+				<e:Skin states="up,down,disabled">
+				<e:Image width="100%" height="100%" source="startCreate" scaleX.down="1.1" scaleY.down="1.1"/>
+				<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+				</e:Skin>
+			</e:skinName>
+		</e:Button>
+			<e:Group id="m_fufei" x="156" y="468.51" scaleX="1" scaleY="1">
+				<e:RadioButton id="m_fufei1" label="房主付" x="109" y="0" width="30" height="30" groupName="m_fufei" selected="false" value="1">
+					<e:skinName>
+						<e:Skin states="up,down,disabled">
+						<e:Image width="100%" height="100%" source="dianCreate" source.down="chuiniuDanxuandian"/>
+						<e:Label id="labelDisplay" x="35" verticalCenter="0" size="23" textColor="0x697699"/>
+						</e:Skin>
+					</e:skinName>
+				</e:RadioButton>
+				<e:RadioButton id="m_fufei2" label="AA制" x="5.5" y="0" width="30" height="30" groupName="m_fufei" value="2" selected="true">
+					<e:skinName>
+						<e:Skin states="up,down,disabled">
+						<e:Image width="100%" height="100%" source="dianCreate" source.down="chuiniuDanxuandian"/>
+						<e:Label id="labelDisplay" x="35" verticalCenter="0" size="23" textColor="0x697699"/>
+						</e:Skin>
+					</e:skinName>
+				</e:RadioButton>
+			</e:Group>
+			<e:CheckBox id="m_allinstart" label="" x="161.5" y="515.72" selected="false" anchorOffsetY="0" width="30" height="28" visible="false">
+				<e:skinName>
+					<e:Skin states="up,down,disabled">
+					<e:Image width="100%" height="100%" source="chuiniuFuxuan" source.down="gouCreate"/>
+					<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+					</e:Skin>
+				</e:skinName>
+			</e:CheckBox>
+		</e:Group>
+		<e:Group y="551.37" scaleX="1" scaleY="1" anchorOffsetX="0" width="343.24" x="153">
+			<e:Label id="m_showtip" text="开房无消耗，坐下后扣除100钻石，未开局则返还。" anchorOffsetX="0" width="331.13" anchorOffsetY="0" height="65.24" size="22" lineSpacing="10" x="0" y="0" fontFamily="Microsoft YaHei" textColor="0x697699"/>
+		</e:Group>
+	</e:Group>
+	<w:Config id="1610225ff8d"/>
+</e:Skin>

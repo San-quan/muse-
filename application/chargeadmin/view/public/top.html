@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>运营后台</title>
+  <meta name="description" content="mobile first, app, web app, responsive, admin dashboard, flat, flat ui">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">	
+	<link rel="stylesheet" href="__STATIC__/admin/css/bootstrap.css">
+  <link rel="stylesheet" href="__STATIC__/admin/css/font-awesome.min.css">
+	<link rel="stylesheet" href="__STATIC__/admin/css/style.css">
+  <link rel="stylesheet" href="__STATIC__/admin/css/plugin.css">
+  <link rel="stylesheet" href="__STATIC__/admin/css/landing.css">
+  <!--[if lt IE 9]>
+    <script src="__STATIC__/admin/js/ie/respond.min.js"></script>
+    <script src="__STATIC__/admin/js/ie/html5.js"></script>
+  <![endif]-->
+</head>
+
+<script src="__STATIC__/admin/js/jquery.min.js"></script>
+  <!-- Bootstrap -->
+  <script src="__STATIC__/admin/js/bootstrap.js"></script>
+  <!-- app -->
+  <script src="__STATIC__/admin/js/app.js"></script>
+  <script src="__STATIC__/admin/js/app.plugin.js"></script>
+  <script src="__STATIC__/admin/js/app.data.js"></script>
+
+  <!-- Sparkline Chart -->
+  <script src="__STATIC__/admin/js/charts/sparkline/jquery.sparkline.min.js"></script>  
+  <!-- Easy Pie Chart -->
+  <script src="__STATIC__/admin/js/charts/easypiechart/jquery.easy-pie-chart.js"></script>
+  <script src="__STATIC__/admin/js/ie/excanvas.js"></script>
+   <!-- clipboard -->
+   <script src="__STATIC__/clipBoard/dist/clipboard.min.js"></script>
+   
+<body>
+  <!-- header -->
+	<header id="header" class="navbar">
+    <ul class="nav navbar-nav navbar-avatar pull-right">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">            
+          
+          <span class="thumb-small avatar inline"><img src="__STATIC__/admin/images/avatar.jpg" alt="Mika Sokeil" class="img-circle"></span>
+          <b class="caret hidden-sm-only"></b>
+        </a>
+        <ul class="dropdown-menu">
+          <li><a href="{:url('Index/loginOut')}">退出</a></li>
+        </ul>
+      </li>
+    </ul>
+    <a class="navbar-brand" href="#">运营后台</a>
+    <button type="button" class="btn btn-link pull-left nav-toggle hidden-lg" data-toggle="class:slide-nav slide-nav-left" data-target="body">
+      <i class="icon-reorder icon-xlarge text-default"></i>
+    </button>
+	</header>
+  <nav id="nav" style="min-height:100%;height:1250px;" class="nav-primary visible-lg nav-vertical">
+    <ul class="nav" id="navContent" data-spy="affix" data-offset-top="50">
+      <li class="active"><a href="{:url('index/index')}"><i class="icon-dashboard icon-xlarge"></i>首页</a></li>
+      <li class="dropdown-submenu">
+        <a href="{:url('Index/loginOut')}"><i class="icon-off icon-xlarge"></i>退出</a>
+      </li>
+      <li class="dropdown-submenu">
+        <a href="#"><i class="icon-desktop icon-xlarge"></i>我的账户<i class="icon-caret-down" style="font-size: 23px;position: absolute;right: 0;top: 7px;"></i></a>
+        <ul class="dropdown-menu" style="padding-left: 20px">
+          <!-- <li><a href="buttons.html">账户明细</a></li> -->
+          <li><a href="{:url('myaccount/changePd')}">修改个人信息</a></li> 
+          <li><a href="{:url('myaccount/tixianApply')}">提现申请</a></li>
+          <li><a href="{:url('myaccount/myCashHistory')}">我的提现记录</a></li>
+        </ul>
+      </li>
+      {if condition="$memberinfo.parentID eq 0"}
+      <li class="dropdown-submenu">
+        <a href="#"><i class="icon-hand-down icon-xlarge"></i>提现管理<i class="icon-caret-down" style="font-size: 23px;position: absolute;right: 0;top: 7px;"></i></a>
+        <ul class="dropdown-menu" style="padding-left: 20px">
+          <li><a href="{:url('myaccount/applyCashList')}">提现申请列表</a></li>
+          <li><a href="{:url('myaccount/cashHistory')}">提现记录</a></li>
+        </ul>
+      </li>
+      {/if}
+      <li class="dropdown-submenu">
+        <a href="#"><i class="icon-jpy icon-xlarge"></i>资产管理<i class="icon-caret-down" style="font-size: 23px;position: absolute;right: 0;top: 7px;"></i></a>
+        <ul class="dropdown-menu" style="padding-left: 20px">
+          <li><a href="{:url('Daili/dailiShouzhi','aid='.$memberinfo['id'])}">我的收支明细</a></li>
+        </ul>
+      </li>
+      {if condition="$memberinfo.parentID eq 0"}
+          <li class="dropdown-submenu">
+            <a href="#"><i class="icon-search icon-xlarge"></i>平台查询<i class="icon-caret-down" style="font-size: 23px;position: absolute;right: 0;top: 7px;"></i></a>
+            <ul class="dropdown-menu" style="padding-left: 20px">
+              <li><a href="{:url('player/chargeList')}">充值订单查询</a></li>
+              <li><a href="{:url('Daili/dailiShouzhi')}">平台收支明细查询</a></li> 
+              <li><a href="{:url('player/index')}">平台玩家查询</a></li>
+              <li><a href="{:url('Daili/agentList')}">平台代理查询</a></li>
+            </ul>
+          </li>
+          <li class="dropdown-submenu">
+            <a href="#" class="menuclick">
+              <i class="icon-smile icon-xlarge"></i>
+              人工充值
+              <i class="icon-caret-down" style="font-size: 23px;position: absolute;right: 0;top: 7px;"></i>
+            </a>
+            <ul class="dropdown-menu" style="padding-left: 20px">
+              <li><a href="{:url('Player/addzuanshi')}">手动充值</a></li>
+              <li><a href="{:url('Player/zuanshiHistory')}">充值记录</a></li>
+            </ul>
+          </li>
+      {/if}
+      {if condition="$memberinfo.level neq 3"}
+      <li class="dropdown-submenu">
+        <a href="#"><i class="icon-male icon-xlarge"></i>代理管理<i class="icon-caret-down" style="font-size: 23px;position: absolute;right: 0;top: 7px;"></i></a>
+        <ul class="dropdown-menu" style="padding-left: 20px">
+          
+          <li><a href="{:url('Daili/addAgentPage')}">添加代理</a></li>
+          
+          {if condition="$memberinfo.parentID eq 0"}
+          <li><a href="{:url('Daili/agentList')}">代理列表</a></li>
+          {/if}
+          <li><a href="{:url('Daili/myAgentList')}">我的代理</a></li>
+          {if condition="$memberinfo.level neq 3"}
+          <li><a href="{:url('Daili/getapplylist')}">代理申请列表</a></li>
+          {/if}
+          
+          <!-- <li><a href="icons.html">返利信息设置</a></li> -->
+         
+        </ul>
+      </li>
+      {/if}
+      {if condition="$memberinfo.parentID eq 0"}
+      <li class="dropdown-submenu">
+        <a href="#"><i class="icon-home icon-xlarge"></i>游戏房间<i class="icon-caret-down" style="font-size: 23px;position: absolute;right: 0;top: 7px;"></i></a>
+        <ul class="dropdown-menu" style="padding-left: 20px">
+          <li><a href="{:url('table/index')}">房间列表</a></li>
+          <!-- <li><a href="{:url('table/delroom')}">删除房间</a></li> -->
+          <li><a href="{:url('table/games')}">游戏管理</a></li>
+        </ul>
+      </li>
+      <li class="dropdown-submenu">
+        <a href="#"><i class="icon-lemon icon-xlarge"></i>商品管理<i class="icon-caret-down" style="font-size: 23px;position: absolute;right: 0;top: 7px;"></i></a>
+        <ul class="dropdown-menu" style="padding-left: 20px">
+          <li><a href="{:url('goods/index')}">商品列表</a></li>
+          <li><a href="{:url('goods/song')}">签到赠品</a></li>
+        </ul>
+      </li>
+      <li class="dropdown-submenu">
+        <a href="#"><i class="icon-group icon-xlarge"></i>游戏控制<i class="icon-caret-down" style="font-size: 23px;position: absolute;right: 0;top: 7px;"></i></a>
+        <ul class="dropdown-menu" style="padding-left: 20px">
+          <li><a href="{:url('sp/index')}">十三水控制</a></li>
+          <li><a href="{:url('mjsp/index')}">杭州麻将控制</a></li>
+          <li><a href="{:url('sfpsp/index')}">四副牌控制</a></li>
+          <li><a href="{:url('sp/historyScoreList')}">赢率数据</a></li>
+        </ul>
+      </li>
+      <li class="dropdown-submenu">
+        <a href="#"><i class="icon-comment icon-xlarge"></i>系统设置<i class="icon-caret-down" style="font-size: 23px;position: absolute;right: 0;top: 7px;"></i></a>
+        <ul class="dropdown-menu" style="padding-left: 20px">
+          <li><a href="{:url('index/message')}">公告</a></li>
+          <!-- <li><a href="{:url('index/kefu')}">客服</a></li> -->
+          <li><a href="{:url('index/loopimg')}">大厅轮播图</a></li>
+          <!-- <li><a href="{:url('sp/index')}">十三水控制</a></li> -->
+        </ul>
+      </li>
+      {/if}
+      
+    </ul>
+  </nav>
+<!--<div style="height: 200px; background-color: red"></div>-->
+  <!-- / nav -->

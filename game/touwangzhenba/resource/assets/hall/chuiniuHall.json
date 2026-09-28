@@ -1,0 +1,17 @@
+{"file":"chuiniuHall.png","frames":{
+"hall_bottom":{"x":333,"y":116,"w":640,"h":101,"offX":0,"offY":0,"sourceW":640,"sourceH":101},
+"biaozhong":{"x":586,"y":219,"w":247,"h":124,"offX":0,"offY":0,"sourceW":247,"sourceH":124},
+"suohua":{"x":333,"y":344,"w":247,"h":124,"offX":0,"offY":0,"sourceW":247,"sourceH":124},
+"niuniu":{"x":333,"y":219,"w":251,"h":123,"offX":0,"offY":0,"sourceW":252,"sourceH":125},
+"honghei":{"x":582,"y":345,"w":246,"h":123,"offX":0,"offY":0,"sourceW":246,"sourceH":123},
+"hall_top":{"x":333,"y":1,"w":640,"h":113,"offX":0,"offY":0,"sourceW":640,"sourceH":113},
+"hall_role":{"x":1,"y":1,"w":330,"h":434,"offX":0,"offY":0,"sourceW":330,"sourceH":434},
+"laba":{"x":1,"y":470,"w":623,"h":40,"offX":0,"offY":0,"sourceW":623,"sourceH":40},
+"set":{"x":975,"y":1,"w":44,"h":71,"offX":0,"offY":0,"sourceW":44,"sourceH":71},
+"shop":{"x":830,"y":414,"w":51,"h":71,"offX":0,"offY":0,"sourceW":51,"sourceH":71},
+"zhanji":{"x":941,"y":219,"w":51,"h":72,"offX":0,"offY":0,"sourceW":51,"sourceH":72},
+"33":{"x":835,"y":219,"w":104,"h":104,"offX":0,"offY":0,"sourceW":104,"sourceH":104},
+"danji":{"x":830,"y":345,"w":192,"h":67,"offX":0,"offY":0,"sourceW":192,"sourceH":67},
+"find":{"x":975,"y":74,"w":44,"h":70,"offX":0,"offY":0,"sourceW":44,"sourceH":70},
+"hallAdd":{"x":975,"y":146,"w":32,"h":32,"offX":0,"offY":0,"sourceW":32,"sourceH":32},
+"hall_dikuang":{"x":883,"y":414,"w":62,"h":54,"offX":0,"offY":0,"sourceW":62,"sourceH":54}}}

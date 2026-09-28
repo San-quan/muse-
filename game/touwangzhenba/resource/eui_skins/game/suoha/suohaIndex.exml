@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="suohaIndex" width="640" height="1038" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+	<e:Image x="0" y="0" width="100%" height="100%" source="greenBg_png"/>
+	<e:Image id="yying" source="newPublic_json.isLuying" y="327.67" horizontalCenter="0" visible="false"/>
+	<e:Image source="watching_png" id="watching" x="440" y="814"/>
+	<e:Button id="menu" label="" x="536.39" y="14.5" scaleX="1" scaleY="1">
+		<e:skinName>
+		<e:Skin states="up,down,disabled" xmlns:w="http://ns.egret.com/wing">
+			<e:Image width="100%" height="100%" source="menu"/>
+			<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+		</e:Skin>
+		</e:skinName>
+	</e:Button>
+	<e:Group x="12.5" y="8" scaleX="0.8" scaleY="0.8">
+		<e:Rect width="250" height="100" x="0" y="0" fillAlpha="0.7"/>
+		<e:Label id="playcount" text="局数：0/1" y="58.5" left="18"/>
+		<e:Label id="roompwd" text="房间号：666666" y="20" left="18"/>
+	</e:Group>
+	<e:Group y="499.62" horizontalCenter="0">
+		<e:Label id="basescore" text="底分：1分" y="0" x="135.28" bold="true" textColor="0x2e815c"/>
+		<e:Label text="梭哈模式" y="0" x="0" bold="true" textColor="0x2e815c"/>
+	</e:Group>
+	<e:Group id="tool" x="521.5" y="12.17" scaleX="1" anchorOffsetX="388" visible="false">
+		<e:Button id="situp" label="" x="81" y="0" scaleX="1" scaleY="1">
+		<e:skinName>
+			<e:Skin states="up,down,disabled">
+			<e:Image id="iconDisplay" width="100%" height="100%" source="biaozhunIndex_json.situp"/>
+			<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+			</e:Skin>
+		</e:skinName>
+		</e:Button>
+		<e:Button id="locationBtn" label="" x="320" y="0" scaleX="1" scaleY="1">
+		<e:skinName>
+			<e:Skin states="up,down,disabled">
+			<e:Image width="100%" height="100%" source="location_btn_png"/>
+			<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+			</e:Skin>
+		</e:skinName>
+		</e:Button>
+		<e:Button id="setting" label="" x="321" y="0" scaleX="1" scaleY="1">
+		<e:skinName>
+			<e:Skin states="up,down,disabled">
+			<e:Image width="100%" height="100%" source="gameset"/>
+			<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+			</e:Skin>
+		</e:skinName>
+		</e:Button>
+		<e:Button id="wanfa" label="" x="241" y="0" scaleX="1" scaleY="1">
+		<e:skinName>
+			<e:Skin states="up,down,disabled">
+			<e:Image width="100%" height="100%" source="help"/>
+			<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+			</e:Skin>
+		</e:skinName>
+		</e:Button>
+		<e:Button id="jiesan" label="" x="161" y="0" scaleX="1" scaleY="1">
+		<e:skinName>
+			<e:Skin states="up,down,disabled">
+			<e:Image width="100%" height="100%" source="jiesan"/>
+			<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+			</e:Skin>
+		</e:skinName>
+		</e:Button>
+	</e:Group>
+	<e:Group id="myShaiGroup" y="745.87" horizontalCenter="7">
+		<e:Group id="shaizhongGroup" x="0" y="-7">
+		<e:Image id="shaizhong" x="0" y="0" scaleX="1" scaleY="1" source="shaizhong"/>
+		</e:Group>
+		<e:Group id="myAnimate" x="0" y="0" width="161" height="121">
+		<e:Image id="myBaozi" source="leopard" x="-21.81" y="-30.66" scaleX="1" scaleY="1" visible="false"/>
+		</e:Group>
+		<e:Image id="mine0" source="mine1" x="13.91" y="78.91" scaleX="0.9" scaleY="0.9"/>
+		<e:Image id="mine1" source="mine1" x="75.97" y="81.69" scaleX="0.9" scaleY="0.9"/>
+		<e:Image id="mine2" source="mine1" x="92.67" y="115" scaleX="0.9" scaleY="0.9"/>
+		<e:Image id="mine4" source="mine1" x="4.6" y="115.64" scaleX="0.9" scaleY="0.9"/>
+		<e:Image id="mine3" source="mine1" x="50.36" y="138.51" scaleX="0.9" scaleY="0.9"/>
+		<e:Image id="mytitle" x="0" y="30" scaleX="0.9" scaleY="0.9" source="suohaType6"/>
+	</e:Group>
+	<e:Group x="6" y="835.98" id="muchWin">
+		<e:Image source="typebg" x="0" y="0" scaleX="0.7" scaleY="0.7"/>
+		<e:Label id="winnum0" text="10连胜" horizontalCenter="0" verticalCenter="0" fontFamily="Microsoft YaHei" size="20"/>
+	</e:Group>
+	<e:Group id="myInfo" x="6.5" y="863.37">
+		<e:Image source="myInfo" x="0" y="0"/>
+		<e:Image id="myHeadImg" x="3.65" y="3.89" anchorOffsetX="0" width="96" anchorOffsetY="0" height="96" source="33_png"/>
+		<e:Image id="offline" source="offline" x="3.65" y="3.89" width="96" height="96" visible="false"/>
+		<e:Label id="myPoint" text="666666" x="116.5" y="60.09" size="21" textColor="0xF4DF58" width="71" height="21" textAlign="center"/>
+		<e:Label id="myName" text="魂族娱乐" x="110.5" y="30.5" size="21" height="21" anchorOffsetX="0" width="86"/>
+		<e:Image id="myYY" source="newPublic_json.zhengzaishuohua" x="3.65" y="3.89" width="96" height="96" visible="false"/>
+		<e:Image id="biaoqing" source="10_png" x="10" y="11" visible="false"/>
+	</e:Group>
+	<e:Group id="dismissGroup" horizontalCenter="0" y="0" visible="false">
+		<e:Image source="topNotice" y="0" x="0"/>
+		<e:Label id="dimissProcess" text="岁is半年报 欧文费围观，每次不能玩那个我IE那个覅我GV你弄完了那个" y="18" anchorOffsetX="0" width="310" anchorOffsetY="0" height="59" textAlign="center" verticalAlign="middle" horizontalCenter="0"/>
+	</e:Group>
+	<e:Group id="gameendTip" x="7.6" y="864.28" scaleX="0.6" scaleY="0.6" anchorOffsetY="100">
+		<e:Image id="endImg" source="sunshi_png" x="9" anchorOffsetX="0" anchorOffsetY="0" scaleX="0.85" scaleY="0.85" verticalCenter="0"/>
+		<e:BitmapLabel id="endContent" x="147.4" text="123" verticalCenter="0" font="lossBei_fnt"/>
+		<e:Image id="mybei" x="312.92" source="bei_png" verticalCenter="0"/>
+	</e:Group>
+	<e:Label id="myAddPoint" text="+20" y="900.85" x="30" fontFamily="Microsoft YaHei" bold="true"/>
+	<e:Group id="callGroup" x="404" y="724.13" scaleX="0.95" scaleY="0.95">
+		<e:Group x="0" y="170.05">
+			<e:Image source="bkd" x="0" y="0" scaleX="0.68" scaleY="0.68"/>
+			<e:Label id="myDaojinum" text="10" x="30.68" size="45" verticalCenter="-4" width="51" textAlign="center" verticalAlign="middle" height="45"/>
+			<e:Button id="callBtn" label="" x="108.59" scaleX="0.6" scaleY="0.6" verticalCenter="-4.5">
+				<e:skinName>
+					<e:Skin states="up,down,disabled">
+					<e:Image width="100%" height="100%" source="btnshake" source.down="btnshakeclick" source.disabled="btnshakedisable"/>
+					<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+					</e:Skin>
+				</e:skinName>
+			</e:Button>
+		</e:Group>
+		<e:Group x="-2.39" y="-10" scaleX="0.9" scaleY="0.9">
+			<e:Image source="bkt" x="0" y="0" scaleX="0.7" scaleY="0.7" scale9Grid="53,39,506,89" anchorOffsetY="0" height="276.86" anchorOffsetX="0" width="399.31"/>
+			<e:Group scaleX="1" scaleY="1" horizontalCenter="0" verticalCenter="0">
+			<e:Group id="chooseShai0" x="1" scaleX="0.8000000000000002" scaleY="0.8000000000000002" y="0">
+				<e:Image source="number_bg" x="0" y="0"/>
+				<e:Image id="shaizi0" horizontalCenter="0" verticalCenter="0" source="pinshai1"/>
+				<e:Image id="selected0" source="selected" x="0" y="0" width="90" height="92" visible="false"/>
+			</e:Group>
+			<e:Group id="chooseShai1" x="81" scaleX="0.8000000000000002" scaleY="0.8000000000000002" y="0">
+				<e:Image source="number_bg" x="0" y="0"/>
+				<e:Image id="shaizi1" horizontalCenter="0" verticalCenter="0" source="pinshai2"/>
+				<e:Image id="selected1" source="selected" x="0" y="0" width="90" height="92" visible="false"/>
+			</e:Group>
+			<e:Group id="chooseShai2" x="161" scaleX="0.8000000000000002" scaleY="0.8000000000000002" y="0">
+				<e:Image source="number_bg" x="0" y="0"/>
+				<e:Image id="shaizi2" horizontalCenter="0" verticalCenter="0" source="pinshai3"/>
+				<e:Image id="selected2" source="selected" x="0" y="0" width="90" height="92" visible="false"/>
+			</e:Group>
+			<e:Group id="chooseShai3" x="0" scaleX="0.8000000000000002" scaleY="0.8000000000000002" y="79">
+				<e:Image source="number_bg" x="0" y="0"/>
+				<e:Image id="shaizi3" horizontalCenter="0" verticalCenter="0" source="pinshai4"/>
+				<e:Image id="selected3" source="selected" x="0" y="0" width="90" height="92" visible="false"/>
+			</e:Group>
+			<e:Group id="chooseShai4" x="81" scaleX="0.8000000000000002" scaleY="0.8000000000000002" y="79">
+				<e:Image source="number_bg" x="0" y="0"/>
+				<e:Image id="shaizi4" horizontalCenter="0" verticalCenter="0" source="pinshai5"/>
+				<e:Image id="selected4" source="selected" x="0" y="0" width="90" height="92" visible="false"/>
+			</e:Group>
+			<e:Group x="159.75" scaleX="0.8000000000000002" scaleY="0.8000000000000002" id="chooseShai11" y="79" visible="false">
+				<e:Image source="number_bg" x="0" y="0"/>
+				<e:Image horizontalCenter="0" verticalCenter="0" source="pinshai6"/>
+				<e:Image source="selected" x="0" y="0" width="90" height="92"/>
+			</e:Group>
+			</e:Group>
+		</e:Group>
+	</e:Group>
+	<e:Image id="yourMinCard" source="minCard" y="501.44" horizontalCenter="0"/>
+	<e:Image id="yaoqing" source="share" x="389.08" y="0" visible="false"/>
+	<e:Rect id="menban" width="100%" height="100%" x="0" y="0" fillAlpha="0" strokeAlpha="0" visible="false"/>
+	<e:Group id="joinNotice" y="0" horizontalCenter="0" visible="false">
+		<e:Image source="topNotice" y="0" x="0"/>
+		<e:Label id="whoJoin" text="岁is半年报 欧文费围观，每次不能玩那个我IE那个覅我GV你弄完了那个" y="18" anchorOffsetX="0" width="330" anchorOffsetY="0" height="56" horizontalCenter="0"/>
+	</e:Group>
+	<e:Image id="readyStatus" source="biaozhunIndex_json.readyStatus" x="16" y="899.37"/>
+	<e:Group x="3.5" y="778.91" id="messagebg" visible="false">
+		<e:Image source="qipao_png" x="0" y="0" width="230"/>
+		<e:Label id="messageT" text="我当年横扫澳门五条加尔后台同仁堂让他人" size="20" width="220" verticalCenter="-11" horizontalCenter="0" textAlign="center"/>
+	</e:Group>
+	<e:Group width="20" height="20" y="692" horizontalCenter="0">
+		<e:Button id="readyBtn" label="" scaleX="1" scaleY="1" horizontalCenter="0" verticalCenter="0">
+		<e:skinName>
+			<e:Skin states="up,down,disabled">
+			<e:Image width="100%" height="100%" source="biaozhunIndex_json.readyBtn" scaleX.down="1.2" scaleY.down="1.2"/>
+			<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+			</e:Skin>
+		</e:skinName>
+		</e:Button>
+	</e:Group>
+	<e:Group x="0" y="956.33">
+		<e:Image source="dibuBgNew_png" y="0" x="0"/>
+		<e:Group width="50" height="50" x="105.29" y="23.68">
+		<e:Button id="voiceplay" label="" scaleX="1" scaleY="1" horizontalCenter="0" verticalCenter="0">
+			<e:skinName>
+			<e:Skin states="up,down,disabled">
+				<e:Image width="100%" height="100%" source="newPublic_json.dibuYY" scaleX.down="1.2" scaleY.down="1.2"/>
+				<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+			</e:Skin>
+			</e:skinName>
+		</e:Button>
+		<e:Group id="lyNoticeGroup" y="-92.66" horizontalCenter="-7">
+			<e:Image source="ddz_yy_qp_bg_png" y="0" x="0"/>
+			<e:Label id="luyingNotice" text="再次点击取消录音15s" y="12.65" horizontalCenter="0" size="20" fontFamily="Microsoft YaHei" width="100"/>
+		</e:Group>
+		</e:Group>
+		<e:Group width="50" height="50" x="284.5" y="26.35">
+		<e:Button id="xiaoxi" label="" horizontalCenter="0" verticalCenter="0">
+			<e:skinName>
+			<e:Skin states="up,down,disabled">
+				<e:Image width="100%" height="100%" source="newPublic_json.dibuMsg" scaleX.down="1.2" scaleY.down="1.2"/>
+				<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+			</e:Skin>
+			</e:skinName>
+		</e:Button>
+		</e:Group>
+		<e:Group width="50" height="50" x="475.94" y="26.35">
+		<e:Button id="pangguanBtn" label="" horizontalCenter="0" verticalCenter="0">
+			<e:skinName>
+			<e:Skin states="up,down,disabled">
+				<e:Image width="100%" height="100%" source="newPublic_json.dibuPlayerList" scaleX.down="1.2" scaleY.down="1.2"/>
+				<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+			</e:Skin>
+			</e:skinName>
+		</e:Button>
+		</e:Group>
+	</e:Group>
+	<e:Group id="resetNumGroup" horizontalCenter="0.5" verticalCenter="41">
+		<e:Label text="重摇次数：" fontFamily="Microsoft YaHei" x="0" y="0" textColor="0x2e815c" size="25"/>
+		<e:Label id="resetNum" text="10/20" x="122" y="0" textAlign="left" textColor="0x2e815c" size="25"/>
+	</e:Group>
+	<e:Group id="waitConnect" x="0" y="0" visible="false">
+		<e:Image x="0" y="0" width="100%" height="100%" source="greenBg_png"/>
+		<e:Image id="juhua" source="juhua_png" horizontalCenter="0" verticalCenter="0"/>
+	</e:Group>
+</e:Skin>

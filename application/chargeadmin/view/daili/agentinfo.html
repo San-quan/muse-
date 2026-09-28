@@ -1,0 +1,88 @@
+<div id="modal" class="modal fade">
+    <form class="m-b-none">
+      <div class="modal-dialog pos-abt" style="margin-top:50px;">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i></button>
+            <h4 class="modal-title" id="myModalLabel">代理信息</h4>
+          </div>
+          <div class="modal-body" id="modelContent">          
+            
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-small btn-default" id="editBtn" onclick="doEdit()">修改</button>
+            <button type="button" class="btn btn-small btn-default" data-dismiss="modal" aria-hidden="true">关闭</button>
+            <!-- <button type="button" class="btn btn-small btn-primary" data-loading-text="Publishing...">Publish</button> -->
+          </div>
+        </div><!-- /.modal-content -->
+      </div>
+    </form>
+  </div>
+  <script>
+  var doEdit=function(){
+      var username=$('#username').val();
+      var password=$('#password').val();
+      var repeatPassword=$('#repeatPassword').val();
+      var phone=$("#phone").val();
+      
+      var realname=$("#realname").val();
+      var percent=$("#percent").val();
+      var aid=$("#agentID").val();
+      var preUsername=$("#preUsername").val();
+      var prePercent=$("#prePercent").val();
+      var uid=$("#uid").val();
+      var wxid=$("#wxid").val();
+      var level=$("#level").val();
+      if(username==preUsername){
+        username='';
+      }
+      if(prePercent==percent){
+        percent='';
+      }
+      if(phone==''){
+        // $('#modal').modal('show');
+        $("#modelContent").html("手机号不能为空");
+        return; 
+      
+      }else if(CheckChinese(username)){
+        // $('#modal').modal('show');
+        $("#modelContent").html("用户名不能含有汉字");
+        return;
+      }else if(phone.length!=11){
+        // $('#modal').modal('show');
+        $("#modelContent").html("请输入正确的手机号");
+        return;
+      }else if(realname==''){
+        // $('#modal').modal('show');
+        $("#modelContent").html("真实姓名不能为空");
+        return;
+      }else if(uid==''){
+        $("#modelContent").html("玩家id不能为空");
+        return;
+      }else if(wxid==''){
+        $("#modelContent").html("微信号不能为空");
+        return;
+      }else{
+        $.post("{:url('Daili/editAgent')}",{username:username,password:password,repeatPassword:repeatPassword,phone:phone,realname:realname,percent:percent,aid:aid,uid:uid,wxid:wxid,level:level},function(res){
+            // var res=eval('('+rel+')');
+            // $('#modal').modal('show');
+            // if(res.state!=1){
+            //   $("#sureApply").html('<button type="button" class="btn btn-small btn-primary" data-dismiss="modal" aria-hidden="true" >确定</button>');
+            // }else{
+            //   $("#sureApply").html('<button type="button" class="btn btn-small btn-primary" data-dismiss="modal" aria-hidden="true" onclick="goToIndex()" >确定</button>');
+            // }
+            $("#editBtn").hide();
+            $("#modelContent").html(res.desc);
+        },'json');
+      }
+  }
+  function CheckChinese(val){     
+　　var reg = new RegExp("[\\u4E00-\\u9FFF]+","g");
+  　　if(reg.test(val)){     
+         // alert("不能输入汉字！");  
+         return true;      
+  　　}else{
+        return false;
+      }
+    }
+  </script>

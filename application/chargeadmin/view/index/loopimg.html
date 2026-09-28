@@ -1,0 +1,186 @@
+{include file="public/top"}
+
+  <section id="content">
+  <style>
+    .mycircle{
+        line-height:29px ;font-size: 18px;
+    }
+  </style>
+    <section class="main padder">
+      <section class="panel" style="margin-top: 10px;">
+        <header class="panel-heading">
+          系统设置 / 大厅轮播图
+        </header>
+        <div class="col-lg-4 m-b-mini" style="margin-bottom: 30px"><button onclick="addLoop()" class="file-input-wrapper btn btn btn-small btn-info">添加</button></div>
+        <div class="pull-out">
+            <table width="100%" height="100px" class="table table-bordered text-nowrap m-b-none text-small" cellpadding="5px">
+              <tr>
+                <th style="padding: 6px">添加时间</th>
+                <th style="padding: 6px">标题</th>
+                <th style="padding: 6px">图片排名</th>
+                <th style="padding: 6px">图片</th>
+                <th style="padding: 6px">操作</th>
+              </tr>
+              {if condition='count($loopList) neq 0'}
+                {volist name='loopList' id='list'}
+                <tr>
+                  <td  style="padding: 6px">{:date('m-d H:i',$list.addtime)}</td>
+                  <td>{$list.title}</td>
+                  <td>{$list.recommend}</td>
+                  <td><img width="100px" src="__STATIC__/uploads/{$list.content}" /></td>
+                  <td>
+                    <button class="btn btn-small btn-default" onclick="seeBanner(this)">查看</button>
+                    <button class="btn btn-small btn-default" onclick="delBanner('{$list.id}')">删除</button>
+                  </td>
+                </tr>
+                {/volist}
+              {else}
+                <tr>
+                  <td colspan="5">暂无数据...</td>
+                </tr>
+              {/if}
+            </table>
+          </div>
+        <footer class="panel-footer">
+          <div class="row">
+            <div class="col-lg-4 text-right text-center-sm">
+              {$loopList->render()}
+            </div>
+          </div>
+        </footer>
+      </section>
+
+
+      </div>
+    </section>
+  </section>
+  <!-- .modal -->
+  <div id="modal" class="modal fade">
+    <!--<form class="m-b-none">-->
+      <div class="modal-dialog pos-abt" style="margin-top:50px;">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i></button>
+            <h4 class="modal-title" id="modalTitle">信息提示</h4>
+          </div>
+          <div class="modal-body" id="modalContent">
+            
+          </div>
+          <div  class="modal-footer" id="modalFooter">
+            <button type="button" class="btn btn-small btn-default" data-dismiss="modal" aria-hidden="true">关闭</button>
+          </div>
+        </div>
+      </div>
+    <!--</form>-->
+  </div>
+
+  <div id="tipModal" class="modal fade">
+    <!--<form class="m-b-none">-->
+      <div class="modal-dialog pos-abt" style="margin-top:50px;">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i></button>
+            <h4 class="modal-title" id="tipModalTitle">信息提示</h4>
+          </div>
+          <div class="modal-body" id="tipModalContent">
+            
+          </div>
+          <div  class="modal-footer" id="tipModalFooter">
+            <button type="button" class="btn btn-small btn-default" data-dismiss="modal" aria-hidden="true">关闭</button>
+          </div>
+        </div>
+      </div>
+    <!--</form>-->
+  </div>
+<script>
+  //展示添加表单
+var addLoop=function(){
+  var modalTitle='添加新闻';
+  var modalContent='<form id="addLoopForm" action="{:url(\'addNews\')}" method="post" enctype="multipart/form-data">'+
+      '<div class="block">' +
+      '<label class="control-label">标题:</label>' +
+      '<input type="text"  id="title" value="" name="title" class="input-small form-control">' +
+      '</div>'+
+      '<div class="block">' +
+      '<label class="control-label">选择图片(<span style="color:red;">尺寸为626*280</span>):</label>' +
+      '<input type="file"  id="content1" name="content" class="input-small form-control">' +
+      '</div>'+
+      '<div class="block">' +
+      '<label class="control-label">排序索引:</label>' +
+      '<input type="number"  id="recommend" value="" name="recommend" class="input-small form-control">' +
+      '</div>'+
+      '</form>';
+  var modalFooter='<button type="button" class="btn btn-small btn-default" data-dismiss="modal" onclick="addLoopClick()">添加</button>'+
+      '<button type="button" class="btn btn-small btn-default" data-dismiss="modal" aria-hidden="true">关闭</button>';
+  $("#modalTitle").html(modalTitle);
+  $("#modalContent").html(modalContent);
+  $("#modalFooter").html(modalFooter);
+  $("#modal").modal("show");
+}
+//提交添加表单
+var addLoopClick=function(){
+  console.log('添加图片');
+    var addLoopData=new FormData($("#addLoopForm")[0]);
+    $.ajax({
+      type:"post",
+      dataType:"json",
+      url:"{:url('ajaxAddLoop')}",
+      processData: false,
+      contentType: false,
+      data:addLoopData,
+      success:function(data){
+        $("#tipModalContent").html(data.desc);
+        if(data.state){
+          $("#tipModalFooter").html('<button type="button" class="btn btn-small btn-default" onclick="window.location.reload()">确定</button>');
+        }else{
+          $("#tipModalFooter").html('<button type="button" class="btn btn-small btn-default" data-dismiss="modal" aria-hidden="true">确定</button>');
+        }
+        $("#tipModal").modal("show");
+      }
+    })
+}
+
+//点击查看图片
+  var seeBanner=function(btn){
+    // console.log(imgpath);
+    // console.log($(btn).parent().prev().children(0).attr('src'));
+      var bannerpath=$(btn).parent().prev().children(0).attr('src');
+      var modalTitle='查看图片';
+      var modalContent='<img width="100%" src="'+bannerpath+'" />';
+      var modalFooter='<button type="button" class="btn btn-small btn-default" data-dismiss="modal" aria-hidden="true">确定</button>';
+      $("#modalTitle").html(modalTitle);
+      $("#modalContent").html(modalContent);
+      $("#modalFooter").html(modalFooter);
+      $("#modal").modal("show");
+  }
+
+  //执行删除banner
+  var delBanner=function (id) {
+      $.ajax({
+          type:"post",
+          dataType:"json",
+          url:"{:url('ajaxDelLoop')}",
+          data:{
+              id:id
+          },
+          success:function(data){
+              var desc=data['desc'];
+              var modalTitle='提示';
+              var modalContent=desc;
+              var modalFooter='<button type="button" class="btn btn-small btn-default" data-dismiss="modal" onclick="reload()">确定</button>';
+              $("#modalTitle").html(modalTitle);
+              $("#modalContent").html(modalContent);
+              $("#modalFooter").html(modalFooter);
+
+              // setTimeout(function () {
+                  $("#modal").modal('show');
+              // },500)
+          }
+      })
+  }
+  //刷新页面
+  var reload=function () {
+      window.location.reload();
+  }
+</script>
+{include file="public/bottom"}

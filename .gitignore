@@ -1,0 +1,9 @@
+pp/
+runtime/
+vendor/
+*.log
+*.exe
+*.cs
+*.sql
+node_modules/
+.idea/

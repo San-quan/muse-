@@ -1,0 +1,480 @@
+<html>
+    <head> 
+        <meta charset="utf-8" /> 
+        <!-- <meta name="viewport" id="view" content="width=device-width,initial-scale=1,minimum-scale:1,maximum-scale=1,user-scalable=no"> -->
+        <meta name="format-detection" content="telephone=no" /> 
+        <meta name="msapplication-tap-highlight" content="no" /> 
+        <title>商城</title> 
+        <!-- 
+        <link rel="stylesheet" type="text/css" href="/static/game9/css/bull_vue-2.0.3.css" /> 
+        <link rel="stylesheet" type="text/css" href="/static/game9/css/alert-1.1.css" /> 
+        <link rel="stylesheet" type="text/css" href="/static/game9/css/bullshop-1.0.css" />  -->
+       
+        <script type="text/javascript" src="/static/baijiale/js/fastclick.js"></script>
+        <script src="__STATIC__/game/js/jquery-1.12.1.js"></script> 
+        <script type="text/javascript" src="/static/js/vue.min.js" ></script>
+        <script type="text/javascript" src="/static/js/vue-resource.min.js" ></script>
+        <script src="__STATIC__/js/setajax.js"></script>
+        <style type="text/css">
+            body{padding:0;margin: 0;}
+           
+        .danxuanyangzi{width: 45.5px;height:45.5px;float: left;cursor: pointer;text-align: center;background-image: url(/static/game/room/radio.png);background-repeat: no-repeat;background-size: 100%;}
+        .danxuanlab{    line-height: 45px;font-size: 39px;}
+        .on {background-image: url(__STATIC__/game/room/dian.png);}
+        .radioclass {opacity: 0;cursor: pointer;-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";filter: alpha(opacity=0);}
+        .niuniu tr{height: 85px;}
+        input{
+          margin:0;
+        }
+        .selections3_d1{float:left;background: url(/static/game/room/select.png) no-repeat;background-size: 100%; }
+            /*.notice{
+                width: 60%;
+                position: absolute;
+                left: 50%;
+                top:30%;
+                margin-left: -7.5rem;
+                display: none;
+            }
+            .last-time{position: absolute;top: 12%;left: 50%;margin-left: -6rem;width: 11.8rem;height:4.8rem;font-size: 0.9rem;color: #ddd;/*background: url(__STATIC__/baijiale/images/daojishi.png) bottom no-repeat;background-size:58%;*/
+            /*.last-time span{text-align: center;display: inline-block;width: 100%;margin-top: 1rem;z-index: 10;}*/
+            .piaochecked{width:45px;height:45px;}
+            .on_check {background: url(__STATIC__/game/room/gou.png) no-repeat;background-size: 100%;}
+        </style>
+        <script type="text/javascript">
+            window.addEventListener('load', function () {
+                FastClick.attach(document.body);
+            }, false);
+
+          
+        </script>
+    </head> 
+<body> 
+
+    <div id="setact" style="position:fixed; display:none; background:rgba(0,0,0,0.5); z-index:9000; top:0; bottom:0; left:0; right:0;width: 100%;height: 100%;">
+    <div style="height: 63%;width: 85%;padding-bottom: 1rem;z-index: 10;position: absolute;top: 16%;left: 50%;margin-left: -42.5%;background: url(/static/game/room/bg2.png) no-repeat;background-size: 100% 100%;" class="niucreate">
+        <img src="__STATIC__/game/room/baijia.png" style="width:48%;position: absolute;left: 50%;margin-left: -24%;" class="niutitle">
+        <img src="__STATIC__/game/room/close.png" style="width:13%;position: absolute;right: -4%;" class="niuclose">
+      <form action="{:url('Baijiale/CreateRoom')}" method="post" callback="none1" id="createfrom">
+      <table style="    color: white;width: 80%;height: 49%;font-size: 39px;margin: 16% 0 0 18%;" class="niuniu">
+        <tr >
+            <td colspan="1">
+              <span class="danxuanyangzi on" name="niujushu" id="niujushu10" style="float: left;">
+                <input name="gamenum" type="radio" value="10:40" class="radioclass" checked="checked" id="bjl10" style="width: 100%;height: 100%;" />
+                </span><label for="" class="danxuanlab" style="float: left;">10局</label>
+            </td>
+            <td colspan="1">          
+                <span class="danxuanyangzi" name="niujushu" id="niujushu20" style="float: left;">
+                    <input name="gamenum" type="radio" value="20:70" class="radioclass" id="bjl20" style="width: 100%;height: 100%;"/>
+                </span><label for="" class="danxuanlab" style="float: left;">20局</label>
+            </td>
+        </tr>
+        <tr style="height:75px;">
+          <td>
+            <span class="danxuanyangzi on" id="" name="bei" style="float: left;">
+                <input name="score" type="radio" value="1" class="radioclass" checked="checked" id="bei1" style="width: 100%;height: 100%;"/>
+            </span><label for="" class="danxuanlab" style="float: left;">1分</label>
+          </td>
+          <td>
+            <span class="danxuanyangzi" id="" name="bei" style="float: left;">
+                <input name="score" type="radio" value="3" class="radioclass" id="bei3" style="width: 100%;height: 100%;"/>
+            </span><label for="" class="danxuanlab" style="float: left;">3分</label>
+          </td>
+          <td>
+            <span class="danxuanyangzi" id="" name="bei" style="float: left;">
+                <input name="score" type="radio" value="5" class="radioclass" id="bei5" style="width: 100%;height: 100%;"/>
+            </span><label for="" class="danxuanlab" style="float: left;">5分</label>
+          </td>
+          <td>
+            <span class="danxuanyangzi" id="" name="bei" style="float: left;">
+                <input name="score" type="radio" value="10" class="radioclass" id="bei10" style="width: 100%;height: 100%;"/>
+            </span><label for="bei10" class="danxuanlab" style="float: left;">10分</label>
+          </td>
+        </tr>
+        <tr style="height:75px;">
+          <td colspan="4">
+            <span class="danxuanyangzi on" id="" name="guize" style="float: left;">
+                <input name="rule" type="radio" value="1" class="radioclass" checked="checked" id="bei1" style="width: 100%;height: 100%;"/>
+            </span><label for="" class="danxuanlab" style="float: left;">牛七,牛八,牛九2倍,牛牛3倍</label>
+          </td>
+        
+        </tr>
+        <tr style="height:75px;">
+          <td colspan="4">
+            <span class="danxuanyangzi" id="" name="guize" style="float: left;">
+                <input name="rule" type="radio" value="1" class="radioclass"  id="bei1" style="width: 100%;height: 100%;"/>
+            </span><label for="" class="danxuanlab" style="float: left;">牛七2倍,牛八3倍,牛九4倍,牛牛5倍</label>
+          </td>
+        </tr>
+        <tr style="height:75px;">
+          <td colspan="2">
+            <div class="selections3_d1">
+              <div class="piaochecked">
+                <input name="types[1]" type="checkbox" value="6" class="radioclass" id="" style="width: 100%;height: 100%;" />
+              </div>
+            </div>
+            <label for="" class="danxuanlab">五花牛6倍</label>
+          </td>
+          <td colspan="2">
+            <div class="selections3_d1">
+              <div class="piaochecked">
+                <input name="types[2]" type="checkbox" value="8" class="radioclass" id="" style="width: 100%;height: 100%;" />
+              </div>
+            </div>
+            <label for="" class="danxuanlab">炸弹牛8倍</label>
+          </td>
+        </tr>
+        <tr style="height:60px;">
+          <td colspan="4">
+            <div class="selections3_d1">
+              <div class="piaochecked">
+                <input name="types[3]" type="checkbox" value="10" class="radioclass" id="" style="width: 100%;height: 100%;" />
+              </div>
+            </div>
+            <label for="" class="danxuanlab">五小牛10倍</label>
+          </td>
+        </tr>
+        <tr style="height:85px;">
+          <td>
+          <span class="danxuanyangzi on" id="" name="zhonglei" style="float: left;">
+                <input name="gametype" type="radio" checked="checked" value="6" class="radioclass" id="bei3" style="width: 100%;height: 100%;"/>
+            </span><label for="" class="danxuanlab" style="float: left;">轮庄</label>
+          </td>
+          <td>
+            <span class="danxuanyangzi" id="" name="zhonglei" style="float: left;">
+                <input name="gametype" type="radio" value="4" class="radioclass" id="bei5" style="width: 100%;height: 100%;"/>
+            </span><label for="" class="danxuanlab" style="float: left;">抢庄</label>
+          </td>
+           <td>
+            <span class="danxuanyangzi" id="" name="zhonglei" style="float: left;">
+                <input name="gametype" type="radio" value="2" class="radioclass" id="bei10" style="width: 100%;height: 100%;"/>
+            </span><label for="bei10" class="danxuanlab" style="float: left;">固定庄</label>
+          </td>
+        </tr>
+        
+        <tr style="height:110px;">
+          <td colspan="4" class="niuren">40个/人</td>
+        </tr>
+      </table>
+      <div class="confirms" style="text-align: center;">
+                  <img onclick="$('#createfrom').submit();" type="sub" src="__STATIC__/game/room/create.png" style="margin-top: 5%;width: 32%;">
+              </div>
+      </form>
+    </div>
+
+    </div>
+    <div id="bjlcr" style="position:fixed; display:none; background:rgba(0,0,0,0.5); z-index:9000; top:0; bottom:0; left:0; right:0;">
+    <div style="height: 40%;width: 85%;padding-bottom: 1rem;z-index: 10;position: absolute;top: 25%;left: 50%;margin-left: -42.5%;background: url(/static/game/room/bg3.png);background-size: 100% 100%;" class="bjlcreate">
+        <img src="__STATIC__/game/room/baijia.png" style="width:48%;position: absolute;left: 50%;margin-left: -24%;" >
+        <img src="__STATIC__/game/room/close.png" style="width:13%;position: absolute;right: -4%;" class="bjlclose">
+      <form action="{:url('Baijiale/CreateRoom')}" method="post" callback="none1" id="bjlCreateRoom">
+      <table style="    color: white;width: 80%;height: 49%;font-size: 45.5px;margin: 21% 0 0 18%;">
+        <tr >
+            <td colspan="1">
+              <span class="danxuanyangzi on" name="jushu" id="jusu10" style="float: left;">
+                <input name="gamenum" type="radio" value="10" class="radioclass" checked="checked" id="bjl10" style="width: 100%;height: 100%;" />
+                </span><label for="" class="danxuanlab" style="float: left;">10局</label>
+             
+            </td>
+            <td colspan="1">          
+                <span class="danxuanyangzi" name="jushu" id="jusu20" style="float: left;">
+                    <input name="gamenum" type="radio" value="20" class="radioclass" id="bjl20" style="width: 100%;height: 100%;"/>
+                </span><label for="" class="danxuanlab" style="float: left;">20局</label>
+            </td>
+        </tr>
+        <tr>
+          <td>
+            <span class="danxuanyangzi on" id="" name="bei" style="float: left;">
+                <input name="rule" type="radio" value="1" class="radioclass" checked="checked" id="bei1" style="width: 100%;height: 100%;"/>
+            </span><label for="" class="danxuanlab" style="float: left;">1倍</label>
+          </td>
+          <td>
+            <span class="danxuanyangzi" id="" name="bei" style="float: left;">
+                <input name="rule" type="radio" value="4" class="radioclass" id="bei3" style="width: 100%;height: 100%;"/>
+            </span><label for="" class="danxuanlab" style="float: left;">4倍</label>
+          </td>
+          <td>
+            <span class="danxuanyangzi" id="" name="bei" style="float: left;">
+                <input name="rule" type="radio" value="8" class="radioclass" id="bei5" style="width: 100%;height: 100%;"/>
+            </span><label for="" class="danxuanlab" style="float: left;">8倍</label>
+          </td>
+          <!-- <td>
+            <span class="danxuanyangzi" id="" name="bei" style="float: left;font-size: 1.5rem;">
+                <input name="rule" type="radio" value="10" class="radioclass" id="bei10" style="width: 28.5px;height: 28.5px;"/>
+            </span><label for="bei10" class="danxuanlab" style="float: left;font-size: 1.5rem;">10倍</label>
+          </td> -->
+        </tr>
+        <tr>
+          <td colspan="4" class="bjlren">40个/人</td>
+        </tr>
+      </table>
+      <div class="confirms" style="text-align: center;">
+                  <img onclick="$('#bjlCreateRoom').submit();" type="sub" src="__STATIC__/game/room/create.png" style="margin-top: 5%;width: 32%;">
+              </div>
+      </form>
+    </div>
+
+    </div>
+
+    <canvas id="myCanvas" width="560" height="910"  style="width:100%;height:100%;">
+        Your browser does not support the HTML5 canvas tag.
+    </canvas>
+
+
+    <div style="display:none;">
+    	<img src="__STATIC__/game/xindating/BG2.png" id="bg" >
+<img src="{$useInfo['photo']}" id="img_head">
+<img src="__STATIC__/game/xindating/6niuniu.png" id="6niuniu" >
+<img src="__STATIC__/game/xindating/12niuniu.png" id="12niuniu" >
+<img src="__STATIC__/game/xindating/huanle30.png" id="huanle30" >
+<img src="__STATIC__/game/xindating/doudizhu.png" id="doudizhu" >
+
+<img src="__STATIC__/game/xindating/set.png" id="btn_set" >
+<img src="__STATIC__/game/xindating/store.png" id="btn_store" >
+<img src="__STATIC__/game/xindating/zhanji.png" id="btn_zhanji" >
+<img src="__STATIC__/game/xindating/find.png" id="btn_find" >
+
+<img src="__STATIC__/game/xindating/laba.png" id="img_laba" >
+<img src="__STATIC__/game/xindating/zhuanBg.png" id="img_zhuanbg" >
+<img src="__STATIC__/game/xindating/add.png" id="btn_add" >
+
+    </div>
+    <style type="text/css">
+ table{background-color: white;width: 90%;height:860px;margin:0 auto;border-radius: 2rem;padding:0 1rem 1rem 2rem;text-align: center;}
+ .cem>img{width: 100%;padding-left:-0.5rem;}
+ .zeng>img{width: 100%;}
+ .goumai>a>img{width: 100%;}
+ th{font-size: 10px;}
+ table td{border-bottom:1px dashed gray;font-size: 34px;}
+ .last td{border-bottom:none;}
+.overlay{background: rgba(0,0,0,0.8);position: absolute;top: 0;left: 0;bottom: 0;right:0;z-index: 100000;display: none;}
+table tr{line-height: 5rem}
+</style>
+<div style="background: white;width: 90%;border-radius: 1rem;margin-top: 16%;z-index: 25;position: absolute;top: 12%;left: 46px;">
+  <table>
+    <th colspan="6" style="text-align: center;font-size:70px;">在线充值</th>
+    
+      
+      <tr>
+        <td class="cem"><img src="__STATIC__/game/shop/cem_1.png"></td>
+        <td>{$goodslist[0]['diamond']}</td>
+        <td class="zeng"><img src="__STATIC__/game/shop/zeng.png"></td>
+        <td>{$goodslist[0]['award']}</td>
+        <td>￥{$goodslist[0]['price']}</td>
+        <td class="goumai" style="width:24%;"><a href="http://wbkj.wanyouxi518.cn/WxpayAPI/shop/jsapi.php"  ><img class="czbtn" src="__STATIC__/game/shop/goumai.png"></a></td>
+      </tr>
+    
+  
+    <tr>
+      <td class="cem"><img src="__STATIC__/game/shop/cem_2.png"></td>
+      <td>{$goodslist[1]['diamond']}</td>
+      <td class="zeng"><img src="__STATIC__/game/shop/zeng.png"></td>
+      <td>{$goodslist[1]['award']}</td>
+      <td>￥{$goodslist[1]['price']}</td>
+      <td class="goumai"><a href="http://wbkj.wanyouxi518.cn/WxpayAPI/shop/goods2.php"><img class="czbtn" src="__STATIC__/game/shop/goumai.png"></a></td>
+    </tr>
+    <tr>
+      <td class="cem"><img src="__STATIC__/game/shop/cem_3.png"></td>
+      <td>{$goodslist[2]['diamond']}</td>
+      <td class="zeng"><img src="__STATIC__/game/shop/zeng.png"></td>
+      <td>{$goodslist[2]['award']}</td>
+      <td>￥{$goodslist[2]['price']}</td>
+      <td class="goumai"><a href="http://wbkj.wanyouxi518.cn/WxpayAPI/shop/goods3.php"><img class="czbtn" src="__STATIC__/game/shop/goumai.png"></a></td>
+    </tr>
+    <tr class="last">
+      <td class="cem"><img src="__STATIC__/game/shop/cem_4.png"></td>
+      <td>{$goodslist[3]['diamond']}</td>
+      <td class="zeng"><img src="__STATIC__/game/shop/zeng.png"></td>
+      <td>{$goodslist[3]['award']}</td>
+      <td>￥{$goodslist[3]['price']}</td>
+      <td class="goumai"><a href="http://wbkj.wanyouxi518.cn/WxpayAPI/shop/goods4.php"><img class="czbtn" src="__STATIC__/game/shop/goumai.png"></a></td>
+    </tr>
+  </table>
+  <input type="hidden" id="memberid" value="{$memberid}">
+  <input type="hidden" id="isingame" value="{$isingame}">
+</div>
+<div class="overlay" >
+  
+   </div>
+</div>
+<div class="invite" style="position: absolute;top: 1rem;width: 100%;z-index: 100000;display: none;">
+    <img src="__STATIC__/game/img/arrow.png" style="width: 5rem;float: right;">
+    <p style="color: white;margin:0 auto;margin-top: 30%;width: 32rem;font-size: 35px;">
+        <span style="    display: inline-block;width: 3rem;height: 3rem;border-radius: 50%;background: red;color: white;text-align: center;line-height: 3rem;margin-right: 0.3rem;">1</span>请点击右上角<img src="__STATIC__/game/img/ico1.png" style="width: 3rem;vertical-align: middle;margin:0 0.3rem;">按钮<br/><br/>
+        <span style=" display: inline-block;width: 3rem;height: 3rem;border-radius: 50%;background: red;color: white;text-align: center;line-height: 3rem;margin-right: 0.3rem;">2</span><!-- <img src="__STATIC__/game/img/ico2.png" style="width: 3rem;vertical-align: middle;margin:0 0.3rem;"> -->请在浏览器打开支付<br/><br/>
+        <span style="color: #E6A43F;">本产品仅供娱乐，禁止用于赌博</span>
+    </p>
+</div>
+
+
+<!-- 微信支付 -->
+<script type="text/javascript">
+   
+  
+  
+
+  $(".danxuanyangzi").on("click",function(){
+              $(this).addClass("on").siblings().removeClass("on");
+              if($('#niujushu').attr('class')=="pay_list_c1 on"){
+                  $('.niuren').html('80个/人');
+                }
+              if($('#niujushu').attr('class')=="pay_list_c1 on"){
+                  $('.niuren').html('40个/人');
+                }
+            })
+    $('.niuclose').click(function(){
+      $("#setact").hide();
+    })
+    $(".danxuanyangzi").on("click",function(){
+      var name=$(this).attr('name');
+      $('[name='+name+']').removeClass('on');
+      $(this).addClass("on");
+      if($('#jusu20').attr('class')=="danxuanyangzi on"){
+          $('.bjlren').html('80个/人');
+        }
+      if($('#jusu10').attr('class')=="danxuanyangzi on"){
+          $('.bjlren').html('40个/人');
+        }
+    })
+     $('#bjlCreateRoom').ajaxsubmit({success:function(ret){
+                      window.location.href=ret.url;
+                }});
+     $('#createfrom').ajaxsubmit({success:function(ret){
+                      window.location.href=ret.url;
+                }});
+  $('.bjlclose').click(function(){
+        $("#bjlcr").hide();
+  })
+$(".piaochecked").on("click",function(){
+                  $(this).toggleClass( "on_check" );
+            })  
+window.onload=function(){
+            // var wid=$(window).width()/560;
+           
+            // $('#view').attr('content','initial-scale='+wid+',maximum-scale=1,user-scalable=no');
+            //  $('#myCanvas').css('height','100%');
+            // $('#myCanvas').css('width','100%');
+            $(".game4").click(function(){
+                  $('#createfrom').attr('action', '{:url('Douniuplaywjy/roomcreate')}');
+                  $('.niutitle').html('<img src="__STATIC__/game/room/6_ren.png">');
+                  $('.cons').css('background-image','url(__STATIC__/game/room/bg.png)');
+                 $(".overlay,.setact").show();
+               })
+                $(".game2").click(function(){
+                  $('#createfrom').attr('action', '{:url('Douniuplay12r/roomcreate')}');
+                  $('.niutitle').attr('src','__STATIC__/game/room/6_ren.png');
+                  $('.cons').css('background-image','url(__STATIC__/game/room/bg2.png)');
+                 $(".overlay,.setact").show();
+               })
+           	var c=document.getElementById("myCanvas");
+        	var ctx=c.getContext("2d");
+            ctx.drawImage($("#bg")[0],0,0);
+            // alert($('#user').val());
+            var obj = eval("(" + $('#user').val() + ")");
+             //圆角矩形的框
+            CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r) {
+                 var min_size = Math.min(w, h);
+                 if (r > min_size / 2) r = min_size / 2;
+                 // 开始绘制
+                 this.beginPath();
+                 this.moveTo(x + r, y);
+                 this.arcTo(x + w, y, x + w, y + h, r);
+                 this.arcTo(x + w, y + h, x, y + h, r);
+                 this.arcTo(x, y + h, x, y, r);
+                 this.arcTo(x, y, x + w, y, r);
+                 this.closePath();
+                 return this;
+             }
+        var height=300;
+        var objpostion={
+            gamebtn:new Array(new Array(260,240),new Array(260,360),new Array(260,480),new Array(260,580)),
+            functionbtn:new Array(new Array(30,810),new Array(160,810),new Array(290,815),new Array(410,815)),
+            excharge:new Array(new Array(505,42)),
+        }
+        // ctx.drawImage($('#6niuniu')[0],objpostion.gamebtn[0][0],objpostion.gamebtn[0][1]);
+        // ctx.drawImage($('#12niuniu')[0],objpostion.gamebtn[1][0],objpostion.gamebtn[1][1]);
+        // ctx.drawImage($('#huanle30')[0],objpostion.gamebtn[2][0],objpostion.gamebtn[2][1]);
+        // ctx.drawImage($('#doudizhu')[0],objpostion.gamebtn[3][0],objpostion.gamebtn[3][1]);
+
+        ctx.drawImage($('#btn_set')[0],objpostion.functionbtn[3][0],objpostion.functionbtn[3][1]);
+        ctx.drawImage($('#btn_store')[0],objpostion.functionbtn[0][0],objpostion.functionbtn[0][1]);
+        ctx.drawImage($('#btn_zhanji')[0],objpostion.functionbtn[1][0],objpostion.functionbtn[1][1]);
+        ctx.drawImage($('#btn_find')[0],objpostion.functionbtn[2][0],objpostion.functionbtn[2][1]);
+
+        ctx.drawImage($('#img_zhuanbg')[0],340,30);
+        ctx.drawImage($('#btn_add')[0],objpostion.excharge[0][0],objpostion.excharge[0][1]);
+
+        // ctx.drawImage($('#img_laba')[0],8,120);
+        //头像
+        var headr = 70;
+        ctx.save();
+        ctx.translate(20,11);
+        ctx.roundRect(0, 0, headr,headr, headr/2);
+        ctx.clip();      
+        ctx.drawImage($('#img_head')[0],0,0,headr,headr);   
+        ctx.restore();
+
+
+        ctx.font="16px Arial";
+        ctx.fillStyle='white';
+        // ctx.fillText("欢迎来到闲趣游戏",80,143);
+        ctx.font="18px Arial";
+        ctx.fillText("{$useInfo['nickname']}",100,40);
+        ctx.fillStyle='yellow';
+        ctx.fillText('ID:{$useInfo['id']}',100,70);
+        ctx.font="20px Arial";
+        ctx.fillText('{$useInfo['cards']}',410,65);
+
+        var c=document.getElementById("myCanvas");
+        c.onclick=function(e){
+                e=e||event;//获取事件对象
+                //获取事件在canvas中发生的位置
+                var x=e.clientX-c.offsetLeft;
+                var y=e.clientY-c.offsetTop;
+                var xx=$(window).width()/560;
+                var yy=$(window).height()/910;
+
+
+    
+        
+
+        //function
+        if (x > (objpostion.functionbtn[0][0]*xx) && x <((objpostion.functionbtn[0][0]+$('#btn_store')[0].width)*xx) && y > (objpostion.functionbtn[0][1]*yy) && y < ((objpostion.functionbtn[0][1]+$('#btn_store')[0].height)*yy)) {
+            console.log("商城");
+            window.location.href='{:url('index/indexShop')}';
+            return;
+        }
+        if (x > (objpostion.functionbtn[1][0]*xx) && x <((objpostion.functionbtn[1][0]+$('#btn_zhanji')[0].width)*xx) && y > (objpostion.functionbtn[1][1]*yy) && y < ((objpostion.functionbtn[1][1]+$('#btn_zhanji')[0].height)*yy)) {
+            console.log("战绩");
+            window.location.href='{:url('index/zhanji')}';
+            return;
+        }
+        if (x > (objpostion.functionbtn[2][0]*xx) && x <((objpostion.functionbtn[2][0]+$('#btn_find')[0].width)*xx) && y > (objpostion.functionbtn[2][1]*yy) && y < ((objpostion.functionbtn[2][1]+$('#btn_find')[0].height)*yy)) {
+            console.log("发现");
+            window.location.href='{:url('index/faxian')}';
+            return;
+        }
+        if (x > (objpostion.functionbtn[3][0]*xx) && x <((objpostion.functionbtn[3][0]+$('#btn_set')[0].width)*xx) && y > (objpostion.functionbtn[3][1]*yy) && y < ((objpostion.functionbtn[3][1]+$('#btn_set')[0].height)*yy)) {
+            console.log("设置");
+            return;
+        }
+
+        //充值
+        if (x > (objpostion.excharge[0][0]*xx) && x <((objpostion.excharge[0][0]+$('#btn_add')[0].width)*xx) && y > (objpostion.excharge[0][1]*yy) && y < ((objpostion.excharge[0][1]+$('#btn_add')[0].height)*yy)) {
+            console.log("顶部充值");
+            window.location.href='{:url('index/indexShop')}';
+            return;
+        }
+
+        return;
+
+                
+                
+            }
+           
+
+        }
+       	
+</script>
+
+</body>
+</html>

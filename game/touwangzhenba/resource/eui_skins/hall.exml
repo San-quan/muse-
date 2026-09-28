@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="hall" width="640" height="1038" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*">
+	<w:Config id="160fd9d6c6f"/>
+	<e:Image source="hallBg_png" x="0" y="0" width="100%" height="100%"/>
+	<e:Image source="chuiniuHall_json.hall_top" x="0" y="0"/>
+	<e:Group x="402.49" y="55.16" width="37" height="37">
+		<e:Button id="add" label="" horizontalCenter="0" verticalCenter="0">
+			<e:skinName>
+				<e:Skin states="up,down,disabled">
+				<e:Image width="100%" height="100%" source="hallAdd" scaleX.down="1.1" scaleY.down="1.1"/>
+				<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+				</e:Skin>
+			</e:skinName>
+		</e:Button>
+	</e:Group>
+	<e:Label id="cardsNum" text="9999999" x="304.14" y="60.36" textAlign="center" size="25" height="25" textColor="0xf4e55d" width="98"/>
+	<e:Label id="username" text="魂族网络科技" x="93.34" y="23.71" size="25" width="150" height="25" textAlign="center"/>
+	<e:Label id="ID" text="ID:999999" x="115.69" y="62.86" size="20" textAlign="center" textColor="0xf4e55d"/>
+	<e:Image id="head" x="15" y="14" anchorOffsetY="0" height="68" anchorOffsetX="0" width="68" source="33"/>
+	<e:Group horizontalCenter="0" bottom="0">
+		<e:Image source="chuiniuHall_json.hall_bottom" scaleX="1" scaleY="1" horizontalCenter="0" verticalCenter="0"/>
+		<e:Group x="125.17" y="12.16" width="60" height="80">
+			<e:Button id="shop" label="" horizontalCenter="0" verticalCenter="0">
+				<e:skinName>
+					<e:Skin states="up,down,disabled">
+					<e:Image width="100%" height="100%" source="chuniu_hall_new_json.hall_shop_btn" scaleX.down="1.1" scaleY.down="1.1"/>
+					<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+					</e:Skin>
+				</e:skinName>
+			</e:Button>
+		</e:Group>
+		<e:Group x="235.17" y="12.16" width="60" height="80">
+			<e:Button id="zhanji" label="" horizontalCenter="0" verticalCenter="0">
+				<e:skinName>
+					<e:Skin states="up,down,disabled">
+					<e:Image width="100%" height="100%" source="chuniu_hall_new_json.hall_zhanji_btn" scaleX.down="1.1" scaleY.down="1.1"/>
+					<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+					</e:Skin>
+				</e:skinName>
+			</e:Button>
+		</e:Group>
+		<e:Group x="345.17" y="12.16" width="60" height="80">
+			<e:Button id="find" label="" horizontalCenter="0" verticalCenter="0">
+				<e:skinName>
+					<e:Skin states="up,down,disabled">
+					<e:Image width="100%" height="100%" source="chuniu_hall_new_json.hall_find_btn" scaleX.down="1.1" scaleY.down="1.1"/>
+					<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+					</e:Skin>
+				</e:skinName>
+			</e:Button>
+		</e:Group>
+		<e:Group x="15.17" y="12.16" width="60" height="80">
+			<e:Button id="set" label="" horizontalCenter="0" verticalCenter="0">
+				<e:skinName>
+					<e:Skin states="up,down,disabled">
+					<e:Image width="100%" height="100%" source="chuniu_hall_new_json.hall_set_btn" scaleX.down="1.1" scaleY.down="1.1"/>
+					<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+					</e:Skin>
+				</e:skinName>
+			</e:Button>
+		</e:Group>
+		<e:Group x="455.17" y="12.16" width="60" height="80">
+			<e:Button id="fankuiBtn" label="" horizontalCenter="0" verticalCenter="0">
+				<e:skinName>
+					<e:Skin states="up,down,disabled">
+					<e:Image width="100%" height="100%" source="chuniu_hall_new_json.hall_fankui_btn" scaleX.down="1.1" scaleY.down="1.1"/>
+					<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+					</e:Skin>
+				</e:skinName>
+			</e:Button>
+		</e:Group>
+		<e:Group x="565.17" y="12.16" width="60" height="80">
+			<e:Button id="applyBtn" label="" horizontalCenter="0" verticalCenter="0">
+				<e:skinName>
+					<e:Skin states="up,down,disabled">
+					<e:Image width="100%" height="100%" source="chuniu_hall_new_json.hall_apply_agent_btn" scaleX.down="1.1" scaleY.down="1.1"/>
+					<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+					</e:Skin>
+				</e:skinName>
+			</e:Button>
+		</e:Group>
+	</e:Group>
+	<e:Group y="124.32" horizontalCenter="0.5">
+		<e:Image id="labaBg" verticalCenter="0" horizontalCenter="0" source="laba"/>
+		<e:Scroller width="540" height="35" horizontalCenter="21" verticalCenter="0">
+			<e:Group>
+				<e:Label id="laba" text="本游戏纯属娱乐，禁止赌博！！！" x="0" size="22" verticalCenter="0"/>
+			</e:Group>
+		</e:Scroller>
+	</e:Group>
+	<e:Group id="waitConnect" x="0" y="0" visible="false">
+		<e:Image source="hallBg_png" x="0" y="0" width="100%" height="100%"/>
+		<e:Image id="juhua" source="juhua_png" horizontalCenter="0" verticalCenter="0"/>
+	</e:Group>
+	<e:Image id="hallshaizhong" source="hallShaizhong_tex_png" x="121.03" y="791.84" anchorOffsetX="40.67" anchorOffsetY="60.67" visible="false"/>
+	<e:Group id="contentGroup" width="640" x="0" y="190" height="750" visible="false">
+		<e:Group x="247.45000000000002" y="58.80000000000004" scaleX="1" scaleY="1">
+			<e:Group x="0" y="0" width="380" height="130">
+			<e:Button id="biaozhong" label="" horizontalCenter="0" verticalCenter="0">
+				<e:skinName>
+				<e:Skin states="up,down,disabled">
+					<e:Image width="100%" height="100%" source="biaozhong" scaleX.down="1.1" scaleY.down="1.1"/>
+					<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+				</e:Skin>
+				</e:skinName>
+			</e:Button>
+			</e:Group>
+			<e:Group x="0" y="140" width="380" height="130">
+			<e:Button id="suoha" label="" horizontalCenter="0" verticalCenter="0">
+				<e:skinName>
+				<e:Skin states="up,down,disabled">
+					<e:Image width="100%" height="100%" source="suohua" scaleX.down="1.1" scaleY.down="1.1"/>
+					<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+				</e:Skin>
+				</e:skinName>
+			</e:Button>
+			</e:Group>
+			<e:Group x="0" y="280" width="380" height="130">
+			<e:Button id="niuniu" label="" horizontalCenter="0" verticalCenter="0">
+				<e:skinName>
+				<e:Skin states="up,down,disabled">
+					<e:Image width="100%" height="100%" source="niuniu" scaleX.down="1.1" scaleY.down="1.1"/>
+					<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+				</e:Skin>
+				</e:skinName>
+			</e:Button>
+			</e:Group>
+			<e:Group x="0" y="420" width="380" height="130">
+			<e:Button id="honghei" label="" horizontalCenter="0" verticalCenter="0">
+				<e:skinName>
+				<e:Skin states="up,down,disabled">
+					<e:Image width="100%" height="100%" source="honghei" scaleX.down="1.1" scaleY.down="1.1"/>
+					<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+				</e:Skin>
+				</e:skinName>
+			</e:Button>
+			</e:Group>
+			<e:Group y="560" width="240" height="80" right="18">
+			<e:Button id="danji" label="" horizontalCenter="0" verticalCenter="0">
+				<e:skinName>
+				<e:Skin states="up,down,disabled">
+					<e:Image width="100%" height="100%" source="danji" scaleX.down="1.1" scaleY.down="1.1"/>
+					<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+				</e:Skin>
+				</e:skinName>
+			</e:Button>
+			</e:Group>
+		</e:Group>
+	</e:Group>
+</e:Skin>

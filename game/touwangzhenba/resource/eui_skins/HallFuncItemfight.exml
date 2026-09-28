@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="skins.HallFuncItemfight" minWidth="30" minHeight="18" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" width="414" height="70">
+	<e:Group x="0" y="0">
+		<e:Image id="m_bg" x="0" y="0" source="findAndFight_json.zafhh"/>
+		<e:Label id="m_roomid" text="999999" x="153.81" y="17" size="14" textColor="0xfcde6c" fontFamily="Microsoft YaHei"/>
+		<e:Label id="m_gametime" text="2018-02-02 23:59:59" x="105.65" y="44.5" size="14" textColor="0xfcde6c" fontFamily="Microsoft YaHei"/>
+		<e:Label id="m_score" text="999999" x="240.79" size="14" borderColor="0x000000" anchorOffsetY="0" textColor="0xfcde6c" fontFamily="Microsoft YaHei" y="17"/>
+		<e:Label text="房间号：" x="104.98" y="17" textColor="0xfcde6c" fontFamily="Microsoft YaHei" size="14"/>
+		<e:Label text="积分：" x="206.29" y="17" textColor="0xFCDE6C" fontFamily="Microsoft YaHei" size="14"/>
+		<e:Group x="344" width="20" height="20" y="25" scaleX="1.2" scaleY="1.2">
+			<e:Button id="detail" label="" horizontalCenter="0" verticalCenter="0">
+			<e:skinName>
+				<e:Skin states="up,down,disabled">
+				<e:Image width="100%" height="100%" source="zhanjiDetail" scaleX.down="1.1" scaleY.down="1.1"/>
+				<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+				</e:Skin>
+			</e:skinName>
+			</e:Button>
+		</e:Group>
+	</e:Group>
+</e:Skin>

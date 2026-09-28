@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="totalResult" width="640" height="1038" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+	<e:Image source="totalBg_png" x="0" y="0"/>
+	<e:Group y="861.79" horizontalCenter="0">
+		<e:Group width="100" height="100" x="0" verticalCenter="0">
+			<e:Button id="jieping" label="" horizontalCenter="0" verticalCenter="0">
+			<e:skinName>
+				<e:Skin states="up,down,disabled">
+				<e:Image width="100%" height="100%" source="totalJieping" scaleX.down="1.1" scaleY.down="1.1"/>
+				<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+				</e:Skin>
+			</e:skinName>
+			</e:Button>
+		</e:Group>
+		<e:Group width="100" height="100" x="311.53" verticalCenter="0">
+			<e:Button id="backHall" label="" verticalCenter="0" horizontalCenter="0">
+				<e:skinName>
+					<e:Skin states="up,down,disabled">
+					<e:Image width="100%" height="100%" source="totalBackHall"  scaleX.down="1.1" scaleY.down="1.1"/>
+					<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+					</e:Skin>
+				</e:skinName>
+			</e:Button>
+		</e:Group>
+	</e:Group>
+	<e:Group y="245.32" x="57" visible="false">
+		<e:Image source="ITemitem" x="0" y="0"/>
+		<e:Image id="paiMing" source="img_rank1" x="17.5" verticalCenter="0"/>
+		<e:Label id="nickname" text="魂族网络科技" x="79" textColor="0x78450f" fontFamily="Microsoft YaHei" size="25" verticalCenter="0.5" width="150" height="25" textAlign="center"/>
+		<e:Label id="ID" text="666666" x="247" textColor="0x78450F" fontFamily="Microsoft YaHei" verticalCenter="0.5" size="25" width="88" height="25" textAlign="center"/>
+		<e:BitmapLabel id="point" x="359" font="win_total_fnt" text="+9999" verticalCenter="0.5"/>
+	</e:Group>
+	<e:Group x="85.5" y="319.32" visible="false">
+		<e:Image source="ITemitem" x="0" y="0" height="75"/>
+		<e:Image source="img_rank1" x="17.5" verticalCenter="0" id="paiMing0"/>
+		<e:Label text="魂族网络科技" x="79" textColor="0x78450F" fontFamily="Microsoft YaHei" id="nickname1" verticalCenter="0.5" size="25" width="150" height="25" textAlign="center"/>
+		<e:Label text="666666" x="247" textColor="0x78450F" fontFamily="Microsoft YaHei" id="ID2" verticalCenter="0.5" size="25" width="88" height="25" textAlign="center"/>
+		<e:BitmapLabel x="359" font="win_total_fnt" text="+9999" verticalCenter="0.5" id="point0"/>
+	</e:Group>
+	<e:Group x="87.5" y="467.32" visible="false">
+		<e:Image source="ITemitem" x="0" y="0"/>
+		<e:Image source="img_rank1" x="17.5" verticalCenter="0" id="paiMing1"/>
+		<e:Label text="魂族网络科技" x="79" textColor="0x78450F" fontFamily="Microsoft YaHei" id="nickname2" verticalCenter="0.5" size="25" width="150" height="25" textAlign="center"/>
+		<e:Label text="666666" x="247" textColor="0x78450F" fontFamily="Microsoft YaHei" id="ID3" verticalCenter="0.5" size="25" width="88" height="25" textAlign="center"/>
+		<e:BitmapLabel x="359" font="win_total_fnt" text="+9999" verticalCenter="0.5" id="point1"/>
+	</e:Group>
+	<e:Group x="84.17" y="541.32" visible="false">
+		<e:Image source="ITemitem" x="0" y="0"/>
+		<e:Image source="img_rank1" x="17.5" verticalCenter="0" id="paiMing3"/>
+		<e:Label text="魂族网络科技" x="79" textColor="0x78450F" fontFamily="Microsoft YaHei" id="nickname4" verticalCenter="0.5" size="25" width="150" height="25" textAlign="center"/>
+		<e:Label text="666666" x="247" textColor="0x78450F" fontFamily="Microsoft YaHei" id="ID5" verticalCenter="0.5" size="25" width="88" height="25" textAlign="center"/>
+		<e:BitmapLabel x="359" font="win_total_fnt" text="+9999" verticalCenter="0.5" id="point3"/>
+	</e:Group>
+	<e:Group x="86.5" y="393.32" visible="false">
+		<e:Image source="ITemitem" x="0" y="0"/>
+		<e:Image source="img_rank1" x="17.5" verticalCenter="0" id="paiMing2"/>
+		<e:Label text="魂族网络科技" x="79" textColor="0x78450F" fontFamily="Microsoft YaHei" id="nickname3" verticalCenter="0.5" size="25" width="150" height="25" textAlign="center"/>
+		<e:Label text="666666" x="247" textColor="0x78450F" fontFamily="Microsoft YaHei" id="ID4" verticalCenter="0.5" size="25" width="88" height="25" textAlign="center"/>
+		<e:BitmapLabel x="359" font="win_total_fnt" text="+9999" verticalCenter="0.5" id="point2"/>
+	</e:Group>
+	<e:Group x="85.5" y="171.32" visible="false">
+		<e:Image source="ITemitem" x="0" y="0"/>
+		<e:Label text="昵称" x="79" textColor="0x78450F" fontFamily="Microsoft YaHei" id="nickname0" verticalCenter="0.5" size="25" width="150" height="25" textAlign="center"/>
+		<e:Label text="ID" x="247" textColor="0x78450F" fontFamily="Microsoft YaHei" id="ID0" verticalCenter="0.5" size="25" width="88" height="25" textAlign="center"/>
+		<e:Label text="分数" x="365" textColor="0x78450F" fontFamily="Microsoft YaHei" id="ID1" verticalCenter="0.5" size="25" width="88" height="25" textAlign="center"/>
+		<e:Label text="名次" x="11" size="25" fontFamily="Microsoft YaHei" textColor="0x78450f" verticalCenter="0"/>
+	</e:Group>
+	<e:Group y="726.48" horizontalCenter="0">
+		<e:Label id="roompwd" text="房间号：666666" x="0" y="0"/>
+		<e:Label id="gamename" text="模式：牛牛模式" x="255.45" y="0"/>
+		<e:Label id="gametime" text="时间：2017-01-01 20:20:20" x="2.09" y="62.52"/>
+	</e:Group>
+</e:Skin>

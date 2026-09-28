@@ -1,0 +1,33 @@
+{if condition="$gid neq ''"}
+<div class="block">
+  <label class="control-label">ID:</label>
+  <input type="text" value="{$gid}" disabled class="input-small form-control">
+</div>
+{/if}
+<div class="block">
+  <label class="control-label">价格:</label>
+  <input type="text" placeholder="请输入价格" id="price" value="" class="input-small form-control">
+</div>
+<div class="block">
+  <label class="control-label">数量:</label>
+  <input type="text" id="diamond" value="" placeholder="请输入商品数" class="input-small form-control">
+</div>
+<div class="block">
+  <label class="control-label">赠送数:</label>
+  <input type="text" id="award" value="" placeholder="请输入赠送数" class="input-small form-control">
+</div>
+<div class="block">
+  <label class="control-label">商品名称:</label>
+  <input type="text" id="name" value="" placeholder="请输入商品名称"  class="input-small form-control">
+</div>
+
+{if condition="$gid neq ''"}
+<script type="text/javascript">
+  $(function(){
+    $("#price").val("{$goodData.price}");
+    $("#diamond").val("{$goodData.diamond}");
+    $("#award").val("{$goodData.award}");
+    $("#name").val("{$goodData.name}");
+  })
+</script>
+{/if}

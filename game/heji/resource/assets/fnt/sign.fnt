@@ -1,0 +1,11 @@
+{"file":"sign.png","frames":{
+"0":{"x":1,"y":42,"w":31,"h":39,"offX":0,"offY":0,"sourceW":31,"sourceH":39},
+"1":{"x":100,"y":82,"w":24,"h":38,"offX":0,"offY":0,"sourceW":24,"sourceH":39},
+"2":{"x":36,"y":1,"w":33,"h":38,"offX":0,"offY":0,"sourceW":33,"sourceH":39},
+"3":{"x":34,"y":82,"w":31,"h":39,"offX":0,"offY":0,"sourceW":31,"sourceH":39},
+"4":{"x":67,"y":82,"w":31,"h":38,"offX":0,"offY":0,"sourceW":31,"sourceH":39},
+"5":{"x":71,"y":1,"w":33,"h":38,"offX":0,"offY":0,"sourceW":33,"sourceH":39},
+"6":{"x":36,"y":41,"w":32,"h":39,"offX":0,"offY":0,"sourceW":32,"sourceH":39},
+"7":{"x":1,"y":83,"w":30,"h":37,"offX":0,"offY":1,"sourceW":30,"sourceH":39},
+"8":{"x":1,"y":1,"w":33,"h":39,"offX":0,"offY":0,"sourceW":33,"sourceH":39},
+"9":{"x":70,"y":41,"w":32,"h":39,"offX":0,"offY":0,"sourceW":32,"sourceH":39}}}

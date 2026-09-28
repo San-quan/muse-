@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="newMessage" width="408" height="500" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+	<e:Rect id="menban" width="640" height="1038" x="-239" y="-538" strokeAlpha="0" fillAlpha="0"/>
+	<e:Group x="395.85" y="74" rotation="90">
+		<e:Image x="0" y="0" source="MessageBg_png"/>
+		<e:Image id="wenziButton" source="wenzi_png" x="8" y="1.15"/>
+		<e:Image id="biaoqingButton" x="8" y="196.52" source="biaoqingN_png"/>
+		<e:Scroller id="biaoqing" x="86" y="369" anchorOffsetX="0" width="341" scrollPolicyH="on" rotation="-90" height="301" scrollPolicyV="off" visible="false">
+			<e:Group x="-19.01" anchorOffsetX="0" width="100%" anchorOffsetY="0" height="100%" y="3.33">
+				<e:Image id="biao1" source="1_png" x="462" y="5.66" scaleX="1" scaleY="1" rotation="90"/>
+				<e:Image id="biao2" source="2_png" y="104.66" scaleX="1" scaleY="1" height="84" width="83" x="463.65" rotation="90"/>
+				<e:Image id="biao3" source="3_png" x="461.67" y="197.5" scaleX="1" scaleY="1" width="83" height="84" rotation="90"/>
+				<e:Image id="biao4" source="4_png" x="371.34" y="8" scaleX="1" scaleY="1" width="83" height="84" rotation="90"/>
+				<e:Image id="biao5" source="5_png" y="104.66" scaleX="1" scaleY="1" x="367" rotation="90"/>
+				<e:Image id="biao6" source="6_png" x="369.5" y="211" scaleX="1" scaleY="1" height="84" width="83" rotation="90"/>
+				<e:Image id="biao7" source="7_png" x="281.37" y="5" scaleX="1" scaleY="1" rotation="90"/>
+				<e:Image id="biao8" source="8_png" x="276.48" y="104.5" rotation="90"/>
+				<e:Image id="biao9" source="9_png" x="271.48" y="203" rotation="90"/>
+				<e:Image id="biao10" source="10_png" x="188.48" y="1.66" rotation="90"/>
+				<e:Image id="biao11" source="11_png" x="180.85" y="105" rotation="90"/>
+				<e:Image id="biao12" source="12_png" x="179.85" y="203" rotation="90"/>
+				<e:Image id="biao13" source="13_png" x="91.85" y="3.66" rotation="90"/>
+				<e:Image id="biao14" source="14_png" x="88.85" y="104.5" rotation="90"/>
+				<e:Image id="biao15" source="15_png" x="91.35" y="204" rotation="90"/>
+			</e:Group>
+		</e:Scroller>
+		<e:Scroller id="wenzi" x="85.5" y="369" anchorOffsetX="0" width="322" scrollPolicyH="on" scrollPolicyV="auto" rotation="-90" height="301" anchorOffsetY="0">
+			<e:Group x="-77" width="100%" anchorOffsetY="0" height="100%" y="0.5">
+				<e:Label id="message1" text="  我出去叫人" width="100%" textAlign="center" textColor="0xEFC586" height="26" size="20" verticalAlign="middle" border="false" background="false" scaleX="1" scaleY="1" rotation="90" verticalCenter="-4.5" x="398"/>
+				<e:Label id="message2" text="  你的牌好靓哇" width="100%" textColor="0xEFC586" verticalAlign="middle" size="20" height="26" background="false" x="358" textAlign="center" scaleX="1" scaleY="1" rotation="90" verticalCenter="0.5"/>
+				<e:Label id="message3" text="  我当年横扫澳门五条街" width="100%" textColor="0xEFC586" height="26" size="20" verticalAlign="middle" background="false" x="318" textAlign="center" scaleX="1" scaleY="1" rotation="90" verticalCenter="0.5"/>
+				<e:Label id="message4" text="  算你牛逼" width="100%" textColor="0xEFC586" height="26" size="20" verticalAlign="middle" background="false" x="278" textAlign="center" scaleX="1" scaleY="1" rotation="90" verticalCenter="0.5"/>
+				<e:Label id="message5" text="  输得裤衩都没了" width="100%" textColor="0xEFC586" height="26" size="20" verticalAlign="middle" background="false" x="238" textAlign="center" scaleX="1" scaleY="1" verticalCenter="0.5" rotation="90"/>
+				<e:Label id="message6" text="  谢谢老板" width="100%" textColor="0xEFC586" size="20" height="26" verticalAlign="middle" background="false" x="198" textAlign="center" scaleX="1" scaleY="1" rotation="90" verticalCenter="0.5"/>
+				<e:Label id="message7" text="  玩游戏请先进群" width="100%" textColor="0xEFC586" size="20" height="26" verticalAlign="middle" background="false" x="158" textAlign="center" scaleX="1" scaleY="1" verticalCenter="0.5" rotation="90"/>
+				<e:Label id="message8" text="  别磨蹭快点打牌" width="100%" textColor="0xEFC586" size="20" height="26" verticalAlign="middle" background="false" x="118" textAlign="center" scaleX="1" scaleY="1" rotation="90" verticalCenter="0.5"/>
+				<e:Label id="message9" text="  别跟我抢庄" width="100%" textColor="0xEFC586" height="26" size="20" background="false" backgroundColor="0x3A3A3A" verticalAlign="middle" x="78" textAlign="center" scaleX="1" scaleY="1" verticalCenter="0.5" rotation="90"/>
+				<e:Label id="message10" text="  我给你们送温暖了" width="100%" textColor="0xEFC586" size="20" height="26" background="false" backgroundColor="0x000000" verticalAlign="middle" x="38" textAlign="center" scaleX="1" scaleY="1" rotation="90" verticalCenter="0.5"/>
+			</e:Group>
+		</e:Scroller>
+	</e:Group>
+</e:Skin>

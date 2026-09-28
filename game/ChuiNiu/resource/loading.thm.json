@@ -1,0 +1,12 @@
+{
+	"skins": {},
+	"autoGenerateExmlsList": true,
+	"exmls": [
+
+		"resource/eui_skins/loadingUI.exml",
+		"resource/eui_skins/ProgressBarSkin1.exml",
+		"resource/eui_skins/ProgressBarSkin.exml"
+
+	],
+	"path": "resource/loading.thm.json"
+}

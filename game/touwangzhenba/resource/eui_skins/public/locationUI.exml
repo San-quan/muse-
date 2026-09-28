@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="locationUI" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+	<e:Rect width="600" height="900" strokeColor="0xF7CB62" strokeWeight="2" ellipseWidth="50" ellipseHeight="50" strokeAlpha="0.8" fillAlpha="0.9" anchorOffsetX="0" anchorOffsetY="0" y="0" x="0"/>
+	<e:Group id="lineGroup0" x="61" y="126">
+		<e:Group id="line01" x="268.51" y="46.04" rotation="-45">
+			<e:Rect width="2" height="130" x="38" y="0" fillColor="0xFFFFFF" rotation="0"/>
+			<e:Label id="txt01" text="999m" rotation="90" horizontalCenter="0" verticalCenter="0"/>
+		</e:Group>
+		<e:Group id="line02" x="236.76" y="46.77" rotation="-20">
+			<e:Rect width="2" height="370" x="38" y="0" fillColor="0xFFFFFF" rotation="0"/>
+			<e:Label id="txt02" text="999m" rotation="90" horizontalCenter="0" verticalCenter="0"/>
+		</e:Group>
+		<e:Group id="line03" x="199" y="39">
+			<e:Rect width="2" height="550" x="38" y="0" fillColor="0xFFFFFF" rotation="0"/>
+			<e:Label id="txt03" text="999m" rotation="90" horizontalCenter="0" verticalCenter="-90"/>
+		</e:Group>
+		<e:Group id="line04" x="165.76" y="15.82" rotation="20">
+			<e:Rect width="2" height="370" x="38" y="0" fillColor="0xFFFFFF" rotation="0"/>
+			<e:Label id="txt04" text="999m" rotation="-90" horizontalCenter="0" verticalCenter="0"/>
+		</e:Group>
+		<e:Group id="line05" x="151" y="0" rotation="45">
+			<e:Rect width="2" height="120" x="38" y="0" fillColor="0xffffff" rotation="0"/>
+			<e:Label id="txt05" text="999m" rotation="-90" horizontalCenter="0" verticalCenter="0"/>
+		</e:Group>
+		<e:Group id="line12" x="416" y="218.08">
+			<e:Rect width="2" height="155" x="38" y="0" fillColor="0xFFFFFF" rotation="0"/>
+			<e:Label id="txt12" text="999m" rotation="90" horizontalCenter="20" verticalCenter="0.5"/>
+		</e:Group>
+		<e:Group id="line13" x="353" y="191" rotation="20">
+			<e:Rect width="2" height="420" x="38" y="0" fillColor="0xFFFFFF" rotation="0"/>
+			<e:Label id="txt13" text="999m" rotation="-90" horizontalCenter="0" verticalCenter="0"/>
+		</e:Group>
+		<e:Group id="line14" x="364.51" y="155.28" rotation="50">
+			<e:Rect width="2" height="380" x="38" y="0" fillColor="0xFFFFFF" rotation="0"/>
+			<e:Label id="txt14" text="999m" rotation="-90" horizontalCenter="2" verticalCenter="73"/>
+		</e:Group>
+		<e:Group id="line15" x="392.99" y="130" rotation="90">
+			<e:Rect width="2" height="300" x="38" y="0" fillColor="0xFFFFFF" rotation="0"/>
+			<e:Label id="txt15" text="999m" rotation="-90" horizontalCenter="0" verticalCenter="0"/>
+		</e:Group>
+		<e:Group id="line23" x="374.72" y="452" rotation="45">
+			<e:Rect width="2" height="170" x="38" y="0" fillColor="0xFFFFFF" rotation="0"/>
+			<e:Label id="txt23" text="999m" rotation="-90" horizontalCenter="0" verticalCenter="0"/>
+		</e:Group>
+		<e:Group id="line24" x="391" y="440" rotation="90">
+			<e:Rect width="2" height="300" x="38" y="0" fillColor="0xFFFFFF" rotation="0"/>
+			<e:Label id="txt24" text="999m" rotation="-90" horizontalCenter="0" verticalCenter="0"/>
+		</e:Group>
+		<e:Group id="line25" x="76.51" y="209.28" rotation="-50">
+			<e:Rect width="2" height="380" x="38" y="0" fillColor="0xFFFFFF" rotation="0"/>
+			<e:Label id="txt25" text="999m" rotation="90" horizontalCenter="3" verticalCenter="-87"/>
+		</e:Group>
+		<e:Group id="line34" x="50.77" y="508.1" rotation="-45">
+			<e:Rect width="2" height="170" x="38" y="0" fillColor="0xFFFFFF" rotation="0"/>
+			<e:Label id="txt34" text="999m" rotation="90" horizontalCenter="0" verticalCenter="0"/>
+		</e:Group>
+		<e:Group id="line35" x="37" y="219" rotation="-20">
+			<e:Rect width="2" height="420" x="38" y="0" fillColor="0xFFFFFF" rotation="0"/>
+			<e:Label id="txt35" text="999m" rotation="90" horizontalCenter="0" verticalCenter="0"/>
+		</e:Group>
+		<e:Group id="line45" x="0" y="218.08">
+			<e:Rect width="2" height="155" x="38" y="0" fillColor="0xFFFFFF" rotation="0"/>
+			<e:Label id="txt45" text="999m" rotation="90" horizontalCenter="0" verticalCenter="0"/>
+		</e:Group>
+	</e:Group>
+	<e:Group id="lineGroup2" x="71" y="136">
+		<e:Group id="line222" x="187" y="25">
+		<e:Rect width="2" height="560" x="38" y="0" fillColor="0xFFFFFF" rotation="0"/>
+		<e:Label id="txt222" text="999m" rotation="0" horizontalCenter="22" verticalCenter="0"/>
+		</e:Group>
+	</e:Group>
+	<e:Group id="head0" y="46" horizontalCenter="0">
+		<e:Image id="headImg0" source="all_defaull_head_png" width="100" height="100" horizontalCenter="0" verticalCenter="0"/>
+		<e:Image source="biaozhunIndex_json.bzHeadkuang" scale9Grid="13,19,80,121" width="110" height="110" horizontalCenter="0" verticalCenter="0"/>
+	</e:Group>
+	<e:Group y="230" id="head1" x="450">
+		<e:Image source="all_defaull_head_png" width="100" height="100" horizontalCenter="0" verticalCenter="0" id="headImg1"/>
+		<e:Image source="biaozhunIndex_json.bzHeadkuang" scale9Grid="13,19,80,121" width="110" height="110" horizontalCenter="0" verticalCenter="0"/>
+	</e:Group>
+	<e:Group y="500" id="head2" x="450">
+		<e:Image source="all_defaull_head_png" width="100" height="100" horizontalCenter="0" verticalCenter="0" id="headImg2"/>
+		<e:Image source="biaozhunIndex_json.bzHeadkuang" scale9Grid="13,19,80,121" width="110" height="110" horizontalCenter="0" verticalCenter="0"/>
+	</e:Group>
+	<e:Group y="724" id="head3" horizontalCenter="0">
+		<e:Image source="all_defaull_head_png" width="100" height="100" horizontalCenter="0" verticalCenter="0" id="headImg3"/>
+		<e:Image source="biaozhunIndex_json.bzHeadkuang" scale9Grid="13,19,80,121" width="110" height="110" horizontalCenter="0" verticalCenter="0"/>
+	</e:Group>
+	<e:Group y="500" id="head4" x="50">
+		<e:Image source="all_defaull_head_png" width="100" height="100" horizontalCenter="0" verticalCenter="0" id="headImg4"/>
+		<e:Image source="biaozhunIndex_json.bzHeadkuang" scale9Grid="13,19,80,121" width="110" height="110" horizontalCenter="0" verticalCenter="0"/>
+	</e:Group>
+	<e:Group y="230" id="head5" x="50">
+		<e:Image source="all_defaull_head_png" width="100" height="100" horizontalCenter="0" verticalCenter="0" id="headImg5"/>
+		<e:Image source="biaozhunIndex_json.bzHeadkuang" scale9Grid="13,19,80,121" width="110" height="110" horizontalCenter="0" verticalCenter="0"/>
+	</e:Group>
+</e:Skin>

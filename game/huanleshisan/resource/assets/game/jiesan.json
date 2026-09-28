@@ -1,0 +1,12 @@
+{"file":"jiesan.png","frames":{
+"voiceBG":{"x":871,"y":373,"w":136,"h":122,"offX":0,"offY":0,"sourceW":136,"sourceH":122},
+"voice_4":{"x":920,"y":497,"w":44,"h":12,"offX":0,"offY":0,"sourceW":44,"sourceH":12},
+"voice_3":{"x":966,"y":497,"w":38,"h":12,"offX":0,"offY":0,"sourceW":38,"sourceH":12},
+"voice_2":{"x":920,"y":511,"w":32,"h":12,"offX":0,"offY":0,"sourceW":32,"sourceH":12},
+"voice_1":{"x":954,"y":511,"w":27,"h":12,"offX":0,"offY":0,"sourceW":27,"sourceH":12},
+"disbandClock":{"x":871,"y":497,"w":47,"h":51,"offX":0,"offY":0,"sourceW":47,"sourceH":51},
+"jiesanAgree":{"x":193,"y":560,"w":190,"h":58,"offX":0,"offY":1,"sourceW":190,"sourceH":60},
+"jiesanBg":{"x":1,"y":1,"w":868,"h":557,"offX":0,"offY":0,"sourceW":868,"sourceH":557},
+"jiesanRefuse":{"x":1,"y":560,"w":190,"h":60,"offX":0,"offY":0,"sourceW":190,"sourceH":60},
+"jiesanSure":{"x":871,"y":1,"w":135,"h":184,"offX":0,"offY":0,"sourceW":135,"sourceH":184},
+"jiesanWait":{"x":871,"y":187,"w":135,"h":184,"offX":0,"offY":0,"sourceW":135,"sourceH":184}}}
