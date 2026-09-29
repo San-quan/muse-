@@ -1,7 +1,10 @@
 <?php
-session_start();
+// 本机调试：URL 带 uid 时按 uid 隔离 session，四个窗口各自独立 openid，不共用一个 session
 $uid_q = isset($_GET['uid']) ? intval($_GET['uid']) : 0;
-$rpwd_q = isset($_GET['roompwd']) ? trim(strval($_GET['roompwd'])) : '';
+if ($uid_q > 0) { @session_id('hzmjlocal' . $uid_q); }
+session_start();
+// roompwd 与 pwd 等价，URL 用 pwd=888888 时同样识别为「已指定房间」
+$rpwd_q = isset($_GET['roompwd']) ? trim(strval($_GET['roompwd'])) : (isset($_GET['pwd']) ? trim(strval($_GET['pwd'])) : '');
 // 本机调试旁路：URL 带 uid+roompwd，或 host 为 127.0.0.1/localhost 时，不走微信 OAuth，直接用 uid 当 openid
 $host_q = isset($_SERVER['HTTP_HOST']) ? strval($_SERVER['HTTP_HOST']) : '';
 $is_local_host_q = (strpos($host_q, '127.0.0.1') === 0 || strpos($host_q, 'localhost') === 0);
@@ -260,20 +263,6 @@ if ($local_bypass_q && $uid_q > 0 && empty($_SESSION['think']['openid'])) {
 
     // URL 里 pwd 与 roompwd 等价：任一存在即表示「已指定房间」，只加入、禁止建房
     var __URLPWD = __QS ? ((__QS.get('roompwd') || __QS.get('pwd') || '') + '') : '';
-    // 对外 game 名 HangzhouMajong 不是客户端内部名，映射为 hzmj，并把 pwd 归一化进查询串，
-    // 使 egret.getOption("gametype"/"pwd") 直接进入指定房场景，避免落大厅后按各自 lastroom 各进各房
-    (function(){
-        try{
-            if (!__URLPWD) return;
-            var gt = __QS ? (__QS.get('gametype') || '') : '';
-            if (gt === '' || gt === 'HangzhouMajong') gt = 'hzmj';
-            var p = new URLSearchParams(location.search);
-            p.set('gametype', gt);
-            p.set('pwd', __URLPWD);
-            history.replaceState(null, '', location.pathname + '?' + p.toString() + location.hash);
-            __QS = new URLSearchParams(location.search);
-        }catch(e){}
-    })();
 
     // 身份：只认当前 URL 的 uid，忽略 PHP session 里旧的 openid
     var __LOCAL_OPENID   = (__URLUID > 0) ? ('local_' + __URLUID) : '';
@@ -308,7 +297,19 @@ if ($local_bypass_q && $uid_q > 0 && empty($_SESSION['think']['openid'])) {
         timerEndAt: 0,
         waitAfterPick: false,
         pickPending: false,
-        context: ''
+        context: '',
+        // v1.20 2.11：本地倒计时（不等服务器心跳）
+        lastDrawnTile: -1,       // 最近摸/选的牌（mainid game_mj_touchcards）
+        handTiles: [],           // 本人暗手牌 byte 列表（本地超时代打"最右一张"用）
+        outTimerId: null,        // 出牌本地倒计时句柄
+        outEndAt: 0,
+        outToken: 0,             // 出牌轮次令牌，防陈旧定时器误触发
+        claimTimerId: null,      // 碰/杠/胡窗口本地倒计时句柄
+        claimEndAt: 0,
+        claimToken: 0,
+        claimMask: 0,
+        claimCard: 0,
+        autoPlayOn: {}           // seatno -> true（来自 game_mj_auto_play 广播）
     };
 
     function parseMJCard(b){
@@ -450,15 +451,89 @@ if ($local_bypass_q && $uid_q > 0 && empty($_SESSION['think']['openid'])) {
         if (State.timerId){clearInterval(State.timerId);State.timerId=null;}
         if ($('fuTimer')) $('fuTimer').textContent = '-';
     }
-    function startTimer(sec){
+    function startTimer(sec, onZero){
         stopTimer();
         State.timerEndAt = Date.now() + (sec|0)*1000;
         if ($('fuTimer')) $('fuTimer').textContent = String(sec|0);
         State.timerId = setInterval(function(){
             var left = Math.max(0, Math.ceil((State.timerEndAt - Date.now())/1000));
             if ($('fuTimer')) $('fuTimer').textContent = String(left);
-            if (left <= 0) stopTimer();
+            if (left <= 0){
+                stopTimer();
+                if (typeof onZero === 'function'){ try{ onZero(); }catch(e){} }
+            }
         }, 250);
+    }
+
+    // v1.20 2.11：出牌/碰杠胡本地倒计时——一律以客户端本地时钟走秒，不等服务器心跳。
+    // 本地到 0 即发送对应动作（出牌则打刚摸的那张；碰杠胡则能胡即胡、否则过）。
+    // 服务端仍以自身 15/5 秒超时为准，两边谁先到谁生效；重复包由服务端忽略。
+    function stopOutTimer(){
+        if (State.outTimerId){ clearInterval(State.outTimerId); State.outTimerId = null; }
+        State.outToken++;
+    }
+    function stopClaimTimer(){
+        if (State.claimTimerId){ clearInterval(State.claimTimerId); State.claimTimerId = null; }
+        State.claimToken++;
+    }
+    function startOutTimer(sec){
+        stopOutTimer();
+        var token = State.outToken;
+        State.outEndAt = Date.now() + (sec|0)*1000;
+        State.outTimerId = setInterval(function(){
+            if (token !== State.outToken){ stopOutTimer(); return; }
+            if (Date.now() >= State.outEndAt){
+                stopOutTimer();
+                onLocalOutcardTimeout();
+            }
+        }, 250);
+    }
+    function onLocalOutcardTimeout(){
+        if (State.mySeat <= 0 || !State.roompwd) return;
+        var tile = State.lastDrawnTile|0;
+        if (tile <= 0){
+            // 无刚摸牌（碰/杠后出牌或庄家起手）：对齐服务端 pickAutoDiscardTile 兜底，打手牌最右一张（byte 最大）
+            var ht = State.handTiles || [];
+            for (var i=0;i<ht.length;i++){ var b = ht[i]|0; if (b > tile) tile = b; }
+        }
+        if (tile > 0){
+            window.__FU_send('game_mj_outcardsreg', {roompwd: State.roompwd, data: tile});
+        }
+    }
+    function startClaimTimer(sec, mask, card){
+        stopClaimTimer();
+        var token = State.claimToken;
+        State.claimMask = mask|0;
+        State.claimCard = card|0;
+        State.claimEndAt = Date.now() + (sec|0)*1000;
+        State.claimTimerId = setInterval(function(){
+            if (token !== State.claimToken){ stopClaimTimer(); return; }
+            if (Date.now() >= State.claimEndAt){
+                stopClaimTimer();
+                onLocalClaimTimeout();
+            }
+        }, 250);
+    }
+    function onLocalClaimTimeout(){
+        if (!State.roompwd) return;
+        var mask = State.claimMask|0;
+        var card = State.claimCard|0;
+        if ((mask & 0x40) > 0){
+            // WIK_CHI_HU：能胡即胡（自摸/点炮/抢杠，与服务端超时裁决一致）
+            window.__FU_send('game_mj_operatereg', {roompwd: State.roompwd, cards: card, action: 0x40});
+        } else if (mask != 0){
+            // 只算过：不碰、不杠、不吃
+            window.__FU_send('game_mj_operatereg', {roompwd: State.roompwd, cards: card, action: 0});
+        }
+    }
+    function onLocalFlipTimeout(){
+        if (!State.roompwd || State.faceUpPhase !== 1) return;
+        var idx = (Array.isArray(State.faceUpHuIdx) && State.faceUpHuIdx.length > 0) ? (State.faceUpHuIdx[0]|0) : 0;
+        State.pickIdx = idx;
+        if (State.faceUp && State.faceUp[idx] > 0) State.pickCard = State.faceUp[idx]|0;
+        State.pickPending = true;
+        renderCards();
+        window.__FU_send('game_mj_pick_flip', {roompwd: State.roompwd, idx: idx});
     }
     function renderCards(){
         for (var i=0;i<2;i++){
@@ -555,13 +630,11 @@ if ($local_bypass_q && $uid_q > 0 && empty($_SESSION['think']['openid'])) {
         if (Array.isArray(p.huIdx)) State.faceUpHuIdx = p.huIdx.slice();
 
         if (typeof p.pickCard !== 'undefined' && p.pickCard !== null && (p.pickCard|0) > 0){
-            // 已选牌后的确认回合：出「自摸 / 打出」
-            State.faceUpPhase = 1;
+            // 杠后选翻已改为普通摸牌：不再进入「必须自摸 / 打出」确认回合
             State.pickCard = p.pickCard|0;
             State.pickPending = false;
-            State.waitAfterPick = true;
-            State.canHu = !!p.canZimo
-                || (State.faceUpHuIdx.length > 0 && State.faceUpHuIdx.indexOf(State.pickIdx) >= 0);
+            State.waitAfterPick = false;
+            State.canHu = false;
         } else {
             // 进入翻牌选择回合：两张明牌可点
             State.faceUpPhase = 1;
@@ -569,9 +642,9 @@ if ($local_bypass_q && $uid_q > 0 && empty($_SESSION['think']['openid'])) {
             State.waitAfterPick = false;
             State.pickIdx = -1; State.pickCard = -1;
             State.canHu = !!p.canZimo;
-            if (p.timeoutSec) startTimer(p.timeoutSec|0);
-            else if (p.timeout) startTimer(p.timeout|0);
-            else startTimer(15);
+            var __fuSec = p.timeoutSec ? (p.timeoutSec|0) : (p.timeout ? (p.timeout|0) : 15);
+            // 本地到 0 自动选翻（能胡取胡位，否则取 0），与服务端 onFlipChooseTimeout 一致
+            startTimer(__fuSec, onLocalFlipTimeout);
         }
         renderCards();
     }
@@ -584,6 +657,8 @@ if ($local_bypass_q && $uid_q > 0 && empty($_SESSION['think']['openid'])) {
         State.canHu = false;
         State.context = '';
         stopTimer();
+        stopOutTimer();
+        stopClaimTimer();
         renderCards();
     }
     function handlePickFlip(p){
@@ -594,11 +669,9 @@ if ($local_bypass_q && $uid_q > 0 && empty($_SESSION['think']['openid'])) {
         }
         if (typeof p.seatno === 'number') State.faceUpUser = p.seatno|0;
         if (Array.isArray(p.faceUpNow)) setFaceUp(p.faceUpNow);
+        // 杠后选翻已改为普通摸牌：选完不再进入「必须自摸 / 打出」回合
         State.pickPending = false;
-        if ((State.faceUpUser===State.mySeat) && State.pickCard>0){
-            State.waitAfterPick = true;
-            State.canHu = (State.faceUpHuIdx.length > 0 && State.faceUpHuIdx.indexOf(State.pickIdx)>=0) || (typeof p.canHu === 'boolean' ? p.canHu : false);
-        }
+        State.waitAfterPick = false;
         renderCards();
     }
     function resetAll(){
@@ -732,6 +805,60 @@ if ($local_bypass_q && $uid_q > 0 && empty($_SESSION['think']['openid'])) {
             handleActionPrompt(d || {});
         } else if (mid === 'game_mj_pick_flip'){
             handlePickFlip(d || {});
+        } else if (mid === 'game_mj_touchcards'){
+            // 记录刚摸/刚选的牌，供出牌本地倒计时到 0 时"打刚摸的那张"
+            if (Array.isArray(d) && d.length > 0 && (d[0]|0) > 0){
+                State.lastDrawnTile = d[0]|0;
+                if (!Array.isArray(State.handTiles)) State.handTiles = [];
+                State.handTiles.push(State.lastDrawnTile);
+            }
+        } else if (mid === 'game_mj_sendhandcards'){
+            // 首次发牌：整副手牌覆盖，供本地超时兜底取"最右一张"
+            if (Array.isArray(d)) State.handTiles = d.map(function(v){ return v|0; });
+        } else if (mid === 'game_mj_outcards'){
+            // 出牌轮：广播包。本人座次则启动本地 15 秒倒计时；他人座次则清本地表
+            var sn = (d && typeof d.seatno === 'number') ? (d.seatno|0) : -1;
+            stopClaimTimer();
+            if (sn >= 0 && sn === State.mySeat){
+                State.lastDrawnTile = -1;   // 新的一轮，等待 touchcards 重新写入
+                var tsec = (d && (d.timeoutSec|0)) ? (d.timeoutSec|0) : 15;
+                startOutTimer(tsec);
+            } else {
+                stopOutTimer();
+            }
+        } else if (mid === 'game_mj_operatenotify'){
+            // 碰/杠/胡窗口：仅直发本人；启动本地倒计时，到 0 过（能胡则胡）
+            var omask = (d && typeof d.cbActionMask === 'number') ? (d.cbActionMask|0) : 0;
+            var ocard = (d && typeof d.cbActionCard === 'number') ? (d.cbActionCard|0) : 0;
+            var osec = (d && (d.timeoutSec|0)) ? (d.timeoutSec|0) : 5;
+            stopOutTimer();
+            if (omask != 0) startClaimTimer(osec, omask, ocard);
+            else stopClaimTimer();
+        } else if (mid === 'game_mj_operateresult' || mid === 'game_mj_outcardsdata' || mid === 'game_mj_handcards'){
+            // 动作已裁决/已出牌/手牌更新：清本地倒计时，避免陈旧定时器误发
+            stopClaimTimer();
+            if (mid !== 'game_mj_operateresult') stopOutTimer();
+            if (mid === 'game_mj_handcards'){
+                // 手牌快照：整副覆盖
+                if (Array.isArray(d)) State.handTiles = d.map(function(v){ return v|0; });
+            } else if (mid === 'game_mj_outcardsdata'){
+                // 出牌广播 array(seatno => card)：本人出牌则本地移除该张
+                if (d && typeof d === 'object' && Array.isArray(State.handTiles)){
+                    for (var osn in d){
+                        if (!Object.prototype.hasOwnProperty.call(d, osn)) continue;
+                        if ((osn|0) === State.mySeat){
+                            var oi = State.handTiles.indexOf(d[osn]|0);
+                            if (oi >= 0) State.handTiles.splice(oi, 1);
+                        }
+                    }
+                }
+            }
+        } else if (mid === 'game_mj_auto_play'){
+            // 托管状态广播（仅用于展示/调试）
+            if (d && typeof d.seatno === 'number'){
+                var asn = d.seatno|0;
+                if (d.on) State.autoPlayOn[asn] = true; else delete State.autoPlayOn[asn];
+            }
         } else if (mid === 'game_mj_calculation' || mid === 'game_mj_hand_end' || mid === 'gamestart' || mid === 'gameend' || mid === 'gameover'){
             resetAll();
         }
@@ -750,6 +877,10 @@ if ($local_bypass_q && $uid_q > 0 && empty($_SESSION['think']['openid'])) {
                 else if (typeof m.seat === 'number') State.mySeat = m.seat|0;
             }
         }
+        // v1.20 2.11：本人主动操作即清本地倒计时（服务端同样会清零超时连击并退出托管）
+        if (mid === 'game_mj_operatereg') stopClaimTimer();
+        else if (mid === 'game_mj_outcardsreg') stopOutTimer();
+        else if (mid === 'game_mj_pick_flip' || mid === 'game_mj_flip_zimo' || mid === 'game_mj_flip_discard' || mid === 'game_mj_flip_kong') stopTimer();
     }
 
     // --- WS prototype hooks ---

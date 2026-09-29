@@ -133,6 +133,8 @@ class GameRoom extends BaseRoom
 	private $m_gangHuaWinnerTile = -1;			//杠后从 faceUp 选到的那张牌值，杠花触发判据
 	private $m_autoPlayOn = array();			//size=4，是否进入托管（cause=TIMEOUT，碰杠胡超时不进）
 	private $m_autoPlayCause = array();			//size=4，TIMEOUT | OFFLINE | LEFT | BANNED
+	private $m_timeoutStreak = array();			//size=4，同一座位连续操作超时次数，>=2 才强制托管（主动操作后清零）
+	private $m_pendingGangResult = null;		//抢杠窗口待完成的杠：窗口全过后由此续杠（杠家补牌/选翻）
 	private $m_lastHandEndReason = '';			//上局结束原因：HU | LIU_JU | REDEAL | DISSOLVED | RECLAIMED | ALL_LEFT
 	private $m_nextDealerSeat = -1;				//下局庄家座位（B3 定庄逻辑提前算好）
 	private $m_countsAsHand = true;				//上一局是否计入 8 局数（Redeal false；Hu/流局 true；解散/回收 false）
@@ -338,6 +340,8 @@ class GameRoom extends BaseRoom
 		$this->m_gangHuaWinnerTile = -1;
 		$this->m_autoPlayOn = array();
 		$this->m_autoPlayCause = array();
+		$this->m_timeoutStreak = array();
+		$this->m_pendingGangResult = null;
 		$this->m_lastHandEndReason = '';
 		$this->m_nextDealerSeat = -1;
 		$this->m_countsAsHand = true;
@@ -349,6 +353,7 @@ class GameRoom extends BaseRoom
 			$this->m_lastDrawnTile[$i] = -1;
 			$this->m_autoPlayOn[$i] = false;
 			$this->m_autoPlayCause[$i] = '';
+			$this->m_timeoutStreak[$i] = 0;
 			for ($j=1; $j <= 4; $j++) {
 				$this->m_gangLedger[$i][$j] = 0;
 			}
@@ -882,7 +887,7 @@ class GameRoom extends BaseRoom
 	}
 
 	//轮到谁下一个出牌
-	public function peopleTurn()
+	public function peopleTurn($guard = 0)
 	{
 		reset($this->m_deskData);
 		if ($this->m_wOutCardUser == -1) {
@@ -903,9 +908,16 @@ class GameRoom extends BaseRoom
 				reset($this->m_deskData);
 				$nextSeatno = key($this->m_deskData);
 			}
-			if($nextSeatno != NULL && ($this->m_deskData[$nextSeatno]['ingame'] == false)){
-				$nextSeatno = $this->peopleTurn();
+			if($nextSeatno != NULL && isset($this->m_deskData[$nextSeatno]) && ($this->m_deskData[$nextSeatno]['ingame'] == false)){
+			// 跳过 ingame=false（已离座/已结束）座位：先推进起点再递归，
+			// 否则递归内 m_wOutCardUser 仍是旧家，会从同一家反复重算导致死循环/OOM
+			$this->m_wOutCardUser = $nextSeatno;
+			// 全部座位都非 ingame 时会绕桌无限递归 → 加绕桌一圈上限后提前 return，避免 OOM
+			if ($guard >= 4) {
+				return $nextSeatno;
 			}
+			$nextSeatno = $this->peopleTurn($guard + 1);
+		}
 			$this->m_wOutCardUser = $nextSeatno;
 		}
 		if ($this->m_bWealthWind[$nextSeatno] == 0) {
@@ -975,10 +987,15 @@ class GameRoom extends BaseRoom
 		$this->destoryClick(CLICK_NAME_OUTCARDS);
 		$seatno = $this->m_wOutCardUser;
 		if ($this->m_gameStatus != self::GAMESTATE_OUT) return;
-		// v1.20 2.8：进入/维持超时托管（TIMEOUT），随 autoPlay 广播全桌
-		$this->m_autoPlayOn[$seatno] = true;
-		$this->m_autoPlayCause[$seatno] = 'TIMEOUT';
-		$this->sendRoomMessage(GR_GAME_MJ_AUTO_PLAY, array('seatno'=>$seatno,'cause'=>'TIMEOUT','on'=>true));
+		// v1.20 2.8：托管规则改为"同一座位连续两次操作超时（各15秒）才强制托管"。
+		// 第一次超时仅按默认动作代打一次，不置托管、不广播；玩家主动操作会清零计数。
+		$streak = isset($this->m_timeoutStreak[$seatno]) ? $this->m_timeoutStreak[$seatno] + 1 : 1;
+		$this->m_timeoutStreak[$seatno] = $streak;
+		if ($streak >= 2) {
+			$this->m_autoPlayOn[$seatno] = true;
+			$this->m_autoPlayCause[$seatno] = 'TIMEOUT';
+			$this->sendRoomMessage(GR_GAME_MJ_AUTO_PLAY, array('seatno'=>$seatno,'cause'=>'TIMEOUT','on'=>true));
+		}
 		$uid = isset($this->m_deskData[$seatno]['uid']) ? $this->m_deskData[$seatno]['uid'] : 0;
 		if ($uid == 0) return;
 		// v1.20 2.8：托管能胡自动胡（自摸；过点炮锁仅限点炮胡，不影响自摸）
@@ -1188,6 +1205,7 @@ class GameRoom extends BaseRoom
 
 	public function clearAutoPlay($seatno)
 	{
+		if (isset($this->m_timeoutStreak[$seatno])) $this->m_timeoutStreak[$seatno] = 0;
 		if (isset($this->m_autoPlayOn[$seatno])) {
 			$this->m_autoPlayOn[$seatno] = false;
 			$this->m_autoPlayCause[$seatno] = '';
@@ -1197,6 +1215,8 @@ class GameRoom extends BaseRoom
 	// v1.20 2.8：结束托管并广播全桌（仅在确实处于托管时广播）
 	public function clearAutoPlayWithBroadcast($seatno, $cause = '')
 	{
+		// 玩家主动操作即视为"连续操作超时"中断，清零连击计数
+		if (isset($this->m_timeoutStreak[$seatno])) $this->m_timeoutStreak[$seatno] = 0;
 		if (empty($this->m_autoPlayOn[$seatno])) return;
 		$this->m_autoPlayOn[$seatno] = false;
 		$this->m_autoPlayCause[$seatno] = '';
@@ -1274,25 +1294,13 @@ class GameRoom extends BaseRoom
 		$this->destoryClick(CLICK_NAME_FLIPCHOOSE);
 		$seatno = $this->m_faceUpUser;
 		if (!$this->m_faceUpPhase || $seatno <= 0) return;
-		$this->m_autoPlayOn[$seatno] = true;
-		$this->m_autoPlayCause[$seatno] = 'TIMEOUT';
-		$this->sendRoomMessage(GR_GAME_MJ_AUTO_PLAY, array('seatno'=>$seatno,'cause'=>'TIMEOUT','on'=>true));
+		// v1.20 2.11：只有"摸牌后出牌超时"才计入托管连击；选翻超时只代选，不计入连击（碰/杠/胡窗口同理只算过）
 		$pickIdx = 0;
 		if (count($this->m_faceUpHuIndex) > 0) $pickIdx = $this->m_faceUpHuIndex[0];
 		$uid = isset($this->m_deskData[$seatno]['uid']) ? $this->m_deskData[$seatno]['uid'] : 0;
-		$r1 = $this->onPickFlip($uid, $pickIdx, true);
-		if (!$r1) return;
-		if (count($this->m_faceUpHuIndex) > 0) {
-			$this->onFlipZimo($uid, true);
-		} else {
-			$outTile = $this->pickAutoDiscardTile($seatno);
-			if ($outTile <= 0) {
-				$this->m_faceUpPhase = false; $this->m_faceUpUser = -1;
-				$this->peopleTurn(); $this->gameOutcardTurn();
-				return;
-			}
-			$this->onFlipDiscard($uid, $outTile, true);
-		}
+		// 选翻已改为普通摸牌：onPickFlip 内部完成补亮/判胡判杠/进入出牌，
+		// 托管者由 gameOutcardTurnNoCards 或 WaitClaim 超时自动代打
+		$this->onPickFlip($uid, $pickIdx, true);
 	}
 
 	public function onPickFlip($uid, $pickIdx, $isAuto = false)
@@ -1312,36 +1320,36 @@ class GameRoom extends BaseRoom
 		$pickCard = $this->m_faceUp[$pickIdx];
 		unset($this->m_faceUp[$pickIdx]);
 		$this->m_faceUp = array_values($this->m_faceUp);
-		$cardsIdx = GameLogic::getInstance()->SwitchToCardIndex($pickCard);
-		$this->m_cbCardIndex[$seatno][$cardsIdx] =
-			isset($this->m_cbCardIndex[$seatno][$cardsIdx])
-				? $this->m_cbCardIndex[$seatno][$cardsIdx] + 1 : 1;
-		$this->m_lastDrawnTile[$seatno] = $pickCard;
-		// v1.20 2.9：选翻牌入手后手牌应为等出牌 14-3*碰杠组数
-		if (!$this->checkHandCount($seatno, 'discard')) {
-			$this->rejectHandCount($seatno, 'discard');
-			return false;
-		}
+		// 杠花判据：杠后选翻选走的这张即为杠花候选
 		if ($this->m_flipContext === 'AFTER_GANG') {
 			$this->m_gangHuaWinnerTile = $pickCard;
 		}
+		// 立刻补回 2 张亮牌
 		$this->refillFaceUp();
+		// 选翻结束：选走的这张按普通摸牌处理
+		$this->m_faceUpPhase = false;
+		$this->m_faceUpUser = -1;
+		$this->m_wOutCardUser = $seatno;
+		$this->m_cbSendCardData = $pickCard;
+		$this->m_bWealthCards = $pickCard;
+		$this->m_cbthisCards[$seatno] = $pickCard;
+		// v1.20 2.8：记录刚选到的牌，供出牌超时托管"打刚摸的牌"使用
+		$this->m_lastDrawnTile[$seatno] = $pickCard;
+		$this->m_gameStatus = self::GAMESTATE_OUT;
+		$this->m_OperateNotify = array();
+
 		$this->sendRoomMessage(GR_GAME_MJ_PICK_FLIP, array(
 			'seatno'=>$seatno, 'pickIdx'=>$pickIdx, 'pickCard'=>$pickCard, 'faceUpNow'=>$this->m_faceUp
 		));
 		$this->broadcastFaceUp();
-		$canZimo = in_array($pickIdx, $this->m_faceUpHuIndex);
-		$canKong = false;
-		if (GR_CHAIN_KONG && count($this->m_faceUp) > 0) {
-			$gangCards = array();
-			$this->findAllGang($seatno, $gangCards);
-			$canKong = count($gangCards) > 0;
+		// 与普通摸牌 gameSendOneCards 一致：广播摸牌 + 置客户端 canOut=true（可点自己手牌出牌）
+		$this->sendRoomMessage(GR_GAME_MJ_SEND_CARDS, array('seatno'=>$seatno));
+		$this->sendMsgToUser($uid, GR_GAME_MJ_TOUCH_CARDS, array($pickCard));
+		// 照常判胡/杠：能胡/杠 → GAMESTATE_OPERATE 提示；否则牌入手 → 等普通出牌
+		$this->insertCardsToHand($seatno);
+		if ($this->m_gameStatus != self::GAMESTATE_OPERATE) {
+			$this->gameOutcardTurnNoCards();
 		}
-		$prompt = array(
-			'seatno'=>$seatno, 'context'=>$this->m_flipContext, 'pickCard'=>$pickCard,
-			'canZimo'=>$canZimo, 'canDiscard'=>true, 'canKong'=>$canKong
-		);
-		$this->sendMsgToUser($uid, GR_GAME_MJ_ACTION_PROMPT, $prompt);
 		return true;
 	}
 
@@ -1878,6 +1886,13 @@ class GameRoom extends BaseRoom
 			if ($action) {
 				$this->saveGameMessage(6,$OperateResult);
 				$this->sendRoomMessage(GR_GAME_MJ_OPERATE_RESULT,$OperateResult);
+				// 杠后抢杠窗口全过：续杠（杠家补牌/选翻），不得 peopleTurn 跳过杠家
+				if ($this->m_pendingGangResult !== null) {
+					$this->destoryClick(CLICK_NAME_WAITCLAIM);
+					$pendingGang = $this->m_pendingGangResult;
+					$this->finishGangCards($pendingGang);
+					return;
+				}
 				if ($OperateResult['wOperateUser'] != $OperateResult['wProvideUser']) {
 					// v1.20 2.3 步骤5：开局首张全员主动过也必须进庄家 OPENING 翻牌
 					if ($this->m_dealerOpeningPhase && !$this->m_openingDone) {
@@ -1958,6 +1973,13 @@ class GameRoom extends BaseRoom
 				$this->sendRoomMessage(GR_GAME_MJ_OPERATE_RESULT,$OperateResult);
 				switch ($OperateResult['cbOperateCode']) {
 					case WIK_NULL:
+						// 杠后抢杠窗口全过：续杠（杠家补牌/选翻），不得 peopleTurn 跳过杠家
+						if ($this->m_pendingGangResult !== null) {
+							$this->destoryClick(CLICK_NAME_WAITCLAIM);
+							$pendingGang = $this->m_pendingGangResult;
+							$this->finishGangCards($pendingGang);
+							break;
+						}
 						// v1.20 2.3 步骤5：开局首张全员主动过也必须进庄家 OPENING 翻牌
 						if ($this->m_dealerOpeningPhase && !$this->m_openingDone) {
 							$this->destoryClick(CLICK_NAME_WAITCLAIM);
@@ -1974,6 +1996,8 @@ class GameRoom extends BaseRoom
 						$this->gameGangCards($OperateResult);
 						break;
 					case WIK_CHI_HU:
+						// 抢杠胡成立：不再给杠家补牌，清掉待完成杠
+						$this->m_pendingGangResult = null;
 						// v1.20 2.10：能胡的人一起胡（一炮多响），逐家生成胡结果后一次结算
 						$winners = array();
 						foreach ($this->m_cbUserAction as $s => $a) {
@@ -2456,23 +2480,28 @@ class GameRoom extends BaseRoom
 
 	public function findNext($seatno)
 	{
-		reset($this->m_deskData);
-		$lastSeatno = $seatno;
-		foreach ($this->m_deskData as $key => $info) {
-			if(key($this->m_deskData) == $lastSeatno){
-				next($this->m_deskData);
-				$nextSeatno = key($this->m_deskData);
-			}else{
-				next($this->m_deskData);
-			}
-		}
-		if($nextSeatno == NULL){
+		$nextSeatno = $seatno;
+		$guard = 0;
+		do {
 			reset($this->m_deskData);
-			$nextSeatno = key($this->m_deskData);
-		}
-		if($nextSeatno != NULL && ($this->m_deskData[$nextSeatno]['ingame'] == false)){
-			$nextSeatno = $this->findNext($nextSeatno);
-		}
+			$lastSeatno = $nextSeatno;
+			$found = null;
+			foreach ($this->m_deskData as $key => $info) {
+				if(key($this->m_deskData) == $lastSeatno){
+					next($this->m_deskData);
+					$found = key($this->m_deskData);
+				}else{
+					next($this->m_deskData);
+				}
+			}
+			if($found == NULL){
+				reset($this->m_deskData);
+				$found = key($this->m_deskData);
+			}
+			$nextSeatno = $found;
+			$guard++;
+		// 仅跳过 ingame=false（已离座/已结束）；最多绕桌一圈，避免全部离座时无限递归
+		} while ($nextSeatno != NULL && isset($this->m_deskData[$nextSeatno]) && $this->m_deskData[$nextSeatno]['ingame'] == false && $guard < 8);
 		return $nextSeatno;
 	}
 	//听牌
@@ -2730,11 +2759,41 @@ class GameRoom extends BaseRoom
 			}
 			$this->m_wOutCardUser = $opSeat;
 			$this->m_cbOutCardData = $tile;
+			// 抢杠窗口期间锁全桌（谁都不许摸牌）；记录待完成的杠，
+			// 若窗口内无人抢杠（全过），由 gameOperateReg 聚合处续杠给杠家补牌
+			$this->m_pendingGangResult = $OperateResult;
 			$this->m_gameStatus = self::GAMESTATE_OPERATE;
 			$this->gameOperateNotify();
 			return;
 		}
-		// ========== 无抢杠：正常完成杠 ==========
+		// ========== 无抢杠：正常完成杠（杠家补牌/选翻 → 出牌） ==========
+		$this->finishGangCards($OperateResult);
+	}
+
+	// 完成杠（抽自 gameGangCards 末尾）：记账 + 扣手牌 + 杠家补牌/选翻
+	// 抢杠窗口全过后也由此续杠，保证杠家不被轮转跳过
+	private function finishGangCards($OperateResult)
+	{
+		$opSeat = $OperateResult['wOperateUser'];
+		$provSeat = $OperateResult['wProvideUser'];
+		$tile = $OperateResult['cbOperateCard'];
+		$tileIdx = GameLogic::getInstance()->SwitchToCardIndex($tile);
+		$isBend = false;
+		$pengIdx = -1;
+		foreach ($this->m_WeaveItemArray[$opSeat] as $k => $v) {
+			if ($v['cbWeaveKind'] == WIK_PENG && $v['cbCenterCard'] == $tile) {
+				$isBend = true;
+				$pengIdx = $k;
+				break;
+			}
+		}
+		$gangKind = 'dark';
+		if ($isBend) {
+			$gangKind = 'bend';
+		} else if ($provSeat != $opSeat && !$OperateResult['bDarkGuang']) {
+			$gangKind = 'straint';
+		}
+		$this->m_pendingGangResult = null;
 		$this->m_hasKong = true;
 		$this->m_bQiangGang[$opSeat]['state']++;
 		$weaveCount = count($this->m_WeaveItemArray[$opSeat]);
@@ -2799,6 +2858,12 @@ class GameRoom extends BaseRoom
 		// 杠算自己的一次过圈动作（清过点炮/过碰，过杠锁死不清）
 		$this->clearSkippedByTurn($opSeat);
 		$this->enterFaceUpPhase($opSeat, 'AFTER_GANG');
+		// enterFaceUpPhase 仅在 count(m_faceUp)>0 时才进入选翻；牌墙/亮牌不足时会直接 return，
+		// 此时若不兜底，轮次会锁死在杠家（杠家既不选翻也不摸打，其余座位全被卡住）。
+		// 兜底：走普通杠后轮转（杠家摸牌→出牌），不改变发牌张数与碰杠胡判定。
+		if (!$this->m_faceUpPhase) {
+			$this->gameOutcardTurn();
+		}
 	}
 
 	// ========== T_B5: 墙头空三分支 ==========
