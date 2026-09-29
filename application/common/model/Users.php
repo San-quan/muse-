@@ -13,9 +13,9 @@ class Users extends Model{
 	public function getTodayNewPlayers(){
 		return $ret=$this->where("reg_time>".strtotime(date("Y-m-d",time())))->count();
 	}
-	//平台剩余未消耗房卡数
+	//平台剩余未消耗房卡数（路线B：房卡主数据迁至 user_wallet，只读不改写）
 	public function getSurplusCards(){
-		return $ret=$this->sum('cards');
+		return $ret=Db::table('user_wallet')->sum('room_cards');
 	}
 	//获取玩家列表
 	public function getUsersList($data){

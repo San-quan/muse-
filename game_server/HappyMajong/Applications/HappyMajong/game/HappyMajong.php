@@ -962,6 +962,15 @@ class GameRoom extends BaseRoom
 		$data['timeoutSec'] = CLICK_VALUE_OUTCARDS;
 		$data['deadline'] = $this->serverDeadline(CLICK_VALUE_OUTCARDS);
 		$this->sendRoomMessage(GR_GAME_MJ_OUT_CARDS,$data);
+		if ($isOpening) {
+			// 开局庄家首张：补发"摸牌"标记（TOUCHCARDS），让客户端点亮并可点击手牌；
+			// 牌值取庄家手牌里已有的一张（最右/最大），不新增手牌、不从牌墙再摸一张。
+			$bankerTile = $this->getRightmostTile($seatno);
+			if ($bankerTile > 0) {
+				$this->sendRoomMessage(GR_GAME_MJ_SEND_CARDS, array('seatno'=>$seatno));
+				$this->sendMsgToUser($this->m_deskData[$seatno]['uid'], GR_GAME_MJ_TOUCH_CARDS, array($bankerTile));
+			}
+		}
 		foreach ($this->m_OperateNotify as $s => $info) {
 			$this->m_OperateNotify[$s] = array();
 			$this->m_cbUserAction[$s] = -1;
@@ -1990,6 +1999,13 @@ class GameRoom extends BaseRoom
 						}
 						break;
 					case WIK_PENG:
+						// v1.21 修复：碰成立即收尾 claim 窗口——先销毁 WAITCLAIM 定时器并结束开局阶段，
+						// 否则窗口超时 onWaitClaimTimeout 会因 m_OperateNotify 已清空而误判"全员过"，
+						// 走 afterOpeningWaitClaim → peopleTurn()+gameOutcardTurn()，把出牌权抢给下家（碰家被跳过）。
+						// 注意必须在 gamePengCards 之前：碰家若有杠会在 cardsToHand→gameOperateNotify 里新建 WAITCLAIM 窗口。
+						$this->destoryClick(CLICK_NAME_WAITCLAIM);
+						$this->m_dealerOpeningPhase = false;
+						$this->m_openingDone = true;
 						$this->gamePengCards($OperateResult);
 						break;
 					case WIK_GANG:

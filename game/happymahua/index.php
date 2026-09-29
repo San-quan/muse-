@@ -33,6 +33,36 @@ if ($local_bypass_q && $uid_q > 0 && empty($_SESSION['think']['openid'])) {
     $_SESSION['think']['headurl']  = '';
     $_SESSION['think']['uid']      = intval($uid_q);
 }
+// 本机调试：URL 带 uid+pwd 时，把 uid/pwd/gametype 记入 session 与 cookie。
+// 记 cookie 的原因：session_id 按 uid 隔离（hzmjlocal<uid>），当页面被跳成「只剩 invitecode=」时 URL 已无 uid，
+// 那次请求用的是另一个 session，读不到 local_uid/local_pwd，只能靠 cookie 兜底还原。
+$gt_q = isset($_GET['gametype']) ? trim(strval($_GET['gametype'])) : '';
+if ($uid_q > 0 && $rpwd_q !== '') {
+    $_SESSION['local_uid'] = intval($uid_q);
+    $_SESSION['local_pwd'] = $rpwd_q;
+    if ($gt_q !== '') { $_SESSION['local_gametype'] = $gt_q; }
+    $ck_exp = time() + 86400;
+    @setcookie('hzmj_local_uid',      strval(intval($uid_q)), $ck_exp, '/');
+    @setcookie('hzmj_local_pwd',      rawurlencode($rpwd_q),  $ck_exp, '/');
+    @setcookie('hzmj_local_gametype', rawurlencode($gt_q),    $ck_exp, '/');
+}
+// 本机调试：当前 URL 只剩 invitecode（没有 uid、没有 pwd），而本机此前带 uid+pwd 访问过，
+// 就用 session/cookie 里记下的 uid+pwd+gametype 立刻 302 跳回，避免停在大厅进不了房。
+$only_invite_q = (isset($_GET['invitecode']) && $uid_q <= 0 && $rpwd_q === '');
+if ($only_invite_q) {
+    $lu = !empty($_SESSION['local_uid']) ? intval($_SESSION['local_uid'])
+        : (isset($_COOKIE['hzmj_local_uid']) ? intval($_COOKIE['hzmj_local_uid']) : 0);
+    $lp = !empty($_SESSION['local_pwd']) ? strval($_SESSION['local_pwd'])
+        : (isset($_COOKIE['hzmj_local_pwd']) ? rawurldecode(strval($_COOKIE['hzmj_local_pwd'])) : '');
+    $lg = !empty($_SESSION['local_gametype']) ? strval($_SESSION['local_gametype'])
+        : (isset($_COOKIE['hzmj_local_gametype']) ? rawurldecode(strval($_COOKIE['hzmj_local_gametype'])) : '');
+    if ($lu > 0 && $lp !== '') {
+        $back_q = '/game/happymahua/index.php?uid=' . $lu . '&pwd=' . rawurlencode($lp)
+            . ($lg !== '' ? '&gametype=' . rawurlencode($lg) : '');
+        header('Location: ' . $back_q, true, 302);
+        exit;
+    }
+}
 ?>
 
 <!DOCTYPE HTML>
@@ -40,7 +70,65 @@ if ($local_bypass_q && $uid_q > 0 && empty($_SESSION['think']['openid'])) {
 
 <head>
     <meta charset="utf-8">
+<script id="local-jump-guard">
+/* 本机调试跳转守卫 v2（放在 <head> 最前，早于 Egret/main.min 一切脚本，同步安装）。
+   目的：本机（host=127.0.0.1/localhost，或 URL 带 uid+pwd）时，
+   拦截「把地址改成只剩 invitecode=」的 location.replace / location.assign，
+   一律改回当前页并保留 uid、pwd、gametype。线上（非本机）不生效。
+   注意：location.href= 赋值属 Location 的 unforgeable 属性，JS 层无法拦截；
+        但压缩代码中这些跳转均走 location.replace，已被本守卫覆盖。 */
+(function(){
+    try{
+        var qs=null;
+        try{ qs=new URLSearchParams(location.search); }catch(e){ qs=null; }
+        if(!qs) return;
+        var uid=parseInt(qs.get('uid'),10); if(isNaN(uid)||uid<0) uid=0;
+        var pwd=(qs.get('roompwd')||qs.get('pwd')||'')+'';
+        var gt=(qs.get('gametype')||'')+'';
+        var host=location.hostname;
+        var isLocal=(host==='127.0.0.1'||host==='localhost')||(uid>0&&pwd!=='');
+        if(!isLocal) return;
+        function keepUrl(){
+            var q=[]; if(uid>0)q.push('uid='+uid);
+            if(gt)q.push('gametype='+gt);
+            if(pwd)q.push('pwd='+encodeURIComponent(pwd));
+            return location.pathname+(q.length?('?'+q.join('&')):'');
+        }
+        // 命中条件：目标串含 invitecode= 且不含 uid=  —— 即「只剩 invitecode」的跳转
+        function isInviteOnly(u){
+            if(typeof u!=='string') return false;
+            if(u.indexOf('invitecode=')<0) return false;
+            return u.indexOf('uid=')<0;
+        }
+        var __at=0;
+        try{ __at=parseInt(sessionStorage.getItem('__fu_guard_at')||'0',10)||0; }catch(e){}
+        // 5 秒内重复触发视为刷新死循环：放弃本次跳转（原地不动）
+        function loopBlocked(){
+            var now=(new Date()).getTime();
+            if(now-__at<5000) return true;
+            __at=now;
+            try{ sessionStorage.setItem('__fu_guard_at',String(now)); }catch(e){}
+            return false;
+        }
+        var _replace=location.replace, _assign=location.assign;
+        try{
+            location.replace=function(u){
+                if(isInviteOnly(u)){ if(loopBlocked()) return; return _replace.call(location,keepUrl()); }
+                return _replace.call(location,u);
+            };
+        }catch(e){}
+        try{
+            location.assign=function(u){
+                if(isInviteOnly(u)){ if(loopBlocked()) return; return _assign.call(location,keepUrl()); }
+                return _assign.call(location,u);
+            };
+        }catch(e){}
+        try{ console.log('[guard] installed, keep=' + keepUrl()); }catch(e){}
+    }catch(e){}
+})();
+</script>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
     <title>加个菜</title>
     <meta name="viewport" content="width=device-width,initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -63,7 +151,9 @@ if ($local_bypass_q && $uid_q > 0 && empty($_SESSION['think']['openid'])) {
         }
     </style>
     <style id="faceup-inject-style">
-        #faceUpBox{position:fixed;top:20px;left:50%;transform:translateX(-50%);z-index:2147483645;display:none;flex-direction:column;gap:14px;align-items:center;justify-content:center;padding:18px 28px;border-radius:20px;background:rgba(0,0,0,0.55);backdrop-filter:blur(4px);border:2px solid rgba(255,220,140,0.25);text-align:center;}
+        #faceUpBox{position:fixed;top:20px;left:50%;transform:translateX(-50%);z-index:2147483645;display:none;flex-direction:column;gap:14px;align-items:center;justify-content:center;padding:18px 28px;border-radius:20px;background:rgba(0,0,0,0.55);backdrop-filter:blur(4px);border:2px solid rgba(255,220,140,0.25);text-align:center;pointer-events:none;}
+        /* 只让浮层自身可点，其余区域点击穿透到 canvas 手牌 */
+        #faceUpBox .fu-card,#faceUpBox .fu-btn,#faceUpBox #fuCard0,#faceUpBox #fuCard1,#faceUpBox #fuZimoBtn,#faceUpBox #fuDiscardBtn{pointer-events:auto;}
         #faceUpBox .fu-cards{display:flex;gap:26px;align-items:center;justify-content:center;}
         #faceUpBox .fu-card{position:relative;width:73px;height:109px;border-radius:6px;background:#3a2a1a;box-shadow:0 4px 12px rgba(0,0,0,.55);cursor:pointer;user-select:none;display:flex;align-items:center;justify-content:center;color:#e8dcc8;font-size:14px;font-weight:700;letter-spacing:1px;background-repeat:no-repeat;background-position:center;transition:transform .12s ease;}
         #faceUpBox .fu-card.disabled{cursor:not-allowed;opacity:.6;box-shadow:none;}
@@ -77,7 +167,7 @@ if ($local_bypass_q && $uid_q > 0 && empty($_SESSION['think']['openid'])) {
         #faceUpBox .fu-btn:disabled{opacity:.45;cursor:not-allowed;filter:grayscale(.4);box-shadow:none;filter:alpha(opacity=45)\9;}
         #faceUpBox .fu-stage{color:#ffefb0;font-weight:800;font-size:18px;}
         #faceUpBox .fu-timer{color:#ffe28a;font-weight:900;font-size:20px;}
-        #fuDebugInfo{position:fixed;left:16px;top:120px;z-index:2147483644;background:rgba(0,0,0,0.45);color:#fff;padding:12px 16px;border-radius:10px;font-size:13px;line-height:1.9;display:none;}
+        #fuDebugInfo{position:fixed;left:16px;top:120px;z-index:2147483644;background:rgba(0,0,0,0.45);color:#fff;padding:12px 16px;border-radius:10px;font-size:13px;line-height:1.9;display:none;pointer-events:none;}
         #fuDebugInfo b{color:#ffefb0;}
     </style>
 </head>
@@ -88,6 +178,7 @@ if ($local_bypass_q && $uid_q > 0 && empty($_SESSION['think']['openid'])) {
             <div>翻屁股明牌 <span class="fu-stage" id="fuStage">等待</span></div>
             <div id="fuSubInfo" style="color:#ddd;font-size:13px;"></div>
             <div>剩余 <span class="fu-timer" id="fuTimer">-</span> 秒</div>
+            <div id="fuTurnInfo" style="color:#9fe8ff;font-size:15px;font-weight:700;"></div>
         </div>
         <div class="fu-cards">
             <div class="fu-card disabled" id="fuCard0" data-idx="0">未亮</div>
@@ -264,6 +355,14 @@ if ($local_bypass_q && $uid_q > 0 && empty($_SESSION['think']['openid'])) {
     // URL 里 pwd 与 roompwd 等价：任一存在即表示「已指定房间」，只加入、禁止建房
     var __URLPWD = __QS ? ((__QS.get('roompwd') || __QS.get('pwd') || '') + '') : '';
 
+    // 本机调试标记：host 为 127.0.0.1/localhost，或 URL 同时带 uid+pwd 时生效。
+    // 供 main.min 末尾的「跳转守卫」判断：本机调试禁止跳 invitecode=、禁止清掉 uid/pwd/gametype。
+    var __LOCAL_HOST = (location.hostname === '127.0.0.1' || location.hostname === 'localhost');
+    window.__LOCAL_DEBUG__    = __LOCAL_HOST || (__URLUID > 0 && __URLPWD !== '');
+    window.__LOCAL_UID__      = __URLUID;
+    window.__LOCAL_PWD__      = __URLPWD;
+    window.__LOCAL_GAMETYPE__ = __QS ? (__QS.get('gametype') || '') : '';
+
     // 身份：只认当前 URL 的 uid，忽略 PHP session 里旧的 openid
     var __LOCAL_OPENID   = (__URLUID > 0) ? ('local_' + __URLUID) : '';
     var __LOCAL_NICKNAME = (__URLUID > 0) ? ('local' + __URLUID) : '';
@@ -309,7 +408,9 @@ if ($local_bypass_q && $uid_q > 0 && empty($_SESSION['think']['openid'])) {
         claimToken: 0,
         claimMask: 0,
         claimCard: 0,
-        autoPlayOn: {}           // seatno -> true（来自 game_mj_auto_play 广播）
+        autoPlayOn: {},          // seatno -> true（来自 game_mj_auto_play 广播）
+        seatsList: [],           // 最近一次 game_mj_seats_shuffled 的座位表，用于座次识别加固
+        forbidTile: -1           // 碰后禁打张（镜像服务端 m_forbidDiscard，只禁刚碰的那一张）
     };
 
     function parseMJCard(b){
@@ -468,33 +569,53 @@ if ($local_bypass_q && $uid_q > 0 && empty($_SESSION['think']['openid'])) {
     // v1.20 2.11：出牌/碰杠胡本地倒计时——一律以客户端本地时钟走秒，不等服务器心跳。
     // 本地到 0 即发送对应动作（出牌则打刚摸的那张；碰杠胡则能胡即胡、否则过）。
     // 服务端仍以自身 15/5 秒超时为准，两边谁先到谁生效；重复包由服务端忽略。
+    // v1.20 2.12：出牌/碰杠胡倒计时同步刷新浮层「剩余」秒数；翻牌回合仍由 startTimer 负责，
+    // 所以这两个 stop 只在翻牌计时器未运行时才把「剩余」清回 "-"。
+    function setFuTimerText(v){ if ($('fuTimer')) $('fuTimer').textContent = String(v); }
     function stopOutTimer(){
         if (State.outTimerId){ clearInterval(State.outTimerId); State.outTimerId = null; }
         State.outToken++;
+        if (!State.timerId) setFuTimerText('-');
     }
     function stopClaimTimer(){
         if (State.claimTimerId){ clearInterval(State.claimTimerId); State.claimTimerId = null; }
         State.claimToken++;
+        if (!State.timerId) setFuTimerText('-');
     }
     function startOutTimer(sec){
         stopOutTimer();
         var token = State.outToken;
         State.outEndAt = Date.now() + (sec|0)*1000;
+        setFuTimerText(sec|0);
         State.outTimerId = setInterval(function(){
             if (token !== State.outToken){ stopOutTimer(); return; }
+            setFuTimerText(Math.max(0, Math.ceil((State.outEndAt - Date.now())/1000)));
             if (Date.now() >= State.outEndAt){
                 stopOutTimer();
                 onLocalOutcardTimeout();
             }
         }, 250);
     }
+    // 座次识别加固：uid 已知但 mySeat 未定（login / seats_shuffled 丢包）时，用最近座位表再匹配一次
+    function tryResolveSeat(){
+        if (State.mySeat > 0 || State.uid <= 0) return;
+        var list = State.seatsList || [];
+        for (var i=0;i<list.length;i++){
+            var s = list[i];
+            if (!s) continue;
+            var seatNo = (typeof s.seatno === 'number') ? (s.seatno|0) : ((i+1)|0);
+            if ((s.uid|0) === State.uid){ State.mySeat = seatNo; return; }
+        }
+    }
     function onLocalOutcardTimeout(){
         if (State.mySeat <= 0 || !State.roompwd) return;
+        var ft = State.forbidTile|0;             // 碰后禁打张：只跳过刚碰的那张
         var tile = State.lastDrawnTile|0;
+        if (tile === ft) tile = 0;               // 刚摸/选的牌若恰是禁打张，改从手牌另选
         if (tile <= 0){
             // 无刚摸牌（碰/杠后出牌或庄家起手）：对齐服务端 pickAutoDiscardTile 兜底，打手牌最右一张（byte 最大）
             var ht = State.handTiles || [];
-            for (var i=0;i<ht.length;i++){ var b = ht[i]|0; if (b > tile) tile = b; }
+            for (var i=0;i<ht.length;i++){ var b = ht[i]|0; if (b === ft) continue; if (b > tile) tile = b; }
         }
         if (tile > 0){
             window.__FU_send('game_mj_outcardsreg', {roompwd: State.roompwd, data: tile});
@@ -506,8 +627,10 @@ if ($local_bypass_q && $uid_q > 0 && empty($_SESSION['think']['openid'])) {
         State.claimMask = mask|0;
         State.claimCard = card|0;
         State.claimEndAt = Date.now() + (sec|0)*1000;
+        setFuTimerText(sec|0);
         State.claimTimerId = setInterval(function(){
             if (token !== State.claimToken){ stopClaimTimer(); return; }
+            setFuTimerText(Math.max(0, Math.ceil((State.claimEndAt - Date.now())/1000)));
             if (Date.now() >= State.claimEndAt){
                 stopClaimTimer();
                 onLocalClaimTimeout();
@@ -774,6 +897,7 @@ if ($local_bypass_q && $uid_q > 0 && empty($_SESSION['think']['openid'])) {
                 var list = [];
                 if (Array.isArray(seats)) list = seats;
                 else { for (var k in seats){ if (Object.prototype.hasOwnProperty.call(seats, k)) list.push(seats[k]); } }
+                State.seatsList = list;
                 for (var i=0;i<list.length;i++){
                     var s = list[i];
                     if (!s) continue;
@@ -818,9 +942,19 @@ if ($local_bypass_q && $uid_q > 0 && empty($_SESSION['think']['openid'])) {
         } else if (mid === 'game_mj_outcards'){
             // 出牌轮：广播包。本人座次则启动本地 15 秒倒计时；他人座次则清本地表
             var sn = (d && typeof d.seatno === 'number') ? (d.seatno|0) : -1;
+            tryResolveSeat();   // 座次识别加固：避免 mySeat 未定导致本人出牌轮被漏判
+            if ($('fuTurnInfo')) $('fuTurnInfo').textContent = (sn > 0) ? ('该座位 ' + sn + ' 出牌') : '出牌';
             stopClaimTimer();
             if (sn >= 0 && sn === State.mySeat){
-                State.lastDrawnTile = -1;   // 新的一轮，等待 touchcards 重新写入
+                if (d && (d.opening|0)){
+                    // 开局庄家首张：服务端不发摸牌，用已有手牌里最大那张作为"刚摸牌"标记，
+                    // 保证点牌/超时都能打出（手牌不变）
+                    var mx = 0, ht = State.handTiles || [];
+                    for (var hi=0; hi<ht.length; hi++){ var hb = ht[hi]|0; if (hb > mx) mx = hb; }
+                    State.lastDrawnTile = (mx > 0) ? mx : -1;
+                } else {
+                    State.lastDrawnTile = -1;   // 新的一轮，等待 touchcards 重新写入
+                }
                 var tsec = (d && (d.timeoutSec|0)) ? (d.timeoutSec|0) : 15;
                 startOutTimer(tsec);
             } else {
@@ -831,11 +965,30 @@ if ($local_bypass_q && $uid_q > 0 && empty($_SESSION['think']['openid'])) {
             var omask = (d && typeof d.cbActionMask === 'number') ? (d.cbActionMask|0) : 0;
             var ocard = (d && typeof d.cbActionCard === 'number') ? (d.cbActionCard|0) : 0;
             var osec = (d && (d.timeoutSec|0)) ? (d.timeoutSec|0) : 5;
+            if ($('fuTurnInfo')) $('fuTurnInfo').textContent = '等待操作';
             stopOutTimer();
             if (omask != 0) startClaimTimer(osec, omask, ocard);
             else stopClaimTimer();
         } else if (mid === 'game_mj_operateresult' || mid === 'game_mj_outcardsdata' || mid === 'game_mj_handcards'){
             // 动作已裁决/已出牌/手牌更新：清本地倒计时，避免陈旧定时器误发
+            if (mid === 'game_mj_operateresult'){
+                // 自己碰牌：镜像服务端 m_forbidDiscard，记录禁打张并同步移除被碰掉的两张
+                var ru = (d && typeof d.wOperateUser === 'number') ? (d.wOperateUser|0) : -1;
+                var rc = (d && typeof d.cbOperateCode === 'number') ? (d.cbOperateCode|0) : 0;
+                var rt = (d && typeof d.cbOperateCard === 'number') ? (d.cbOperateCard|0) : 0;
+                tryResolveSeat();
+                if (ru > 0 && ru === State.mySeat && rc === 8 && rt > 0){   // WIK_PENG：碰后禁打该张
+                    State.forbidTile = rt;
+                    if (Array.isArray(State.handTiles)){
+                        for (var ri=0; ri<2; ri++){
+                            var rx = State.handTiles.indexOf(rt);
+                            if (rx >= 0) State.handTiles.splice(rx,1);
+                        }
+                    }
+                } else if (ru > 0 && ru === State.mySeat){
+                    State.forbidTile = -1;
+                }
+            }
             stopClaimTimer();
             if (mid !== 'game_mj_operateresult') stopOutTimer();
             if (mid === 'game_mj_handcards'){
@@ -849,6 +1002,7 @@ if ($local_bypass_q && $uid_q > 0 && empty($_SESSION['think']['openid'])) {
                         if ((osn|0) === State.mySeat){
                             var oi = State.handTiles.indexOf(d[osn]|0);
                             if (oi >= 0) State.handTiles.splice(oi, 1);
+                            State.forbidTile = -1;   // 成功出牌后解除碰后禁打
                         }
                     }
                 }

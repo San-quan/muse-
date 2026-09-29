@@ -150,6 +150,28 @@ class GameDB
 
     //玩家支付房卡
     public function coastPlayerCards($uid,$roomPwd,$rule,$coast,$gametype){
+        //路线B：有 user_wallet 行则扣钱包并写 ledger(ROOM_CARD)；无行回退原 users 扣卡（不自动建行）
+        $tgId = 0;
+        $uRow = self::$db->row("SELECT openid FROM users WHERE id = '".$uid."'");
+        if (!empty($uRow['openid']) && strpos($uRow['openid'], 'tg_') === 0) {
+            $tgId = intval(substr($uRow['openid'], 3));
+        }
+        $wRow = ($tgId > 0) ? self::$db->row("SELECT room_cards, balance FROM user_wallet WHERE tg_id = ".$tgId) : false;
+        if (!empty($wRow) && isset($wRow['room_cards'])) {
+            $after = intval($wRow['room_cards']) - intval($coast);
+            self::$db->query("UPDATE user_wallet SET room_cards = room_cards - ".intval($coast)." WHERE tg_id = ".$tgId);
+            self::$db->insert('ledger')->cols(array(
+                'tg_id' => $tgId,
+                'type' => 'ROOM_CARD',
+                'amount' => -intval($coast),
+                'balance_after' => intval($wRow['balance']),
+                'room_cards_after' => $after,
+                'note' => $gametype,
+                'room_id' => $roomPwd
+            ))->query();
+            return;
+        }
+        @file_put_contents(__DIR__.'/log/routeB_coast.log', date('[Y-m-d H:i:s]')." [routeB] coastPlayerCards no wallet row uid=".$uid." tg_id=".$tgId." room=".$roomPwd." coast=".$coast."\n", FILE_APPEND | LOCK_EX);
         $sql = "SELECT cards,paycards,freecards FROM users WHERE id = '$uid'";
         $res = self::$db->row($sql);
 
